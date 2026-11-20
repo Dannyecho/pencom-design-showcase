@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import { Modal } from "@/views/theme/ui";
 
 /**
- * Adapters so the Resources sections keep their logic while taking the "for everyone" look:
- * SectionHeading renders the home page's numbered title (Headline), and Dialog/DialogContent/DialogTitle/
+ * Adapters so the Resources sections keep their logic while taking the showcase look:
+ * SectionHeading renders the theme Headline (ghost word, pill tag, gradient mark), and Dialog/DialogContent/DialogTitle/
  * DialogDescription render the theme's accessible Modal.
  */
 
