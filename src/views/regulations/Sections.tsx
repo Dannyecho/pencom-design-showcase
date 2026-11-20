@@ -4,12 +4,19 @@ import { useRef, useState } from "react";
 import { Link } from "@/lib/router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
-  ArrowLeft, ArrowRight, Building2, Check, ChevronRight, FileCheck, HandCoins, KeyRound, Landmark, Lock,
+  ArrowLeft, ArrowRight, ArrowUpRight, Building2, Check, ChevronRight, FileCheck, HandCoins, KeyRound, Landmark, Lock,
   MessageSquareWarning, PiggyBank, Scale, ShieldCheck, Undo2, Users, Wallet,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CountUp, Spotlight, ease, reveal } from "@/views/about/primitives";
+import { CountUp, ease } from "@/views/about/primitives";
+import { ArrowChip, darkCard, glowLight } from "@/views/docs/kit";
 import { SectionHeading } from "@/views/theme/heading";
+import { DarkBackdrop, Rise, focus, sectionCls, spot } from "@/views/theme/ui";
+
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]";
+const darkBtn = "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]";
+const goldBtn = "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#F4D27A] py-1.5 pl-5 pr-1.5 text-sm font-bold text-[#1A1206] shadow-[0_14px_30px_-14px_rgba(244,210,122,0.9)] transition hover:bg-[#FFE08A]";
+const chip = "flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-45";
 import { library } from "./library";
 import { fmtDate, latest, typeStyle } from "./search";
 import type { Filters } from "./Library";
@@ -20,7 +27,7 @@ export function LatestRail({ onOpen }: { onOpen: (id: string) => void }) {
   const rail = useRef<HTMLUListElement>(null);
   const scroll = (dir: number) => rail.current?.scrollBy({ left: dir * 340, behavior: "smooth" });
   return (
-    <section id="latest" aria-labelledby="latest-title" className="scroll-mt-[160px] py-20 sm:py-24">
+    <section id="latest" aria-labelledby="latest-title" className="scroll-mt-[170px] overflow-x-clip bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4">
         <SectionHeading
           id="latest-title"
@@ -30,64 +37,70 @@ export function LatestRail({ onOpen }: { onOpen: (id: string) => void }) {
           intro="New regulations, guidelines and circulars, newest first. Open one for a summary and the signed PDF."
           action={
             <div className="hidden gap-2 sm:flex">
-            {[
-              { d: -1, I: ArrowLeft, l: "Scroll back" },
-              { d: 1, I: ArrowRight, l: "Scroll forward" },
-            ].map(({ d, I, l }) => (
-              <button
-                key={l}
-                type="button"
-                onClick={() => scroll(d)}
-                aria-label={l}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-gray-700 ring-1 ring-black/10 transition hover:border-[#117F21] hover:text-[#117F21] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]"
-              >
-                <I className="h-5 w-5" aria-hidden="true" />
-              </button>
-            ))}
-          </div>
+              {[
+                { d: -1, I: ArrowLeft, l: "Scroll back" },
+                { d: 1, I: ArrowRight, l: "Scroll forward" },
+              ].map(({ d, I, l }) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => scroll(d)}
+                  aria-label={l}
+                  className={cn("flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#0B1F10] ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-[#F4D27A]", focus)}
+                >
+                  <I className="h-5 w-5" aria-hidden="true" />
+                </button>
+              ))}
+            </div>
           }
         />
       </div>
       <ul
         ref={rail}
-        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-6 [scrollbar-width:none] sm:px-[max(1rem,calc((100vw_-_80rem)/2_+_1rem))] sm:scroll-px-[max(1rem,calc((100vw_-_80rem)/2_+_1rem))] scroll-px-4 [&::-webkit-scrollbar]:hidden"
+        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-8 pt-2 [scrollbar-width:none] sm:px-[max(1rem,calc((100vw_-_80rem)/2_+_1rem))] sm:scroll-px-[max(1rem,calc((100vw_-_80rem)/2_+_1rem))] scroll-px-4 [&::-webkit-scrollbar]:hidden"
       >
-        {latest.map((d, i) => (
-          <motion.li
-            key={d.id}
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.06, ease }}
-            className="w-[300px] shrink-0 snap-start sm:w-[320px]"
-          >
-            <button
-              type="button"
-              onClick={() => onOpen(d.id)}
-              className={cn(
-                "group relative flex h-full min-h-[240px] w-full flex-col overflow-hidden rounded-3xl p-6 text-left transition duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#FFD84D]",
-                i === 0
-                  ? "bg-gradient-to-br from-[#0A4A13] via-[#0A4A13] to-[#117F21] text-white shadow-[0_30px_60px_-30px_rgba(4,36,10,0.9)]"
-                  : "bg-white ring-1 ring-black/10 hover:shadow-[0_24px_50px_-24px_rgba(10,74,19,0.4)]",
-              )}
+        {latest.map((d, i) => {
+          const first = i === 0;
+          return (
+            <motion.li
+              key={d.id}
+              initial={{ opacity: 0, y: 26 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: Math.min(i, 6) * 0.06, ease }}
+              className="w-[290px] shrink-0 snap-start sm:w-[320px]"
             >
-              {i === 0 && <span aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#F4D27A]/20 blur-3xl" />}
-              <span className="relative flex items-center justify-between text-xs">
-                <span className={cn("rounded-full px-2.5 py-0.5 font-bold uppercase tracking-wider", i === 0 ? "bg-white/15 text-[#F4D27A]" : typeStyle[d.type].chip)}>
-                  {d.type}
+              <button
+                type="button"
+                onClick={() => onOpen(d.id)}
+                onMouseMove={spot}
+                className={cn(
+                  "group relative flex h-full min-h-[250px] w-full flex-col overflow-hidden rounded-3xl p-6 text-left",
+                  lift,
+                  focus,
+                  first ? cn(darkCard, "text-white shadow-[0_30px_60px_-30px_rgba(4,20,10,0.9)]") : cn("bg-white ring-1 ring-black/10", glowLight),
+                )}
+              >
+                {/* growing top line */}
+                <span aria-hidden="true" className={cn("absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r transition-transform duration-500 group-hover:scale-x-100", first ? "from-[#F4D27A] to-[#E9B949]" : "from-[#117F21] to-[#CB9615]")} />
+                <span className="relative flex items-center justify-between gap-2 text-xs">
+                  <span className={cn("rounded-full px-2.5 py-0.5 font-bold uppercase tracking-wider", first ? "bg-[#F4D27A] text-[#1A1206]" : typeStyle[d.type].chip)}>
+                    {d.type}
+                  </span>
+                  <span className={cn("font-mono", first ? "text-white/70" : "text-gray-600")}>{fmtDate(d.date)}</span>
                 </span>
-                <span className={cn("font-mono", i === 0 ? "text-white/60" : "text-gray-400")}>{fmtDate(d.date)}</span>
-              </span>
-              <span className={cn("relative mt-5 line-clamp-4 text-lg font-bold leading-snug", i === 0 ? "text-white" : "text-[#0A2E10] group-hover:text-[#117F21]")}>
-                {d.title}
-              </span>
-              <span className={cn("relative mt-auto flex items-center gap-2 pt-5 text-sm font-semibold", i === 0 ? "text-[#F4D27A]" : "text-[#117F21]")}>
-                Read details
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </span>
-            </button>
-          </motion.li>
-        ))}
+                {first && <span className="relative mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-[#F4D27A]">Newest</span>}
+                <span className={cn("relative line-clamp-4 text-lg font-bold leading-snug", first ? "mt-2 text-white" : "mt-5 text-[#0B1F10] group-hover:text-[#0A4A13]")}>
+                  {d.title}
+                </span>
+                <span className={cn("relative mt-auto flex items-center justify-between gap-2 pt-5 text-sm font-semibold", first ? "text-[#F4D27A]" : "text-[#0A4A13]")}>
+                  Read details
+                  <ArrowChip dark={first} />
+                </span>
+              </button>
+            </motion.li>
+          );
+        })}
       </ul>
     </section>
   );
@@ -169,11 +182,9 @@ export function ActSpotlight({ set }: { set: (p: Partial<Filters>) => void }) {
   const p = provisions.find((x) => x.id === tab)!;
 
   return (
-    <section id="act" aria-labelledby="act-title" className="relative isolate scroll-mt-[160px] overflow-hidden bg-[#04140A] py-20 text-white sm:py-28">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(60%_70%_at_85%_0%,rgba(203,150,21,0.26),transparent),radial-gradient(55%_70%_at_0%_100%,rgba(46,145,61,0.38),transparent)]" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
-      <div aria-hidden="true" className="absolute -left-32 top-1/3 -z-10 h-[480px] w-[480px] rounded-full bg-[#117F21]/40 blur-[150px]" />
-      <div className="mx-auto max-w-7xl px-4">
+    <section id="act" aria-labelledby="act-title" className={cn("relative isolate overflow-hidden bg-[#04140A] text-white", sectionCls)}>
+      <DarkBackdrop />
+      <div className="mx-auto max-w-7xl">
         <SectionHeading
           id="act-title"
           dark
@@ -182,14 +193,23 @@ export function ActSpotlight({ set }: { set: (p: Partial<Filters>) => void }) {
           highlight="in plain language"
           intro="The Act sets up the Contributory Pension Scheme and the Commission. Here is what it means for you."
           action={
-            <motion.div {...reveal} className="flex flex-wrap items-center gap-4 rounded-2xl bg-white/[0.07] p-4 ring-1 ring-white/15">
-            <Landmark className="h-10 w-10 text-[#F4D27A]" aria-hidden="true" />
-            <div>
-              <p className="text-sm font-semibold">Signed into law</p>
-              <p className="text-2xl font-black text-[#F4D27A]">1 July 2014</p>
-            </div>
-            <Link to="/regulations/pension-reform-act" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#CB9615] px-4 text-sm font-semibold text-[#1A1206] transition hover:bg-[#E0AA22] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]">Read the full Act →</Link>
-          </motion.div>
+            <Rise>
+              <div onMouseMove={spot} className="relative overflow-hidden rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/15 backdrop-blur [background-image:radial-gradient(320px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.16),transparent_60%)]">
+                <div className="flex items-center gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F4D27A]/15 text-[#F4D27A] ring-1 ring-[#F4D27A]/40">
+                    <Landmark className="h-6 w-6" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/70">Signed into law</p>
+                    <p className="bg-gradient-to-r from-[#F4D27A] to-[#E9B949] bg-clip-text text-2xl font-black text-transparent">1 July 2014</p>
+                  </div>
+                </div>
+                <Link to="/regulations/pension-reform-act" className={cn(goldBtn, "mt-4", focus)}>
+                  Read the full Act
+                  <span aria-hidden="true" className={cn(chip, "bg-[#0B1F10] text-[#F4D27A]")}><ArrowUpRight className="h-4 w-4" /></span>
+                </Link>
+              </div>
+            </Rise>
           }
         />
 
@@ -216,12 +236,13 @@ export function ActSpotlight({ set }: { set: (p: Partial<Filters>) => void }) {
                     document.getElementById(`act-tab-${next.id}`)?.focus();
                   }}
                   className={cn(
-                    "relative isolate flex min-h-14 shrink-0 items-center gap-3 rounded-2xl px-4 text-left font-semibold transition-colors focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]",
-                    on ? "text-[#0A4A13]" : "text-white/70 hover:bg-white/5 hover:text-white",
+                    "relative isolate flex min-h-14 shrink-0 items-center gap-3 rounded-full px-5 text-left font-semibold transition-colors",
+                    focus,
+                    on ? "text-[#1A1206]" : "text-white/75 ring-1 ring-white/10 hover:bg-white/[0.06] hover:text-white",
                   )}
                 >
                   {on && (
-                    <motion.span layoutId="act-pill" className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-r from-[#F4D27A] to-[#E9B949]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                    <motion.span layoutId="act-pill" className="absolute inset-0 -z-10 rounded-full shadow-[0_14px_30px_-14px_rgba(244,210,122,0.9)] bg-gradient-to-r from-[#F4D27A] to-[#E9B949]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
                   )}
                   <x.icon className="h-5 w-5 shrink-0" aria-hidden="true" />
                   {x.tab}
@@ -239,20 +260,22 @@ export function ActSpotlight({ set }: { set: (p: Partial<Filters>) => void }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: reduce ? 0 : -16 }}
                 transition={{ duration: 0.3, ease }}
-                className="grid h-full grid-cols-1 gap-5 rounded-3xl border border-white/10 bg-white/[0.06] p-7 backdrop-blur sm:p-9 md:grid-cols-[1fr_220px]"
+                onMouseMove={spot}
+                className="relative grid h-full grid-cols-1 gap-5 overflow-hidden rounded-[1.75rem] bg-white/[0.06] p-6 ring-1 ring-white/15 backdrop-blur [background-image:radial-gradient(480px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.12),transparent_55%)] sm:p-9 md:grid-cols-[1fr_220px]"
               >
+                <p.icon aria-hidden="true" className="pointer-events-none absolute -bottom-8 -right-6 h-44 w-44 text-white/[0.04]" />
                 <div>
                   <h3 className="text-2xl font-bold">{p.title}</h3>
                   <ul className="mt-5 space-y-4">
                     {p.points.map((pt, i) => (
                       <motion.li
                         key={pt}
-                        initial={{ opacity: 0, x: reduce ? 0 : -12 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: reduce ? 0 : 10 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.35, delay: 0.08 + i * 0.07, ease }}
                         className="flex gap-3 leading-relaxed text-white/85"
                       >
-                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#117F21] ring-1 ring-[#2E913D]">
+                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206]">
                           <Check className="h-3.5 w-3.5" aria-hidden="true" />
                         </span>
                         {pt}
@@ -265,19 +288,21 @@ export function ActSpotlight({ set }: { set: (p: Partial<Filters>) => void }) {
                       set({ q: p.q, types: [], years: [], who: [], subjects: [], status: "" });
                       document.getElementById("library")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
                     }}
-                    className="group mt-7 inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/20 px-4 text-sm font-semibold transition hover:border-[#F4D27A] hover:text-[#F4D27A] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]"
+                    className={cn("group relative mt-7 inline-flex min-h-11 items-center gap-2 rounded-full bg-white/[0.06] py-1.5 pl-5 pr-1.5 text-sm font-semibold ring-1 ring-white/25 transition hover:bg-white hover:text-[#0B1F10]", focus)}
                   >
                     Related regulations and circulars
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                    <span aria-hidden="true" className={cn(chip, "bg-[#F4D27A] text-[#1A1206]")}><ArrowUpRight className="h-4 w-4" /></span>
                   </button>
                 </div>
-                <div className="flex flex-col justify-center rounded-2xl bg-gradient-to-br from-[#F4D27A] to-[#CB9615] p-6 text-[#1A1206]">
-                  <CountUp value={p.stat.value} className="text-6xl font-black tracking-tight" />
-                  <p className="mt-2 text-sm font-semibold leading-snug">{p.stat.label}</p>
+                <div className="relative flex flex-col justify-center overflow-hidden rounded-3xl bg-[#0B1F10] p-6 ring-1 ring-[#F4D27A]/40 [background-image:linear-gradient(135deg,#0B1F10,#0A4A13)]">
+                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#F4D27A] via-[#E9B949] to-[#117F21]" />
+                  <span aria-hidden="true" className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[#F4D27A]/20 blur-2xl" />
+                  <CountUp value={p.stat.value} className="relative bg-gradient-to-r from-[#F4D27A] to-[#E9B949] bg-clip-text text-6xl font-black tracking-tight text-transparent" />
+                  <p className="relative mt-2 text-sm font-semibold leading-snug text-white/85">{p.stat.label}</p>
                 </div>
               </motion.div>
             </AnimatePresence>
-            <p className="mt-4 text-xs text-white/50">
+            <p className="mt-4 text-xs text-white/65">
               A plain-language summary. The wording of the Pension Reform Act 2014 is the legal text and takes precedence.
             </p>
           </div>
@@ -313,8 +338,8 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
   ];
 
   return (
-    <section id="compliance" aria-labelledby="compliance-title" className="scroll-mt-[160px] py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-4">
+    <section id="compliance" aria-labelledby="compliance-title" className={cn("bg-white", sectionCls)}>
+      <div className="mx-auto max-w-7xl">
         <SectionHeading
           id="compliance-title"
           eyebrow="Compliance"
@@ -325,141 +350,164 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
 
         <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-12">
           {/* Employer checklist */}
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 sm:p-8 lg:col-span-8">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#9A6F06]">
-                  <Building2 className="h-4 w-4" aria-hidden="true" /> For employers
-                </p>
-                <h3 className="mt-2 text-2xl font-bold text-[#0A2E10]">Your pension duties: a self-check</h3>
-                <p className="mt-1 text-sm text-gray-600">Tick what you already do. Nothing is sent to PenCom.</p>
-              </div>
-              <div className="relative flex h-32 w-32 shrink-0 items-center justify-center self-center">
-                <svg viewBox="0 0 120 120" className="h-32 w-32 -rotate-90" aria-hidden="true">
-                  <circle cx="60" cy="60" r={R} fill="none" stroke="#E8F5E9" strokeWidth="10" />
-                  <motion.circle
-                    cx="60"
-                    cy="60"
-                    r={R}
-                    fill="none"
-                    stroke={pct === 1 ? "#117F21" : "#CB9615"}
-                    strokeWidth="10"
-                    strokeLinecap="round"
-                    strokeDasharray={C}
-                    animate={{ strokeDashoffset: C * (1 - pct) }}
-                    transition={{ duration: reduce ? 0 : 0.6, ease }}
-                  />
-                </svg>
-                <span className="absolute text-center">
-                  <span className="block text-3xl font-black text-[#0A2E10]">{score}/{duties.length}</span>
-                  <span className="block text-[11px] font-semibold uppercase tracking-wider text-gray-500">done</span>
-                </span>
-              </div>
-            </div>
-
-            <ol className="mt-6 space-y-3">
-              {duties.map((d, i) => (
-                <li key={d.title}>
-                  <label
-                    className={cn(
-                      "group flex cursor-pointer gap-4 rounded-2xl border p-4 transition duration-300",
-                      done[i] ? "border-[#117F21]/40 bg-[#F4FAF3]" : "border-gray-200 hover:border-[#117F21]/30",
-                    )}
-                  >
-                    <input
-                      type="checkbox"
-                      className="peer sr-only"
-                      checked={done[i]}
-                      onChange={() => setDone((x) => x.map((v, j) => (j === i ? !v : v)))}
+          <Rise className="lg:col-span-8">
+            <div className="relative overflow-hidden rounded-[1.75rem] bg-white p-6 shadow-[0_40px_80px_-50px_rgba(4,20,10,0.45)] ring-1 ring-black/10 sm:p-8">
+              <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-[#E8F5E9]">
+                <motion.span className="block h-full origin-left bg-gradient-to-r from-[#117F21] to-[#CB9615]" animate={{ scaleX: pct }} initial={false} transition={{ duration: reduce ? 0 : 0.6, ease }} />
+              </span>
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#7F5A04]">
+                    <Building2 className="h-4 w-4" aria-hidden="true" /> For employers
+                  </p>
+                  <h3 className="mt-2 text-2xl font-black tracking-tight text-[#0B1F10]">Your pension duties: a self-check</h3>
+                  <p className="mt-1 text-sm text-gray-600">Tick what you already do. Nothing is sent to PenCom.</p>
+                </div>
+                <div className="relative flex h-32 w-32 shrink-0 items-center justify-center self-center rounded-full bg-[#0B1F10] shadow-[0_24px_50px_-24px_rgba(4,20,10,0.8)]">
+                  <svg viewBox="0 0 120 120" className="h-32 w-32 -rotate-90" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="comp-ring" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#F4D27A" />
+                        <stop offset="100%" stopColor={pct === 1 ? "#2E913D" : "#E9B949"} />
+                      </linearGradient>
+                    </defs>
+                    <circle cx="60" cy="60" r={R} fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="9" />
+                    <motion.circle
+                      cx="60"
+                      cy="60"
+                      r={R}
+                      fill="none"
+                      stroke="url(#comp-ring)"
+                      strokeWidth="9"
+                      strokeLinecap="round"
+                      strokeDasharray={C}
+                      initial={false}
+                      animate={{ strokeDashoffset: C * (1 - pct) }}
+                      transition={{ duration: reduce ? 0 : 0.6, ease }}
                     />
-                    <span
-                      aria-hidden="true"
+                  </svg>
+                  <span className="absolute text-center">
+                    <span className="block font-mono text-3xl font-black tabular-nums text-[#F4D27A]">{score}/{duties.length}</span>
+                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-white/70">done</span>
+                  </span>
+                </div>
+              </div>
+
+              <ol className="mt-6 space-y-3">
+                {duties.map((d, i) => (
+                  <li key={d.title}>
+                    <label
+                      onMouseMove={spot}
                       className={cn(
-                        "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition duration-300 peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-[#FFD84D]",
-                        done[i] ? "bg-[#117F21] text-white" : "bg-[#F4F7F2] text-[#117F21]",
+                        "group flex cursor-pointer gap-4 rounded-3xl p-4 ring-1 transition duration-300 hover:-translate-y-0.5",
+                        glowLight,
+                        done[i] ? "bg-[#F2F6F0] ring-[#117F21]/35" : "bg-white ring-black/10 hover:ring-[#117F21]/30",
                       )}
                     >
-                      {done[i] ? <Check className="h-5 w-5" strokeWidth={3} /> : <d.icon className="h-5 w-5" />}
-                    </span>
-                    <span className="flex-1">
-                      <span className="flex items-center gap-2 font-semibold text-[#0A2E10]">
-                        <span className="font-mono text-xs text-gray-400">0{i + 1}</span>
-                        {d.title}
+                      <input
+                        type="checkbox"
+                        className="peer sr-only"
+                        checked={done[i]}
+                        onChange={() => setDone((x) => x.map((v, j) => (j === i ? !v : v)))}
+                      />
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition duration-300 peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#FFD84D]",
+                          done[i] ? "scale-105 bg-[#0B1F10] text-[#F4D27A]" : "bg-[#F2F6F0] text-[#0A4A13] group-hover:bg-[#E8F5E9]",
+                        )}
+                      >
+                        {done[i] ? <Check className="h-5 w-5" strokeWidth={3} /> : <d.icon className="h-5 w-5" />}
                       </span>
-                      <span className="mt-1 block text-sm leading-relaxed text-gray-600">{d.body}</span>
-                    </span>
-                  </label>
-                </li>
-              ))}
-            </ol>
+                      <span className="flex-1">
+                        <span className="flex items-center gap-2 font-semibold text-[#0B1F10]">
+                          <span className="font-mono text-xs tabular-nums text-[#7F5A04]">0{i + 1}</span>
+                          {d.title}
+                        </span>
+                        <span className="mt-1 block text-sm leading-relaxed text-gray-600">{d.body}</span>
+                      </span>
+                    </label>
+                  </li>
+                ))}
+              </ol>
 
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={pct === 1 ? "all" : "some"}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                className={cn("mt-6 flex flex-col gap-4 rounded-2xl p-5 sm:flex-row sm:items-center", pct === 1 ? "bg-[#117F21] text-white" : "bg-[#FFF8E1] text-[#5C4300]")}
-                aria-live="polite"
-              >
-                <p className="flex-1 text-sm font-medium">
-                  {pct === 1
-                    ? "You’re doing everything on the list. Keep your records ready for PenCom inspections."
-                    : `${duties.length - score} to go. Late or unpaid contributions attract penalties under the Pension Reform Act 2014.`}
-                </p>
-                <Link
-                  to="/services#pcc"
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={pct === 1 ? "all" : "some"}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
                   className={cn(
-                    "inline-flex min-h-11 shrink-0 items-center gap-2 rounded-xl px-4 text-sm font-semibold transition focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]",
-                    pct === 1 ? "bg-white text-[#0A4A13]" : "bg-[#117F21] text-white hover:bg-[#0A4A13]",
+                    "relative mt-6 flex flex-col gap-4 overflow-hidden rounded-3xl p-5 sm:flex-row sm:items-center",
+                    pct === 1 ? cn(darkCard, "text-white") : "bg-[#F2F6F0] text-[#0B1F10] ring-1 ring-black/10",
                   )}
+                  aria-live="polite"
                 >
-                  Get your PCC <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                  {pct !== 1 && <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#F4D27A] to-[#CB9615]" />}
+                  <p className="flex-1 text-sm font-medium">
+                    {pct === 1
+                      ? "You’re doing everything on the list. Keep your records ready for PenCom inspections."
+                      : `${duties.length - score} to go. Late or unpaid contributions attract penalties under the Pension Reform Act 2014.`}
+                  </p>
+                  <Link to="/services#pcc" className={cn(pct === 1 ? goldBtn : darkBtn, "shrink-0 self-start sm:self-auto", focus)}>
+                    Get your PCC
+                    <span aria-hidden="true" className={cn(chip, pct === 1 ? "bg-[#0B1F10] text-[#F4D27A]" : "bg-[#F4D27A] text-[#1A1206]")}>
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </Rise>
 
           <div className="space-y-6 lg:col-span-4">
             {/* Operators */}
-            <Spotlight color="rgba(244,210,122,0.2)" className="rounded-3xl bg-gradient-to-br from-[#0A4A13] via-[#0A4A13] to-[#117F21] p-6 text-white sm:p-7">
-              <p className="relative flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">
-                <KeyRound className="h-4 w-4" aria-hidden="true" /> For licensed operators
-              </p>
-              <h3 className="relative mt-2 text-xl font-bold">The rules that apply to you</h3>
-              <ul className="relative mt-5 space-y-2">
-                {operatorLinks.map((o) => (
-                  <li key={o.label}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        set({ q: "", types: [], years: [], who: [], subjects: [], status: "", ...o.patch });
-                        document.getElementById("library")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
-                      }}
-                      className="group flex min-h-12 w-full items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 text-left text-sm font-semibold transition hover:border-[#F4D27A]/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]"
-                    >
-                      <span className="flex-1">{o.label}</span>
-                      <span className="rounded-full bg-white/15 px-2 py-0.5 font-mono text-xs">{o.n}</span>
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </Spotlight>
+            <Rise delay={0.08}>
+              <div onMouseMove={spot} className={cn("relative overflow-hidden rounded-[1.75rem] p-6 text-white shadow-[0_30px_60px_-30px_rgba(4,20,10,0.9)] sm:p-7", darkCard)}>
+                <KeyRound aria-hidden="true" className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 text-white/[0.05]" />
+                <p className="relative flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">
+                  <KeyRound className="h-4 w-4" aria-hidden="true" /> For licensed operators
+                </p>
+                <h3 className="relative mt-2 text-xl font-black tracking-tight">The rules that apply to you</h3>
+                <ul className="relative mt-5 space-y-2">
+                  {operatorLinks.map((o) => (
+                    <li key={o.label}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          set({ q: "", types: [], years: [], who: [], subjects: [], status: "", ...o.patch });
+                          document.getElementById("library")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+                        }}
+                        className={cn("group flex min-h-12 w-full items-center gap-3 rounded-full bg-white/[0.06] py-1.5 pl-4 pr-1.5 text-left text-sm font-semibold ring-1 ring-white/10 transition hover:bg-white/[0.12] hover:ring-[#F4D27A]/50", focus)}
+                      >
+                        <span className="flex-1">{o.label}</span>
+                        <span className="rounded-full bg-white/15 px-2 py-0.5 font-mono text-xs tabular-nums">{o.n}</span>
+                        <span aria-hidden="true" className={cn(chip, "bg-[#F4D27A] text-[#1A1206]")}><ArrowUpRight className="h-4 w-4" /></span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Rise>
 
             {/* Report */}
-            <Link
-              to="/connect#report"
-              className="group flex gap-4 rounded-3xl border border-gray-200 bg-white p-6 transition duration-300 hover:-translate-y-0.5 hover:border-[#B52026]/40 hover:shadow-[0_24px_50px_-24px_rgba(181,32,38,0.35)] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]"
-            >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#FDE8E8] text-[#B52026] transition group-hover:scale-110">
-                <MessageSquareWarning className="h-6 w-6" aria-hidden="true" />
-              </span>
-              <span>
-                <span className="block text-lg font-bold text-[#0A2E10]">Report an employer</span>
-                <span className="mt-1 block text-sm text-gray-600">Is your employer deducting pension but not remitting it? Tell us and we will follow it up.</span>
-              </span>
-            </Link>
+            <Rise delay={0.16}>
+              <Link
+                to="/connect#report"
+                onMouseMove={spot}
+                className={cn("group relative flex gap-4 overflow-hidden rounded-[1.75rem] bg-white p-6 ring-1 ring-black/10 hover:ring-[#B52026]/30", glowLight, lift, focus)}
+              >
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#B52026] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#FDE8E8] text-[#B52026] transition group-hover:scale-110">
+                  <MessageSquareWarning className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <span className="flex-1">
+                  <span className="block text-lg font-black tracking-tight text-[#0B1F10]">Report an employer</span>
+                  <span className="mt-1 block text-sm text-gray-600">Is your employer deducting pension but not remitting it? Tell us and we will follow it up.</span>
+                </span>
+                <ArrowChip />
+              </Link>
+            </Rise>
           </div>
         </div>
       </div>
@@ -475,43 +523,37 @@ export function Policies() {
       icon: Lock,
       title: "Data Protection Policy",
       body: "How PenCom collects, uses, stores and protects personal data, in line with the Nigeria Data Protection Act 2023.",
-      tone: "green",
     },
     {
       icon: ShieldCheck,
       title: "Information Security (ISMS) Policy",
       body: "How PenCom keeps the information it holds confidential, accurate and available.",
-      tone: "gold",
     },
   ];
   return (
-    <section id="policies" aria-labelledby="policies-title" className="scroll-mt-[160px] bg-[#F2F6F0] py-20 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4">
+    <section id="policies" aria-labelledby="policies-title" className={cn("bg-[#F2F6F0]", sectionCls)}>
+      <div className="mx-auto max-w-7xl">
         <SectionHeading id="policies-title" eyebrow="Our own policies" title="How PenCom protects your information" highlight="protects your information" />
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
           {items.map((it, i) => (
-            <motion.div key={it.title} {...reveal} transition={{ ...reveal.transition, delay: i * 0.1 }}>
-              <Spotlight
-                color={it.tone === "green" ? "rgba(17,127,33,0.12)" : "rgba(203,150,21,0.16)"}
-                className="h-full rounded-3xl border border-gray-200 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgba(10,74,19,0.35)]"
-              >
-                <span className={cn("flex h-14 w-14 items-center justify-center rounded-2xl", it.tone === "green" ? "bg-[#E8F5E9] text-[#117F21]" : "bg-[#FFF8E1] text-[#9A6F06]")}>
-                  <it.icon className="h-7 w-7" aria-hidden="true" />
+            <Rise key={it.title} delay={i * 0.1} className="h-full">
+              <div onMouseMove={spot} className={cn("group relative h-full overflow-hidden rounded-[1.75rem] bg-white p-7 ring-1 ring-black/10 sm:p-8", glowLight, lift)}>
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                <it.icon aria-hidden="true" className="pointer-events-none absolute -bottom-8 -right-6 h-40 w-40 text-[#0A4A13]/[0.05] transition duration-500 group-hover:-translate-y-2" />
+                <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] shadow-[0_16px_30px_-16px_rgba(4,20,10,0.8)] transition duration-300 group-hover:-rotate-6">
+                  <it.icon className="h-6 w-6" aria-hidden="true" />
                 </span>
-                <h3 className="mt-5 text-xl font-bold text-[#0A2E10]">{it.title}</h3>
-                <p className="mt-2 leading-relaxed text-gray-600">{it.body}</p>
-                <Link
-                  to="/connect#contact"
-                  className="group mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#117F21] hover:underline"
-                >
+                <h3 className="relative mt-5 text-xl font-black tracking-tight text-[#0B1F10]">{it.title}</h3>
+                <p className="relative mt-2 leading-relaxed text-gray-600">{it.body}</p>
+                <Link to="/connect#contact" className={cn(darkBtn, "relative mt-6", focus)}>
                   Questions about your data? Contact us
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                  <span aria-hidden="true" className={cn(chip, "bg-[#F4D27A] text-[#1A1206]")}><ArrowUpRight className="h-4 w-4" /></span>
                 </Link>
-              </Spotlight>
-            </motion.div>
+              </div>
+            </Rise>
           ))}
         </div>
-        <p className="mt-6 flex items-center gap-2 text-xs text-gray-500">
+        <p className="mt-6 flex items-center gap-2 text-xs text-gray-600">
           <Scale className="h-4 w-4" aria-hidden="true" />
           Full policy text to be supplied by the Data Protection Officer and ICT before launch.
         </p>

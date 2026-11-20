@@ -2,11 +2,12 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MotionConfig, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Gavel, Scale, Search } from "lucide-react";
+import { ArrowUpRight, Gavel, Scale, Search } from "lucide-react";
 import { Link, useLocation, useSearchParams } from "@/lib/router";
 import { cn } from "@/lib/utils";
-import { scrollToId } from "@/views/about/primitives";
-import { FramedPanel, PageHero, SectionNav, ease, focus } from "@/views/theme/ui";
+import { CountUp, scrollToId } from "@/views/about/primitives";
+import { ArrowChip, darkCard, glowLight } from "@/views/docs/kit";
+import { FramedPanel, PageHero, SectionNav, ease, focus, spot } from "@/views/theme/ui";
 import DocDrawer from "./DocDrawer";
 import Library, { type Filters } from "./Library";
 import { ActSpotlight, Compliance, LatestRail, Policies } from "./Sections";
@@ -14,7 +15,7 @@ import { library } from "./library";
 import { fmtDate, latest, typeStyle } from "./search";
 
 /**
- * Regulations and compliance, "for everyone" theme (brief §7 "Regulatory library" + "Regulatory item").
+ * Regulations and compliance, showcase theme (brief §7 "Regulatory library" + "Regulatory item").
  * Hero search → latest issued → filterable library → the Act in plain language → compliance → PenCom's own
  * policies. Filters and the open document (?doc=) live in the URL, so any view can be shared or bookmarked.
  */
@@ -128,30 +129,37 @@ function Hero({ onSearch, onType, onOpen }: { onSearch: (q: string) => void; onT
       intro={`All ${library.length} regulations, guidelines, frameworks and circulars issued under the Pension Reform Act, in one place. Search by title, subject or abbreviation, then read the summary or download the signed document.`}
       actions={
         <div className="max-w-xl">
-          <form
-            role="search"
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSearch(q.trim());
-            }}
-            className="flex items-center gap-2 rounded-2xl bg-white p-2 pl-4 shadow-[0_20px_40px_-28px_rgba(10,74,19,0.6)] ring-1 ring-black/10 focus-within:ring-2 focus-within:ring-[#117F21]"
-          >
-            <Search className="h-5 w-5 shrink-0 text-[#117F21]" aria-hidden="true" />
-            <label htmlFor="reg-hero-q" className="sr-only">
-              Search the regulatory library
-            </label>
-            <input
-              id="reg-hero-q"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="e.g. “RSA transfer”, “PPP”"
-              className="min-h-12 w-full min-w-0 bg-transparent text-base placeholder:text-gray-400 focus:outline-none"
-            />
-            <button type="submit" className={cn("min-h-12 shrink-0 rounded-xl bg-[#117F21] px-5 font-semibold text-white transition hover:bg-[#0A4A13]", focus)}>
-              Search
-            </button>
-          </form>
-          <p className="mt-3 flex flex-wrap items-center gap-2 text-sm text-white/70">
+          {/* Search pill: gold-to-green edge, pointer glow, focus ring on the pill (not inside it) */}
+          <div className="relative rounded-full p-px [background-image:linear-gradient(120deg,rgba(244,210,122,0.9),rgba(255,255,255,0.15),rgba(17,127,33,0.8))] has-[input:focus-visible]:outline has-[input:focus-visible]:outline-[3px] has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-[#FFD84D]">
+            <form
+              role="search"
+              onMouseMove={spot}
+              onSubmit={(e) => {
+                e.preventDefault();
+                onSearch(q.trim());
+              }}
+              className={cn("flex items-center gap-2 rounded-full bg-white p-1.5 pl-5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)]", glowLight)}
+            >
+              <Search className="h-5 w-5 shrink-0 text-[#117F21]" aria-hidden="true" />
+              <label htmlFor="reg-hero-q" className="sr-only">
+                Search the regulatory library
+              </label>
+              <input
+                id="reg-hero-q"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="e.g. “RSA transfer”, “PPP”"
+                className="min-h-12 w-full min-w-0 bg-transparent text-base placeholder:text-gray-500 focus:outline-none focus-visible:outline-none focus-visible:ring-0"
+              />
+              <button type="submit" className={cn("group inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+                Search
+                <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowUpRight className="h-4 w-4" />
+                </span>
+              </button>
+            </form>
+          </div>
+          <p className="mt-4 flex flex-wrap items-center gap-2 text-sm text-white/70">
             <span>Try:</span>
             {examples.map((x) => (
               <button
@@ -161,7 +169,7 @@ function Hero({ onSearch, onType, onOpen }: { onSearch: (q: string) => void; onT
                   setQ(x);
                   onSearch(x);
                 }}
-                className={cn("rounded-full bg-white/80 px-3 py-1 font-medium text-[#0A4A13] ring-1 ring-black/10 transition hover:bg-[#0A4A13] hover:text-white", focus)}
+                className={cn("min-h-9 rounded-full bg-white/[0.08] px-3.5 font-medium text-white ring-1 ring-white/20 backdrop-blur transition hover:bg-[#F4D27A] hover:text-[#1A1206] hover:ring-[#F4D27A]", focus)}
               >
                 {x}
               </button>
@@ -173,11 +181,15 @@ function Hero({ onSearch, onType, onOpen }: { onSearch: (q: string) => void; onT
                 <button
                   type="button"
                   onClick={() => onType(c.t)}
-                  className={cn("group w-full rounded-2xl bg-white/80 p-4 text-left ring-1 ring-black/5 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_40px_-24px_rgba(10,74,19,0.5)]", focus)}
+                  onMouseMove={spot}
+                  className={cn(
+                    "group relative w-full overflow-hidden rounded-3xl bg-white/[0.06] p-4 text-left text-white ring-1 ring-white/15 backdrop-blur transition duration-300 hover:-translate-y-1 hover:ring-[#F4D27A]/60 [background-image:radial-gradient(220px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.18),transparent_60%)]",
+                    focus,
+                  )}
                 >
-                  <span className="block font-mono text-3xl font-bold text-[#0A4A13]">{c.n}</span>
-                  <span className="mt-1 flex items-center gap-2 text-sm text-gray-600 group-hover:text-[#0A4A13]">
-                    <span aria-hidden="true" className={cn("h-2 w-2 rounded-full", typeStyle[c.t].dot)} />
+                  <CountUp value={String(c.n)} className="block bg-gradient-to-r from-[#F4D27A] to-[#E9B949] bg-clip-text font-mono text-3xl font-bold tabular-nums text-transparent" />
+                  <span className="mt-1 flex items-center gap-2 text-sm text-white/75 group-hover:text-white">
+                    <span aria-hidden="true" className={cn("h-2 w-2 rounded-full ring-2 ring-white/20", typeStyle[c.t].dot)} />
                     {c.t}s
                   </span>
                   <span className="sr-only">, show only {c.t.toLowerCase()}s</span>
@@ -189,43 +201,47 @@ function Hero({ onSearch, onType, onOpen }: { onSearch: (q: string) => void; onT
       }
       aside={
         <FramedPanel className="p-4 sm:p-5">
-          <div className="flex items-center justify-between px-1">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0A4A13]">Latest issued</p>
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#117F21]">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#117F21]" aria-hidden="true" />
+          <div className="flex items-center justify-between gap-3 px-1">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#7F5A04]">Latest issued</p>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0A4A13]">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inset-0 animate-ping rounded-full bg-[#117F21]/60 motion-reduce:animate-none" />
+                <span className="relative h-2 w-2 rounded-full bg-[#117F21]" />
+              </span>
               Updated {fmtDate(latest[0].date)}
             </span>
           </div>
           <ul className="mt-3 space-y-2">
             {latest.slice(0, 4).map((d, i) => (
-              <motion.li key={d.id} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.06, ease }}>
+              <motion.li key={d.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.06, ease }}>
                 <button
                   type="button"
                   onClick={() => onOpen(d.id)}
-                  className={cn("group flex w-full items-start gap-3 rounded-2xl bg-[#F2F6F0] p-3.5 text-left ring-1 ring-black/5 transition duration-300 hover:bg-[#0A4A13] hover:text-white", focus)}
+                  className={cn("group flex w-full items-start gap-3 rounded-2xl bg-[#F2F6F0] p-3.5 text-left ring-1 ring-black/10 transition duration-300 hover:bg-[#0B1F10] hover:text-white", focus)}
                 >
                   <span className={cn("mt-0.5 shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider", typeStyle[d.type].chip)}>{d.type}</span>
                   <span className="min-w-0 flex-1">
                     <span className="line-clamp-2 font-semibold leading-snug">{d.title}</span>
-                    <span className="mt-0.5 block font-mono text-xs text-gray-500 transition group-hover:text-white/70">{fmtDate(d.date)}</span>
+                    <span className="mt-0.5 block font-mono text-xs text-gray-600 transition group-hover:text-white/70">{fmtDate(d.date)}</span>
                   </span>
-                  <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-gray-300 transition group-hover:translate-x-0.5 group-hover:text-[#F4D27A]" aria-hidden="true" />
+                  <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-[#0B1F10]/40 transition duration-300 group-hover:rotate-45 group-hover:text-[#F4D27A]" aria-hidden="true" />
                 </button>
               </motion.li>
             ))}
           </ul>
           <Link
             to="/regulations/pension-reform-act"
-            className={cn("group mt-3 flex items-center gap-4 rounded-2xl bg-gradient-to-r from-[#0A4A13] to-[#117F21] p-4 text-white transition hover:shadow-lg", focus)}
+            onMouseMove={spot}
+            className={cn("group relative mt-3 flex items-center gap-4 overflow-hidden rounded-2xl p-4 text-white shadow-[0_24px_50px_-28px_rgba(4,20,10,0.9)] transition duration-300 hover:-translate-y-0.5", darkCard, focus)}
           >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F4D27A] text-[#1A1206]">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F4D27A]/15 text-[#F4D27A] ring-1 ring-[#F4D27A]/40">
               <Gavel className="h-5 w-5" aria-hidden="true" />
             </span>
             <span className="min-w-0 flex-1">
               <span className="block font-bold">Pension Reform Act 2014</span>
               <span className="block text-xs text-white/70">Read every section online, or download it</span>
             </span>
-            <ArrowRight className="h-5 w-5 shrink-0 transition group-hover:translate-x-1" aria-hidden="true" />
+            <ArrowChip dark />
           </Link>
         </FramedPanel>
       }
