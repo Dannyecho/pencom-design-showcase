@@ -150,9 +150,9 @@ export default function Calculator() {
                     <stop offset="100%" stopColor="#F4D27A" stopOpacity="0" />
                   </linearGradient>
                 </defs>
-                <motion.path d={toPath(r.series, true)} fill="url(#calc-fill)" animate={{ d: toPath(r.series, true) }} transition={{ duration: reduce ? 0 : 0.6, ease }} />
-                <motion.path d={toPath(r.series, false)} fill="none" stroke="#F4D27A" strokeWidth="3" animate={{ d: toPath(r.series, false) }} transition={{ duration: reduce ? 0 : 0.6, ease }} />
-                <motion.path d={toPath(r.paidIn, false)} fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="2" strokeDasharray="6 6" animate={{ d: toPath(r.paidIn, false) }} transition={{ duration: reduce ? 0 : 0.6, ease }} />
+                <motion.path initial={false} d={toPath(r.series, true)} fill="url(#calc-fill)" animate={{ d: toPath(r.series, true) }} transition={{ duration: reduce ? 0 : 0.6, ease }} />
+                <motion.path initial={false} d={toPath(r.series, false)} fill="none" stroke="#F4D27A" strokeWidth="3" animate={{ d: toPath(r.series, false) }} transition={{ duration: reduce ? 0 : 0.6, ease }} />
+                <motion.path initial={false} d={toPath(r.paidIn, false)} fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="2" strokeDasharray="6 6" animate={{ d: toPath(r.paidIn, false) }} transition={{ duration: reduce ? 0 : 0.6, ease }} />
               </svg>
               <figcaption className="mt-2 flex flex-wrap justify-between gap-2 text-xs text-white/60">
                 <span>Age {age}</span>

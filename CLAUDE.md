@@ -29,6 +29,11 @@ The showcase design is cinematic and dark-accented: big photography, heavy type,
 - **Colour weight:** mostly white and pale green; dark green/near-black in the banner, the dock, portal cards and
   one figures band; gold is the accent (CTA, highlights, counters, active states), never a large fill except the CTA.
 
+## Page sessions
+
+The inner pages are restyled session by session: the list and status are in `SESSIONS.md`; run the next one with
+`/session` (or `/session S3`, `/session status`).
+
 ## Run
 
 ```bash

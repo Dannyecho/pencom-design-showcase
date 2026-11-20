@@ -90,7 +90,7 @@ export default function RegDocPage({ id }: { id: string }) {
 
 function Doc({ d }: { d: RegDoc }) {
   const has = webText[d.id];
-  const { status, data } = useDocJson<Text>(has ? `/documents/text/${d.id}.json` : "/documents/text/__none__.json");
+  const { status, data } = useDocJson<Text>(has ? `/documents/text/${d.id}.json` : null);
   const [tab, setTab] = useState<"read" | "about">(has ? "read" : "about");
   const [q, setQ] = useState("");
   const dq = useDeferredValue(q);

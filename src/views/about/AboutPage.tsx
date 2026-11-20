@@ -6,7 +6,7 @@ import { ArrowDown, ArrowRight, Landmark } from "lucide-react";
 import { useI18n } from "@/i18n/context";
 import { Link, useLocation } from "@/lib/router";
 import { cn } from "@/lib/utils";
-import { scrollToId } from "@/views/about/primitives";
+import { CountUp, scrollToId } from "@/views/about/primitives";
 import Ghost from "@/views/theme/Ghost";
 import { DarkBackdrop, FramedPanel, SectionNav } from "@/views/theme/ui";
 import { heroStats } from "./data";
@@ -145,15 +145,17 @@ function Hero() {
               fetchPriority="high"
             />
             <div aria-hidden="true" className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/45 to-transparent" />
-            <p className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[#FFD84D] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#04140A] shadow">
+            <p className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[#F4D27A] px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#1A1206] shadow-[0_12px_30px_-12px_rgba(244,210,122,0.8)]">
               Since 2004
             </p>
-            <dl className="absolute inset-x-3 bottom-3 grid grid-cols-3 divide-x divide-black/5 rounded-2xl bg-white/95 shadow-xl backdrop-blur sm:inset-x-4 sm:bottom-4">
+            <dl className="absolute inset-x-3 bottom-3 grid grid-cols-3 divide-x divide-black/10 rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/10 backdrop-blur sm:inset-x-4 sm:bottom-4">
               {heroStats.map((s) => (
                 <div key={s.label} className="px-3 py-3.5 sm:px-5 sm:py-4">
                   <dt className="text-xs font-semibold text-gray-600 sm:text-sm">{s.label}</dt>
-                  <dd className="mt-0.5 font-mono text-xl font-bold text-[#0B1F10] sm:text-2xl">{s.value}</dd>
-                  <dd className="text-[11px] text-gray-500">{s.note}</dd>
+                  <dd className="mt-0.5 font-mono text-xl font-bold text-[#0B1F10] sm:text-2xl">
+                    <CountUp value={s.value} />
+                  </dd>
+                  <dd className="text-[11px] text-gray-600">{s.note}</dd>
                 </div>
               ))}
             </dl>

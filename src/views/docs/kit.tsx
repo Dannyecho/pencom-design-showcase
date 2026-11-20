@@ -13,10 +13,15 @@ import { DarkBackdrop } from "@/views/theme/ui";
 
 export const ring = "focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]";
 
-export function useDocJson<T>(url: string) {
+/** `url` null: the document has no web version; report "error" without a request (no 404 in the console). */
+export function useDocJson<T>(url: string | null) {
   const [state, setState] = useState<{ status: "loading" | "ready" | "error"; data: T | null }>({ status: "loading", data: null });
   useEffect(() => {
     let off = false;
+    if (!url) {
+      setState({ status: "error", data: null });
+      return;
+    }
     setState({ status: "loading", data: null });
     fetch(url)
       .then((r) => {
