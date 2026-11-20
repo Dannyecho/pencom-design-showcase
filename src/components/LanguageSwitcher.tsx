@@ -90,7 +90,7 @@ export default function LanguageSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: reduce ? 0 : -6, scale: reduce ? 1 : 0.97 }}
             transition={{ duration: 0.18 }}
-            className="absolute right-0 top-full z-[70] mt-2 w-[min(19rem,calc(100vw-2rem))] origin-top-right overflow-hidden rounded-2xl bg-white text-gray-800 shadow-[0_24px_60px_-20px_rgba(4,36,10,0.55)] ring-1 ring-black/5"
+            className="absolute right-0 top-full z-[70] mt-2 w-[min(19rem,calc(100vw-2rem))] origin-top-right overflow-hidden rounded-2xl bg-white text-gray-800 shadow-[0_24px_60px_-20px_rgba(4,36,10,0.55)] ring-1 ring-black/10"
           >
             <div className="relative overflow-hidden bg-gradient-to-br from-[#04240A] to-[#117F21] px-4 py-3 text-white">
               <div aria-hidden="true" className="absolute -right-6 -top-10 h-28 w-28 rounded-full bg-[#CB9615]/30 blur-2xl" />
@@ -126,7 +126,7 @@ export default function LanguageSwitcher() {
                       {l.short}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-bold text-[#0A2E10]">{l.native}</span>
+                      <span className="block text-sm font-bold text-[#0B1F10]">{l.native}</span>
                       <span className="block truncate text-xs italic text-gray-500">“{l.hello}”</span>
                     </span>
                     {l.code !== "en" && <span lang={lang} className="rounded-full bg-[#FFF4D6] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#7A5200]">{t("Draft")}</span>}

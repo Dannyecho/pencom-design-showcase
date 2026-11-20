@@ -105,7 +105,7 @@ export default function QuickLinks() {
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#117F21] to-[#0A4A13] text-white shadow-[0_10px_24px_-8px_rgba(10,74,19,0.8)] ring-2 ring-white transition duration-200 group-hover:scale-110 group-hover:from-[#CB9615] group-hover:to-[#9A6F06] group-focus-visible:outline group-focus-visible:outline-[3px] group-focus-visible:outline-offset-2 group-focus-visible:outline-[#FFD84D]">
                       <l.icon className="h-5 w-5" aria-hidden="true" />
                     </span>
-                    <span className="whitespace-nowrap rounded-lg bg-white px-3 py-1.5 text-sm font-semibold text-[#0A2E10] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] ring-1 ring-black/5 transition group-hover:-translate-x-0 group-hover:text-[#117F21] group-hover:ring-[#117F21]/30">
+                    <span className="whitespace-nowrap rounded-lg bg-white px-3 py-1.5 text-sm font-semibold text-[#0B1F10] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] ring-1 ring-black/10 transition group-hover:-translate-x-0 group-hover:text-[#117F21] group-hover:ring-[#117F21]/30">
                       {l.label}
                     </span>
                   </Link>

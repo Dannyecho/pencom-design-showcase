@@ -62,7 +62,7 @@ export default function LanguageNotice() {
             <div lang={suggestion.code} className="border-b border-[#117F21]/15 bg-gradient-to-r from-[#E8F5E9] via-white to-[#FFF8E6]">
               <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5 text-sm">
                 <Languages className="h-4 w-4 text-[#117F21]" aria-hidden="true" />
-                <span className="font-semibold text-[#0A2E10]">{suggestion.hello}!</span>
+                <span className="font-semibold text-[#0B1F10]">{suggestion.hello}!</span>
                 <span className="text-gray-700">{suggestion.offer}</span>
                 <button type="button" onClick={() => setLang(suggestion.code)} className="inline-flex min-h-9 items-center rounded-full bg-[#117F21] px-4 text-xs font-bold text-white hover:bg-[#0A4A13] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]">
                   {suggestion.switchTo}

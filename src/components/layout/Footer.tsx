@@ -9,12 +9,13 @@ import {
 } from "lucide-react";
 import { useI18n } from "@/i18n/context";
 import { cn } from "@/lib/utils";
+import Ghost from "@/views/theme/Ghost";
 
 /**
- * Site footer, styled after the "for everyone" homepage: warm light background with soft colour
- * fields and a dot grid, a deep-green feature panel (newsletter, app, social), numbered column
- * labels joined by a drawn line, a gold highlighter sweep on the key words, white rounded chips
- * for contact details and portals. Motion runs once; reduced motion shows the finished state.
+ * Site footer in the showcase look: pale green band with a drifting outlined "PenCom" ghost word, a dark
+ * spotlight feature panel (newsletter, app, social), unnumbered uppercase eyebrows with a gold dot, the key
+ * words in the light-gold gradient, ink icon tiles for contact details and pill links for the portals.
+ * Motion runs once; reduced motion shows the finished state.
  */
 
 const columns = [
@@ -75,43 +76,27 @@ const contacts = [
 const ease = [0.22, 1, 0.36, 1] as const;
 const focus = "focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#FFD84D]";
 
-/** Column label: index number joined to the label by a line that draws itself (homepage style). */
-function Kicker({ n, children, dark = false }: { n: string; children: string; dark?: boolean }) {
-  const reduce = useReducedMotion();
+/** Column label: uppercase eyebrow with a gold dot (the theme has no numbered labels). */
+function Kicker({ children, dark = false }: { children: string; dark?: boolean }) {
   return (
-    <p className={cn("flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.16em] sm:gap-3 sm:tracking-[0.2em] lg:whitespace-nowrap", dark ? "text-white/80" : "text-[#0A4A13]")}>
-      <span className={cn("font-mono text-sm tracking-normal", dark ? "text-[#F4D27A]" : "text-[#B07E0C]")}>{n}</span>
-      <motion.span
-        aria-hidden="true"
-        className={cn("h-[2px] w-8 shrink-0 origin-left rounded-full", dark ? "bg-[#F4D27A]/70" : "bg-[#117F21]/50")}
-        initial={{ scaleX: reduce ? 1 : 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, ease }}
-      />
+    <p className={cn("flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] lg:whitespace-nowrap", dark ? "text-[#F4D27A]" : "text-[#0A4A13]")}>
+      <span aria-hidden="true" className={cn("h-1.5 w-1.5 shrink-0 rounded-full", dark ? "bg-[#F4D27A]" : "bg-[#CB9615]")} />
       {children}
     </p>
   );
 }
 
-/** Gold highlighter swept in behind the key words (homepage style). */
-function Mark({ children, dark = false }: { children: string; dark?: boolean }) {
-  const reduce = useReducedMotion();
-  return (
-    <motion.span
-      className={cn(
-        "box-decoration-clone rounded-md bg-no-repeat px-1",
-        dark ? "bg-[linear-gradient(transparent_68%,rgba(244,210,122,0.28)_68%)] text-[#F4D27A]" : "bg-[linear-gradient(transparent_58%,rgba(244,210,122,0.75)_58%)]",
-      )}
-      initial={{ backgroundSize: reduce ? "100% 100%" : "0% 100%" }}
-      whileInView={{ backgroundSize: "100% 100%" }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.9, delay: 0.25, ease: [0.65, 0, 0.35, 1] }}
-    >
-      {children}
-    </motion.span>
-  );
+/** Key words filled with the light-gold gradient, as in the theme's titles on dark. */
+function Mark({ children }: { children: string }) {
+  return <span className="bg-gradient-to-r from-[#F4D27A] to-[#E9B949] bg-clip-text text-transparent">{children}</span>;
 }
+
+/** Pointer spotlight for the dark panel. */
+const spot = (e: React.MouseEvent<HTMLElement>) => {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--x", `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty("--y", `${e.clientY - r.top}px`);
+};
 
 export default function Footer() {
   const { t } = useI18n();
@@ -128,19 +113,14 @@ export default function Footer() {
   const toTop = () => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
 
   return (
-    <footer className="relative isolate overflow-hidden bg-[#F2F6F0] text-[#0E2414]" aria-labelledby="footer-title">
+    <footer className="relative isolate overflow-hidden bg-[#F2F6F0] text-[#0B1F10]" aria-labelledby="footer-title">
       <h2 id="footer-title" className="sr-only">
         Site footer
       </h2>
 
-      {/* Ambient colour fields + dot grid, as on the homepage hero */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-40 top-24 h-[30rem] w-[30rem] rounded-full bg-[#BFE3C4]/60 blur-[120px]" />
-        <div className="absolute -right-40 bottom-0 h-[26rem] w-[26rem] rounded-full bg-[#F8E2A8]/60 blur-[120px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(10,74,19,0.07)_1px,transparent_0)] [background-size:28px_28px] [mask-image:linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]" />
-      </div>
-      {/* Brand line across the top */}
-      <div aria-hidden="true" className="h-1 bg-gradient-to-r from-[#0A4A13] via-[#CB9615] to-[#117F21]" />
+      {/* Brand line across the top, and the drifting ghost word behind the columns */}
+      <div aria-hidden="true" className="h-1 bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615]" />
+      <Ghost word="PenCom" className="bottom-24 top-auto -z-10 hidden sm:top-auto sm:block lg:top-auto" />
 
       <div className="mx-auto max-w-7xl px-4 pt-14 sm:pt-16">
         {/* ── Feature panel: newsletter, app, social ── */}
@@ -151,20 +131,21 @@ export default function Footer() {
           transition={{ duration: 0.7, ease }}
           className="relative"
         >
-          <div aria-hidden="true" className="absolute -inset-2 -z-10 translate-x-2 translate-y-2 rounded-[2.2rem] bg-[#CB9615]/25 sm:-inset-3 sm:translate-x-3 sm:translate-y-3" />
-          <div className="relative overflow-hidden rounded-[2rem] bg-[#0A4A13] text-white shadow-[0_40px_80px_-40px_rgba(10,46,16,0.7)]">
-            <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#117F21] blur-3xl" />
-            <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-[#CB9615]/30 blur-3xl" />
+          <div
+            onMouseMove={spot}
+            className="relative overflow-hidden rounded-[1.75rem] bg-[#04140A] text-white shadow-[0_40px_80px_-40px_rgba(4,20,10,0.8)] [background-image:radial-gradient(520px_circle_at_var(--x,70%)_var(--y,0%),rgba(244,210,122,0.16),transparent_50%),radial-gradient(60%_80%_at_100%_0%,rgba(203,150,21,0.22),transparent),radial-gradient(55%_80%_at_0%_100%,rgba(46,145,61,0.35),transparent)]"
+          >
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
 
             <div className="relative grid grid-cols-1 gap-8 p-5 sm:gap-10 sm:p-10 lg:grid-cols-12 lg:gap-12">
               <div className="lg:col-span-7">
-                <Kicker n="01" dark>
+                <Kicker dark>
                   Stay informed
                 </Kicker>
-                <h3 className="mt-4 text-[1.8rem] font-bold leading-[1.15] tracking-tight sm:text-4xl">
-                  Pension news, straight to <Mark dark>your inbox</Mark>
+                <h3 className="mt-4 text-[1.8rem] font-black leading-[1.1] tracking-tight sm:text-4xl">
+                  Pension news, straight to <Mark>your inbox</Mark>
                 </h3>
-                <p className="mt-3 max-w-xl text-white/75">Circulars, deadlines and new services, about once a month. No spam, unsubscribe at any time.</p>
+                <p className="mt-3 max-w-xl text-white/80">Circulars, deadlines and new services, about once a month. No spam, unsubscribe at any time.</p>
 
                 <form onSubmit={subscribe} className="mt-6">
                   <label htmlFor="footer-email" className="sr-only">
@@ -183,8 +164,8 @@ export default function Footer() {
                         Thank you. Check your inbox to confirm your subscription.
                       </motion.p>
                     ) : (
-                      <motion.div key="form" exit={{ opacity: 0 }} className="flex flex-col gap-3 rounded-2xl bg-white p-2 shadow-xl sm:flex-row sm:items-center">
-                        <span className="flex flex-1 items-center gap-3 px-3">
+                      <motion.div key="form" exit={{ opacity: 0 }} className="flex flex-col gap-2 rounded-[1.5rem] bg-white p-1.5 shadow-xl ring-[3px] ring-transparent transition focus-within:ring-[#FFD84D] sm:flex-row sm:items-center sm:rounded-full">
+                        <span className="flex flex-1 items-center gap-3 px-4">
                           <Mail className="h-5 w-5 shrink-0 text-[#117F21]" aria-hidden="true" />
                           <input
                             id="footer-email"
@@ -194,15 +175,17 @@ export default function Footer() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="you@example.com"
-                            className="min-h-12 w-full bg-transparent text-base text-[#0E2414] placeholder:text-gray-400 focus:outline-none"
+                            className="min-h-12 w-full bg-transparent text-base text-[#0B1F10] placeholder:text-gray-500 focus:outline-none"
                           />
                         </span>
                         <button
                           type="submit"
-                          className={cn("group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#CB9615] px-6 font-bold text-[#1A1206] transition hover:bg-[#E0AB24]", focus)}
+                          className={cn("group inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#F4D27A] py-1.5 pl-5 pr-1.5 font-bold text-[#1A1206] transition hover:bg-[#FFE08F]", focus)}
                         >
                           Subscribe
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                          <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]">
+                            <ArrowRight className="h-4 w-4" />
+                          </span>
                         </button>
                       </motion.div>
                     )}
@@ -212,7 +195,7 @@ export default function Footer() {
 
               <div className="flex flex-col gap-7 border-t border-white/15 pt-7 sm:flex-row sm:flex-wrap sm:gap-10 lg:col-span-5 lg:flex-col lg:gap-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
                 <div>
-                  <Kicker n="02" dark>
+                  <Kicker dark>
                     Get the app
                   </Kicker>
                   <div className="mt-4 flex flex-wrap gap-3">
@@ -223,7 +206,7 @@ export default function Footer() {
                       <Link
                         key={s.name}
                         to="/mobile"
-                        className={cn("group inline-flex min-h-14 items-center gap-3 rounded-2xl bg-white/10 px-4 ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white hover:text-[#0A4A13]", focus)}
+                        className={cn("group inline-flex min-h-14 items-center gap-3 rounded-2xl bg-white/10 px-4 ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white hover:text-[#0B1F10]", focus)}
                       >
                         <s.icon className="h-6 w-6" aria-hidden="true" />
                         <span className="text-left">
@@ -235,7 +218,7 @@ export default function Footer() {
                   </div>
                 </div>
                 <div>
-                  <Kicker n="03" dark>
+                  <Kicker dark>
                     Follow us
                   </Kicker>
                   <ul className="mt-4 flex flex-wrap gap-2.5">
@@ -266,7 +249,7 @@ export default function Footer() {
             <Link to="/" className={cn("inline-flex items-center gap-3 rounded-xl", focus)}>
               <img src="/pencom-logo.png" alt="" className="h-12 w-12 rounded-xl bg-white object-contain p-1 ring-1 ring-black/10" />
               <span>
-                <span className="block text-lg font-bold leading-tight">PenCom</span>
+                <span className="block text-lg font-black leading-tight tracking-tight">PenCom</span>
                 <span className="block text-sm text-gray-600">National Pension Commission</span>
               </span>
             </Link>
@@ -277,7 +260,7 @@ export default function Footer() {
               {contacts.map((c) => {
                 const inner = (
                   <>
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-[#0A4A13] ring-1 ring-black/10 transition group-hover:bg-[#0A4A13] group-hover:text-white">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:rotate-6 group-hover:bg-[#117F21]">
                       <c.icon className="h-[18px] w-[18px]" aria-hidden="true" />
                     </span>
                     <span className="min-w-0">
@@ -292,18 +275,18 @@ export default function Footer() {
             </ul>
           </div>
 
-          {columns.map((col, ci) => (
+          {columns.map((col) => (
             <nav key={col.title} aria-label={t(col.title)} className="lg:col-span-2 [&:first-of-type]:lg:col-span-3 [&:last-of-type]:col-span-2 [&:last-of-type]:lg:col-span-4">
-              <Kicker n={`0${ci + 4}`}>{col.title}</Kicker>
+              <Kicker>{col.title}</Kicker>
               <ul className={cn("mt-5 space-y-1", col.links.length > 4 && "columns-2 gap-6")}>
                 {col.links.map((l) => (
                   <li key={l.label} className="break-inside-avoid">
-                    <Link to={l.href} className={cn("group inline-flex min-h-9 items-center gap-1.5 rounded py-1 text-[0.95rem] text-gray-700 transition hover:text-[#0A4A13]", focus)}>
+                    <Link to={l.href} className={cn("group inline-flex min-h-9 items-center gap-1.5 rounded py-1 text-[0.95rem] text-gray-700 transition hover:text-[#0B1F10]", focus)}>
                       <span className="relative">
                         {l.label}
                         <span aria-hidden="true" className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-left scale-x-0 rounded-full bg-[#CB9615] transition-transform duration-300 group-hover:scale-x-100" />
                       </span>
-                      <ArrowUpRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" aria-hidden="true" />
+                      <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition duration-300 group-hover:rotate-45 group-hover:opacity-100" aria-hidden="true" />
                     </Link>
                   </li>
                 ))}
@@ -313,9 +296,9 @@ export default function Footer() {
         </div>
 
         {/* ── Online services ── */}
-        <div className="rounded-3xl bg-white/80 p-5 ring-1 ring-black/5 backdrop-blur sm:p-6">
+        <div className="rounded-[1.75rem] bg-white p-5 shadow-[0_30px_60px_-45px_rgba(4,20,10,0.5)] ring-1 ring-black/10 sm:p-6">
           <div className="flex flex-col gap-4">
-            <Kicker n="07">Online services</Kicker>
+            <Kicker>Online services</Kicker>
             <ul className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
               {portals.map((p) => (
                 <li key={p.name}>
@@ -323,11 +306,11 @@ export default function Footer() {
                     href={`https://${p.name.toLowerCase()}.pencom.gov.ng`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={cn("group flex min-h-12 items-center gap-3 rounded-2xl bg-[#F2F6F0] px-4 ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:bg-[#0A4A13] hover:text-white", focus)}
+                    className={cn("group flex min-h-12 items-center gap-3 rounded-full bg-[#F2F6F0] pl-5 pr-1.5 ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-white", focus)}
                   >
                     <span className="font-bold">{p.name}</span>
-                    <span className="hidden truncate text-sm text-gray-500 transition group-hover:text-white/75 sm:inline">{p.note}</span>
-                    <ExternalLink className="ml-auto h-4 w-4 shrink-0 text-gray-400 transition group-hover:text-[#F4D27A]" aria-hidden="true" />
+                    <span className="hidden truncate text-sm text-gray-600 transition group-hover:text-white/80 sm:inline">{p.note}</span>
+                    <span aria-hidden="true" className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:rotate-45 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]"><ExternalLink className="h-4 w-4" /></span>
                     <span className="sr-only">(opens in a new tab)</span>
                   </a>
                 </li>
@@ -339,7 +322,7 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="mx-auto mt-10 max-w-7xl px-4 pb-8">
-        <div className="flex flex-col gap-4 border-t border-[#0E2414]/10 pt-6 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 border-t border-[#0B1F10]/10 pt-6 md:flex-row md:items-center md:justify-between">
           <p className="text-sm text-gray-600">
             &copy; 2026 National Pension Commission. All rights reserved. Federal Republic of Nigeria.
           </p>
@@ -349,14 +332,14 @@ export default function Footer() {
               { label: "Report Employer", to: "/connect#report" },
               { label: "Privacy Policy", to: "/regulations#policies" },
             ].map((l) => (
-              <Link key={l.label} to={l.to} className={cn("rounded text-sm font-medium text-gray-700 hover:text-[#0A4A13] hover:underline", focus)}>
+              <Link key={l.label} to={l.to} className={cn("rounded text-sm font-medium text-gray-700 hover:text-[#0B1F10] hover:underline", focus)}>
                 {l.label}
               </Link>
             ))}
             <button
               type="button"
               onClick={toTop}
-              className={cn("group inline-flex min-h-10 items-center gap-2 rounded-full bg-[#0A4A13] pl-4 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]", focus)}
+              className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] pl-4 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]", focus)}
             >
               Back to top
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform group-hover:-translate-y-0.5">

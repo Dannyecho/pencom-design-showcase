@@ -409,7 +409,7 @@ export function NewsBento() {
           </Rise>
           {rest.map((a, i) => (
             <Rise key={a.id} delay={0.1 * (i + 1)} className="lg:col-span-5">
-              <Link to={newsPath(a)} className={cn("group flex h-full gap-5 overflow-hidden rounded-[1.75rem] bg-white p-3 ring-1 ring-black/5 transition hover:shadow-[0_24px_50px_-30px_rgba(10,74,19,0.5)]", focus)}>
+              <Link to={newsPath(a)} className={cn("group flex h-full gap-5 overflow-hidden rounded-[1.75rem] bg-white p-3 ring-1 ring-black/10 transition hover:shadow-[0_24px_50px_-30px_rgba(10,74,19,0.5)]", focus)}>
                 <span className="relative block w-36 shrink-0 overflow-hidden rounded-[1.3rem] sm:w-44">
                   <img src={a.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
                 </span>

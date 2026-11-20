@@ -29,10 +29,13 @@ The showcase design is cinematic and dark-accented: big photography, heavy type,
 - **Colour weight:** mostly white and pale green; dark green/near-black in the banner, the dock, portal cards and
   one figures band; gold is the accent (CTA, highlights, counters, active states), never a large fill except the CTA.
 
-## Page sessions
+## Status
 
-The inner pages are restyled session by session: the list and status are in `SESSIONS.md`; run the next one with
-`/session` (or `/session S3`, `/session status`).
+Finished (20 November 2026). Every inner page was restyled session by session (S0–S13, all `done` in `SESSIONS.md`;
+`/session status` prints the table). The grep for template leftovers (`#FBFCF9`, `#F6F8F3`, `#0E2414`, `#0A2E10`,
+`ring-black/5`, `scroll-mt-[160px]`) is clean over `src/`. The footer has no numbered labels; the "being redesigned"
+placeholder (`[...slug]`) and the 404 are dark showcase bands (server components, so the backdrop is plain CSS, no
+motion). Open: whether the Notices panel should open by itself on a first visit (`NoticesBell.tsx`).
 
 ## Run
 

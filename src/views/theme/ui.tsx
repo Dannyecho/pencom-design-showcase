@@ -297,7 +297,7 @@ export function Modal({ open, onClose, labelledBy, children, className }: { open
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
             className={cn("relative max-h-[calc(100svh-1.5rem)] w-full overflow-y-auto rounded-[1.75rem] bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]", className)}
           >
-            <button ref={closeBtn} type="button" onClick={onClose} aria-label="Close" className={cn("absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#0E2414] shadow transition hover:rotate-90", focus)}>
+            <button ref={closeBtn} type="button" onClick={onClose} aria-label="Close" className={cn("absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#0B1F10] shadow transition hover:rotate-90", focus)}>
               <X className="h-5 w-5" aria-hidden="true" />
             </button>
             {children}
