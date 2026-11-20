@@ -18,7 +18,7 @@ const sections = [
 ];
 
 /**
- * Industry performance, "for everyone" theme (brief §7 "Data page (PFA performance and fees)": accessible tables
+ * Industry performance, showcase theme (brief §7 "Data page (PFA performance and fees)": accessible tables
  * and charts, period selector, CSV/JSON download, methodology note; DES-29).
  * #rsa-summary (old link) lands on Coverage.
  */
