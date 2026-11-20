@@ -6,7 +6,7 @@ import { ArrowRight, BookOpen, FileText, FolderOpen, HelpCircle, Library as Libr
 import { useLocation, useNavigate, useSearchParams } from "@/lib/router";
 import { cn } from "@/lib/utils";
 import { scrollToId } from "@/views/about/primitives";
-import { FramedPanel, PageHero, SectionNav, ease, focus } from "@/views/theme/ui";
+import { FramedPanel, PageHero, SectionNav, ease, focus, spot } from "@/views/theme/ui";
 import { FaqSection, Glossary } from "./FaqGlossary";
 import Guides from "./Guides";
 import { Downloads, Learning, Publications } from "./Library";
@@ -14,7 +14,7 @@ import { faqs, glossary, guides } from "./data";
 import { forms, publications } from "./publications";
 
 /**
- * Resources and knowledge base, "for everyone" theme (brief §6.2 Resources; DES-06, DES-22, DES-24, DES-39, DES-41).
+ * Resources and knowledge base, showcase theme (brief §6.2 Resources; DES-06, DES-22, DES-24, DES-39, DES-41).
  * Hero with one search across guides, questions, terms and publications → guides (read aloud, enlarge, print;
  * ?guide=<id> makes each shareable) → FAQs → glossary → publications → forms → learning.
  * /resources/faq lands on the questions; old anchors (#annual-reports, #circulars …) still work.
@@ -161,8 +161,14 @@ function Hero({
           <label htmlFor="kb-q" className="sr-only">
             Search guides, questions, terms and publications
           </label>
-          <div className="flex items-center gap-3 rounded-2xl bg-white px-4 shadow-[0_20px_40px_-28px_rgba(10,74,19,0.6)] ring-1 ring-black/10 focus-within:ring-2 focus-within:ring-[#117F21]">
-            <Search className="h-5 w-5 shrink-0 text-[#117F21]" aria-hidden="true" />
+          <div aria-hidden="true" className="pointer-events-none absolute -inset-px rounded-full bg-gradient-to-r from-[#F4D27A]/80 via-white/10 to-[#117F21]/70" />
+          <div
+            onMouseMove={spot}
+            className="relative flex items-center gap-3 rounded-full bg-white py-1.5 pl-1.5 pr-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.85)] transition focus-within:shadow-[0_0_0_3px_#FFD84D,0_30px_60px_-24px_rgba(0,0,0,0.85)] [background-image:radial-gradient(260px_circle_at_var(--x,50%)_var(--y,50%),rgba(244,210,122,0.18),transparent_60%)]"
+          >
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] text-[#F4D27A]">
+              <Search className="h-5 w-5" aria-hidden="true" />
+            </span>
             <input
               id="kb-q"
               value={q}
@@ -172,10 +178,10 @@ function Hero({
               role="combobox"
               aria-expanded={hits.length > 0}
               aria-controls="kb-results"
-              className="min-h-14 w-full bg-transparent text-base focus:outline-none"
+              className="min-h-11 w-full min-w-0 bg-transparent text-base placeholder:text-gray-500 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
             />
             {q && (
-              <button type="button" onClick={() => setQ("")} aria-label="Clear search" className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100", focus)}>
+              <button type="button" onClick={() => setQ("")} aria-label="Clear search" className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-gray-600 transition hover:rotate-90 hover:bg-[#F2F6F0]", focus)}>
                 <X className="h-4 w-4" aria-hidden="true" />
               </button>
             )}
@@ -183,11 +189,11 @@ function Hero({
           <AnimatePresence>
             {q.trim().length >= 2 && (
               <motion.div
-                initial={{ opacity: 0, y: -6 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
+                exit={{ opacity: 0, y: 6 }}
                 transition={{ duration: 0.2, ease }}
-                className="absolute inset-x-0 top-full z-40 mt-2 overflow-hidden rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(10,46,16,0.45)] ring-1 ring-black/10"
+                className="absolute inset-x-0 top-full z-40 mt-3 overflow-hidden rounded-3xl bg-white p-1.5 shadow-[0_40px_80px_-24px_rgba(0,0,0,0.75)] ring-1 ring-black/10"
               >
                 {hits.length ? (
                   <ul id="kb-results" role="listbox" aria-label="Results">
@@ -201,23 +207,25 @@ function Hero({
                               h.go();
                               setQ("");
                             }}
-                            className={cn("group flex w-full items-center gap-3 px-4 py-3 text-left transition hover:bg-[#F2F6F0]", focus)}
+                            className={cn("group flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition hover:bg-[#F2F6F0]", focus)}
                           >
-                            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E8F5E9] text-[#117F21]">
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#F2F6F0] text-[#117F21] transition duration-300 group-hover:bg-gradient-to-br group-hover:from-[#0B1F10] group-hover:to-[#0A4A13] group-hover:text-[#F4D27A]">
                               <I className="h-4 w-4" aria-hidden="true" />
                             </span>
                             <span className="min-w-0 flex-1">
                               <span className="block truncate font-semibold">{h.label}</span>
-                              <span className="block text-xs text-gray-500">{h.kind}</span>
+                              <span className="block text-[11px] font-bold uppercase tracking-[0.16em] text-[#7F5A04]">{h.kind}</span>
                             </span>
-                            <ArrowRight className="h-4 w-4 text-gray-300 transition group-hover:translate-x-0.5 group-hover:text-[#117F21]" aria-hidden="true" />
+                            <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] text-[#0B1F10] transition duration-300 group-hover:rotate-[-45deg] group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]">
+                              <ArrowRight className="h-4 w-4" />
+                            </span>
                           </button>
                         </li>
                       );
                     })}
                   </ul>
                 ) : (
-                  <p className="px-4 py-4 text-sm text-gray-600">
+                  <p className="px-4 py-4 text-sm text-gray-700">
                     Nothing found. Try another word, or{" "}
                     <button type="button" onClick={() => document.getElementById("chat-trigger")?.click()} className={cn("rounded font-semibold text-[#117F21] underline", focus)}>
                       ask PenCom Assistant
@@ -232,23 +240,24 @@ function Hero({
       }
       aside={
         <FramedPanel className="p-4 sm:p-5">
-          <p className="px-1 text-xs font-bold uppercase tracking-[0.18em] text-[#0A4A13]">What’s here</p>
+          <p className="flex items-center gap-2 px-1 text-xs font-bold uppercase tracking-[0.18em] text-[#0A4A13]"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#CB9615]" />What’s here</p>
           <ul className="mt-3 space-y-2">
             {tiles.map((t, i) => (
-              <motion.li key={t.id} initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.05, ease }}>
+              <motion.li key={t.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.05, ease }}>
                 <button
                   type="button"
                   onClick={() => jump(t.id)}
-                  className={cn("group flex w-full items-center gap-4 rounded-2xl bg-[#F2F6F0] p-3 text-left ring-1 ring-black/5 transition duration-300 hover:bg-[#0A4A13] hover:text-white", focus)}
+                  className={cn("group relative flex min-h-[4.25rem] w-full items-center gap-4 overflow-hidden rounded-2xl bg-[#F2F6F0] p-3 text-left ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-white hover:shadow-[0_20px_40px_-24px_rgba(4,20,10,0.8)] hover:ring-[#0B1F10]", focus)}
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-[#117F21] shadow-sm transition group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]">
+                  <span aria-hidden="true" className="absolute inset-y-3 left-0 w-[3px] origin-center scale-y-0 rounded-r-full bg-gradient-to-b from-[#F4D27A] to-[#117F21] transition-transform duration-300 group-hover:scale-y-100" />
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-[#117F21] shadow-sm transition duration-300 group-hover:rotate-[-6deg] group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]">
                     <t.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block font-bold">{t.label}</span>
-                    <span className="block text-xs text-gray-500 transition group-hover:text-white/70">{t.note}</span>
+                    <span className="block text-xs text-gray-600 transition group-hover:text-white/75">{t.note}</span>
                   </span>
-                  <span className="font-mono text-2xl font-bold text-[#0A4A13] transition group-hover:text-[#F4D27A]">{t.n}</span>
+                  <span className="font-mono text-2xl font-bold tabular-nums text-[#0A4A13] transition group-hover:text-[#F4D27A]">{t.n}</span>
                 </button>
               </motion.li>
             ))}
