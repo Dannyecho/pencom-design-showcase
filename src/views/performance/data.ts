@@ -38,7 +38,7 @@ export const allocation: Alloc[] = [
 export const allocColors: Record<string, string> = {
   "FGN securities": "#117F21",
   Equities: "#CB9615",
-  "Corporate debt": "#2E7DAF",
+  "Corporate debt": "#0B1F10",
   "Money market": "#7BC67E",
   Other: "#9AA59B",
 };

@@ -271,7 +271,7 @@ export function CoverageSection() {
             <p className="mt-1 text-sm text-gray-600">Money paid in by employers and workers each quarter.</p>
             <div className="mt-6">
               <DataPanel title="Contributions" name="contributions" rows={contributions.map((c) => ({ quarter: c.label, naira_billion: c.v, derived: !!c.derived }))}
-                chart={<Columns data={contributions.map((c) => ({ ...c, note: c.derived ? "derived" : undefined }))} fmt={bn} color="#2E7DAF" />}
+                chart={<Columns data={contributions.map((c) => ({ ...c, note: c.derived ? "derived" : undefined }))} fmt={bn} color="#0B1F10" />}
                 table={<DataTable head={["Quarter", "₦ billion"]} rows={contributions.map((c) => [c.label + (c.derived ? " *" : ""), c.v.toFixed(2)])} />}
                 caption="* Worked out from the published Q3 2025 increase of 18%. Q4 2025 included one-off public-sector payments."
               />
