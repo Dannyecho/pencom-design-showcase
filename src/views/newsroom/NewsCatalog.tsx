@@ -8,6 +8,7 @@ import CookieConsent from "@/components/CookieConsent";
 import { useI18n } from "@/i18n/context";
 import { cn } from "@/lib/utils";
 import { scrollToId } from "@/views/about/primitives";
+import { sectionCls } from "@/views/theme/ui";
 import Headline from "@/views/theme/Headline";
 import { items, kinds, type Kind, type NewsItem } from "./data";
 import { Empty, FilterBar, Galleries, Hero, MediaDesk, NewsCard, Toast, ease, focus, type Sort, type View } from "./parts";
@@ -17,8 +18,9 @@ const PAGE = 9;
 /**
  * News catalogue (/news): the newsroom the stakeholders asked for (questionnaire "Anything else"; brief §6–7).
  * Top story → search, type chips, year archive, sort and card/list view, all kept in the URL so a filtered view
- * can be shared → photo galleries → media desk (press contacts, verified accounts, data). Styled after the
- * "for everyone" homepage: soft colour fields, numbered titles with a drawn line and gold highlighter.
+ * can be shared → photo galleries → media desk (press contacts, verified accounts, data). Showcase look: dark
+ * cinematic hero with the top story floating in it, a sticky pill filter bar, spotlight cards with a growing
+ * green→gold line, photo stacks on a pale green band, and the media desk as the page's one near-black band.
  * Not a carousel (brief §13: the home slider is the only one); images lazy-load below the fold.
  */
 export default function NewsCatalog() {
@@ -110,11 +112,10 @@ export default function NewsCatalog() {
       <div className="bg-white text-[#0B1F10]">
         <Hero lead={lead} q={q} onSearch={search} />
 
-        <section id="catalogue" aria-labelledby="catalogue-title" className="scroll-mt-[160px] px-4 pb-6 pt-16 sm:pt-20">
+        <section id="catalogue" aria-labelledby="catalogue-title" className={sectionCls}>
           <div className="mx-auto max-w-7xl">
             <Headline
               id="catalogue-title"
-              n="01"
               kicker="All news"
               title="Browse every story"
               mark="every story"
@@ -167,20 +168,22 @@ export default function NewsCatalog() {
 
               {results.length > limit && (
                 <div className="mt-10 flex flex-col items-center gap-3">
-                  <div className="h-1.5 w-48 overflow-hidden rounded-full bg-gray-200" aria-hidden="true">
+                  <div className="h-1.5 w-48 overflow-hidden rounded-full bg-[#F2F6F0] ring-1 ring-black/10" aria-hidden="true">
                     <motion.div className="h-full rounded-full bg-gradient-to-r from-[#117F21] to-[#CB9615]" animate={{ width: `${(limit / results.length) * 100}%` }} transition={{ duration: 0.5, ease }} />
                   </div>
                   <button
                     type="button"
                     onClick={() => setLimit((l) => l + PAGE)}
-                    className={cn("group inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-6 font-semibold text-[#0A4A13] shadow-sm ring-1 ring-black/10 transition hover:bg-[#0A4A13] hover:text-white", focus)}
+                    className={cn("group inline-flex min-h-12 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-6 pr-1.5 font-semibold text-white transition hover:bg-[#117F21]", focus)}
                   >
                     {t("Show more news")}
-                    <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
+                    <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:translate-y-0.5">
+                      <ChevronDown className="h-4 w-4" />
+                    </span>
                   </button>
                 </div>
               )}
-              <p className="mt-8 text-center text-xs text-gray-500">
+              <p className="mt-10 text-center text-xs text-gray-600">
                 News items are drafts until the newsroom is connected to the CMS. Items scheduled for a later date appear automatically on that date.
               </p>
             </div>
