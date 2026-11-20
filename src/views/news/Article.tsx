@@ -8,13 +8,18 @@ import {
   Linkedin, Megaphone, MessageCircle, Mic, Minus, Pause, Plus, Printer, Quote, Scale, Share2, ThumbsDown, ThumbsUp, Twitter, Volume2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CountUp, Spotlight, Tilt, ease, reveal } from "@/views/about/primitives";
+import { CountUp, Tilt, reveal } from "@/views/about/primitives";
+import { DarkBackdrop, Rise, ease, focus, sectionCls, spot } from "@/views/theme/ui";
+import { SectionHeading } from "@/views/theme/heading";
+import { ArrowChip, darkCard, glowLight } from "@/views/docs/kit";
 import { social } from "@/views/connect/data";
 import { findArticle, news, newsPath, type Article as A, type Block, type Category } from "./data";
 
 /**
  * News article (brief §7 "News and events"; questionnaire: news and media centre, easy sharing, verified social links).
  * Route: /news/:slug
+ * Showcase look: the dark photo header is a deliberate exception; the body is white with ring cards, ink pills,
+ * dark spotlight cards for figures, the PDF and media enquiries, and "More from the newsroom" on the soft band.
  */
 
 const fmt = (d: string) => new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
@@ -29,7 +34,9 @@ export const catIcon: Record<Category, typeof Megaphone> = {
   Event: Calendar,
 };
 
-const focusRing = "focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]";
+const focusRing = focus;
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]";
+const eyebrowCls = "text-[11px] font-bold uppercase tracking-[0.16em] text-[#7F5A04]";
 
 /* ─────────────────────────── Sharing ─────────────────────────── */
 
@@ -64,10 +71,10 @@ function useShare(a: A) {
 
 function ShareRail({ a, vertical }: { a: A; vertical?: boolean }) {
   const { links, copy, copied, native } = useShare(a);
-  const btn = "group relative flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition hover:-translate-y-0.5 hover:border-[#117F21] hover:bg-[#117F21] hover:text-white";
+  const btn = "group relative flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#0B1F10] ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-[#F4D27A] hover:ring-[#0B1F10]";
   return (
     <div className={cn("flex items-center gap-2", vertical && "flex-col")}>
-      <span className={cn("text-[11px] font-bold uppercase tracking-[0.16em] text-gray-400", vertical ? "mb-1" : "mr-1")}>Share</span>
+      <span className={cn(eyebrowCls, vertical ? "mb-1" : "mr-1")}>Share</span>
       {links.map((l) => (
         <a key={l.name} href={l.href} target="_blank" rel="noopener noreferrer" className={cn(btn, focusRing)} aria-label={`Share on ${l.name} (opens in a new tab)`}>
           <l.icon className="h-4 w-4" aria-hidden="true" />
@@ -97,11 +104,12 @@ function Facts({ items }: { items: { value: string; label: string }[] }) {
     <div className={cn("my-10 grid grid-cols-1 gap-3 sm:grid-cols-2", items.length === 3 && "md:grid-cols-3")}>
       {items.map((f, i) => (
         <motion.div key={f.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.6, delay: i * 0.08, ease }}>
-          <Spotlight color="rgba(244,210,122,0.22)" className="relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#0A4A13] via-[#0A4A13] to-[#117F21] p-5 text-white">
-            <span aria-hidden="true" className="absolute -right-6 -top-6 h-20 w-20 rounded-full border-[10px] border-white/[0.06]" />
-            <CountUp value={f.value} className="block break-words font-display text-[1.6rem] font-bold leading-none text-[#F4D27A] sm:text-[1.75rem]" />
-            <span className="mt-3 block text-sm leading-snug text-white/75">{f.label}</span>
-          </Spotlight>
+          <div onMouseMove={spot} className={cn("group relative h-full overflow-hidden rounded-3xl p-5 text-white", darkCard, lift)}>
+            <span aria-hidden="true" className="absolute -right-6 -top-6 h-20 w-20 rounded-full border-[10px] border-[#F4D27A]/10 transition-transform duration-500 group-hover:scale-125" />
+            <span aria-hidden="true" className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-[#F4D27A]/60 to-transparent" />
+            <CountUp value={f.value} className="block break-words bg-gradient-to-r from-[#F4D27A] to-[#FFE9A8] bg-clip-text font-display text-[1.6rem] font-black leading-none tracking-tight text-transparent sm:text-[1.75rem]" />
+            <span className="mt-3 block text-sm leading-snug text-white/80">{f.label}</span>
+          </div>
         </motion.div>
       ))}
     </div>
@@ -118,26 +126,27 @@ function BlockView({ b, first }: { b: Block; first: boolean }) {
       );
     case "h2":
       return (
-        <h2 id={b.id} className="group mt-12 scroll-mt-48 text-2xl font-bold text-[#0A2E10] sm:text-[1.75rem]">
-          <span aria-hidden="true" className="mb-3 block h-1 w-12 rounded-full bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-all duration-500 group-hover:w-20" />
+        <h2 id={b.id} className="group mt-12 scroll-mt-48 text-2xl font-black tracking-tight text-[#0B1F10] sm:text-[1.85rem]">
+          <span aria-hidden="true" className="mb-3 block h-1 w-12 rounded-full bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615] transition-all duration-500 group-hover:w-20" />
           {b.text}
         </h2>
       );
     case "quote":
       return (
-        <motion.figure {...reveal} className="relative my-12 overflow-hidden rounded-3xl bg-[#FBF7EC] px-7 py-9 sm:px-10">
-          <Quote aria-hidden="true" className="absolute -left-2 -top-3 h-24 w-24 rotate-180 text-[#CB9615]/20" />
-          <span aria-hidden="true" className="absolute inset-y-6 left-0 w-1 rounded-r-full bg-gradient-to-b from-[#CB9615] to-[#117F21]" />
-          <blockquote className="relative font-serif text-[1.45em] italic leading-snug text-[#0A2E10]">{b.text}</blockquote>
-          {b.by && <figcaption className="relative mt-4 text-sm font-semibold text-[#9A6F06]">{b.by}</figcaption>}
+        <motion.figure {...reveal} className="relative my-12 overflow-hidden rounded-[1.75rem] bg-[#F2F6F0] px-7 py-9 ring-1 ring-black/10 sm:px-10">
+          <Quote aria-hidden="true" className="absolute -right-3 -top-4 h-28 w-28 rotate-180 text-[#0A4A13]/[0.07]" />
+          <span aria-hidden="true" className="absolute inset-y-6 left-0 w-1 rounded-r-full bg-gradient-to-b from-[#CB9615] via-[#2E913D] to-[#117F21]" />
+          <span aria-hidden="true" className="relative mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]"><Quote className="h-4 w-4 rotate-180 fill-current" /></span>
+          <blockquote className="relative font-serif text-[1.45em] italic leading-snug text-[#0B1F10]">{b.text}</blockquote>
+          {b.by && <figcaption className="relative mt-4 text-sm font-bold uppercase tracking-[0.12em] text-[#7F5A04]">{b.by}</figcaption>}
         </motion.figure>
       );
     case "list":
       return (
         <ul className="my-6 space-y-3">
           {b.items.map((it, i) => (
-            <motion.li key={it} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, ease }} className="flex gap-3 font-serif text-[1.12em] leading-relaxed text-gray-800">
-              <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8F5E9] text-[#117F21]">
+            <motion.li key={it} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, ease }} className="flex gap-3 font-serif text-[1.12em] leading-relaxed text-gray-800">
+              <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]">
                 <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />
               </span>
               {it}
@@ -149,20 +158,21 @@ function BlockView({ b, first }: { b: Block; first: boolean }) {
       return <Facts items={b.items} />;
     case "callout":
       return (
-        <motion.aside {...reveal} aria-label={b.title} className="relative my-12 overflow-hidden rounded-3xl border border-[#117F21]/20 bg-gradient-to-br from-[#F2FAF2] to-white p-7 sm:p-8">
-          <span aria-hidden="true" className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#117F21]/10 blur-2xl" />
-          <p className="relative text-xs font-bold uppercase tracking-[0.18em] text-[#117F21]">{b.title}</p>
-          <p className="relative mt-2 text-lg leading-relaxed text-[#0A2E10]">{b.text}</p>
+        <motion.aside {...reveal} aria-label={b.title} onMouseMove={spot} className="relative my-12 rounded-[1.75rem] bg-gradient-to-br from-[#CB9615] via-[#2E913D] to-[#117F21] p-px shadow-[0_30px_60px_-36px_rgba(4,20,10,0.45)]">
+          <div className={cn("relative overflow-hidden rounded-[calc(1.75rem-1px)] bg-white p-7 sm:p-8", glowLight)}>
+          <p className="relative inline-flex items-center gap-2 rounded-full bg-[#0A4A13] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#F4D27A]" />{b.title}</p>
+          <p className="relative mt-3 text-lg leading-relaxed text-[#0B1F10]">{b.text}</p>
           <ul className="relative mt-5 flex flex-wrap gap-3">
             {b.links.map((l, i) => (
               <li key={l.to}>
-                <Link to={l.to} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-xl px-4 font-semibold transition", i === 0 ? "bg-[#117F21] text-white hover:bg-[#0A4A13]" : "border border-[#117F21]/30 bg-white text-[#117F21] hover:border-[#117F21]", focusRing)}>
+                <Link to={l.to} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full px-5 font-semibold transition", i === 0 ? "bg-[#0B1F10] text-white hover:bg-[#117F21]" : "bg-white text-[#0B1F10] ring-1 ring-black/15 hover:ring-[#0B1F10]", focusRing)}>
                   {l.label}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                  <ArrowRight className={cn("h-4 w-4 transition-transform group-hover:translate-x-1", i === 0 && "text-[#F4D27A]")} aria-hidden="true" />
                 </Link>
               </li>
             ))}
           </ul>
+          </div>
         </motion.aside>
       );
   }
@@ -198,29 +208,29 @@ function Contents({ items, progress }: { items: { id: string; text: string }[]; 
   const r = 22;
   const c = 2 * Math.PI * r;
   return (
-    <nav aria-label="In this story" className="rounded-3xl border border-gray-200 bg-white p-5">
+    <nav aria-label="In this story" className="rounded-3xl bg-white p-5 ring-1 ring-black/10">
       <div className="flex items-center gap-3">
         <svg viewBox="0 0 56 56" className="h-14 w-14 -rotate-90" aria-hidden="true">
-          <circle cx="28" cy="28" r={r} fill="none" stroke="#E8F5E9" strokeWidth="5" />
+          <circle cx="28" cy="28" r={r} fill="none" stroke="#F2F6F0" strokeWidth="5" />
           <circle cx="28" cy="28" r={r} fill="none" stroke="url(#ring)" strokeWidth="5" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - progress)} className="transition-[stroke-dashoffset] duration-200" />
           <defs>
             <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#117F21" /><stop offset="1" stopColor="#CB9615" /></linearGradient>
           </defs>
         </svg>
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-gray-400">In this story</p>
-          <p className="text-sm font-semibold text-[#0A2E10]">{Math.round(progress * 100)}% read</p>
+          <p className={eyebrowCls}>In this story</p>
+          <p className="text-sm font-bold text-[#0B1F10]">{Math.round(progress * 100)}% read</p>
         </div>
       </div>
       {items.length > 0 && (
-        <ol className="mt-4 space-y-1 border-l-2 border-gray-100">
+        <ol className="mt-4 space-y-1 border-l-2 border-[#F2F6F0]">
           {items.map((i) => (
             <li key={i.id}>
               <a
                 href={`#${i.id}`}
                 onClick={(e) => { e.preventDefault(); document.getElementById(i.id)?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
                 aria-current={active === i.id ? "location" : undefined}
-                className={cn("relative -ml-0.5 block border-l-2 py-1.5 pl-4 text-sm transition", active === i.id ? "border-[#117F21] font-semibold text-[#117F21]" : "border-transparent text-gray-500 hover:text-gray-800")}
+                className={cn("relative -ml-0.5 block border-l-2 py-1.5 pl-4 text-sm transition", active === i.id ? "border-[#CB9615] font-bold text-[#0B1F10]" : "border-transparent text-gray-600 hover:text-[#0B1F10]", "rounded-r-lg", focusRing)}
               >
                 {i.text}
               </a>
@@ -239,20 +249,21 @@ export function StoryCard({ a, i = 0 }: { a: A; i?: number }) {
   return (
     <motion.li initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.6, delay: i * 0.08, ease }}>
       <Tilt className="h-full">
-        <Link to={newsPath(a)} className={cn("group flex h-full flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white transition hover:shadow-[0_30px_60px_-30px_rgba(10,74,19,0.45)]", focusRing)}>
-          <span className="relative block aspect-[16/10] overflow-hidden bg-gray-100">
-            <img src={a.image} alt="" loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
-            <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-            <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#0A4A13]">
+        <Link to={newsPath(a)} onMouseMove={spot} className={cn("group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-black/10", glowLight, lift, focusRing)}>
+          <span aria-hidden="true" className="absolute inset-x-0 top-0 z-10 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+          <span className="relative block aspect-[16/10] overflow-hidden bg-[#0B1F10]">
+            <img src={a.image} alt="" loading="lazy" className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.06]" />
+            <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#04140A]/60 via-transparent to-[#04140A]/20" />
+            <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-[#0B1F10]/85 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[#F4D27A] shadow-sm backdrop-blur">
               <Icon className="h-3.5 w-3.5" aria-hidden="true" /> {a.category}
             </span>
           </span>
           <span className="flex flex-1 flex-col p-5">
-            <span className="text-xs text-gray-500">{short(a.date)} · {a.readMins} min read</span>
-            <span className="mt-2 block text-lg font-bold leading-snug text-[#0A2E10] group-hover:text-[#117F21]">{a.title}</span>
+            <span className="text-xs text-gray-600">{short(a.date)} · {a.readMins} min read</span>
+            <span className="mt-2 block text-lg font-bold leading-snug text-[#0B1F10] transition-colors group-hover:text-[#117F21]">{a.title}</span>
             <span className="mt-2 line-clamp-2 text-sm text-gray-600">{a.excerpt}</span>
-            <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-[#117F21]">
-              Read story <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            <span className="mt-auto flex items-center justify-between gap-3 pt-5 text-sm font-bold text-[#0B1F10]">
+              Read story <ArrowChip />
             </span>
           </span>
         </Link>
@@ -323,22 +334,22 @@ function Story({ a }: { a: A }) {
   const older = idx < news.length - 1 ? news[idx + 1] : null;
   const more = news.filter((n) => n.slug !== a.slug).sort((x, y) => Number(y.category === a.category) - Number(x.category === a.category)).slice(0, 3);
   const words = a.title.split(" ");
-  const tool = cn("inline-flex min-h-11 items-center gap-2 rounded-xl border border-gray-200 bg-white px-3.5 text-sm font-semibold text-gray-700 transition hover:border-[#117F21] hover:text-[#117F21]", focusRing);
+  const tool = cn("inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-[#F4D27A] hover:ring-[#0B1F10] disabled:pointer-events-none disabled:opacity-40", focusRing);
 
   return (
     <article aria-labelledby="story-title">
       {/* Sticky reading bar */}
       <AnimatePresence>
         {!heroVisible && (
-          <motion.div initial={{ y: -64, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -64, opacity: 0 }} transition={{ duration: 0.35, ease }} className="fixed inset-x-0 top-[92px] z-30 border-b border-gray-200 bg-white/90 backdrop-blur-xl print:hidden">
+          <motion.div initial={{ y: -64, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -64, opacity: 0 }} transition={{ duration: 0.35, ease }} className="fixed inset-x-0 top-[92px] z-30 border-b border-black/10 bg-white/90 shadow-[0_12px_30px_-24px_rgba(4,20,10,0.5)] backdrop-blur-xl print:hidden">
             <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4">
-              <span className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#E8F5E9] text-[#117F21] sm:flex"><Icon className="h-4 w-4" aria-hidden="true" /></span>
-              <p className="min-w-0 flex-1 truncate text-sm font-semibold text-[#0A2E10]">{a.title}</p>
-              <button type="button" onClick={listen} disabled={!canSpeak} className="hidden min-h-10 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-[#117F21] hover:bg-[#E8F5E9] sm:inline-flex" aria-pressed={speaking}>
+              <span className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] sm:flex"><Icon className="h-4 w-4" aria-hidden="true" /></span>
+              <p className="min-w-0 flex-1 truncate text-sm font-bold text-[#0B1F10]">{a.title}</p>
+              <button type="button" onClick={listen} disabled={!canSpeak} className={cn("hidden min-h-11 items-center gap-1.5 rounded-full px-4 text-sm font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:bg-[#0B1F10] hover:text-[#F4D27A] sm:inline-flex", speaking && "bg-[#0B1F10] text-[#F4D27A]", focusRing)} aria-pressed={speaking}>
                 {speaking ? <Pause className="h-4 w-4" aria-hidden="true" /> : <Volume2 className="h-4 w-4" aria-hidden="true" />}{speaking ? "Stop" : "Listen"}
               </button>
-              <Link to="/news" className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-gray-600 hover:bg-gray-100">
-                <ArrowLeft className="h-4 w-4" aria-hidden="true" /> <span className="hidden sm:inline">Newsroom</span>
+              <Link to="/news" className={cn("inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#0B1F10] px-4 text-sm font-semibold text-white transition hover:bg-[#117F21]", focusRing)}>
+                <ArrowLeft className="h-4 w-4 text-[#F4D27A]" aria-hidden="true" /> <span className="hidden sm:inline">Newsroom</span>
               </Link>
             </div>
             <motion.span aria-hidden="true" style={{ scaleX: bar }} className="absolute inset-x-0 bottom-0 h-[3px] origin-left bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615]" />
@@ -349,8 +360,8 @@ function Story({ a }: { a: A }) {
       {/* Hero */}
       <header ref={heroRef} className="relative isolate flex min-h-[560px] items-end overflow-hidden bg-[#0A4A13] text-white lg:min-h-[640px]">
         <motion.img src={a.image} alt={a.imageAlt} style={{ y: imgY, scale: imgScale }} className="absolute inset-0 -z-20 h-full w-full object-cover" />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-[#04240A] via-[#04240A]/80 to-[#04240A]/30" />
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#04240A]/80 via-transparent to-transparent" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-[#04140A] via-[#04140A]/80 to-[#04140A]/30" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#04140A]/80 via-transparent to-transparent" />
         <motion.div style={{ opacity: fade }} className="mx-auto w-full max-w-7xl px-4 pb-14 pt-10 sm:pb-20">
           <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/65">
@@ -368,7 +379,7 @@ function Story({ a }: { a: A }) {
             <span className="inline-flex items-center gap-1.5 text-white/75"><Calendar className="h-4 w-4" aria-hidden="true" /><time dateTime={a.date}>{fmt(a.date)}</time></span>
             <span className="inline-flex items-center gap-1.5 text-white/75"><Clock className="h-4 w-4" aria-hidden="true" />{a.readMins} min read</span>
           </motion.p>
-          <h1 id="story-title" data-no-translate className="mt-6 max-w-4xl text-[2.1rem] font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.6rem]">
+          <h1 id="story-title" data-no-translate className="mt-6 max-w-4xl text-[2.1rem] font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.6rem]">
             {words.map((w, i) => (
               <motion.span key={`${w}-${i}`} initial={{ opacity: 0, y: reduce ? 0 : "0.6em", filter: reduce ? "none" : "blur(8px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 0.6, delay: 0.1 + i * 0.05, ease }} className="mr-[0.25em] inline-block">
                 {w}
@@ -382,7 +393,7 @@ function Story({ a }: { a: A }) {
       </header>
 
       {/* Body */}
-      <div className="bg-[#FBFCFA]">
+      <div className="bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-14 sm:py-20 lg:grid-cols-[56px_minmax(0,1fr)_280px] lg:gap-12">
           <aside className="hidden lg:block print:hidden" aria-label="Share this story">
             <div className="sticky top-[180px]"><ShareRail a={a} vertical /></div>
@@ -390,18 +401,19 @@ function Story({ a }: { a: A }) {
 
           <div ref={bodyRef} className="min-w-0">
             {/* Byline + tools */}
-            <div className="flex flex-col gap-5 border-b border-gray-200 pb-7 sm:flex-row sm:items-center sm:justify-between">
+            <div className="relative flex flex-col gap-5 pb-7 sm:flex-row sm:items-center sm:justify-between">
+              <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-[#117F21]/40 via-[#CB9615]/40 to-transparent" />
               <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white ring-2 ring-[#E8F5E9]">
+                <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white ring-2 ring-[#CB9615]/40 ring-offset-2">
                   <img src="/pencom-logo.png" alt="" className="h-9 w-9 object-contain" />
                 </span>
                 <div>
-                  <p className="font-semibold text-[#0A2E10]">{a.author}</p>
-                  <p className="text-sm text-gray-500">National Pension Commission</p>
+                  <p className="font-bold text-[#0B1F10]">{a.author}</p>
+                  <p className="text-sm text-gray-600">National Pension Commission</p>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-2 print:hidden">
-                <button type="button" onClick={listen} disabled={!canSpeak} aria-pressed={speaking} className={cn(tool, speaking && "border-[#117F21] bg-[#117F21] text-white hover:text-white")}>
+                <button type="button" onClick={listen} disabled={!canSpeak} aria-pressed={speaking} className={cn(tool, speaking && "bg-[#0B1F10] text-[#F4D27A] ring-[#0B1F10]")}>
                   {speaking ? (
                     <span className="flex h-4 items-end gap-0.5" aria-hidden="true">
                       {[0, 1, 2].map((i) => <motion.span key={i} className="w-1 rounded-full bg-current" animate={{ height: ["30%", "100%", "30%"] }} transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }} />)}
@@ -409,10 +421,10 @@ function Story({ a }: { a: A }) {
                   ) : <Volume2 className="h-4 w-4" aria-hidden="true" />}
                   {speaking ? "Stop" : "Listen"}
                 </button>
-                <div className="inline-flex items-center rounded-xl border border-gray-200 bg-white" role="group" aria-label="Text size">
-                  <button type="button" onClick={() => setSize((s) => Math.max(0, s - 1))} disabled={size === 0} className={cn("flex h-11 w-10 items-center justify-center text-gray-600 hover:text-[#117F21] disabled:opacity-30", focusRing)} aria-label="Smaller text"><Minus className="h-4 w-4" aria-hidden="true" /></button>
-                  <span className="px-1 text-sm font-bold text-gray-700" aria-live="polite">A<span className="sr-only"> text size {size + 1} of 3</span></span>
-                  <button type="button" onClick={() => setSize((s) => Math.min(2, s + 1))} disabled={size === 2} className={cn("flex h-11 w-10 items-center justify-center text-gray-600 hover:text-[#117F21] disabled:opacity-30", focusRing)} aria-label="Larger text"><Plus className="h-4 w-4" aria-hidden="true" /></button>
+                <div className="inline-flex items-center rounded-full bg-white ring-1 ring-black/10" role="group" aria-label="Text size">
+                  <button type="button" onClick={() => setSize((s) => Math.max(0, s - 1))} disabled={size === 0} className={cn("flex h-11 w-11 items-center justify-center rounded-full text-[#0B1F10] transition hover:bg-[#0B1F10] hover:text-[#F4D27A] disabled:pointer-events-none disabled:opacity-30", focusRing)} aria-label="Smaller text"><Minus className="h-4 w-4" aria-hidden="true" /></button>
+                  <span className="px-1 text-sm font-black text-[#0B1F10]" aria-live="polite">A<span className="sr-only"> text size {size + 1} of 3</span></span>
+                  <button type="button" onClick={() => setSize((s) => Math.min(2, s + 1))} disabled={size === 2} className={cn("flex h-11 w-11 items-center justify-center rounded-full text-[#0B1F10] transition hover:bg-[#0B1F10] hover:text-[#F4D27A] disabled:pointer-events-none disabled:opacity-30", focusRing)} aria-label="Larger text"><Plus className="h-4 w-4" aria-hidden="true" /></button>
                 </div>
                 <button type="button" onClick={() => window.print()} className={tool}><Printer className="h-4 w-4" aria-hidden="true" /> Print</button>
               </div>
@@ -426,7 +438,7 @@ function Story({ a }: { a: A }) {
 
             <div className="mx-auto mt-12 max-w-[44rem] space-y-6">
               {a.attachment && (
-                <motion.a {...reveal} href={a.attachment.url} target="_blank" rel="noopener noreferrer" className={cn("group relative flex items-center gap-5 overflow-hidden rounded-3xl bg-[#0A4A13] p-6 text-white", focusRing)}>
+                <motion.a {...reveal} href={a.attachment.url} target="_blank" rel="noopener noreferrer" onMouseMove={spot} className={cn("group relative flex items-center gap-5 overflow-hidden rounded-3xl p-6 text-white transition-shadow duration-300 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.6)]", darkCard, focusRing)}>
                   <span aria-hidden="true" className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition duration-1000 group-hover:translate-x-full" />
                   <span className="relative flex h-16 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-white text-[#B52026] shadow-lg transition group-hover:-rotate-6">
                     <FileText className="h-6 w-6" aria-hidden="true" /><span className="text-[10px] font-black">PDF</span>
@@ -434,48 +446,54 @@ function Story({ a }: { a: A }) {
                   <span className="relative min-w-0 flex-1">
                     <span className="block text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">Read the full document</span>
                     <span className="mt-1 block font-semibold leading-snug">{a.attachment.title}</span>
-                    {a.attachment.size && <span className="mt-0.5 block text-sm text-white/60">{a.attachment.size}</span>}
+                    {a.attachment.size && <span className="mt-0.5 block text-sm text-white/70">{a.attachment.size}</span>}
                   </span>
-                  <span className="relative hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#CB9615] text-[#1A1206] transition group-hover:scale-110 sm:flex"><Download className="h-5 w-5" aria-hidden="true" /></span>
+                  <span className="relative hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition group-hover:scale-110 sm:flex"><Download className="h-5 w-5" aria-hidden="true" /></span>
                   <span className="sr-only">(opens in a new tab)</span>
                 </motion.a>
               )}
 
               {/* Related + sources */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="rounded-3xl border border-gray-200 bg-white p-6">
-                  <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-gray-400">Related on this site</h2>
-                  <ul className="mt-3 space-y-1">
+                <Rise className="h-full">
+                <div onMouseMove={spot} className={cn("group/card relative h-full overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/10", glowLight, lift)}>
+                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615] transition-transform duration-500 group-hover/card:scale-x-100" />
+                  <h2 className={eyebrowCls}>Related on this site</h2>
+                  <ul className="mt-3 divide-y divide-black/5">
                     {a.related.map((r) => (
-                      <li key={r.to}><Link to={r.to} className="group flex min-h-10 items-center justify-between gap-2 rounded-lg font-semibold text-[#117F21] hover:underline">{r.label}<ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" /></Link></li>
+                      <li key={r.to}><Link to={r.to} className={cn("group flex min-h-12 items-center justify-between gap-3 rounded-lg py-2 font-semibold text-[#0B1F10] transition-colors hover:text-[#117F21]", focusRing)}>{r.label}<span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-45"><ArrowUpRight className="h-4 w-4" /></span></Link></li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-3xl border border-gray-200 bg-white p-6">
-                  <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-gray-400">Sources</h2>
-                  <ul className="mt-3 space-y-1">
+                </Rise>
+                <Rise delay={0.08} className="h-full">
+                <div onMouseMove={spot} className={cn("group/card relative h-full overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/10", glowLight, lift)}>
+                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615] transition-transform duration-500 group-hover/card:scale-x-100" />
+                  <h2 className={eyebrowCls}>Sources</h2>
+                  <ul className="mt-3 divide-y divide-black/5">
                     {a.sources.map((s) => (
-                      <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className="group flex min-h-10 items-start justify-between gap-2 py-2 text-sm text-gray-700 hover:text-[#117F21]">{s.label}<ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" /><span className="sr-only">(opens in a new tab)</span></a></li>
+                      <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className={cn("group flex min-h-11 items-start justify-between gap-3 rounded-lg py-2.5 text-sm text-gray-700 transition-colors hover:text-[#117F21]", focusRing)}>{s.label}<ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-[#7F5A04] transition-transform group-hover:-translate-y-0.5" aria-hidden="true" /><span className="sr-only">(opens in a new tab)</span></a></li>
                     ))}
                   </ul>
                 </div>
+                </Rise>
               </div>
 
               {/* Feedback */}
-              <div className="flex flex-col items-start justify-between gap-4 rounded-3xl border border-dashed border-gray-300 p-6 sm:flex-row sm:items-center print:hidden">
+              <div className="flex flex-col items-start justify-between gap-4 rounded-3xl bg-[#F2F6F0] p-6 ring-1 ring-black/10 sm:flex-row sm:items-center print:hidden">
                 <AnimatePresence mode="wait" initial={false}>
                   {useful === null ? (
                     <motion.div key="ask" exit={{ opacity: 0, y: -8 }} className="flex w-full flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                      <p className="font-semibold text-[#0A2E10]">Was this story useful?</p>
+                      <p className="font-bold text-[#0B1F10]">Was this story useful?</p>
                       <div className="flex gap-2">
                         <button type="button" onClick={() => setUseful(true)} className={tool}><ThumbsUp className="h-4 w-4" aria-hidden="true" /> Yes</button>
                         <button type="button" onClick={() => setUseful(false)} className={tool}><ThumbsDown className="h-4 w-4" aria-hidden="true" /> No</button>
                       </div>
                     </motion.div>
                   ) : (
-                    <motion.p key="thanks" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} role="status" className="flex items-center gap-2 font-semibold text-[#117F21]">
-                      <Check className="h-5 w-5" aria-hidden="true" />
-                      {useful ? "Thank you for your feedback." : <>Thank you. <Link to="/connect#contact" className="underline">Tell us what was missing</Link>.</>}
+                    <motion.p key="thanks" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} role="status" className="flex items-center gap-3 font-semibold text-[#0B1F10]">
+                      <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]"><Check className="h-4 w-4" strokeWidth={3} /></span>
+                      {useful ? "Thank you for your feedback." : <>Thank you. <Link to="/connect#contact" className={cn("text-[#117F21] underline underline-offset-2", focusRing)}>Tell us what was missing</Link>.</>}
                     </motion.p>
                   )}
                 </AnimatePresence>
@@ -486,34 +504,35 @@ function Story({ a }: { a: A }) {
           <aside className="hidden lg:block print:hidden">
             <div className="sticky top-[180px] space-y-5">
               <Contents items={toc} progress={pct} />
-              <Spotlight color="rgba(244,210,122,0.2)" className="rounded-3xl bg-gradient-to-br from-[#0A4A13] to-[#117F21] p-6 text-white">
-                <p className="font-bold">Media enquiries</p>
-                <p className="mt-1 text-sm text-white/75">Corporate Communications Department</p>
+              <div onMouseMove={spot} className={cn("relative overflow-hidden rounded-3xl p-6 text-white", darkCard)}>
+                <span aria-hidden="true" className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[#F4D27A]/60 to-transparent" />
+                <p className="font-black tracking-tight">Media enquiries</p>
+                <p className="mt-1 text-sm text-white/80">Corporate Communications Department</p>
                 <a href="mailto:info@pencom.gov.ng" className="mt-3 block text-sm font-semibold text-[#F4D27A] underline-offset-2 hover:underline">info@pencom.gov.ng</a>
-                <p className="mt-5 text-xs text-white/55">Follow PenCom</p>
+                <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.16em] text-white/70">Follow PenCom</p>
                 <ul className="mt-2 flex flex-wrap gap-1.5">
                   {social.map((s) => (
-                    <li key={s.name}><a href={s.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center rounded-full bg-white/10 px-2.5 text-xs font-semibold hover:bg-white/20">{s.name}<span className="sr-only"> (opens in a new tab)</span></a></li>
+                    <li key={s.name}><a href={s.href} target="_blank" rel="noopener noreferrer" className={cn("inline-flex min-h-8 items-center rounded-full bg-white/10 px-3 text-xs font-semibold ring-1 ring-white/15 transition hover:bg-[#F4D27A] hover:text-[#1A1206]", focusRing)}>{s.name}<span className="sr-only"> (opens in a new tab)</span></a></li>
                   ))}
                 </ul>
-              </Spotlight>
+              </div>
             </div>
           </aside>
         </div>
       </div>
 
       {/* Newer / older */}
-      <nav aria-label="More stories" className="border-y border-gray-200 bg-white print:hidden">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 sm:grid-cols-2">
+      <nav aria-label="More stories" className="bg-white px-4 pb-16 print:hidden sm:pb-20">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2">
           {[{ s: older, label: "Previous story", dir: -1 }, { s: newer, label: "Next story", dir: 1 }].map(({ s, label, dir }) =>
             s ? (
-              <Link key={label} to={newsPath(s)} className={cn("group flex items-center gap-4 px-4 py-8 transition hover:bg-[#F4FAF3] sm:px-8", dir === 1 && "sm:flex-row-reverse sm:text-right sm:border-l sm:border-gray-200", focusRing)}>
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gray-200 text-[#117F21] transition group-hover:border-[#117F21] group-hover:bg-[#117F21] group-hover:text-white">
+              <Link key={label} to={newsPath(s)} onMouseMove={spot} className={cn("group relative flex items-center gap-4 overflow-hidden rounded-3xl bg-white p-5 ring-1 ring-black/10 sm:p-6", glowLight, lift, dir === 1 && "sm:flex-row-reverse sm:text-right", focusRing)}>
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:bg-[#117F21] group-hover:text-white">
                   {dir === -1 ? <ArrowLeft className="h-5 w-5" aria-hidden="true" /> : <ArrowRight className="h-5 w-5" aria-hidden="true" />}
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-xs font-bold uppercase tracking-[0.16em] text-gray-400">{label}</span>
-                  <span className="mt-1 block font-semibold leading-snug text-[#0A2E10] group-hover:text-[#117F21]">{s.title}</span>
+                  <span className={cn("block", eyebrowCls)}>{label}</span>
+                  <span className="mt-1 block font-bold leading-snug text-[#0B1F10] transition-colors group-hover:text-[#117F21]">{s.title}</span>
                 </span>
               </Link>
             ) : <span key={label} className="hidden sm:block" />,
@@ -522,14 +541,20 @@ function Story({ a }: { a: A }) {
       </nav>
 
       {/* More stories */}
-      <section aria-labelledby="more-title" className="bg-[#F4F7F2] py-20 print:hidden">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <h2 id="more-title" className="text-3xl font-bold text-[#0A2E10] sm:text-4xl">More from the <span className="bg-gradient-to-r from-[#117F21] to-[#CB9615] bg-clip-text text-transparent">newsroom</span></h2>
-            <Link to="/news" className={cn("group inline-flex min-h-11 w-fit items-center gap-2 rounded-xl border border-[#117F21]/25 bg-white px-4 text-sm font-semibold text-[#117F21] hover:border-[#117F21]", focusRing)}>
-              All news <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </Link>
-          </div>
+      <section aria-labelledby="more-title" className={cn("bg-[#F2F6F0] print:hidden", sectionCls)}>
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            id="more-title"
+            eyebrow="Newsroom"
+            title="More from the newsroom"
+            highlight="newsroom"
+            action={
+              <Link to="/news" className={cn("group inline-flex min-h-11 w-fit items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]", focusRing)}>
+                All news
+                <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:rotate-45"><ArrowUpRight className="h-4 w-4" /></span>
+              </Link>
+            }
+          />
           <ul className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
             {more.map((m, i) => <StoryCard key={m.slug} a={m} i={i} />)}
           </ul>
@@ -542,14 +567,13 @@ function Story({ a }: { a: A }) {
 function Missing() {
   return (
     <section className="relative isolate overflow-hidden bg-[#04140A] py-28 text-center text-white">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(60%_70%_at_85%_0%,rgba(203,150,21,0.26),transparent),radial-gradient(55%_70%_at_0%_100%,rgba(46,145,61,0.38),transparent)]" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+      <DarkBackdrop />
       <div className="mx-auto max-w-xl px-4">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#F4D27A]">Newsroom</p>
-        <h1 className="mt-4 text-4xl font-bold">We can’t find that story</h1>
+        <h1 className="mt-4 text-4xl font-black tracking-tight">We can’t find that story</h1>
         <p className="mt-4 text-white/70">It may have been moved or archived. Browse the latest news instead.</p>
-        <Link to="/news" className={cn("mt-8 inline-flex min-h-12 items-center gap-2 rounded-xl bg-[#CB9615] px-6 font-semibold text-[#1A1206] hover:bg-[#E0AA22]", focusRing)}>
-          Go to the newsroom <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        <Link to="/news" className={cn("group mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#F4D27A] py-1.5 pl-6 pr-1.5 font-semibold text-[#1A1206] transition hover:bg-[#FFE39A]", focusRing)}>
+          Go to the newsroom <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-45"><ArrowUpRight className="h-4 w-4" /></span>
         </Link>
       </div>
     </section>

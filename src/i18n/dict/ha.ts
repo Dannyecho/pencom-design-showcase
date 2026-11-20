@@ -1746,6 +1746,8 @@ const ha: Record<string, string> = {
   "need to do": "buƙatar yi",
   "PenCom's service standard:": "Matsayin hidimar PenCom:",
   "· {n} of {total} ready": "· {n} cikin {total} a shirye",
+  // S9b news story
+  "More from the newsroom": "Ƙarin daga ɗakin labarai",
 };
 
 export default ha;

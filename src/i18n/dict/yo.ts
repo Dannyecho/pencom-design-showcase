@@ -1746,6 +1746,8 @@ const yo: Record<string, string> = {
   "need to do": "nílò láti ṣe",
   "PenCom's service standard:": "Ìpele iṣẹ́ PenCom:",
   "· {n} of {total} ready": "· {n} nínú {total} ti ṣetán",
+  // S9b news story
+  "More from the newsroom": "Púpọ̀ sí i láti ibi ìròyìn",
 };
 
 export default yo;

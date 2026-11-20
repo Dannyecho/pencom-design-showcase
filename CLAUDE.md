@@ -152,7 +152,7 @@ Exceptions on purpose: news stories keep a dark photo header; Chronicles has a h
 - Components can call `t("English", vars)` from `useI18n()`; Headline/PageHero/About hero do this for whole titles.
 - `/regulations/*` is always English (`isLegalPath`). Content stays English by policy: names, addresses, dates,
   figures, document titles, news story text, the Q1 report text, the signed charter text, media captions.
-- Dictionaries: `dict/ha.ts`, `yo.ts`, `ig.ts` have identical keys (1,651 each). New entries go in a marked section at
+- Dictionaries: `dict/ha.ts`, `yo.ts`, `ig.ts` have identical keys (1,652 each). New entries go in a marked section at
   the end. Tools and the full procedure: `tools/i18n/README.md` and `/i18n-pass`.
 
 ## Verify before you report

@@ -1746,6 +1746,8 @@ const ig: Record<string, string> = {
   "need to do": "chọrọ ime",
   "PenCom's service standard:": "Ụkpụrụ ọrụ PenCom:",
   "· {n} of {total} ready": "· {n} n'ime {total} dị njikere",
+  // S9b news story
+  "More from the newsroom": "Ọzọ site na ụlọ akụkọ",
 };
 
 export default ig;
