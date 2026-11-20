@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { Link } from "@/lib/router";
 import { AnimatePresence, LayoutGroup, MotionConfig, motion } from "framer-motion";
-import { AlertTriangle, ArrowRight, BarChart3, CheckCircle2, Download, Flag, Lightbulb, Quote, Target, TrendingUp } from "lucide-react";
+import { AlertTriangle, BarChart3, CheckCircle2, Download, Flag, Lightbulb, Quote, Target, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CountUp, Spotlight, ease, reveal } from "@/views/about/primitives";
+import { CountUp, ease, reveal } from "@/views/about/primitives";
+import { spot } from "@/views/theme/ui";
 import { SectionHeading } from "@/views/theme/heading";
-import { DocHero, DocTools, Loading, PdfCard, PrimaryBtn, ReadingBar, Toc, VerifyNote, ring, sizes, useDocJson } from "@/views/docs/kit";
+import { ArrowChip, DocHero, DocTools, Loading, PdfCard, PrimaryBtn, ReadingBar, Toc, VerifyNote, darkCard, glowLight, ring, sizes, useDocJson } from "@/views/docs/kit";
 
 /**
  * Industry report as a web page with the PDF attached (DES-22: "industry reports ... available as web pages").
@@ -29,6 +30,10 @@ const STATUS: Record<string, string> = {
   Stable: "bg-[#E8F5E9] text-[#0A4A13]",
   Mixed: "bg-[#FFF3CD] text-[#7A5600]",
 };
+
+/** Dot colour per status, for the domain list. */
+const DOT: Record<string, string> = { Stable: "bg-[#117F21]", Improving: "bg-[#00897B]", Watch: "bg-[#CB9615]", Mixed: "bg-[#CB9615]", Critical: "bg-[#B52026]" };
+const card = "rounded-3xl bg-white ring-1 ring-black/10";
 
 const tiles = [
   { k: "Pension assets (NAV)", v: "₦29.52tn", note: "+7.53% on Q4 2025. Equity revaluation of ₦1.50 trillion drove most of the growth.", s: "On track" },
@@ -54,14 +59,15 @@ function Paras({ blocks }: { blocks: Para[] }) {
     <div className="space-y-3">
       {blocks.map((p, i) =>
         p.insight ? (
-          <aside key={i} className="relative overflow-hidden rounded-2xl border border-[#CB9615]/30 bg-gradient-to-br from-[#FFF8E1] to-white p-5">
-            <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#9A6F06]"><Lightbulb className="h-4 w-4" aria-hidden="true" /> Further insight</p>
-            <p className="mt-2 font-serif leading-[1.75] text-gray-800">{p.x}</p>
+          <aside key={i} className="relative overflow-hidden rounded-2xl bg-[#F2F6F0] p-5 pl-6">
+            <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#F4D27A] to-[#CB9615]" />
+            <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#7F5A04]"><span aria-hidden="true" className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]"><Lightbulb className="h-3.5 w-3.5" /></span> Further insight</p>
+            <p className="mt-2 font-serif leading-[1.75] text-[#0B1F10]/90">{p.x}</p>
           </aside>
         ) : p.b ? (
-          <p key={i} className="flex gap-3 leading-relaxed text-gray-800"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-[#117F21]" aria-hidden="true" /><span>{p.x}</span></p>
+          <p key={i} className="flex gap-3 leading-relaxed text-[#0B1F10]/90"><CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-[#117F21]" aria-hidden="true" /><span>{p.x}</span></p>
         ) : (
-          <p key={i} className="font-serif leading-[1.75] text-gray-800">{p.x}</p>
+          <p key={i} className="font-serif leading-[1.75] text-[#0B1F10]/90">{p.x}</p>
         ),
       )}
     </div>
@@ -78,9 +84,9 @@ export default function ReportPage() {
   const bullets = dg?.blocks.filter((b) => b.b) ?? [];
   const headline = dg?.blocks.find((b) => !b.b)?.x.replace(/^HEADLINE, Q1 2026\s*/, "");
   const cols = [
-    { k: "What is working", icon: TrendingUp, tone: "from-[#117F21] to-[#2E913D]", items: bullets.slice(0, 5) },
-    { k: "What is at risk", icon: AlertTriangle, tone: "from-[#B52026] to-[#D9534F]", items: bullets.slice(5, 10) },
-    { k: "What we will do", icon: Target, tone: "from-[#9A6F06] to-[#CB9615]", items: bullets.slice(10) },
+    { k: "What is working", icon: TrendingUp, tone: "from-[#117F21] to-[#2E913D]", chip: "bg-[#117F21]", items: bullets.slice(0, 5) },
+    { k: "What is at risk", icon: AlertTriangle, tone: "from-[#B52026] to-[#D9534F]", chip: "bg-[#B52026]", items: bullets.slice(5, 10) },
+    { k: "What we will do", icon: Target, tone: "from-[#9A6F06] to-[#F4D27A]", chip: "bg-[#9A6F06]", items: bullets.slice(10) },
   ];
   const domainChs = data?.filter((c) => ["04", "05", "06", "07", "08"].includes(c.n)) ?? [];
   const toc = [
@@ -106,40 +112,41 @@ export default function ReportPage() {
         ]}
         actions={<>
           <PrimaryBtn href={PDF} external><Download className="h-4 w-4" aria-hidden="true" /> Full report (PDF)</PrimaryBtn>
-          <Link to="/performance" className={cn("inline-flex min-h-12 items-center gap-2 rounded-xl bg-white px-5 font-semibold text-[#0A4A13] ring-1 ring-black/10 hover:ring-[#117F21]", ring)}><TrendingUp className="h-4 w-4" aria-hidden="true" /> Latest industry figures</Link>
+          <Link to="/performance" className={cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-white/10 px-6 font-semibold text-white ring-1 ring-white/25 backdrop-blur transition hover:bg-white hover:text-[#0B1F10]", ring)}><TrendingUp className="h-4 w-4" aria-hidden="true" /> Latest industry figures</Link>
         </>}
       />
 
       {status === "loading" && <Loading />}
       <div className="bg-[#F2F6F0]">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-14 lg:grid-cols-[260px_minmax(0,1fr)]">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[260px_minmax(0,1fr)]">
           <aside className="hidden lg:block print:hidden"><div className="sticky top-[120px] space-y-4"><Toc items={toc} title="In this report" /><DocTools size={size} setSize={setSize} /></div></aside>
-          <div className="min-w-0 space-y-16" style={{ fontSize: sizes[size] }}>
+          <div className="min-w-0 space-y-20 sm:space-y-24" style={{ fontSize: sizes[size] }}>
             {/* At a glance */}
             <section id="glance" aria-labelledby="glance-t" className="scroll-mt-[120px]">
               <SectionHeading id="glance-t" eyebrow="Executive dashboard" title="Q1 2026 at a glance" highlight="at a glance" intro="The industry entered 2026 on a stronger footing. Assets crossed ₦29 trillion for the first time and every reform track moved forward under Pension Revolution 2.0." />
               <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 {tiles.map((t, i) => (
-                  <motion.li key={t.k} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 4) * 0.07, ease }}>
-                    <Spotlight color="rgba(244,210,122,0.2)" className="h-full rounded-3xl bg-[#0A4A13] p-5 text-white">
+                  <motion.li key={t.k} initial={{ opacity: 0, y: 26 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 4) * 0.07, duration: 0.6, ease }}>
+                    <div onMouseMove={spot} className={cn("group relative h-full overflow-hidden rounded-3xl p-5 text-white shadow-[0_24px_50px_-30px_rgba(4,20,10,0.8)] transition duration-300 hover:-translate-y-1", darkCard)}>
+                      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-[#F4D27A] to-[#2E913D] transition-transform duration-500 group-hover:scale-x-100" />
                       <div className="flex flex-col-reverse items-start gap-2">
-                        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/60">{t.k}</p>
+                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/70">{t.k}</p>
                         <span className={cn("shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider", STATUS[t.s])}>{t.s}</span>
                       </div>
-                      <CountUp value={t.v} className="mt-3 block font-display text-3xl font-bold text-[#F4D27A]" />
-                      <p className="mt-2 text-sm leading-snug text-white/70">{t.note}</p>
-                    </Spotlight>
+                      <CountUp value={t.v} className="mt-3 block bg-gradient-to-r from-[#FFE9A8] to-[#F4D27A] bg-clip-text font-display text-3xl font-black tracking-tight text-transparent tabular-nums" />
+                      <p className="mt-2 text-sm leading-snug text-white/75">{t.note}</p>
+                    </div>
                   </motion.li>
                 ))}
               </ul>
-              <div className="mt-6 overflow-hidden rounded-3xl bg-white ring-1 ring-black/5">
-                <p className="border-b border-gray-100 px-5 py-3 text-sm font-bold text-[#0A2E10]">Status by outcome domain</p>
+              <div className={cn("mt-6 overflow-hidden", card)}>
+                <p className="border-b border-[#0B1F10]/[0.07] px-5 py-4 text-xs font-bold uppercase tracking-[0.18em] text-[#7F5A04]">Status by outcome domain</p>
                 <ul>
                   {domains.map((d, i) => (
-                    <motion.li key={d.d} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className="grid grid-cols-1 gap-2 border-t border-gray-100 px-5 py-4 first:border-0 sm:grid-cols-[160px_110px_1fr] sm:items-center">
-                      <span className="font-semibold text-[#0A2E10]">{d.d}</span>
+                    <motion.li key={d.d} onMouseMove={spot} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }} className={cn("grid grid-cols-1 gap-2 border-t border-[#0B1F10]/[0.07] px-5 py-4 transition-colors first:border-0 hover:bg-[#F2F6F0]/60 sm:grid-cols-[170px_110px_1fr] sm:items-center", glowLight)}>
+                      <span className="flex items-center gap-2.5 font-bold text-[#0B1F10]"><span aria-hidden="true" className={cn("h-2.5 w-2.5 shrink-0 rounded-full ring-4 ring-black/[0.04]", DOT[d.s])} />{d.d}</span>
                       <span className={cn("w-fit rounded-full px-2.5 py-1 text-xs font-bold", STATUS[d.s])}>{d.s}</span>
-                      <span className="text-sm text-gray-600">{d.r}</span>
+                      <span className="text-sm text-[#0B1F10]/75">{d.r}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -150,19 +157,21 @@ export default function ReportPage() {
             <section id="dg" aria-labelledby="dg-t" className="scroll-mt-[120px]">
               <SectionHeading id="dg-t" eyebrow="Director-General’s read" title="The quarter in perspective" highlight="perspective" />
               {headline && (
-                <motion.figure {...reveal} className="relative mt-8 overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A4A13] to-[#117F21] p-7 text-white sm:p-10">
-                  <Quote className="absolute -right-4 -top-4 h-32 w-32 text-white/[0.06]" aria-hidden="true" />
+                <motion.figure {...reveal} onMouseMove={spot} className={cn("relative mt-8 overflow-hidden rounded-[1.75rem] p-7 text-white shadow-[0_40px_80px_-40px_rgba(4,20,10,0.8)] sm:p-10", darkCard)}>
+                  <span aria-hidden="true" className="absolute inset-y-8 left-0 w-1 rounded-r-full bg-gradient-to-b from-[#F4D27A] to-[#2E913D]" />
+                  <Quote className="absolute -right-4 -top-4 h-32 w-32 text-[#F4D27A]/[0.12]" aria-hidden="true" />
                   <blockquote className="relative font-serif text-lg leading-relaxed text-white/90 sm:text-xl">{headline}</blockquote>
                 </motion.figure>
               )}
               <div className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-3">
                 {cols.map((c, i) => (
-                  <motion.div key={c.k} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, ease }} className="overflow-hidden rounded-3xl bg-white ring-1 ring-black/5">
-                    <p className={cn("flex items-center gap-2 bg-gradient-to-r px-5 py-3 font-bold text-white", c.tone)}><c.icon className="h-5 w-5" aria-hidden="true" />{c.k}</p>
-                    <ul className="space-y-3 p-5">
+                  <motion.div key={c.k} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, ease }} className={cn("relative overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]", card)}>
+                    <span aria-hidden="true" className={cn("absolute inset-x-0 top-0 h-1 bg-gradient-to-r", c.tone)} />
+                    <p className="flex items-center gap-3 px-5 pb-2 pt-6 text-lg font-black tracking-tight text-[#0B1F10]"><span aria-hidden="true" className={cn("flex h-9 w-9 items-center justify-center rounded-full text-white", c.chip)}><c.icon className="h-4 w-4" /></span>{c.k}</p>
+                    <ul className="space-y-3 p-5 pt-3">
                       {c.items.map((b) => {
                         const [lead, ...rest] = b.x.split(". ");
-                        return <li key={b.x.slice(0, 30)} className="text-sm leading-relaxed text-gray-700"><strong className="text-[#0A2E10]">{lead}.</strong> {rest.join(". ")}</li>;
+                        return <li key={b.x.slice(0, 30)} className="text-sm leading-relaxed text-[#0B1F10]/80"><strong className="text-[#0B1F10]">{lead}.</strong> {rest.join(". ")}</li>;
                       })}
                     </ul>
                   </motion.div>
@@ -174,10 +183,10 @@ export default function ReportPage() {
             <section id="domains" aria-labelledby="dom-t" className="scroll-mt-[120px]">
               <SectionHeading id="dom-t" eyebrow="PenCom Insight Framework" title="Five outcome domains" highlight="outcome domains" />
               <LayoutGroup id="dom">
-                <div role="tablist" aria-label="Outcome domains" className="mt-8 flex gap-2 overflow-x-auto pb-2">
+                <div role="tablist" aria-label="Outcome domains" className="mt-8 flex w-fit max-w-full gap-1 overflow-x-auto rounded-full bg-white p-1.5 ring-1 ring-black/10 [scrollbar-width:none]">
                   {domainChs.map((c, i) => (
-                    <button key={c.n} role="tab" type="button" aria-selected={domain === c.n} onClick={() => setDomain(c.n)} className={cn("relative min-h-11 shrink-0 rounded-xl px-4 text-sm font-semibold transition", ring, domain === c.n ? "text-white" : "bg-white text-gray-600 ring-1 ring-gray-200 hover:text-[#117F21]")}>
-                      {domain === c.n && <motion.span layoutId="dom-pill" className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#0A4A13] to-[#117F21]" transition={{ type: "spring", stiffness: 400, damping: 32 }} />}
+                    <button key={c.n} role="tab" type="button" aria-selected={domain === c.n} onClick={() => setDomain(c.n)} className={cn("relative min-h-11 shrink-0 rounded-full px-5 text-sm font-semibold transition", ring, domain === c.n ? "text-[#F4D27A]" : "text-[#0B1F10]/75 hover:text-[#0B1F10]")}>
+                      {domain === c.n && <motion.span layoutId="dom-pill" className="absolute inset-0 rounded-full bg-[#0B1F10] shadow-[0_10px_24px_-12px_rgba(4,20,10,0.8)]" transition={{ type: "spring", stiffness: 400, damping: 32 }} />}
                       <span className="relative">{domains[i]?.d ?? c.title}</span>
                     </button>
                   ))}
@@ -187,8 +196,8 @@ export default function ReportPage() {
                 {domainChs.filter((c) => c.n === domain).map((c) => (
                   <motion.div key={c.n} role="tabpanel" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.3, ease }} className="mt-4 space-y-4">
                     {c.subs.map((s) => (
-                      <article key={s.n} className="rounded-3xl bg-white ring-1 ring-black/5 p-6 sm:p-8">
-                        <h3 className="flex items-baseline gap-3 text-xl font-bold text-[#0A2E10]"><span className="font-display text-sm text-[#CB9615]">{s.n}</span>{label(s.title)}</h3>
+                      <article key={s.n} className={cn("p-6 sm:p-8", card)}>
+                        <h3 className="flex items-baseline gap-3 text-xl font-black tracking-tight text-[#0B1F10]"><span className="font-mono text-sm font-bold tabular-nums text-[#7F5A04]">{s.n}</span>{label(s.title)}</h3>
                         <div className="mt-4"><Paras blocks={s.blocks} /></div>
                       </article>
                     ))}
@@ -203,14 +212,14 @@ export default function ReportPage() {
               return (
                 <section key={id} id={id} aria-labelledby={`${id}-t`} className="scroll-mt-[120px]">
                   <SectionHeading n={n} id={`${id}-t`} eyebrow={`Chapter ${n}`} title={t} />
-                  <div className={cn("mt-6 rounded-3xl bg-white ring-1 ring-black/5 p-6 sm:p-8", id === "priorities" && "[&_ul]:grid")}>
+                  <div className={cn("mt-6 p-6 sm:p-8", card, id === "priorities" && "[&_ul]:grid")}>
                     {id === "priorities" ? (
                       <>
-                        {c.blocks.filter((b) => !b.b).slice(0, 1).map((b) => <p key="i" className="font-serif leading-[1.75] text-gray-800">{b.x}</p>)}
+                        {c.blocks.filter((b) => !b.b).slice(0, 1).map((b) => <p key="i" className="font-serif leading-[1.75] text-[#0B1F10]/90">{b.x}</p>)}
                         <ol className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
                           {c.blocks.filter((b) => b.b).map((b, i) => (
-                            <motion.li key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 6) * 0.04 }} className="flex gap-3 rounded-2xl bg-[#F2F6F0] p-4 text-sm leading-relaxed text-gray-700">
-                              <Flag className="mt-0.5 h-4 w-4 shrink-0 text-[#CB9615]" aria-hidden="true" />{b.x}
+                            <motion.li key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 6) * 0.04 }} className="group flex gap-3 rounded-2xl bg-[#F2F6F0] p-4 text-sm leading-relaxed text-[#0B1F10]/80 transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_20px_40px_-26px_rgba(4,20,10,0.4)] hover:ring-1 hover:ring-black/10">
+                              <span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]"><Flag className="h-3.5 w-3.5" /></span>{b.x}
                             </motion.li>
                           ))}
                         </ol>
@@ -224,8 +233,8 @@ export default function ReportPage() {
             <div className="space-y-4">
               <VerifyNote>This web version presents the report’s dashboard, commentary and priorities in an accessible format. Charts, the risk register and the statistical annex are in the full PDF.</VerifyNote>
               <PdfCard href={PDF} title="Nigerian Pension Industry Quarterly Report, Q1 2026" meta="PDF · 33 pages · 0.8 MB" />
-              <Link to="/resources#quarterly-reports" className={cn("group flex items-center justify-between rounded-3xl bg-white ring-1 ring-black/5 p-6 font-semibold text-[#0A2E10] hover:border-[#117F21]", ring)}>
-                All quarterly reports <ArrowRight className="h-5 w-5 text-[#117F21] transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              <Link to="/resources#quarterly-reports" onMouseMove={spot} className={cn("group flex items-center justify-between p-6 font-bold text-[#0B1F10] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]", card, glowLight, ring)}>
+                All quarterly reports <ArrowChip />
               </Link>
             </div>
           </div>
