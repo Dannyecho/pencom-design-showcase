@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* PenCom Brand - Light Mode */
+    --background: 80 7% 98%;
+    --foreground: 100 5% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 100 5% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 100 5% 10%;
+    --primary: 130 75% 28%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 43 80% 44%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 80 5% 94%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 130 75% 28%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 357 69% 41%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 90 5% 88%;
+    --input: 90 5% 88%;
+    --ring: 130 75% 28%;
+    --radius: 0.625rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 100 5% 10%;
+    --sidebar-primary: 130 75% 28%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 80 5% 94%;
+    --sidebar-accent-foreground: 100 5% 10%;
+    --sidebar-border: 90 5% 88%;
+    --sidebar-ring: 130 75% 28%;
+  }
+
+  .dark {
+    --background: 100 10% 8%;
+    --foreground: 80 5% 96%;
+    --card: 100 8% 12%;
+    --card-foreground: 80 5% 96%;
+    --popover: 100 8% 12%;
+    --popover-foreground: 80 5% 96%;
+    --primary: 130 60% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 43 70% 50%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 100 5% 18%;
+    --muted-foreground: 80 5% 60%;
+    --accent: 130 60% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 357 50% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 100 5% 20%;
+    --input: 100 5% 20%;
+    --ring: 130 60% 45%;
+    --sidebar-background: 100 10% 8%;
+    --sidebar-foreground: 80 5% 96%;
+    --sidebar-primary: 130 60% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 100 5% 18%;
+    --sidebar-accent-foreground: 80 5% 96%;
+    --sidebar-border: 100 5% 20%;
+    --sidebar-ring: 130 60% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: Arial, Helvetica, 'Liberation Sans', Arimo, sans-serif;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Safety net: nothing may widen the page sideways on phones (clip keeps position: sticky working). */
+  body {
+    overflow-x: clip;
+  }
+  /* NITDA fonts: Verdana for headings, Arial for body text, Times New Roman for formal statements (.font-serif). */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    letter-spacing: -0.01em;
+  }
+  button, input, select, textarea {
+    font-family: inherit;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gradient-pencom {
+    background: linear-gradient(135deg, #117F21 0%, #0A4A13 100%);
+  }
+  .gradient-gold {
+    background: linear-gradient(135deg, #E5A91E 0%, #CB9615 100%);
+  }
+  .gradient-hero {
+    background: linear-gradient(135deg, #0A4A13 0%, #117F21 50%, #2E913D 100%);
+  }
+  .gradient-grey {
+    background: linear-gradient(135deg, #BABBBD 0%, #9A9B9D 100%);
+  }
+  .gradient-red {
+    background: linear-gradient(135deg, #B52026 0%, #8E1A1E 100%);
+  }
+  .gradient-nigeria {
+    background: linear-gradient(135deg, #117F21 0%, #CB9615 50%, #B52026 100%);
+  }
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  /* PenCom Grey accent */
+  .bg-pencom-grey {
+    background-color: #BABBBD;
+  }
+  .text-pencom-grey {
+    color: #BABBBD;
+  }
+  .border-pencom-grey {
+    border-color: #BABBBD;
+  }
+  /* PenCom Red accent */
+  .bg-pencom-red {
+    background-color: #B52026;
+  }
+  .text-pencom-red {
+    color: #B52026;
+  }
+  .border-pencom-red {
+    border-color: #B52026;
+  }
+  /* Card shadow system */
+  .shadow-card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  }
+  .shadow-card-hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  }
+  /* Smooth card lift transition */
+  .card-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus styles for accessibility */
+@layer base {
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #BABBBD;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #88888A;
+}
+
+/* Language switch: a short cross-fade so readers see the page change language (skipped with reduced motion). */
+@media (prefers-reduced-motion: no-preference) {
+  html.i18n-swap #main-content,
+  html.i18n-swap header nav,
+  html.i18n-swap footer {
+    animation: i18n-swap 0.5s ease-out;
+  }
+}
+@keyframes i18n-swap {
+  0% { opacity: 0.25; filter: blur(4px); }
+  100% { opacity: 1; filter: blur(0); }
+}

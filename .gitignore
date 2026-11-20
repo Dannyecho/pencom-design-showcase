@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+*.log
+.env*
+next-env.d.ts
+*.tsbuildinfo
+
+# translation tool output
+tools/i18n/.out/

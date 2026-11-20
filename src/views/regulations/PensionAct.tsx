@@ -1,0 +1,234 @@
+"use client";
+
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { Link, useSearchParams } from "@/lib/router";
+import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, BookOpen, Check, Download, ExternalLink, Gavel, Link2, Search, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ease } from "@/views/about/primitives";
+import { DocHero, DocTools, GhostBtn, Loading, Mark, PdfCard, PrimaryBtn, ReadingBar, Toc, VerifyNote, ring, sizes, useDocJson } from "@/views/docs/kit";
+
+/**
+ * Pension Reform Act 2014 as a web page (DES-22; brief §6.2 Regulations: "Pension Reform Act 2014 (full act, key provisions)").
+ * Text: OCR of the gazetted PDF (the PDF's own text layer is unreadable), checked against the Act's Arrangement of Sections.
+ * Deep links: /regulations/pension-reform-act?s=7
+ */
+
+type Block = { m?: string; x: string; sub?: boolean };
+type Section = { n: number; title: string; page: number; blocks: Block[] };
+type Part = { n: string; title: string; sections: Section[] };
+type Act = { parts: Part[]; schedules: { title: string; blocks: Block[] }[] };
+
+const PDF = "/documents/pension-reform-act-2014.pdf";
+const POPULAR = [4, 7, 8, 11, 13, 16, 89, 99];
+
+function Blocks({ blocks, q }: { blocks: Block[]; q: string }) {
+  return (
+    <div className="space-y-3">
+      {blocks.map((b, i) => (
+        <p key={i} className={cn("font-serif leading-[1.75] text-gray-800", b.sub ? "pl-8 sm:pl-12" : b.m ? "pl-8" : "")}>
+          {b.m && <span className={cn("-ml-8 inline-block w-8 font-sans text-sm font-bold", b.sub ? "text-gray-400" : "text-[#117F21]")}>{b.m}</span>}
+          <Mark text={b.x} q={q} />
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function SectionCard({ s, q, partN }: { s: Section; q: string; partN: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    const url = `${location.origin}/regulations/pension-reform-act?s=${s.n}`;
+    navigator.clipboard?.writeText(url).catch(() => undefined);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1800);
+  };
+  return (
+    <motion.article
+      id={`s-${s.n}`} aria-labelledby={`s-${s.n}-t`}
+      initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.45, ease }}
+      className="group scroll-mt-44 rounded-3xl border border-gray-200 bg-white p-6 transition hover:border-[#117F21]/30 hover:shadow-[0_24px_50px_-34px_rgba(10,74,19,0.5)] sm:p-8 print:break-inside-avoid print:border-0 print:p-0"
+    >
+      <header className="flex flex-wrap items-start justify-between gap-3">
+        <div className="flex items-start gap-4">
+          <span className="flex h-12 min-w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0A4A13] to-[#117F21] px-2 font-display text-lg font-bold text-white shadow-[0_10px_24px_-10px_rgba(17,127,33,0.8)]">{s.n}</span>
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-gray-400">Part {partN} · Section {s.n}</p>
+            <h3 id={`s-${s.n}-t`} className="mt-0.5 text-lg font-bold leading-snug text-[#0A2E10] sm:text-xl"><Mark text={s.title} q={q} /></h3>
+          </div>
+        </div>
+        <div className="flex gap-1 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 print:hidden">
+          <button type="button" onClick={copy} className={cn("inline-flex h-9 items-center gap-1.5 rounded-lg px-2.5 text-xs font-semibold text-gray-500 hover:bg-gray-100 hover:text-[#117F21]", ring)}>
+            {copied ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <Link2 className="h-3.5 w-3.5" aria-hidden="true" />}{copied ? "Copied" : "Link"}<span className="sr-only"> to section {s.n}</span>
+          </button>
+          {s.page > 0 && (
+            <a href={`${PDF}#page=${s.page}`} target="_blank" rel="noopener noreferrer" className={cn("inline-flex h-9 items-center gap-1.5 rounded-lg px-2.5 text-xs font-semibold text-gray-500 hover:bg-gray-100 hover:text-[#117F21]", ring)}>
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /> PDF p.{s.page}<span className="sr-only"> (opens the official PDF in a new tab)</span>
+            </a>
+          )}
+        </div>
+      </header>
+      <div className="mt-5"><Blocks blocks={s.blocks} q={q} /></div>
+    </motion.article>
+  );
+}
+
+export default function PensionAct() {
+  const reduce = useReducedMotion();
+  const { status, data } = useDocJson<Act>("/documents/text/pension-reform-act-2014.json");
+  const [params, setParams] = useSearchParams();
+  const [q, setQ] = useState(params.get("q") ?? "");
+  const dq = useDeferredValue(q);
+  const [size, setSize] = useState(0);
+
+  const all = useMemo(() => (data ? data.parts.flatMap((p) => p.sections.map((s) => ({ ...s, part: p }))) : []), [data]);
+  const matches = useMemo(() => {
+    const t = dq.trim().toLowerCase();
+    if (t.length < 2) return null;
+    return all.filter((s) => `${s.n} ${s.title} ${s.blocks.map((b) => b.x).join(" ")}`.toLowerCase().includes(t)).map((s) => s.n);
+  }, [all, dq]);
+  const shown = useMemo(() => (matches ? new Set(matches) : null), [matches]);
+
+  const toc = useMemo(
+    () => (data ? data.parts.flatMap((p) => [{ id: `part-${p.n}`, label: `Part ${p.n} · ${p.title}`, level: 1 }, ...p.sections.filter((s) => !shown || shown.has(s.n)).map((s) => ({ id: `s-${s.n}`, label: `${s.n}. ${s.title}`, level: 2 }))]).concat(data.schedules.map((s, i) => ({ id: `sch-${i}`, label: s.title, level: 1 }))) : []),
+    [data, shown],
+  );
+
+  // Deep link to a section
+  useEffect(() => {
+    const s = params.get("s");
+    if (!s || status !== "ready") return;
+    const t = window.setTimeout(() => document.getElementById(`s-${s}`)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }), 120);
+    return () => window.clearTimeout(t);
+  }, [params, status, reduce]);
+
+  const go = (n: number) => {
+    setQ("");
+    const next = new URLSearchParams(params);
+    next.set("s", String(n));
+    setParams(next, { replace: true, preventScrollReset: true });
+    window.setTimeout(() => document.getElementById(`s-${n}`)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }), 60);
+  };
+
+  return (
+    <MotionConfig reducedMotion="user">
+      <ReadingBar />
+      <DocHero
+        crumbs={[{ label: "Home", to: "/" }, { label: "Regulations", to: "/regulations" }, { label: "Pension Reform Act 2014" }]}
+        kind="Act of the National Assembly"
+        icon={<Gavel className="h-3.5 w-3.5" aria-hidden="true" />}
+        title="Pension Reform Act 2014"
+        badge={<span className="inline-flex items-center gap-1.5 rounded-full bg-[#E8F5E9] px-3 py-1 text-xs font-bold text-[#0A4A13] ring-1 ring-[#117F21]/20"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#117F21]" />In force</span>}
+        lead="This Act repeals the Pension Reform Act No. 2, 2004 and enacts the Pension Reform Act, 2014 to continue to govern and regulate the administration of the uniform contributory pension scheme for both the public and private sectors in Nigeria."
+        meta={[
+          { label: "Signed into law", value: "1 July 2014" },
+          { label: "Repeals", value: "Pension Reform Act 2004" },
+          { label: "Parts", value: data ? data.parts.length : 15 },
+          { label: "Sections", value: data ? all.length : 121 },
+        ]}
+        actions={<>
+          <PrimaryBtn href={PDF} external><Download className="h-4 w-4" aria-hidden="true" /> Official PDF</PrimaryBtn>
+          <GhostBtn href="/regulations#act"><BookOpen className="h-4 w-4" aria-hidden="true" /> Key provisions in plain English</GhostBtn>
+        </>}
+      />
+
+      {/* Search + popular */}
+      <div className="sticky top-[92px] z-20 border-b border-gray-200 bg-white/90 backdrop-blur-xl print:hidden">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-3 md:flex-row md:items-center">
+          <label className="relative flex-1">
+            <span className="sr-only">Search the Act</span>
+            <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" aria-hidden="true" />
+            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search the Act, e.g. “retirement savings account”, “penalty”, “death”" className="min-h-12 w-full rounded-2xl border border-gray-300 bg-white pl-12 pr-12 focus:border-[#117F21] focus:outline-none focus:ring-4 focus:ring-[#117F21]/15" />
+            {q && <button type="button" onClick={() => setQ("")} aria-label="Clear search" className={cn("absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full hover:bg-gray-100", ring)}><X className="h-4 w-4" aria-hidden="true" /></button>}
+          </label>
+          <p className="text-sm text-gray-600 md:w-56" aria-live="polite">
+            {matches ? <><strong className="text-[#0A2E10]">{matches.length}</strong> section{matches.length === 1 ? "" : "s"} mention “{dq.trim()}”</> : "Search across all 121 sections"}
+          </p>
+          <DocTools size={size} setSize={setSize} />
+        </div>
+      </div>
+
+      <div className="bg-[#F2F6F0]">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-12 lg:grid-cols-[300px_minmax(0,1fr)]">
+          <aside className="hidden lg:block print:hidden">
+            <div className="sticky top-[180px] space-y-4">
+              {data && <Toc items={toc} title={matches ? "Matching sections" : "Arrangement of sections"} />}
+            </div>
+          </aside>
+
+          <div className="min-w-0 space-y-10">
+            {status === "ready" && !matches && (
+              <section aria-labelledby="pop-title" className="print:hidden">
+                <h2 id="pop-title" className="text-sm font-bold uppercase tracking-[0.16em] text-gray-500">Most looked-up sections</h2>
+                <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
+                  {POPULAR.map((n, i) => {
+                    const s = all.find((x) => x.n === n);
+                    if (!s) return null;
+                    return (
+                      <motion.li key={n} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
+                        <button type="button" onClick={() => go(n)} className={cn("group flex h-full w-full items-start gap-3 rounded-2xl border border-gray-200 bg-white p-3 text-left transition hover:-translate-y-0.5 hover:border-[#117F21]/40 hover:shadow-md", ring)}>
+                          <span className="flex h-8 min-w-8 items-center justify-center rounded-lg bg-[#E8F5E9] text-sm font-bold text-[#117F21] transition group-hover:bg-[#117F21] group-hover:text-white">{n}</span>
+                          <span className="text-sm font-semibold leading-snug text-[#0A2E10]">{s.title}</span>
+                        </button>
+                      </motion.li>
+                    );
+                  })}
+                </ul>
+              </section>
+            )}
+
+            {status === "loading" && <Loading />}
+            {status === "error" && <p className="rounded-2xl bg-white p-8 text-center">The web version could not be loaded. <a href={PDF} className="font-semibold text-[#117F21] underline">Open the official PDF</a>.</p>}
+
+            {data && (
+              <div className="space-y-12" style={{ fontSize: sizes[size] }}>
+                {data.parts.map((p) => {
+                  const secs = p.sections.filter((s) => !shown || shown.has(s.n));
+                  if (!secs.length) return null;
+                  return (
+                    <section key={p.n} id={`part-${p.n}`} aria-labelledby={`part-${p.n}-t`} className="scroll-mt-44">
+                      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0A4A13] to-[#0A4A13] px-6 py-7 text-white sm:px-8">
+                        <span aria-hidden="true" className="pointer-events-none absolute -right-2 -top-8 select-none font-serif text-[8rem] font-bold leading-none text-white/[0.06]">{p.n}</span>
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F4D27A]">Part {p.n}</p>
+                        <h2 id={`part-${p.n}-t`} className="relative mt-1 text-2xl font-bold">{p.title}</h2>
+                        <p className="relative mt-1 text-sm text-white/60">Sections {p.sections[0].n}–{p.sections[p.sections.length - 1].n}</p>
+                      </div>
+                      <div className="mt-4 space-y-4">
+                        {secs.map((s) => <SectionCard key={s.n} s={s} q={dq} partN={p.n} />)}
+                      </div>
+                    </section>
+                  );
+                })}
+                {!matches && data.schedules.map((s, i) => (
+                  <section key={s.title} id={`sch-${i}`} className="scroll-mt-44 rounded-3xl border border-dashed border-[#117F21]/40 bg-white p-6 sm:p-8">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#117F21]">Schedule</p>
+                    <h2 className="mt-1 text-2xl font-bold text-[#0A2E10]">{s.title}</h2>
+                    <div className="mt-5"><Blocks blocks={s.blocks} q="" /></div>
+                    {i === 1 && <p className="mt-4 text-sm text-gray-500">The formula tables in this Schedule are easier to read in the <a href={`${PDF}#page=60`} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#117F21] underline">official PDF</a>.</p>}
+                  </section>
+                ))}
+                <AnimatePresence>
+                  {matches && matches.length === 0 && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="rounded-3xl bg-white p-10 text-center">
+                      <p className="text-lg font-semibold text-[#0A2E10]">No section mentions “{dq.trim()}”.</p>
+                      <p className="mt-1 text-gray-600">Try a shorter word, or ask the PenCom Assistant.</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
+
+            <div className="space-y-4 print:hidden">
+              <VerifyNote>This web version was prepared from the gazetted copy of the Act using text recognition, so it is easier to read, search and link to. Legal Services will check it against the gazette before publication. If the two ever differ, the gazetted text is authoritative.</VerifyNote>
+              <PdfCard href={PDF} title="Pension Reform Act 2014 (gazetted copy)" meta="PDF · 62 pages · 1.2 MB" />
+              <Link to="/regulations#library" className={cn("group flex items-center justify-between rounded-3xl border border-gray-200 bg-white p-6 font-semibold text-[#0A2E10] hover:border-[#117F21]", ring)}>
+                Regulations, guidelines and circulars issued under the Act
+                <ArrowRight className="h-5 w-5 text-[#117F21] transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </MotionConfig>
+  );
+}
