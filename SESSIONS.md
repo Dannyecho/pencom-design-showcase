@@ -20,7 +20,7 @@ Paths below are relative to `src/views/`.
 | S1a | About part 1 `/about` | `about/AboutPage.tsx`, `about/sections.tsx` (overview, mission, structure) | done (2026-11-20): hero stats count up, gold badge; overview cards unnumbered with spotlight; mission dark gradient card, vision white with gold edge; org chart with green-to-gold connectors; `sections.tsx` now uses the theme kit `Rise`/`sectionCls`/`focus` |
 | S1b | About part 2 `/about` | `about/sections.tsx` (executive, history, charter), `about/primitives.tsx` | done (2026-11-20): history timeline with ink year nodes, spotlight cards and dark figure chips; leadership cards with spotlight and rotating arrow chips; profile dialog in theme tokens; charter is now the page's `#04140A` band with count-up figures, gold CTA and the visit-us `FramedPanel`; primitives `SectionHeading` now renders the theme `Headline` |
 | S2 | Service Charter `/about/service-charter` | `charter/CharterPage.tsx` | done (2026-11-20): reading bar moved to the window top (kit `ReadingBar`); hero stat tiles dark gradient with spotlight; standards cards with spotlight, lift and dark time badges, dark pill department picker; complaints is now the page's `#04140A` band (steps 1–4 kept, glass cards, gold CTA); value cards unnumbered with icons and a growing top line; foreword on `#F2F6F0` with a gold edge; charter contents highlight the section being read; "PCC" search now finds the clearance certificate |
-| S3 | Services `/services` | `services/ServicesPage.tsx`, `services/Calculator.tsx` | pending |
+| S3 | Services `/services` | `services/ServicesPage.tsx`, `services/Calculator.tsx` | done (2026-11-20): journey panel has a dark gradient header with spotlight and swaps on `y`; ink step nodes, gold-edged "where to go next"; calculator is the page's `#04140A` band (white slider panel with gold edge, glass results card with a pointer-following gold edge, gold-gradient total); portals are the home page's dark tilt cards; help cards with spotlight, lift and arrow chips; handoff dialog in theme tokens |
 | S4 | Operators `/operators` | `operators/OperatorsPage.tsx` | pending |
 | S5a | Resources part 1 `/resources` | `resources/ResourcesPage.tsx`, `resources/Guides.tsx` | pending |
 | S5b | Resources part 2 `/resources`, `/resources/faq` | `resources/Library.tsx`, `resources/FaqGlossary.tsx`, `resources/compat.tsx` | pending |
@@ -66,6 +66,7 @@ Result: grep clean. Gold labels on white/pale green use `#7F5A04` (`#9A6F06` is 
 **S3 Services.** Sections: journeys, calculator, portals, help. Portal cards can borrow the homepage portal tilt and
 spotlight. Calculator results must stay readable at 390 px.
 Audit: grep `ServicesPage` 8. S0 fixed a console error in `Calculator.tsx` (`motion.path` animating `d` from undefined; now `initial={false}`). Journey panel uses `#FFF2CC`/`#FFF8E1` fills; journey swap animates `x` ±24 (switch to `y`).
+Result: grep clean in both files. Calculator breakdown colours changed for the dark band (voluntary is teal `#5EC4C4`, not purple). `ServicesPage.tsx` has local `glowLight`, `lift`, `darkBtn`, `Chip` and `TiltButton` (a `<button>` version of the home page tilt card); reuse them if Operators needs the same. No new UI strings.
 
 **S4 Operators.** Sections: how, directory, funds, performance; details drawer (`Drawer`). PFA returns are sample
 figures and must stay labelled.
