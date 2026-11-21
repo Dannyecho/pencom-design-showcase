@@ -8,3 +8,6 @@ next-env.d.ts
 
 # translation tool output
 tools/i18n/.out/
+
+# deploy bundle
+/deploy/

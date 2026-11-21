@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   // The development badge sat on top of the quick-links button (bottom left).
   devIndicators: false,
   images: { unoptimized: true },
+  // `npm run bundle` sets this to build a self-contained server for GoDaddy (see tools/deploy/bundle.mjs).
+  output: process.env.NEXT_STANDALONE ? "standalone" : undefined,
 };
 
 export default nextConfig;
