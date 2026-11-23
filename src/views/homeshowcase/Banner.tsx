@@ -57,12 +57,12 @@ export default function Banner() {
   if (!s) return null;
   const running = playing && !hold && !reduce;
   const words = t(s.title).split(" ");
-  const round = cn("flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition hover:bg-white hover:text-[#0B1F10]", focus);
+  const round = cn("flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition hover:bg-white hover:text-[#1A3A22]", focus);
 
   return (
     <section
       aria-label="Featured"
-      className="relative isolate h-[min(90svh,820px)] min-h-[640px] overflow-hidden bg-[#04140A] text-white"
+      className="relative isolate h-[min(90svh,820px)] min-h-[640px] overflow-hidden bg-[#12331C] text-white"
       onPointerEnter={() => setHold(true)}
       onPointerLeave={() => setHold(false)}
       onFocus={() => setHold(true)}
@@ -102,8 +102,8 @@ export default function Banner() {
           />
         </motion.div>
       </AnimatePresence>
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#007E2F]/80 via-[#04140A]/45 to-transparent" />
-      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#04140A] via-[#04140A]/40 to-transparent" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#068537]/80 via-[#12331C]/45 to-transparent" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#12331C] via-[#12331C]/40 to-transparent" />
 
       <div
         className="relative mx-auto flex h-full max-w-7xl items-end px-4 pb-36 sm:pb-40"

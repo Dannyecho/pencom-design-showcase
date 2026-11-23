@@ -72,7 +72,7 @@ export default function Ghost({ word, dark = false, clip = true, className }: { 
       style={{ x: reduce ? 0 : x }}
       className={cn(
         "block select-none whitespace-nowrap text-[4.5rem] font-black uppercase leading-none tracking-tighter text-transparent sm:text-[8rem] lg:text-[11rem]",
-        dark ? "[-webkit-text-stroke:1.5px_rgba(244,210,122,0.18)]" : "[-webkit-text-stroke:1.5px_rgba(10,74,19,0.13)]",
+        dark ? "[-webkit-text-stroke:1.5px_rgba(244,210,122,0.18)]" : "[-webkit-text-stroke:1.5px_rgba(16,93,29,0.13)]",
         !clip && cn("pointer-events-none absolute -top-8 left-0 sm:-top-12 lg:-top-16", className),
       )}
     >

@@ -77,7 +77,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top bar */}
-      <div className="bg-[#0A4A13] text-white text-xs">
+      <div className="bg-[#105D1D] text-white text-xs">
         <div className="max-w-7xl mx-auto px-4 py-1.5 flex justify-between items-center">
           <div className="flex gap-4 whitespace-nowrap">
             <span className="opacity-80">Federal Republic of Nigeria</span>
@@ -128,7 +128,7 @@ export default function Header() {
                 }}
               />
               <div
-                className="hidden w-10 h-10 rounded-lg bg-gradient-to-br from-[#117F21] to-[#0A4A13] items-center justify-center"
+                className="hidden w-10 h-10 rounded-lg bg-gradient-to-br from-[#14892A] to-[#105D1D] items-center justify-center"
                 style={{ display: 'none' }}
               >
                 <Shield className="w-6 h-6 text-white" />
@@ -183,7 +183,7 @@ export default function Header() {
               <NoticesBell />
               <Link
                 to="/services"
-                className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-[#117F21] text-white text-sm font-semibold rounded-lg hover:bg-[#0A4A13] transition-colors"
+                className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-[#14892A] text-white text-sm font-semibold rounded-lg hover:bg-[#105D1D] transition-colors"
               >
                 <Shield className="w-4 h-4" />
                 e-Services
@@ -215,7 +215,7 @@ export default function Header() {
                 <input
                   type="text"
                   placeholder="Search pension services, forms, FAQs..."
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#117F21] focus:ring-2 focus:ring-[#117F21]/20 outline-none text-base"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#14892A] focus:ring-2 focus:ring-[#14892A]/20 outline-none text-base"
                   autoFocus
                 />
                 <button
@@ -275,7 +275,7 @@ export default function Header() {
               <div className="pt-4 border-t mt-4">
                 <Link
                   to="/services"
-                  className="flex items-center justify-center gap-2 px-4 py-3 bg-[#117F21] text-white font-semibold rounded-lg"
+                  className="flex items-center justify-center gap-2 px-4 py-3 bg-[#14892A] text-white font-semibold rounded-lg"
                 >
                   <Shield className="w-5 h-5" />
                   Access e-Services

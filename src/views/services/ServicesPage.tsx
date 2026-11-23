@@ -81,11 +81,11 @@ const portalIcons: Record<string, LucideIcon> = {
 
 /** Soft green spotlight for white cards, and the theme's hover lift. */
 const glowLight =
-  "[background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(46,145,61,0.10),transparent_45%)]";
+  "[background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(54,160,69,0.10),transparent_45%)]";
 const lift =
-  "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]";
+  "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)]";
 const darkBtn =
-  "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]";
+  "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#14892A]";
 
 /** Gold circular arrow chip used at the end of dark buttons. */
 function Chip({ children }: { children: ReactNode }) {
@@ -149,7 +149,7 @@ export default function ServicesPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Hero onPick={(a) => choose(a, true)} />
         <SectionNav sections={onThisPage} pillId="svc-nav-pill" />
         <Journeys
@@ -184,11 +184,11 @@ function Hero({ onPick }: { onPick: (anchor: string) => void }) {
             e.preventDefault();
             onPick(pick);
           }}
-          className="flex flex-col gap-2 rounded-2xl bg-white p-2 shadow-[0_20px_40px_-28px_rgba(10,74,19,0.6)] ring-1 ring-black/10 sm:flex-row sm:items-center"
+          className="flex flex-col gap-2 rounded-2xl bg-white p-2 shadow-[0_20px_40px_-28px_rgba(16,93,29,0.6)] ring-1 ring-black/10 sm:flex-row sm:items-center"
         >
           <label
             htmlFor="svc-pick"
-            className="shrink-0 pl-3 font-semibold text-[#0A4A13]"
+            className="shrink-0 pl-3 font-semibold text-[#105D1D]"
           >
             I want to
           </label>
@@ -198,7 +198,7 @@ function Hero({ onPick }: { onPick: (anchor: string) => void }) {
               value={pick}
               onChange={(e) => setPick(e.target.value)}
               className={cn(
-                "min-h-12 w-full appearance-none truncate rounded-xl bg-[#F2F6F0] pl-3 pr-9 font-semibold text-[#0B1F10] ring-1 ring-black/10",
+                "min-h-12 w-full appearance-none truncate rounded-xl bg-[#F2F6F0] pl-3 pr-9 font-semibold text-[#1A3A22] ring-1 ring-black/10",
                 focus,
               )}
             >
@@ -216,7 +216,7 @@ function Hero({ onPick }: { onPick: (anchor: string) => void }) {
           <button
             type="submit"
             className={cn(
-              "group inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0B1F10] px-5 font-semibold text-white transition hover:bg-[#117F21]",
+              "group inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#1A3A22] px-5 font-semibold text-white transition hover:bg-[#14892A]",
               focus,
             )}
           >
@@ -229,7 +229,7 @@ function Hero({ onPick }: { onPick: (anchor: string) => void }) {
       }
       aside={
         <FramedPanel className="p-4 sm:p-5">
-          <p className="px-1 text-xs font-bold uppercase tracking-[0.18em] text-[#0A4A13]">
+          <p className="px-1 text-xs font-bold uppercase tracking-[0.18em] text-[#105D1D]">
             Most used services
           </p>
           <ul className="mt-3 grid grid-cols-2 gap-2.5">
@@ -246,7 +246,7 @@ function Hero({ onPick }: { onPick: (anchor: string) => void }) {
                     type="button"
                     onClick={() => onPick(j.anchor)}
                     className={cn(
-                      "group flex h-full w-full items-start gap-3 rounded-2xl bg-[#F2F6F0] p-3 text-left ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-white",
+                      "group flex h-full w-full items-start gap-3 rounded-2xl bg-[#F2F6F0] p-3 text-left ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#1A3A22] hover:text-white",
                       focus,
                     )}
                   >
@@ -305,7 +305,7 @@ function Eligibility({ j }: { j: Journey }) {
                       "flex min-h-11 min-w-16 cursor-pointer items-center justify-center rounded-full px-4 text-sm font-semibold ring-1 transition has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-[#FFD84D]",
                       ans[i] === v
                         ? v
-                          ? "bg-[#0B1F10] text-[#F4D27A] ring-[#0B1F10]"
+                          ? "bg-[#1A3A22] text-[#F4D27A] ring-[#1A3A22]"
                           : "bg-[#B52026] text-white ring-[#B52026]"
                         : "text-gray-700 ring-black/10 hover:ring-black/30",
                     )}
@@ -338,7 +338,7 @@ function Eligibility({ j }: { j: Journey }) {
               className={cn(
                 "mt-4 flex gap-3 rounded-2xl p-4 text-sm font-medium",
                 ok
-                  ? "bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] text-white"
+                  ? "bg-gradient-to-br from-[#1A3A22] to-[#105D1D] text-white"
                   : "bg-[#FDE8E8] text-[#5C1013]",
               )}
             >
@@ -376,11 +376,11 @@ function Panel({
       exit={{ opacity: 0, y: reduce ? 0 : -16 }}
       transition={{ duration: 0.35, ease }}
       aria-labelledby={`${j.anchor}-title`}
-      className="overflow-hidden rounded-[1.75rem] bg-white shadow-[0_40px_80px_-50px_rgba(4,20,10,0.55)] ring-1 ring-black/10"
+      className="overflow-hidden rounded-[1.75rem] bg-white shadow-[0_40px_80px_-50px_rgba(18,51,28,0.55)] ring-1 ring-black/10"
     >
       <header
         onMouseMove={spot}
-        className="relative isolate flex flex-col gap-5 overflow-hidden p-6 text-white [background-image:radial-gradient(420px_circle_at_var(--x,80%)_var(--y,0%),rgba(244,210,122,0.22),transparent_45%),linear-gradient(135deg,#0B1F10,#0A4A13)] sm:flex-row sm:p-8"
+        className="relative isolate flex flex-col gap-5 overflow-hidden p-6 text-white [background-image:radial-gradient(420px_circle_at_var(--x,80%)_var(--y,0%),rgba(244,210,122,0.22),transparent_45%),linear-gradient(135deg,#1A3A22,#105D1D)] sm:flex-row sm:p-8"
       >
         <Icon
           aria-hidden="true"
@@ -462,7 +462,7 @@ function Panel({
               initial={{ scaleY: reduce ? 1 : 0 }}
               animate={{ scaleY: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease }}
-              className="absolute bottom-3 left-[19px] top-3 w-[3px] origin-top rounded-full bg-gradient-to-b from-[#117F21] to-[#CB9615]"
+              className="absolute bottom-3 left-[19px] top-3 w-[3px] origin-top rounded-full bg-gradient-to-b from-[#14892A] to-[#CB9615]"
             />
             {j.steps.map((s, i) => (
               <motion.li
@@ -472,7 +472,7 @@ function Panel({
                 transition={{ duration: 0.35, delay: 0.15 + i * 0.08, ease }}
                 className="relative"
               >
-                <span className="absolute -left-12 flex h-10 w-10 items-center justify-center rounded-full bg-[#0B1F10] font-mono font-bold text-[#F4D27A] ring-4 ring-white">
+                <span className="absolute -left-12 flex h-10 w-10 items-center justify-center rounded-full bg-[#1A3A22] font-mono font-bold text-[#F4D27A] ring-4 ring-white">
                   {i + 1}
                 </span>
                 <p className="pt-1.5 font-bold">{s.title}</p>
@@ -586,7 +586,7 @@ function Journeys({
                         {on && (
                           <motion.span
                             layoutId="svc-rail-pill"
-                            className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] shadow-[0_18px_36px_-16px_rgba(4,20,10,0.9)]"
+                            className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-[#1A3A22] to-[#105D1D] shadow-[0_18px_36px_-16px_rgba(18,51,28,0.9)]"
                             transition={{
                               type: "spring",
                               stiffness: 380,
@@ -701,7 +701,7 @@ function Portals({ onHandoff }: { onHandoff: (key: string) => void }) {
                 <Rise delay={(i % 3) * 0.07} className="h-full">
                   <TiltButton
                     onClick={() => onHandoff(p.key)}
-                    className="group relative flex h-full flex-col overflow-hidden rounded-3xl p-7 text-white shadow-[0_30px_60px_-34px_rgba(4,20,10,0.9)] [background-image:radial-gradient(360px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.22),transparent_45%),linear-gradient(135deg,#0B1F10,#0A4A13)]"
+                    className="group relative flex h-full flex-col overflow-hidden rounded-3xl p-7 text-white shadow-[0_30px_60px_-34px_rgba(18,51,28,0.9)] [background-image:radial-gradient(360px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.22),transparent_45%),linear-gradient(135deg,#1A3A22,#105D1D)]"
                   >
                     <span className="flex items-start justify-between [transform:translateZ(30px)]">
                       <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-[#F4D27A] ring-1 ring-white/15 transition duration-500 group-hover:rotate-6">
@@ -761,7 +761,7 @@ function Handoff({
     >
       {p && (
         <>
-          <div className="relative isolate overflow-hidden bg-gradient-to-br from-[#04140A] via-[#0B1F10] to-[#0A4A13] p-7 pr-16 text-white">
+          <div className="relative isolate overflow-hidden bg-gradient-to-br from-[#12331C] via-[#1A3A22] to-[#105D1D] p-7 pr-16 text-white">
             <div
               aria-hidden="true"
               className="absolute inset-0 -z-10 bg-[radial-gradient(70%_80%_at_100%_0%,rgba(203,150,21,0.30),transparent)]"
@@ -813,7 +813,7 @@ function Handoff({
                 <p className="mt-2 text-sm text-gray-700">{p.next}</p>
               </div>
             )}
-            <p className="relative flex gap-2 overflow-hidden rounded-2xl bg-[#F2F6F0] p-3 pl-4 text-xs text-[#0B1F10] ring-1 ring-black/10">
+            <p className="relative flex gap-2 overflow-hidden rounded-2xl bg-[#F2F6F0] p-3 pl-4 text-xs text-[#1A3A22] ring-1 ring-black/10">
               <span
                 aria-hidden="true"
                 className="absolute inset-y-0 left-0 w-1 bg-[#CB9615]"
@@ -910,7 +910,7 @@ function Help() {
               "group relative flex h-full w-full flex-col overflow-hidden rounded-3xl p-7 text-left",
               lift,
               dark
-                ? "text-white shadow-[0_30px_60px_-30px_rgba(4,20,10,0.8)] [background-image:radial-gradient(380px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.22),transparent_45%),linear-gradient(135deg,#0B1F10,#0A4A13)]"
+                ? "text-white shadow-[0_30px_60px_-30px_rgba(18,51,28,0.8)] [background-image:radial-gradient(380px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.22),transparent_45%),linear-gradient(135deg,#1A3A22,#105D1D)]"
                 : cn("bg-white ring-1 ring-black/10", glowLight),
               focus,
             );
@@ -945,7 +945,7 @@ function Help() {
                       "flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-[-45deg]",
                       dark
                         ? "bg-[#F4D27A] text-[#1A1206]"
-                        : "bg-[#0B1F10] text-[#F4D27A]",
+                        : "bg-[#1A3A22] text-[#F4D27A]",
                     )}
                   >
                     <ArrowRight className="h-5 w-5" aria-hidden="true" />

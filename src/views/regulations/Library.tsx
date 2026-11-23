@@ -52,7 +52,7 @@ export function applyFilters(f: Filters) {
 
 function FacetGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <fieldset className="border-t border-[#0B1F10]/10 pt-5 first:border-0 first:pt-0">
+    <fieldset className="border-t border-[#1A3A22]/10 pt-5 first:border-0 first:pt-0">
       <legend className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[#7F5A04]">{title}</legend>
       {children}
     </fieldset>
@@ -72,14 +72,14 @@ function CheckRow({ label, count, checked, onChange, dot }: { label: string; cou
         aria-hidden="true"
         className={cn(
           "flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-[#FFD84D]",
-          checked ? "border-[#0B1F10] bg-[#0B1F10] text-[#F4D27A]" : "border-gray-400 bg-white group-hover:border-[#117F21]",
+          checked ? "border-[#1A3A22] bg-[#1A3A22] text-[#F4D27A]" : "border-gray-400 bg-white group-hover:border-[#14892A]",
         )}
       >
         {checked && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
       </span>
       {dot && <span aria-hidden="true" className={cn("h-2 w-2 rounded-full", dot)} />}
-      <span className={cn("flex-1", checked ? "font-semibold text-[#0B1F10]" : "text-gray-700")}>{label}</span>
-      <span className={cn("min-w-7 rounded-full px-1.5 py-0.5 text-center font-mono text-xs tabular-nums", checked ? "bg-[#0B1F10] text-[#F4D27A]" : "text-gray-600")}>{count}</span>
+      <span className={cn("flex-1", checked ? "font-semibold text-[#1A3A22]" : "text-gray-700")}>{label}</span>
+      <span className={cn("min-w-7 rounded-full px-1.5 py-0.5 text-center font-mono text-xs tabular-nums", checked ? "bg-[#1A3A22] text-[#F4D27A]" : "text-gray-600")}>{count}</span>
     </label>
   );
 }
@@ -130,7 +130,7 @@ function Facets({ f, set }: { f: Filters; set: (p: Partial<Filters>) => void }) 
                   layout
                   className={cn(
                     "block w-full rounded-t-[4px] transition-colors",
-                    on ? "bg-gradient-to-t from-[#CB9615] to-[#F4D27A]" : f.years.length ? "bg-gray-200 group-hover:bg-[#117F21]/60" : "bg-gradient-to-t from-[#0A4A13] to-[#2E913D] group-hover:from-[#117F21] group-hover:to-[#CB9615]",
+                    on ? "bg-gradient-to-t from-[#CB9615] to-[#F4D27A]" : f.years.length ? "bg-gray-200 group-hover:bg-[#14892A]/60" : "bg-gradient-to-t from-[#105D1D] to-[#36A045] group-hover:from-[#14892A] group-hover:to-[#CB9615]",
                   )}
                   style={{ height: `${Math.max(n ? 6 : 2, (n / maxYear) * 100)}%` }}
                 />
@@ -145,7 +145,7 @@ function Facets({ f, set }: { f: Filters; set: (p: Partial<Filters>) => void }) 
         {f.years.length > 0 && (
           <p className="mt-2 text-xs text-gray-600">
             {f.years.slice().sort().join(", ")}{" "}
-            <button type="button" onClick={() => set({ years: [] })} className={cn("rounded font-semibold text-[#0A4A13] underline underline-offset-2", focus)}>
+            <button type="button" onClick={() => set({ years: [] })} className={cn("rounded font-semibold text-[#105D1D] underline underline-offset-2", focus)}>
               clear
             </button>
           </p>
@@ -189,13 +189,13 @@ function ResultCard({ d, onOpen, i }: { d: RegDoc; onOpen: (id: string) => void;
       <div
         onMouseMove={spot}
         className={cn(
-          "group relative overflow-hidden rounded-3xl bg-white ring-1 ring-black/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)] hover:ring-[#117F21]/25 has-[button:focus-visible]:outline has-[button:focus-visible]:outline-[3px] has-[button:focus-visible]:outline-offset-2 has-[button:focus-visible]:outline-[#FFD84D]",
+          "group relative overflow-hidden rounded-3xl bg-white ring-1 ring-black/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)] hover:ring-[#14892A]/25 has-[button:focus-visible]:outline has-[button:focus-visible]:outline-[3px] has-[button:focus-visible]:outline-offset-2 has-[button:focus-visible]:outline-[#FFD84D]",
           glowLight,
         )}
       >
         <span aria-hidden="true" className={cn("absolute inset-y-0 left-0 w-1 origin-top scale-y-0 transition-transform duration-500 group-hover:scale-y-100", typeStyle[d.type].dot)} />
         <div className="flex gap-4 p-5 sm:p-6">
-          <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] text-[#0A4A13] transition duration-300 group-hover:-rotate-6 group-hover:bg-[#0B1F10] group-hover:text-[#F4D27A] sm:flex">
+          <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] text-[#105D1D] transition duration-300 group-hover:-rotate-6 group-hover:bg-[#1A3A22] group-hover:text-[#F4D27A] sm:flex">
             <FileText className="h-5 w-5" aria-hidden="true" />
           </span>
           <div className="min-w-0 flex-1">
@@ -207,11 +207,11 @@ function ResultCard({ d, onOpen, i }: { d: RegDoc; onOpen: (id: string) => void;
                 {fmtDate(d.date)}
               </span>
             </div>
-            <h3 className="mt-2.5 text-[1.05rem] font-bold leading-snug text-[#0B1F10]">
+            <h3 className="mt-2.5 text-[1.05rem] font-bold leading-snug text-[#1A3A22]">
               <button
                 type="button"
                 onClick={() => onOpen(d.id)}
-                className="text-left after:absolute after:inset-0 after:content-[''] group-hover:text-[#0A4A13] focus-visible:outline-none group-has-[:focus-visible]:underline"
+                className="text-left after:absolute after:inset-0 after:content-[''] group-hover:text-[#105D1D] focus-visible:outline-none group-has-[:focus-visible]:underline"
               >
                 {d.title}
               </button>
@@ -227,7 +227,7 @@ function ResultCard({ d, onOpen, i }: { d: RegDoc; onOpen: (id: string) => void;
             href={d.pdf}
             target="_blank"
             rel="noopener noreferrer"
-            className={cn("relative z-10 hidden h-11 shrink-0 items-center gap-1.5 self-center rounded-full bg-white px-4 text-sm font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:bg-[#0B1F10] hover:text-[#F4D27A] md:inline-flex", focus)}
+            className={cn("relative z-10 hidden h-11 shrink-0 items-center gap-1.5 self-center rounded-full bg-white px-4 text-sm font-semibold text-[#1A3A22] ring-1 ring-black/10 transition hover:bg-[#1A3A22] hover:text-[#F4D27A] md:inline-flex", focus)}
           >
             <Download className="h-4 w-4" aria-hidden="true" />
             PDF
@@ -280,7 +280,7 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
         />
 
         {/* Search + sort bar */}
-        <div className="sticky top-[152px] z-20 mt-10 rounded-[1.75rem] bg-white/90 p-1.5 shadow-[0_24px_50px_-30px_rgba(4,20,10,0.55)] ring-1 ring-black/10 backdrop-blur-xl sm:rounded-full">
+        <div className="sticky top-[152px] z-20 mt-10 rounded-[1.75rem] bg-white/90 p-1.5 shadow-[0_24px_50px_-30px_rgba(18,51,28,0.55)] ring-1 ring-black/10 backdrop-blur-xl sm:rounded-full">
           <div className="flex flex-col gap-2 sm:flex-row">
             <label className="flex flex-1 items-center gap-3 rounded-full pl-4 pr-1 has-[input:focus-visible]:outline has-[input:focus-visible]:outline-[3px] has-[input:focus-visible]:outline-[#FFD84D]">
               <Search className="h-5 w-5 shrink-0 text-[#117F21]" aria-hidden="true" />
@@ -294,16 +294,16 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
                 className="min-h-12 w-full bg-transparent text-base placeholder:text-gray-500 focus:outline-none focus-visible:outline-none focus-visible:ring-0 [&::-webkit-search-cancel-button]:hidden"
               />
               {draft && (
-                <button type="button" onClick={() => setDraft("")} aria-label="Clear search" className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-gray-600 transition hover:rotate-90 hover:bg-[#F2F6F0] hover:text-[#0B1F10]", focus)}>
+                <button type="button" onClick={() => setDraft("")} aria-label="Clear search" className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-gray-600 transition hover:rotate-90 hover:bg-[#F2F6F0] hover:text-[#1A3A22]", focus)}>
                   <X className="h-4 w-4" aria-hidden="true" />
                 </button>
               )}
             </label>
             <div className="flex gap-2">
               <label className="flex min-h-12 flex-1 items-center gap-2 rounded-full bg-[#F2F6F0] px-4 text-sm text-gray-600 ring-1 ring-black/10 has-[select:focus-visible]:outline has-[select:focus-visible]:outline-[3px] has-[select:focus-visible]:outline-[#FFD84D] sm:flex-none">
-                <ArrowDownWideNarrow className="h-4 w-4 text-[#0A4A13]" aria-hidden="true" />
+                <ArrowDownWideNarrow className="h-4 w-4 text-[#105D1D]" aria-hidden="true" />
                 <span className="sr-only">Sort by</span>
-                <select value={f.sort} onChange={(e) => set({ sort: e.target.value as Filters["sort"] })} className="min-h-10 flex-1 cursor-pointer bg-transparent font-semibold text-[#0B1F10] focus:outline-none focus-visible:outline-none">
+                <select value={f.sort} onChange={(e) => set({ sort: e.target.value as Filters["sort"] })} className="min-h-10 flex-1 cursor-pointer bg-transparent font-semibold text-[#1A3A22] focus:outline-none focus-visible:outline-none">
                   <option value="new">Newest first</option>
                   <option value="old">Oldest first</option>
                   <option value="az">Title A–Z</option>
@@ -314,7 +314,7 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
                 onClick={() => setMobileFilters((o) => !o)}
                 aria-expanded={mobileFilters}
                 aria-controls="reg-facets"
-                className={cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-[#0B1F10] px-5 text-sm font-semibold text-white transition hover:bg-[#117F21] lg:hidden", focus)}
+                className={cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1A3A22] px-5 text-sm font-semibold text-white transition hover:bg-[#14892A] lg:hidden", focus)}
               >
                 <SlidersHorizontal className="h-4 w-4 text-[#F4D27A]" aria-hidden="true" />
                 Filters{chips.length ? ` (${chips.length})` : ""}
@@ -328,7 +328,7 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
           <aside
             id="reg-facets"
             aria-label="Filters"
-            className={cn("rounded-[1.75rem] bg-white p-5 shadow-[0_30px_60px_-40px_rgba(4,20,10,0.35)] ring-1 ring-black/10 lg:col-span-3 lg:block lg:self-start", mobileFilters ? "block" : "hidden")}
+            className={cn("rounded-[1.75rem] bg-white p-5 shadow-[0_30px_60px_-40px_rgba(18,51,28,0.35)] ring-1 ring-black/10 lg:col-span-3 lg:block lg:self-start", mobileFilters ? "block" : "hidden")}
           >
             <Facets f={f} set={set} />
           </aside>
@@ -337,7 +337,7 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
           <div className="lg:col-span-9">
             <div className="flex flex-wrap items-center gap-2">
               <p className="mr-2 text-sm text-gray-600" aria-live="polite">
-                <strong className="font-mono text-xl font-black tabular-nums text-[#0B1F10]">{results.length}</strong> of {library.length} documents
+                <strong className="font-mono text-xl font-black tabular-nums text-[#1A3A22]">{results.length}</strong> of {library.length} documents
               </p>
               <LayoutGroup>
                 <AnimatePresence initial={false}>
@@ -350,7 +350,7 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
                       onClick={c.clear}
-                      className={cn("inline-flex min-h-9 items-center gap-1.5 rounded-full bg-[#0B1F10] pl-3.5 pr-2 text-xs font-semibold text-[#F4D27A] transition hover:bg-[#B52026] hover:text-white", focus)}
+                      className={cn("inline-flex min-h-9 items-center gap-1.5 rounded-full bg-[#1A3A22] pl-3.5 pr-2 text-xs font-semibold text-[#F4D27A] transition hover:bg-[#B52026] hover:text-white", focus)}
                     >
                       {c.label}
                       <X className="h-3.5 w-3.5" aria-hidden="true" />
@@ -360,7 +360,7 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
                 </AnimatePresence>
               </LayoutGroup>
               {chips.length > 1 && (
-                <button type="button" onClick={clearAll} className={cn("min-h-9 rounded-full px-2 text-xs font-semibold text-[#0A4A13] underline underline-offset-2", focus)}>
+                <button type="button" onClick={clearAll} className={cn("min-h-9 rounded-full px-2 text-xs font-semibold text-[#105D1D] underline underline-offset-2", focus)}>
                   Clear all
                 </button>
               )}
@@ -371,19 +371,19 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
 
             {results.length === 0 ? (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-6 rounded-[1.75rem] bg-white p-10 text-center ring-1 ring-black/10">
-                <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]"><Search className="h-7 w-7" aria-hidden="true" /></span>
-                <h3 className="mt-4 text-xl font-black tracking-tight text-[#0B1F10]">No documents match</h3>
+                <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A]"><Search className="h-7 w-7" aria-hidden="true" /></span>
+                <h3 className="mt-4 text-xl font-black tracking-tight text-[#1A3A22]">No documents match</h3>
                 <p className="mx-auto mt-2 max-w-md text-sm text-gray-600">
                   Try fewer words, remove a filter, or search for a topic such as “transfer”, “investment” or “benefits”.
                 </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
-                  <button type="button" onClick={clearAll} className={cn("min-h-11 rounded-full bg-[#0B1F10] px-6 text-sm font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+                  <button type="button" onClick={clearAll} className={cn("min-h-11 rounded-full bg-[#1A3A22] px-6 text-sm font-semibold text-white transition hover:bg-[#14892A]", focus)}>
                     Clear all filters
                   </button>
                   <button
                     type="button"
                     onClick={() => document.getElementById("chat-trigger")?.click()}
-                    className={cn("inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:bg-[#F2F6F0]", focus)}
+                    className={cn("inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-[#1A3A22] ring-1 ring-black/10 transition hover:bg-[#F2F6F0]", focus)}
                   >
                     <MessageCircle className="h-4 w-4" aria-hidden="true" />
                     Ask PenCom Assistant
@@ -401,14 +401,14 @@ export default function Library({ f, set, onOpen }: { f: Filters; set: (p: Parti
                 </ul>
                 {shown < results.length && (
                   <div className="mt-8 flex flex-col items-center gap-3">
-                    <div className="h-1.5 w-48 overflow-hidden rounded-full bg-[#0B1F10]/10" aria-hidden="true">
-                      <motion.div className="h-full rounded-full bg-gradient-to-r from-[#117F21] to-[#CB9615]" animate={{ width: `${(shown / results.length) * 100}%` }} />
+                    <div className="h-1.5 w-48 overflow-hidden rounded-full bg-[#1A3A22]/10" aria-hidden="true">
+                      <motion.div className="h-full rounded-full bg-gradient-to-r from-[#14892A] to-[#CB9615]" animate={{ width: `${(shown / results.length) * 100}%` }} />
                     </div>
                     <p className="text-xs text-gray-600">Showing {shown} of {results.length}</p>
                     <button
                       type="button"
                       onClick={() => setShown((s) => s + PAGE)}
-                      className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]", focus)}
+                      className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#14892A]", focus)}
                     >
                       Show {Math.min(PAGE, results.length - shown)} more
                       <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:translate-y-0.5">

@@ -11,28 +11,28 @@
     --card-foreground: 100 5% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 100 5% 10%;
-    --primary: 130 75% 28%;
+    --primary: 130 74% 31%;
     --primary-foreground: 0 0% 100%;
     --secondary: 43 80% 44%;
     --secondary-foreground: 0 0% 100%;
     --muted: 80 5% 94%;
     --muted-foreground: 0 0% 40%;
-    --accent: 130 75% 28%;
+    --accent: 130 74% 31%;
     --accent-foreground: 0 0% 100%;
     --destructive: 357 69% 41%;
     --destructive-foreground: 0 0% 100%;
     --border: 90 5% 88%;
     --input: 90 5% 88%;
-    --ring: 130 75% 28%;
+    --ring: 130 74% 31%;
     --radius: 0.625rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 100 5% 10%;
-    --sidebar-primary: 130 75% 28%;
+    --sidebar-primary: 130 74% 31%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 80 5% 94%;
     --sidebar-accent-foreground: 100 5% 10%;
     --sidebar-border: 90 5% 88%;
-    --sidebar-ring: 130 75% 28%;
+    --sidebar-ring: 130 74% 31%;
   }
 
   .dark {
@@ -96,13 +96,13 @@
     text-wrap: balance;
   }
   .gradient-pencom {
-    background: linear-gradient(135deg, #117F21 0%, #0A4A13 100%);
+    background: linear-gradient(135deg, #14892A 0%, #105D1D 100%);
   }
   .gradient-gold {
     background: linear-gradient(135deg, #E5A91E 0%, #CB9615 100%);
   }
   .gradient-hero {
-    background: linear-gradient(135deg, #0A4A13 0%, #117F21 50%, #2E913D 100%);
+    background: linear-gradient(135deg, #105D1D 0%, #14892A 50%, #2E913D 100%);
   }
   .gradient-grey {
     background: linear-gradient(135deg, #BABBBD 0%, #9A9B9D 100%);
@@ -111,7 +111,7 @@
     background: linear-gradient(135deg, #B52026 0%, #8E1A1E 100%);
   }
   .gradient-nigeria {
-    background: linear-gradient(135deg, #117F21 0%, #CB9615 50%, #B52026 100%);
+    background: linear-gradient(135deg, #14892A 0%, #CB9615 50%, #B52026 100%);
   }
   .text-shadow {
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);

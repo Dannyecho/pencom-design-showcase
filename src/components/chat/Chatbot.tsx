@@ -131,7 +131,7 @@ export default function Chatbot() {
             exit={{ scale: 0, opacity: 0 }}
             id="chat-trigger"
             onClick={() => setOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#117F21] to-[#0A4A13] text-white shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
+            className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#14892A] to-[#105D1D] text-white shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
             aria-label="Open AI Chat Assistant"
           >
             <MessageCircle className="w-6 h-6" />
@@ -150,7 +150,7 @@ export default function Chatbot() {
             className="fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] h-[560px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#117F21] to-[#0A4A13] p-4 flex items-center justify-between shrink-0">
+            <div className="bg-gradient-to-r from-[#14892A] to-[#105D1D] p-4 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
                   <Bot className="w-5 h-5 text-white" />
@@ -198,7 +198,7 @@ export default function Chatbot() {
                     className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                       msg.role === "assistant"
                         ? "bg-gray-50 text-gray-800 rounded-tl-md"
-                        : "bg-[#117F21] text-white rounded-tr-md"
+                        : "bg-[#14892A] text-white rounded-tr-md"
                     }`}
                   >
                     <p>{msg.content}</p>
@@ -249,7 +249,7 @@ export default function Chatbot() {
                       <button
                         key={prompt}
                         onClick={() => handleSend(prompt)}
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#E8F5E9] text-[#117F21] text-xs rounded-lg hover:bg-[#117F21] hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-[#E8F5E9] text-[#117F21] text-xs rounded-lg hover:bg-[#14892A] hover:text-white transition-colors"
                       >
                         {prompt}
                         <ChevronRight className="w-3 h-3" />
@@ -272,13 +272,13 @@ export default function Chatbot() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Ask about pension services..."
-                  className="flex-1 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#117F21] focus:ring-1 focus:ring-[#117F21]/20"
+                  className="flex-1 px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#14892A] focus:ring-1 focus:ring-[#14892A]/20"
                   disabled={typing}
                 />
                 <button
                   onClick={() => handleSend()}
                   disabled={!input.trim() || typing}
-                  className="w-10 h-10 rounded-xl bg-[#117F21] text-white flex items-center justify-center hover:bg-[#0A4A13] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                  className="w-10 h-10 rounded-xl bg-[#14892A] text-white flex items-center justify-center hover:bg-[#105D1D] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                   aria-label="Send message"
                 >
                   <Send className="w-4 h-4" />

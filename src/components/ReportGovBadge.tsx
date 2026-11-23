@@ -22,7 +22,7 @@ export default function ReportGovBadge({ compact = false }: { compact?: boolean 
       title="ReportGov.ng - Report Government Activities"
     >
       <span className="text-xs font-bold tracking-wide">reportgov</span>
-      <span aria-hidden="true" className={cn("ml-0.5 rounded-sm bg-[#117F21] font-bold text-white", compact ? "px-1 text-xs leading-[14px]" : "px-1 py-0.5 text-xs")}>
+      <span aria-hidden="true" className={cn("ml-0.5 rounded-sm bg-[#14892A] font-bold text-white", compact ? "px-1 text-xs leading-[14px]" : "px-1 py-0.5 text-xs")}>
         .ng
       </span>
       <span className="sr-only">.ng (opens in a new tab)</span>

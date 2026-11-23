@@ -59,12 +59,12 @@ export default function LanguageNotice() {
       <AnimatePresence initial={false}>
         {suggestion && lang === "en" && (
           <motion.div key="offer" {...anim} className="overflow-hidden" role="region" aria-label="Language">
-            <div lang={suggestion.code} className="border-b border-[#117F21]/15 bg-gradient-to-r from-[#E8F5E9] via-white to-[#FFF8E6]">
+            <div lang={suggestion.code} className="border-b border-[#14892A]/15 bg-gradient-to-r from-[#E8F5E9] via-white to-[#FFF8E6]">
               <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5 text-sm">
                 <Languages className="h-4 w-4 text-[#117F21]" aria-hidden="true" />
-                <span className="font-semibold text-[#0B1F10]">{suggestion.hello}!</span>
+                <span className="font-semibold text-[#1A3A22]">{suggestion.hello}!</span>
                 <span className="text-gray-700">{suggestion.offer}</span>
-                <button type="button" onClick={() => setLang(suggestion.code)} className="inline-flex min-h-9 items-center rounded-full bg-[#117F21] px-4 text-xs font-bold text-white hover:bg-[#0A4A13] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]">
+                <button type="button" onClick={() => setLang(suggestion.code)} className="inline-flex min-h-9 items-center rounded-full bg-[#14892A] px-4 text-xs font-bold text-white hover:bg-[#105D1D] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]">
                   {suggestion.switchTo}
                 </button>
                 <button type="button" onClick={dismissSuggestion} lang="en" aria-label="No thanks, stay in English" className="ml-auto flex h-9 w-9 items-center justify-center rounded-full text-gray-500 hover:bg-black/5 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]">
@@ -77,7 +77,7 @@ export default function LanguageNotice() {
 
         {show && (
           <motion.div key={`notice-${lang}`} {...anim} className="overflow-hidden" role="region" aria-label={t("Language notice")}>
-            <div className="relative overflow-hidden border-b border-[#117F21]/15 bg-gradient-to-r from-[#04240A] via-[#0A4A13] to-[#117F21] text-white">
+            <div className="relative overflow-hidden border-b border-[#14892A]/15 bg-gradient-to-r from-[#11421A] via-[#105D1D] to-[#14892A] text-white">
               <div aria-hidden="true" className="pointer-events-none absolute -left-10 top-0 h-full w-1/3 bg-[radial-gradient(closest-side,rgba(244,210,122,0.25),transparent)]" />
               <div className="relative mx-auto flex max-w-7xl items-start gap-3 px-4 py-3 sm:items-center">
                 <span className="hidden h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 sm:flex">

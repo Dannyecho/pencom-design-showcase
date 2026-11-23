@@ -44,7 +44,7 @@ const spot = (e: MouseEvent<HTMLElement>) => {
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
-  return <motion.div aria-hidden="true" style={{ scaleX }} className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615]" />;
+  return <motion.div aria-hidden="true" style={{ scaleX }} className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-[#14892A] via-[#36A045] to-[#CB9615]" />;
 }
 
 /* ─────────────────────────── 1 "I am a…" expanding cards ─────────────────────────── */
@@ -75,13 +75,12 @@ export function AudienceDock() {
               <li
                 key={a.id}
                 className={cn(
-                  "group relative overflow-hidden rounded-[1.75rem] bg-[#0B1F10] text-white shadow-[0_30px_60px_-30px_rgba(4,20,10,0.8)] transition-[flex-grow,height] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                  "group relative overflow-hidden rounded-[1.75rem] bg-[#1A3A22] text-white shadow-[0_30px_60px_-30px_rgba(18,51,28,0.8)] transition-[flex-grow,height] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
                   on ? "lg:flex-[3.2]" : "lg:flex-1",
                 )}
               >
-                <img src={L.img} alt="" loading="lazy" className={cn("absolute inset-0 h-full w-full object-cover transition duration-700", on ? "scale-100 opacity-60" : "scale-110 opacity-35 group-hover:opacity-50")} />
-                <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#04140A] via-[#04140A]/60 to-[#04140A]/10" />
-                <h3 className="relative">
+                <img src={L.img} alt="" loading="lazy" className={cn("absolute inset-0 h-full w-full object-cover transition duration-700", on ? "scale-100 opacity-100" : "scale-110 opacity-90 group-hover:opacity-100")} />
+                <h3 className="relative [text-shadow:0_2px_10px_rgba(18,51,28,0.9),0_1px_2px_rgba(18,51,28,0.9)]">
                   <button
                     type="button"
                     aria-expanded={on}
@@ -89,11 +88,11 @@ export function AudienceDock() {
                     onClick={() => setActive(a.id)}
                     className={cn("flex w-full items-center gap-3 p-5 text-left lg:h-full lg:flex-col lg:items-start lg:justify-end", on && "lg:pointer-events-none lg:absolute lg:inset-x-0 lg:top-0 lg:h-auto lg:justify-start", focus)}
                   >
-                    <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl transition", on ? "bg-[#F4D27A] text-[#1A1206]" : "bg-white/15 text-white backdrop-blur")}>
+                    <span className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl shadow-[0_8px_20px_-6px_rgba(18,51,28,0.8)] transition", on ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#12331C]/40 text-white backdrop-blur")}>
                       <L.icon className="h-5 w-5" aria-hidden="true" />
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#F4D27A]">{t("I am a")}</span>
-                    <span className="text-xl font-black">{a.label}</span>
+                    <span className="rounded-lg bg-[#12331C]/60 shadow-[0_8px_20px_-6px_rgba(18,51,28,0.8)] backdrop-blur-sm px-2 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#F4D27A]">{t("I am a")}</span>
+                    <span className="rounded-lg bg-[#12331C]/60 shadow-[0_8px_20px_-6px_rgba(18,51,28,0.8)] backdrop-blur-sm px-2.5 py-1 text-xl font-black">{a.label}</span>
                   </button>
                 </h3>
                 <AnimatePresence initial={false}>
@@ -106,14 +105,14 @@ export function AudienceDock() {
                       transition={{ duration: 0.45, delay: 0.2, ease }}
                       className="relative px-5 pb-5 lg:absolute lg:inset-x-0 lg:bottom-0"
                     >
-                      <p className="max-w-md text-white/80">{a.blurb}</p>
+                      <p className="max-w-md rounded-xl bg-[#12331C]/60 shadow-[0_8px_20px_-6px_rgba(18,51,28,0.8)] backdrop-blur-sm px-3 py-2 font-medium text-white">{a.blurb}</p>
                       <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
                         {a.tasks.slice(0, 4).map((tk) => (
                           <li key={tk.label}>
                             <button
                               type="button"
                               onClick={() => go(tk, navigate)}
-                              className={cn("group/t flex min-h-12 w-full items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-left text-sm font-semibold backdrop-blur-md transition hover:bg-white hover:text-[#0B1F10]", focus)}
+                              className={cn("group/t flex min-h-12 w-full items-center gap-2 rounded-xl bg-[#12331C]/45 px-4 py-2.5 text-left text-sm font-semibold shadow-[0_10px_24px_-8px_rgba(18,51,28,0.85)] ring-1 ring-white/15 backdrop-blur-md transition hover:bg-white hover:text-[#1A3A22]", focus)}
                             >
                               <span className="flex-1">{tk.label}</span>
                               {tk.external ? <ArrowUpRight className="h-4 w-4" aria-hidden="true" /> : <ArrowRight className="h-4 w-4 transition-transform group-hover/t:translate-x-1" aria-hidden="true" />}
@@ -157,14 +156,14 @@ export function CommandSearch() {
   return (
     <section aria-labelledby="cmd-title" className="px-4 pt-16 sm:pt-20">
       <Rise className="mx-auto max-w-4xl text-center">
-        <h2 id="cmd-title" className="text-3xl font-black tracking-tight text-[#0B1F10] sm:text-4xl">{t("What do you need to do today?")}</h2>
+        <h2 id="cmd-title" className="text-3xl font-black tracking-tight text-[#1A3A22] sm:text-4xl">{t("What do you need to do today?")}</h2>
         <p className="mt-2 text-gray-600">
           {t("Search tasks, services, regulations and answers.")}{" "}
           <span className="hidden sm:inline">
             {t("Press")} <kbd className="mx-0.5 rounded-md border border-gray-300 bg-white px-1.5 py-0.5 font-mono text-xs text-gray-700 shadow-sm">/</kbd> {t("to search from anywhere on this page.")}
           </span>
         </p>
-        <div ref={box} className="relative mt-7 rounded-[1.4rem] bg-gradient-to-r from-[#117F21] via-[#CB9615] to-[#117F21] p-[2px] text-left shadow-[0_30px_60px_-30px_rgba(10,74,19,0.6)]">
+        <div ref={box} className="relative mt-7 rounded-[1.4rem] bg-gradient-to-r from-[#14892A] via-[#CB9615] to-[#14892A] p-[2px] text-left shadow-[0_30px_60px_-30px_rgba(16,93,29,0.6)]">
           <div className="rounded-[1.3rem] bg-white p-1.5 [&_form>div]:border-0 [&_input]:min-h-14 [&_input]:text-lg">
             <SiteSearch />
           </div>
@@ -172,7 +171,7 @@ export function CommandSearch() {
         <ul className="mt-5 flex flex-wrap justify-center gap-2">
           {popularTasks.map((tk) => (
             <li key={tk.label}>
-              <Link to={tk.href} className={cn("inline-flex min-h-10 items-center gap-1.5 rounded-full bg-[#EEF4EC] px-4 text-sm font-semibold text-[#0A4A13] transition hover:bg-[#0A4A13] hover:text-white", focus)}>
+              <Link to={tk.href} className={cn("inline-flex min-h-10 items-center gap-1.5 rounded-full bg-[#EEF4EC] px-4 text-sm font-semibold text-[#105D1D] transition hover:bg-[#105D1D] hover:text-white", focus)}>
                 <Search className="h-3.5 w-3.5" aria-hidden="true" />
                 {tk.label}
               </Link>
@@ -190,7 +189,7 @@ const alertLook: Record<NoticeType, { icon: LucideIcon; label: string; text: str
   critical: { icon: ShieldAlert, label: "Critical", text: "text-[#B52026]", ring: "bg-[#FCEBEB]", glow: "rgba(229,57,53,0.16)" },
   warning: { icon: AlertTriangle, label: "Warning", text: "text-[#8A4B00]", ring: "bg-[#FAEEDA]", glow: "rgba(245,158,11,0.18)" },
   info: { icon: Info, label: "Information", text: "text-[#0C447C]", ring: "bg-[#E6F1FB]", glow: "rgba(30,136,229,0.16)" },
-  success: { icon: CheckCircle2, label: "Update", text: "text-[#0A4A13]", ring: "bg-[#E8F5E9]", glow: "rgba(46,145,61,0.16)" },
+  success: { icon: CheckCircle2, label: "Update", text: "text-[#105D1D]", ring: "bg-[#E8F5E9]", glow: "rgba(54,160,69,0.16)" },
 };
 
 export function Alerts() {
@@ -214,7 +213,7 @@ export function Alerts() {
                       <s.icon className="h-6 w-6" aria-hidden="true" />
                     </span>
                     <p className={cn("mt-5 text-xs font-black uppercase tracking-[0.16em]", s.text)}>{t(s.label)}</p>
-                    <h3 className="mt-1 text-xl font-bold text-[#0B1F10]">{t(n.title)}</h3>
+                    <h3 className="mt-1 text-xl font-bold text-[#1A3A22]">{t(n.title)}</h3>
                     <p className="mt-2 flex-1 leading-relaxed text-gray-700">{t(n.message)}</p>
                     {n.link && (
                       <Link to={n.link.to} className={cn("group mt-5 inline-flex w-fit items-center gap-2 font-bold text-[#117F21]", focus)}>
@@ -240,7 +239,7 @@ export function Circulars() {
   const track = useRef<HTMLUListElement>(null);
   const latest = [...library].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 8);
   const scroll = (d: number) => track.current?.scrollBy({ left: d * Math.min(track.current.clientWidth * 0.8, 420), behavior: "smooth" });
-  const nav = cn("flex h-12 w-12 items-center justify-center rounded-full border border-[#0B1F10]/15 bg-white text-[#0B1F10] transition hover:bg-[#0B1F10] hover:text-white", focus);
+  const nav = cn("flex h-12 w-12 items-center justify-center rounded-full border border-[#1A3A22]/15 bg-white text-[#1A3A22] transition hover:bg-[#1A3A22] hover:text-white", focus);
   return (
     <section id="circulars" aria-labelledby="s-circ" className="scroll-mt-32 overflow-x-clip bg-[#F2F6F0] py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4">
@@ -259,7 +258,7 @@ export function Circulars() {
               <button type="button" onClick={() => scroll(1)} aria-label={t("Next")} className={nav}>
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </button>
-              <Link to="/regulations#library" className={cn("ml-2 inline-flex min-h-12 items-center gap-2 rounded-full bg-[#0B1F10] px-5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+              <Link to="/regulations#library" className={cn("ml-2 inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1A3A22] px-5 font-semibold text-white transition hover:bg-[#14892A]", focus)}>
                 {t("Open the library")}
               </Link>
             </div>
@@ -270,15 +269,15 @@ export function Circulars() {
         {latest.map((d, i) => (
           <li key={d.id} className="w-[19rem] shrink-0 snap-start sm:w-[22rem]">
             <Rise delay={Math.min(i, 4) * 0.06} className="h-full">
-              <Link to={`/regulations/doc/${d.id}`} className={cn("group flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-black/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_50px_-30px_rgba(10,74,19,0.6)] hover:ring-[#117F21]", focus)}>
+              <Link to={`/regulations/doc/${d.id}`} className={cn("group flex h-full flex-col rounded-3xl bg-white p-6 ring-1 ring-black/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_50px_-30px_rgba(16,93,29,0.6)] hover:ring-[#14892A]", focus)}>
                 <span className="flex items-start justify-between">
                   <span>
-                    <span className="block text-5xl font-black leading-none tracking-tight text-[#0B1F10]">{new Date(d.date).getDate()}</span>
+                    <span className="block text-5xl font-black leading-none tracking-tight text-[#1A3A22]">{new Date(d.date).getDate()}</span>
                     <span className="mt-1 block text-sm font-semibold uppercase tracking-wider text-[#B07E0C]">{fmt(d.date, { month: "long", year: "numeric" })}</span>
                   </span>
-                  <span className="rounded-full bg-[#EEF4EC] px-3 py-1 text-xs font-bold text-[#0A4A13]">{d.type}</span>
+                  <span className="rounded-full bg-[#EEF4EC] px-3 py-1 text-xs font-bold text-[#105D1D]">{d.type}</span>
                 </span>
-                <span className="mt-6 line-clamp-4 flex-1 font-semibold leading-snug text-[#0B1F10] group-hover:text-[#117F21]">{d.title}</span>
+                <span className="mt-6 line-clamp-4 flex-1 font-semibold leading-snug text-[#1A3A22] group-hover:text-[#117F21]">{d.title}</span>
                 <span className="mt-6 flex items-center justify-between border-t border-gray-100 pt-4 text-sm text-gray-600">
                   <span className="truncate">{d.appliesTo.slice(0, 2).join(" · ")}</span>
                   <ArrowUpRight className="h-5 w-5 shrink-0 text-[#117F21] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
@@ -288,7 +287,7 @@ export function Circulars() {
           </li>
         ))}
         <li className="w-[19rem] shrink-0 snap-start sm:w-[22rem]">
-          <Link to="/regulations/pension-reform-act" className={cn("group relative flex h-full min-h-[18rem] flex-col justify-end overflow-hidden rounded-3xl bg-[#0B1F10] p-6 text-white", focus)}>
+          <Link to="/regulations/pension-reform-act" className={cn("group relative flex h-full min-h-[18rem] flex-col justify-end overflow-hidden rounded-3xl bg-[#1A3A22] p-6 text-white", focus)}>
             <span aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#CB9615]/40 blur-2xl transition-transform duration-700 group-hover:scale-150" />
             <Scale className="relative h-8 w-8 text-[#F4D27A]" aria-hidden="true" />
             <span className="relative mt-4 text-2xl font-black">Pension Reform Act 2014</span>
@@ -350,7 +349,7 @@ export function Portals() {
             return (
               <li key={p.name}>
                 <Rise delay={i * 0.07} className="h-full">
-                  <Tilt href={p.url} className="group relative h-full overflow-hidden rounded-3xl bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] p-7 text-white shadow-[0_30px_60px_-34px_rgba(4,20,10,0.9)] [background-image:radial-gradient(360px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.22),transparent_45%),linear-gradient(135deg,#0B1F10,#0A4A13)]">
+                  <Tilt href={p.url} className="group relative h-full overflow-hidden rounded-3xl bg-gradient-to-br from-[#1A3A22] to-[#105D1D] p-7 text-white shadow-[0_30px_60px_-34px_rgba(18,51,28,0.9)] [background-image:radial-gradient(360px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.22),transparent_45%),linear-gradient(135deg,#1A3A22,#105D1D)]">
                     <span className="flex items-start justify-between [transform:translateZ(30px)]">
                       <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-[#F4D27A] ring-1 ring-white/15">
                         <I className="h-6 w-6" aria-hidden="true" />
@@ -388,7 +387,7 @@ export function NewsBento() {
           title="What’s happening at PenCom"
           mark="PenCom"
           action={
-            <Link to="/news" className={cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-[#0B1F10] px-5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+            <Link to="/news" className={cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1A3A22] px-5 font-semibold text-white transition hover:bg-[#14892A]", focus)}>
               {t("All news")}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
@@ -398,7 +397,7 @@ export function NewsBento() {
           <Rise className="lg:col-span-7 lg:row-span-2">
             <Link to={newsPath(lead)} className={cn("group relative flex h-full min-h-[26rem] flex-col justify-end overflow-hidden rounded-[1.75rem] text-white", focus)}>
               <img src={lead.image} alt={t(lead.imageAlt)} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-1000 group-hover:scale-110" />
-              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#04140A] via-[#04140A]/50 to-transparent" />
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#12331C] via-[#12331C]/50 to-transparent" />
               <span className="relative p-7 sm:p-9">
                 <span className="inline-flex rounded-full bg-[#F4D27A] px-3 py-1 text-xs font-bold text-[#1A1206]">{lead.category}</span>
                 <span className="mt-3 block text-sm text-white/80">{fmt(lead.date)}</span>
@@ -409,13 +408,13 @@ export function NewsBento() {
           </Rise>
           {rest.map((a, i) => (
             <Rise key={a.id} delay={0.1 * (i + 1)} className="lg:col-span-5">
-              <Link to={newsPath(a)} className={cn("group flex h-full gap-5 overflow-hidden rounded-[1.75rem] bg-white p-3 ring-1 ring-black/10 transition hover:shadow-[0_24px_50px_-30px_rgba(10,74,19,0.5)]", focus)}>
+              <Link to={newsPath(a)} className={cn("group flex h-full gap-5 overflow-hidden rounded-[1.75rem] bg-white p-3 ring-1 ring-black/10 transition hover:shadow-[0_24px_50px_-30px_rgba(16,93,29,0.5)]", focus)}>
                 <span className="relative block w-36 shrink-0 overflow-hidden rounded-[1.3rem] sm:w-44">
                   <img src={a.image} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
                 </span>
                 <span className="flex min-w-0 flex-col justify-center py-3 pr-3">
                   <span className="text-sm font-semibold text-[#B07E0C]">{fmt(a.date)}</span>
-                  <span className="mt-1 text-lg font-bold leading-snug text-[#0B1F10] group-hover:text-[#117F21]">{a.title}</span>
+                  <span className="mt-1 text-lg font-bold leading-snug text-[#1A3A22] group-hover:text-[#117F21]">{a.title}</span>
                   <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-[#117F21]">
                     {t("Read more")}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
@@ -435,8 +434,8 @@ export function NewsBento() {
 export function FiguresBand() {
   const { t } = useI18n();
   return (
-    <section id="figures" aria-labelledby="s-fig" className="relative isolate scroll-mt-32 overflow-hidden bg-[#04140A] px-4 py-20 text-white sm:py-28">
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_80%_10%,rgba(203,150,21,0.28),transparent),radial-gradient(50%_60%_at_10%_90%,rgba(46,145,61,0.35),transparent)]" />
+    <section id="figures" aria-labelledby="s-fig" className="relative isolate scroll-mt-32 overflow-hidden bg-[#12331C] px-4 py-20 text-white sm:py-28">
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_80%_10%,rgba(203,150,21,0.28),transparent),radial-gradient(50%_60%_at_10%_90%,rgba(54,160,69,0.35),transparent)]" />
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
       <div className="mx-auto max-w-7xl">
         <Title id="s-fig" ghost="Figures" tag="Industry figures" icon={LineChart} title="The pension industry at a glance" mark="at a glance" dark intro="Approved figures from PenCom’s published industry reports. Each one shows the date it refers to." />
@@ -444,7 +443,7 @@ export function FiguresBand() {
           {figures.map((f, i) => (
             <Rise key={f.label} delay={i * 0.08}>
               <div onMouseMove={spot} className="group relative h-full overflow-hidden rounded-3xl p-[1px] [background-image:radial-gradient(260px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.7),rgba(255,255,255,0.12)_45%)]">
-                <div className="relative h-full rounded-[calc(1.5rem-1px)] bg-[#0A1C10]/95 p-7">
+                <div className="relative h-full rounded-[calc(1.5rem-1px)] bg-[#173624]/95 p-7">
                   <dt className="text-white/75">{t(f.label)}</dt>
                   <dd className="mt-3 text-5xl font-black tracking-tight text-[#F4D27A]">
                     <CountUp value={f.value} />
@@ -493,7 +492,7 @@ export function HelpBlock() {
             {faqs.slice(0, 5).map((f, i) => {
               const on = open === i;
               return (
-                <li key={f.question} className={cn("overflow-hidden rounded-2xl ring-1 transition-colors duration-300", on ? "bg-[#0B1F10] text-white ring-[#0B1F10]" : "bg-white ring-black/10")}>
+                <li key={f.question} className={cn("overflow-hidden rounded-2xl ring-1 transition-colors duration-300", on ? "bg-[#1A3A22] text-white ring-[#1A3A22]" : "bg-white ring-black/10")}>
                   <h3>
                     <button type="button" id={`sq-${i}`} aria-expanded={on} aria-controls={`sa-${i}`} onClick={() => setOpen(on ? null : i)} className={cn("flex min-h-16 w-full items-center gap-4 px-6 py-4 text-left font-bold", focus)}>
                       <span className={cn("font-mono text-sm", on ? "text-[#F4D27A]" : "text-[#B07E0C]")}>{String(i + 1).padStart(2, "0")}</span>
@@ -520,7 +519,7 @@ export function HelpBlock() {
           </ul>
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-32">
-              <button type="button" onClick={openChat} className={cn("group relative flex w-full items-center gap-4 overflow-hidden rounded-3xl bg-gradient-to-br from-[#117F21] to-[#0A4A13] p-6 text-left text-white shadow-[0_30px_60px_-30px_rgba(10,74,19,0.8)]", focus)}>
+              <button type="button" onClick={openChat} className={cn("group relative flex w-full items-center gap-4 overflow-hidden rounded-3xl bg-gradient-to-br from-[#14892A] to-[#105D1D] p-6 text-left text-white shadow-[0_30px_60px_-30px_rgba(16,93,29,0.8)]", focus)}>
                 <span aria-hidden="true" className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#F4D27A]/30 blur-2xl transition-transform duration-700 group-hover:scale-150" />
                 <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-[#F4D27A]">
                   <MessageCircle className="h-7 w-7" aria-hidden="true" />
@@ -535,16 +534,16 @@ export function HelpBlock() {
                 {ways.map((w) => {
                   const inner = (
                     <>
-                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF4EC] text-[#0A4A13] transition group-hover:bg-[#0A4A13] group-hover:text-[#F4D27A]">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EEF4EC] text-[#105D1D] transition group-hover:bg-[#105D1D] group-hover:text-[#F4D27A]">
                         <w.icon className="h-5 w-5" aria-hidden="true" />
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block font-bold text-[#0B1F10]">{t(w.label)}</span>
+                        <span className="block font-bold text-[#1A3A22]">{t(w.label)}</span>
                         <span className="block break-words text-sm text-gray-600">{t(w.value)}</span>
                       </span>
                     </>
                   );
-                  const cls = cn("group flex items-center gap-4 rounded-2xl bg-white p-4 ring-1 ring-black/10 transition hover:ring-[#117F21]", focus);
+                  const cls = cn("group flex items-center gap-4 rounded-2xl bg-white p-4 ring-1 ring-black/10 transition hover:ring-[#14892A]", focus);
                   return <li key={w.label}>{w.to ? <Link to={w.to} className={cls}>{inner}</Link> : <a href={w.href} className={cls}>{inner}</a>}</li>;
                 })}
               </ul>

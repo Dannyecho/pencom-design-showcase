@@ -80,7 +80,7 @@ export default function SiteSearch({ dark = false }: { dark?: boolean }) {
             "group flex items-center gap-3 rounded-2xl border px-4 transition focus-within:ring-4",
             dark
               ? "border-white/20 bg-white text-gray-900 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] focus-within:ring-[#F4D27A]/40"
-              : "border-gray-200 bg-white focus-within:border-[#117F21] focus-within:ring-[#117F21]/15",
+              : "border-gray-200 bg-white focus-within:border-[#14892A] focus-within:ring-[#14892A]/15",
           )}
         >
           <Search className="h-5 w-5 shrink-0 text-[#117F21]" aria-hidden="true" />
@@ -119,7 +119,7 @@ export default function SiteSearch({ dark = false }: { dark?: boolean }) {
           />
           <button
             type="submit"
-            className="hidden min-h-10 shrink-0 items-center gap-1.5 rounded-xl bg-[#117F21] px-4 text-sm font-semibold text-white transition hover:bg-[#0A4A13] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D] sm:inline-flex"
+            className="hidden min-h-10 shrink-0 items-center gap-1.5 rounded-xl bg-[#14892A] px-4 text-sm font-semibold text-white transition hover:bg-[#105D1D] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D] sm:inline-flex"
           >
             Search
           </button>

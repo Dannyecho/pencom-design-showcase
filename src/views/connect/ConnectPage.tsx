@@ -55,7 +55,7 @@ export default function ConnectPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Hero go={go} />
         <SectionNav sections={sections} pillId="connect-nav-pill" />
         <CaseForm topic={topic} setTopic={setTopic} onSubmitted={setLastRef} />
@@ -77,7 +77,7 @@ const actions: { id: string; topic?: TopicId; icon: typeof Send; title: string; 
 ];
 
 const row = "group flex items-center gap-4 rounded-2xl p-3 transition hover:bg-[#F2F6F0]";
-const tile = "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:bg-[#117F21] group-hover:text-white";
+const tile = "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#1A3A22] text-[#F4D27A] transition duration-300 group-hover:bg-[#14892A] group-hover:text-white";
 
 function Hero({ go }: { go: (id: string, topic?: TopicId) => void }) {
   const reduce = useReducedMotion();
@@ -98,19 +98,19 @@ function Hero({ go }: { go: (id: string, topic?: TopicId) => void }) {
                 onClick={() => go(a.id, a.topic)}
                 onMouseMove={spot}
                 className={cn(
-                  "group relative flex h-full w-full flex-col items-start gap-3 overflow-hidden rounded-3xl bg-white p-4 text-left ring-1 ring-black/10 transition duration-300 hover:-translate-y-1 hover:bg-[#0B1F10] hover:text-white hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)] sm:flex-row sm:items-center",
+                  "group relative flex h-full w-full flex-col items-start gap-3 overflow-hidden rounded-3xl bg-white p-4 text-left ring-1 ring-black/10 transition duration-300 hover:-translate-y-1 hover:bg-[#1A3A22] hover:text-white hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)] sm:flex-row sm:items-center",
                   glowLight,
                   focus,
                 )}
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#1A3A22] text-[#F4D27A] transition duration-300 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]">
                   <a.icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block font-bold leading-snug">{a.title}</span>
                   <span className="mt-0.5 block text-sm text-gray-600 transition group-hover:text-white/75">{a.body}</span>
                 </span>
-                <span aria-hidden="true" className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] text-[#0B1F10] transition duration-300 group-hover:rotate-45 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206] sm:flex">
+                <span aria-hidden="true" className="hidden h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] text-[#1A3A22] transition duration-300 group-hover:rotate-45 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206] sm:flex">
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
               </button>
@@ -172,7 +172,7 @@ function Hero({ go }: { go: (id: string, topic?: TopicId) => void }) {
               <span className="inline-flex items-center gap-2">
                 <MessageCircle className="h-4 w-4" aria-hidden="true" /> Chat with PenCom Assistant
               </span>
-              <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-45">
+              <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-45">
                 <ArrowUpRight className="h-4 w-4" />
               </span>
             </button>
@@ -180,7 +180,7 @@ function Hero({ go }: { go: (id: string, topic?: TopicId) => void }) {
             <ul className="mt-2 flex flex-wrap gap-2">
               {social.map((s) => (
                 <li key={s.name}>
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" className={cn("inline-flex min-h-9 items-center rounded-full bg-white px-3 text-xs font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:bg-[#0B1F10] hover:text-[#F4D27A] hover:ring-[#0B1F10]", focus)}>
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className={cn("inline-flex min-h-9 items-center rounded-full bg-white px-3 text-xs font-semibold text-[#1A3A22] ring-1 ring-black/10 transition hover:bg-[#1A3A22] hover:text-[#F4D27A] hover:ring-[#1A3A22]", focus)}>
                     {s.name}
                     <span className="sr-only"> {s.handle} (opens in a new tab)</span>
                   </a>

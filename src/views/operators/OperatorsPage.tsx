@@ -32,12 +32,12 @@ const onThisPage = [
 ];
 
 /** Pointer spotlights (green on white cards, gold on dark ones) and the theme's hover lift. */
-const glowLight = "[background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(46,145,61,0.10),transparent_45%)]";
+const glowLight = "[background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(54,160,69,0.10),transparent_45%)]";
 const glowDark = "[background-image:radial-gradient(380px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.14),transparent_50%)]";
 /** Dark gradient card with the gold spotlight in the same background-image (a separate gradient class would be overridden). */
-const darkCard = "bg-[#0B1F10] [background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.14),transparent_50%),linear-gradient(135deg,#0B1F10,#0A4A13)]";
-const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]";
-const darkBtn = "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]";
+const darkCard = "bg-[#1A3A22] [background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.14),transparent_50%),linear-gradient(135deg,#1A3A22,#105D1D)]";
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)]";
+const darkBtn = "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#14892A]";
 
 /** Gold circular arrow chip at the end of buttons and cards. */
 function Chip({ children, className }: { children: ReactNode; className?: string }) {
@@ -57,7 +57,7 @@ const initials = (n: string) =>
     .map((w) => w[0])
     .join("")
     .toUpperCase();
-const tones = ["bg-[#0A4A13] text-[#F4D27A]", "bg-[#117F21] text-white", "bg-[#CB9615] text-[#1A1206]", "bg-[#E8F5E9] text-[#0A4A13]"];
+const tones = ["bg-[#105D1D] text-[#F4D27A]", "bg-[#14892A] text-white", "bg-[#CB9615] text-[#1A1206]", "bg-[#E8F5E9] text-[#105D1D]"];
 const tone = (id: string) => tones[[...id].reduce((a, c) => a + c.charCodeAt(0), 0) % tones.length];
 
 function Monogram({ o, size = "md" }: { o: Operator; size?: "md" | "lg" }) {
@@ -84,7 +84,7 @@ function ContactActions({ o, compact = false }: { o: Operator; compact?: boolean
           aria-label={it.label}
           title={it.text}
           {...(it.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          className={cn("inline-flex items-center gap-1.5 rounded-full bg-white font-semibold text-gray-700 ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-[#F4D27A] hover:ring-[#0B1F10]", compact ? "h-11 w-11 justify-center" : "min-h-11 px-4 text-sm", focus)}
+          className={cn("inline-flex items-center gap-1.5 rounded-full bg-white font-semibold text-gray-700 ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#1A3A22] hover:text-[#F4D27A] hover:ring-[#1A3A22]", compact ? "h-11 w-11 justify-center" : "min-h-11 px-4 text-sm", focus)}
         >
           <it.icon className="h-4 w-4" aria-hidden="true" />
           {!compact && it.text}
@@ -126,7 +126,7 @@ export default function OperatorsPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Hero onOpen={open} />
         <SectionNav sections={onThisPage} pillId="ops-nav-pill" />
         <Directory onOpen={open} tabHint={tabHint} />
@@ -170,7 +170,7 @@ function Hero({ onOpen }: { onOpen: (id: string) => void }) {
       }
       aside={
         <FramedPanel className="p-6 sm:p-7">
-          <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#0A4A13]">
+          <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#105D1D]">
             <BadgeCheck className="h-4 w-4" aria-hidden="true" />
             Licence check
           </p>
@@ -179,7 +179,7 @@ function Hero({ onOpen }: { onOpen: (id: string) => void }) {
           <label htmlFor="verify-q" className="sr-only">
             Company name
           </label>
-          <div className="mt-4 flex items-center gap-2 rounded-2xl bg-[#F2F6F0] px-3 ring-1 ring-black/10 focus-within:ring-2 focus-within:ring-[#117F21]">
+          <div className="mt-4 flex items-center gap-2 rounded-2xl bg-[#F2F6F0] px-3 ring-1 ring-black/10 focus-within:ring-2 focus-within:ring-[#14892A]">
             <Search className="h-5 w-5 shrink-0 text-[#117F21]" aria-hidden="true" />
             <input id="verify-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Type at least 3 letters, e.g. “Leadway”" autoComplete="off" className="min-h-12 w-full bg-transparent text-base focus:outline-none" />
             {q && (
@@ -199,7 +199,7 @@ function Hero({ onOpen }: { onOpen: (id: string) => void }) {
                 <motion.ul key="found" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-2">
                   {matches.slice(0, 3).map((o) => (
                     <li key={o.id}>
-                      <button type="button" onClick={() => onOpen(o.id)} className={cn("group flex w-full items-center gap-3 rounded-2xl bg-[#E8F5E9] p-3 text-left transition hover:bg-[#0B1F10] hover:text-white", focus)}>
+                      <button type="button" onClick={() => onOpen(o.id)} className={cn("group flex w-full items-center gap-3 rounded-2xl bg-[#E8F5E9] p-3 text-left transition hover:bg-[#1A3A22] hover:text-white", focus)}>
                         <ShieldCheck className="h-6 w-6 shrink-0 text-[#117F21] group-hover:text-[#F4D27A]" aria-hidden="true" />
                         <span className="min-w-0 flex-1">
                           <span className="block truncate font-bold">{o.name}</span>
@@ -271,7 +271,7 @@ function Directory({ onOpen, tabHint }: { onOpen: (id: string) => void; tabHint:
           intro={tab === "Related" ? "Bodies that work alongside the Commission and licensed operators." : typeInfo[tab].role}
         />
 
-        <div className="mt-10 rounded-[1.75rem] bg-white/90 p-2 shadow-[0_24px_50px_-34px_rgba(4,20,10,0.6)] ring-1 ring-black/10 backdrop-blur sm:p-2.5">
+        <div className="mt-10 rounded-[1.75rem] bg-white/90 p-2 shadow-[0_24px_50px_-34px_rgba(18,51,28,0.6)] ring-1 ring-black/10 backdrop-blur sm:p-2.5">
           <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
             <LayoutGroup id="ops-tabs">
               <div role="tablist" aria-label="Type of operator" className="-mx-1 flex gap-1 overflow-x-auto px-1 [scrollbar-width:none] lg:flex-1 [&::-webkit-scrollbar]:hidden">
@@ -279,7 +279,7 @@ function Directory({ onOpen, tabHint }: { onOpen: (id: string) => void; tabHint:
                   const on = tab === t.id;
                   return (
                     <button key={t.id} type="button" role="tab" aria-selected={on} aria-controls="ops-panel" onClick={() => setTab(t.id)} className={cn("relative flex min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-semibold transition", on ? "text-[#F4D27A]" : "text-gray-700 hover:bg-[#F2F6F0]", focus)}>
-                      {on && <motion.span layoutId="ops-tab-pill" className="absolute inset-0 rounded-full bg-[#0B1F10]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                      {on && <motion.span layoutId="ops-tab-pill" className="absolute inset-0 rounded-full bg-[#1A3A22]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                       <span className="relative">{t.label}</span>
                       <span className={cn("relative rounded-full px-1.5 text-xs tabular-nums", on ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#F2F6F0] text-gray-600")}>{t.n}</span>
                     </button>
@@ -289,21 +289,21 @@ function Directory({ onOpen, tabHint }: { onOpen: (id: string) => void; tabHint:
             </LayoutGroup>
             {tab !== "Related" && (
               <div className="flex flex-wrap items-center gap-2">
-                <label className="flex min-h-11 flex-1 items-center gap-2 rounded-full bg-[#F2F6F0] px-4 ring-1 ring-black/10 focus-within:ring-2 focus-within:ring-[#117F21] sm:w-60 sm:flex-none">
+                <label className="flex min-h-11 flex-1 items-center gap-2 rounded-full bg-[#F2F6F0] px-4 ring-1 ring-black/10 focus-within:ring-2 focus-within:ring-[#14892A] sm:w-60 sm:flex-none">
                   <Search className="h-4 w-4 shrink-0 text-gray-500" aria-hidden="true" />
                   <span className="sr-only">Search operators</span>
                   <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search name or address" className="w-full bg-transparent text-sm focus:outline-none" />
                 </label>
                 <div role="group" aria-label="City" className="flex rounded-full bg-[#F2F6F0] p-1">
                   {(["All", "Lagos", "Abuja"] as const).map((c) => (
-                    <button key={c} type="button" aria-pressed={city === c} onClick={() => setCity(c)} className={cn("min-h-9 rounded-full px-3.5 text-sm font-semibold transition", city === c ? "bg-[#0B1F10] text-[#F4D27A] shadow" : "text-gray-600 hover:text-gray-900", focus)}>
+                    <button key={c} type="button" aria-pressed={city === c} onClick={() => setCity(c)} className={cn("min-h-9 rounded-full px-3.5 text-sm font-semibold transition", city === c ? "bg-[#1A3A22] text-[#F4D27A] shadow" : "text-gray-600 hover:text-gray-900", focus)}>
                       {c}
                     </button>
                   ))}
                 </div>
                 <div role="group" aria-label="Layout" className="flex rounded-full bg-[#F2F6F0] p-1">
                   {([["grid", LayoutGrid, "Cards"], ["list", List, "List"]] as const).map(([v, Icon, label]) => (
-                    <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} title={label} className={cn("flex h-9 w-10 items-center justify-center rounded-full transition", view === v ? "bg-[#0B1F10] text-[#F4D27A] shadow" : "text-gray-500 hover:text-gray-900", focus)}>
+                    <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} title={label} className={cn("flex h-9 w-10 items-center justify-center rounded-full transition", view === v ? "bg-[#1A3A22] text-[#F4D27A] shadow" : "text-gray-500 hover:text-gray-900", focus)}>
                       <Icon className="h-4 w-4" aria-hidden="true" />
                       <span className="sr-only">{label}</span>
                     </button>
@@ -321,7 +321,7 @@ function Directory({ onOpen, tabHint }: { onOpen: (id: string) => void; tabHint:
                 <li key={b.short}>
                   <Rise delay={i * 0.06} className="h-full">
                   <div onMouseMove={spot} className={cn("flex h-full gap-4 rounded-[1.75rem] bg-white p-6 ring-1 ring-black/10 sm:p-7", glowLight, lift)}>
-                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] text-[#F4D27A] shadow-[0_14px_30px_-14px_rgba(4,20,10,0.8)]">
+                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1A3A22] to-[#105D1D] text-[#F4D27A] shadow-[0_14px_30px_-14px_rgba(18,51,28,0.8)]">
                       <Landmark className="h-7 w-7" aria-hidden="true" />
                     </span>
                     <span>
@@ -358,17 +358,17 @@ function Directory({ onOpen, tabHint }: { onOpen: (id: string) => void; tabHint:
                     {list.map((o) => (
                       <motion.li key={`${view}-${o.id}`} layout initial={{ opacity: 0, scale: reduce ? 1 : 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, transition: { duration: 0.15 } }} transition={{ duration: 0.3, ease }}>
                         {view === "grid" ? (
-                          <article onMouseMove={spot} className={cn("group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-white p-5 ring-1 ring-black/10 hover:ring-[#117F21]/30 sm:p-6", glowLight, lift)}>
-                            <span aria-hidden="true" className="absolute inset-x-6 top-0 h-[3px] origin-left scale-x-0 rounded-b-full bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                          <article onMouseMove={spot} className={cn("group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-white p-5 ring-1 ring-black/10 hover:ring-[#14892A]/30 sm:p-6", glowLight, lift)}>
+                            <span aria-hidden="true" className="absolute inset-x-6 top-0 h-[3px] origin-left scale-x-0 rounded-b-full bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
                             <div className="flex items-start gap-3">
                               <Monogram o={o} />
                               <div className="min-w-0">
                                 <h3 className="font-black leading-snug tracking-tight">
-                                  <button type="button" onClick={() => onOpen(o.id)} className={cn("text-left after:absolute after:inset-0 after:rounded-[1.75rem] after:content-[''] group-hover:text-[#0A4A13]", focus)}>
+                                  <button type="button" onClick={() => onOpen(o.id)} className={cn("text-left after:absolute after:inset-0 after:rounded-[1.75rem] after:content-[''] group-hover:text-[#105D1D]", focus)}>
                                     {o.name}
                                   </button>
                                 </h3>
-                                <p className="mt-1 inline-flex items-center gap-1 rounded-full bg-[#E8F5E9] px-2 py-0.5 text-[11px] font-bold text-[#0A4A13]">
+                                <p className="mt-1 inline-flex items-center gap-1 rounded-full bg-[#E8F5E9] px-2 py-0.5 text-[11px] font-bold text-[#105D1D]">
                                   <BadgeCheck className="h-3 w-3" aria-hidden="true" />
                                   Licensed
                                 </p>
@@ -388,17 +388,17 @@ function Directory({ onOpen, tabHint }: { onOpen: (id: string) => void; tabHint:
                             </dl>
                             <div className="mt-auto flex items-center justify-between gap-2 border-t border-black/[0.06] pt-4">
                               <ContactActions o={o} compact />
-                              <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]">
+                              <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]">
                                 <ArrowRight className="h-4 w-4" />
                               </span>
                             </div>
                           </article>
                         ) : (
-                          <article onMouseMove={spot} className={cn("group relative flex items-center gap-4 rounded-3xl bg-white p-3 ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-34px_rgba(4,20,10,0.4)] hover:ring-[#117F21]/30 sm:p-4", glowLight)}>
+                          <article onMouseMove={spot} className={cn("group relative flex items-center gap-4 rounded-3xl bg-white p-3 ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-34px_rgba(18,51,28,0.4)] hover:ring-[#14892A]/30 sm:p-4", glowLight)}>
                             <Monogram o={o} />
                             <div className="min-w-0 flex-1">
                               <h3 className="font-bold">
-                                <button type="button" onClick={() => onOpen(o.id)} className={cn("text-left after:absolute after:inset-0 after:rounded-3xl after:content-[''] group-hover:text-[#0A4A13]", focus)}>
+                                <button type="button" onClick={() => onOpen(o.id)} className={cn("text-left after:absolute after:inset-0 after:rounded-3xl after:content-[''] group-hover:text-[#105D1D]", focus)}>
                                   {o.name}
                                 </button>
                               </h3>
@@ -433,7 +433,7 @@ function Details({ id, onClose }: { id: string | null; onClose: () => void }) {
     <Drawer open={!!o} onClose={onClose} labelledBy="op-name">
       {o && (
         <>
-          <div className="relative isolate overflow-hidden bg-[#04140A] px-6 pb-8 pt-8 text-white sm:px-8">
+          <div className="relative isolate overflow-hidden bg-[#12331C] px-6 pb-8 pt-8 text-white sm:px-8">
             <DarkBackdrop animate={false} />
             <div className="relative flex items-center gap-4 pr-12">
               <Monogram o={o} size="lg" />
@@ -515,7 +515,7 @@ function HowItWorks() {
           <div
             onMouseMove={spot}
             className={cn(
-              "relative overflow-hidden rounded-[2rem] p-5 text-white shadow-[0_40px_80px_-40px_rgba(4,20,10,0.8)] sm:p-8",
+              "relative overflow-hidden rounded-[2rem] p-5 text-white shadow-[0_40px_80px_-40px_rgba(18,51,28,0.8)] sm:p-8",
               darkCard,
             )}
           >
@@ -534,9 +534,9 @@ function HowItWorks() {
                       )}
                     </span>
                   )}
-                  <div className="group h-full rounded-3xl bg-white p-5 text-[#0B1F10] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:p-6">
+                  <div className="group h-full rounded-3xl bg-white p-5 text-[#1A3A22] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:p-6">
                     <span className="flex items-center justify-between gap-3">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] text-[#F4D27A] transition-transform duration-300 group-hover:scale-105">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1A3A22] to-[#105D1D] text-[#F4D27A] transition-transform duration-300 group-hover:scale-105">
                         <n.icon className="h-5 w-5" aria-hidden="true" />
                       </span>
                       <span className="font-mono text-sm font-bold tabular-nums text-[#7F5A04]">0{i + 1}</span>
@@ -569,18 +569,18 @@ function Funds() {
 
   // The page's one near-black band: the fund finder is its interactive moment.
   return (
-    <section id="funds" aria-labelledby="funds-title" className={cn(sectionCls, "relative isolate bg-[#04140A] text-white")}>
+    <section id="funds" aria-labelledby="funds-title" className={cn(sectionCls, "relative isolate bg-[#12331C] text-white")}>
       <DarkBackdrop />
       <div className="mx-auto max-w-7xl">
         <Headline id="funds-title" kicker="RSA funds" title="Which fund is your money in?" mark="your money" intro="Every PFA runs the same set of RSA funds. Which one you’re in depends on your age and situation. Try it." dark />
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
-          <div className="h-fit text-[#0B1F10] lg:sticky lg:top-[170px] lg:col-span-5">
+          <div className="h-fit text-[#1A3A22] lg:sticky lg:top-[170px] lg:col-span-5">
             <FramedPanel className="p-6 sm:p-7">
               <fieldset>
                 <legend className="font-black tracking-tight">I am…</legend>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                   {([["working", "Working"], ["retired", "Retired"], ["ppp", "Self-employed (PPP)"]] as const).map(([v, l]) => (
-                    <label key={v} className={cn("flex min-h-12 cursor-pointer items-center justify-center rounded-2xl px-2 text-center text-sm font-semibold ring-1 transition has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-[#FFD84D]", status === v ? "bg-[#0B1F10] text-[#F4D27A] ring-[#0B1F10]" : "text-gray-700 ring-black/10 hover:ring-[#117F21]")}>
+                    <label key={v} className={cn("flex min-h-12 cursor-pointer items-center justify-center rounded-2xl px-2 text-center text-sm font-semibold ring-1 transition has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-[#FFD84D]", status === v ? "bg-[#1A3A22] text-[#F4D27A] ring-[#1A3A22]" : "text-gray-700 ring-black/10 hover:ring-[#14892A]")}>
                       <input type="radio" name="fund-status" value={v} checked={status === v} onChange={() => setStatus(v)} className="sr-only" />
                       {l}
                     </label>
@@ -590,7 +590,7 @@ function Funds() {
               <div className={cn("mt-7 transition-opacity", status !== "working" && "pointer-events-none opacity-40")}>
                 <label htmlFor="fund-age" className="flex items-baseline justify-between font-black tracking-tight">
                   My age
-                  <span className="rounded-full bg-[#0B1F10] px-3 py-0.5 font-mono text-sm text-[#F4D27A]">{age}</span>
+                  <span className="rounded-full bg-[#1A3A22] px-3 py-0.5 font-mono text-sm text-[#F4D27A]">{age}</span>
                 </label>
                 <input
                   id="fund-age"
@@ -600,12 +600,12 @@ function Funds() {
                   value={age}
                   disabled={status !== "working"}
                   onChange={(e) => setAge(Number(e.target.value))}
-                  className={cn("mt-3 h-2 w-full cursor-pointer appearance-none rounded-full accent-[#117F21]", focus)}
-                  style={{ background: `linear-gradient(to right, #117F21, #CB9615 ${((age - 18) / 52) * 100}%, #E5E7EB ${((age - 18) / 52) * 100}%)` }}
+                  className={cn("mt-3 h-2 w-full cursor-pointer appearance-none rounded-full accent-[#14892A]", focus)}
+                  style={{ background: `linear-gradient(to right, #14892A, #CB9615 ${((age - 18) / 52) * 100}%, #E5E7EB ${((age - 18) / 52) * 100}%)` }}
                 />
               </div>
               <label className="mt-7 flex cursor-pointer items-start gap-3 rounded-2xl bg-[#F2F6F0] p-4 ring-1 ring-black/10">
-                <input type="checkbox" checked={nonInterest} onChange={(e) => setNonInterest(e.target.checked)} className="mt-0.5 h-5 w-5 accent-[#117F21]" />
+                <input type="checkbox" checked={nonInterest} onChange={(e) => setNonInterest(e.target.checked)} className="mt-0.5 h-5 w-5 accent-[#14892A]" />
                 <span className="text-sm font-semibold">I want non-interest (ethical) investments</span>
               </label>
               <p className="mt-5 text-xs text-gray-600">A simplified guide. Your PFA can confirm which fund you are in and help you move between funds where the rules allow.</p>
@@ -624,7 +624,7 @@ function Funds() {
                   className={cn(
                     "relative overflow-hidden rounded-[1.75rem] p-5 ring-1 transition-[background-color,box-shadow,color] duration-300 sm:p-6",
                     mine
-                      ? "bg-white text-[#0B1F10] shadow-[0_0_0_2px_#F4D27A,0_30px_70px_-25px_rgba(244,210,122,0.55)] ring-transparent"
+                      ? "bg-white text-[#1A3A22] shadow-[0_0_0_2px_#F4D27A,0_30px_70px_-25px_rgba(244,210,122,0.55)] ring-transparent"
                       : open
                         ? "bg-white/[0.07] ring-[#F4D27A]/50"
                         : "bg-white/[0.04] ring-white/10 hover:bg-white/[0.07]",
@@ -632,11 +632,11 @@ function Funds() {
                   )}
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className={cn("font-mono text-3xl font-black tabular-nums", mine ? "text-[#0A4A13]" : "text-[#F4D27A]")}>Fund {f.key}</span>
-                    {mine && <span className="rounded-full bg-[#0B1F10] px-2.5 py-1 text-xs font-bold text-[#F4D27A]">Your fund</span>}
+                    <span className={cn("font-mono text-3xl font-black tabular-nums", mine ? "text-[#105D1D]" : "text-[#F4D27A]")}>Fund {f.key}</span>
+                    {mine && <span className="rounded-full bg-[#1A3A22] px-2.5 py-1 text-xs font-bold text-[#F4D27A]">Your fund</span>}
                     {open && <span className="rounded-full px-2.5 py-1 text-xs font-bold text-[#F4D27A] ring-1 ring-[#F4D27A]/60">You can choose this</span>}
                   </div>
-                  <p className={cn("mt-3 font-semibold", mine ? "text-[#0B1F10]" : "text-white")}>{f.who}</p>
+                  <p className={cn("mt-3 font-semibold", mine ? "text-[#1A3A22]" : "text-white")}>{f.who}</p>
                   <p className={cn("mt-1 text-sm leading-relaxed", mine ? "text-gray-600" : "text-white/75")}>{f.note}</p>
                 </motion.li>
               );
@@ -658,11 +658,11 @@ function Performance() {
           <div
             onMouseMove={spot}
             className={cn(
-              "relative h-full overflow-hidden rounded-[2rem] p-7 text-white shadow-[0_40px_80px_-40px_rgba(4,20,10,0.8)] sm:p-10",
+              "relative h-full overflow-hidden rounded-[2rem] p-7 text-white shadow-[0_40px_80px_-40px_rgba(18,51,28,0.8)] sm:p-10",
               darkCard,
             )}
           >
-            <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#117F21]/60 blur-3xl" />
+            <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#14892A]/60 blur-3xl" />
             <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 left-1/4 h-72 w-72 rounded-full bg-[#CB9615]/25 blur-3xl" />
             <div className="relative">
               <Headline id="perf-title" kicker="Performance and reporting" title="Compare PFA performance and fees" mark="performance and fees" dark stacked />
@@ -670,7 +670,7 @@ function Performance() {
               <Link to="/performance" className={cn("group mt-7 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#F4D27A] py-1.5 pl-5 pr-1.5 font-semibold text-[#1A1206] transition hover:bg-white", focus)}>
                 <BarChart3 className="h-5 w-5" aria-hidden="true" />
                 See industry performance
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]">
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </span>
               </Link>

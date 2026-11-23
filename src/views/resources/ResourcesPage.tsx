@@ -80,7 +80,7 @@ export default function ResourcesPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Hero
           openGuide={(id) => setGuide(id)}
           openFaq={(q) => {
@@ -161,12 +161,12 @@ function Hero({
           <label htmlFor="kb-q" className="sr-only">
             Search guides, questions, terms and publications
           </label>
-          <div aria-hidden="true" className="pointer-events-none absolute -inset-px rounded-full bg-gradient-to-r from-[#F4D27A]/80 via-white/10 to-[#117F21]/70" />
+          <div aria-hidden="true" className="pointer-events-none absolute -inset-px rounded-full bg-gradient-to-r from-[#F4D27A]/80 via-white/10 to-[#14892A]/70" />
           <div
             onMouseMove={spot}
             className="relative flex items-center gap-3 rounded-full bg-white py-1.5 pl-1.5 pr-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.85)] transition focus-within:shadow-[0_0_0_3px_#FFD84D,0_30px_60px_-24px_rgba(0,0,0,0.85)] [background-image:radial-gradient(260px_circle_at_var(--x,50%)_var(--y,50%),rgba(244,210,122,0.18),transparent_60%)]"
           >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] text-[#F4D27A]">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#1A3A22] to-[#105D1D] text-[#F4D27A]">
               <Search className="h-5 w-5" aria-hidden="true" />
             </span>
             <input
@@ -209,14 +209,14 @@ function Hero({
                             }}
                             className={cn("group flex w-full items-center gap-3 rounded-2xl px-3 py-2.5 text-left transition hover:bg-[#F2F6F0]", focus)}
                           >
-                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#F2F6F0] text-[#117F21] transition duration-300 group-hover:bg-gradient-to-br group-hover:from-[#0B1F10] group-hover:to-[#0A4A13] group-hover:text-[#F4D27A]">
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#F2F6F0] text-[#117F21] transition duration-300 group-hover:bg-gradient-to-br group-hover:from-[#1A3A22] group-hover:to-[#105D1D] group-hover:text-[#F4D27A]">
                               <I className="h-4 w-4" aria-hidden="true" />
                             </span>
                             <span className="min-w-0 flex-1">
                               <span className="block truncate font-semibold">{h.label}</span>
                               <span className="block text-[11px] font-bold uppercase tracking-[0.16em] text-[#7F5A04]">{h.kind}</span>
                             </span>
-                            <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] text-[#0B1F10] transition duration-300 group-hover:rotate-[-45deg] group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]">
+                            <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] text-[#1A3A22] transition duration-300 group-hover:rotate-[-45deg] group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]">
                               <ArrowRight className="h-4 w-4" />
                             </span>
                           </button>
@@ -240,16 +240,16 @@ function Hero({
       }
       aside={
         <FramedPanel className="p-4 sm:p-5">
-          <p className="flex items-center gap-2 px-1 text-xs font-bold uppercase tracking-[0.18em] text-[#0A4A13]"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#CB9615]" />What’s here</p>
+          <p className="flex items-center gap-2 px-1 text-xs font-bold uppercase tracking-[0.18em] text-[#105D1D]"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#CB9615]" />What’s here</p>
           <ul className="mt-3 space-y-2">
             {tiles.map((t, i) => (
               <motion.li key={t.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.3 + i * 0.05, ease }}>
                 <button
                   type="button"
                   onClick={() => jump(t.id)}
-                  className={cn("group relative flex min-h-[4.25rem] w-full items-center gap-4 overflow-hidden rounded-2xl bg-[#F2F6F0] p-3 text-left ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-white hover:shadow-[0_20px_40px_-24px_rgba(4,20,10,0.8)] hover:ring-[#0B1F10]", focus)}
+                  className={cn("group relative flex min-h-[4.25rem] w-full items-center gap-4 overflow-hidden rounded-2xl bg-[#F2F6F0] p-3 text-left ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#1A3A22] hover:text-white hover:shadow-[0_20px_40px_-24px_rgba(18,51,28,0.8)] hover:ring-[#1A3A22]", focus)}
                 >
-                  <span aria-hidden="true" className="absolute inset-y-3 left-0 w-[3px] origin-center scale-y-0 rounded-r-full bg-gradient-to-b from-[#F4D27A] to-[#117F21] transition-transform duration-300 group-hover:scale-y-100" />
+                  <span aria-hidden="true" className="absolute inset-y-3 left-0 w-[3px] origin-center scale-y-0 rounded-r-full bg-gradient-to-b from-[#F4D27A] to-[#14892A] transition-transform duration-300 group-hover:scale-y-100" />
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-[#117F21] shadow-sm transition duration-300 group-hover:rotate-[-6deg] group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]">
                     <t.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
@@ -257,7 +257,7 @@ function Hero({
                     <span className="block font-bold">{t.label}</span>
                     <span className="block text-xs text-gray-600 transition group-hover:text-white/75">{t.note}</span>
                   </span>
-                  <span className="font-mono text-2xl font-bold tabular-nums text-[#0A4A13] transition group-hover:text-[#F4D27A]">{t.n}</span>
+                  <span className="font-mono text-2xl font-bold tabular-nums text-[#105D1D] transition group-hover:text-[#F4D27A]">{t.n}</span>
                 </button>
               </motion.li>
             ))}

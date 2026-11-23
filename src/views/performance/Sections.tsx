@@ -25,17 +25,17 @@ const mil = (v: number) => `${(v / 1e6).toFixed(2)}m`;
 /** Gold spotlight for glass tiles on dark bands. */
 const glowDark = "[background-image:radial-gradient(380px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.14),transparent_50%)]";
 /** White card on the theme: ring, large radius, 4px hover lift with a long soft shadow. */
-const card = "rounded-[1.75rem] bg-white ring-1 ring-black/10 shadow-[0_30px_60px_-48px_rgba(4,20,10,0.6)]";
-const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_34px_70px_-36px_rgba(4,20,10,0.45)]";
+const card = "rounded-[1.75rem] bg-white ring-1 ring-black/10 shadow-[0_30px_60px_-48px_rgba(18,51,28,0.6)]";
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_34px_70px_-36px_rgba(18,51,28,0.45)]";
 const goldText = "bg-gradient-to-r from-[#F4D27A] via-[#FBE6A6] to-[#E8B64A] bg-clip-text text-transparent";
 const goldCta = cn("group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#F4D27A] py-1.5 pl-5 pr-1.5 font-bold text-[#1A1206] shadow-[0_14px_34px_-16px_rgba(244,210,122,0.9)] transition hover:bg-[#FBE0A0]", ring);
 
 function Segmented<T extends string>({ value, options, onChange, label, id, dark }: { value: T; options: readonly T[]; onChange: (v: T) => void; label: string; id: string; dark?: boolean }) {
   return (
-    <div role="radiogroup" aria-label={label} className={cn("inline-flex flex-wrap gap-1 rounded-[1.4rem] p-1", dark ? "bg-white/[0.08] ring-1 ring-white/15 backdrop-blur" : "bg-white shadow-[0_10px_30px_-20px_rgba(4,20,10,0.5)] ring-1 ring-black/10")}>
+    <div role="radiogroup" aria-label={label} className={cn("inline-flex flex-wrap gap-1 rounded-[1.4rem] p-1", dark ? "bg-white/[0.08] ring-1 ring-white/15 backdrop-blur" : "bg-white shadow-[0_10px_30px_-20px_rgba(18,51,28,0.5)] ring-1 ring-black/10")}>
       {options.map((o) => (
         <button key={o} type="button" role="radio" aria-checked={value === o} onClick={() => onChange(o)} className={cn("relative min-h-11 rounded-full px-4 text-sm font-semibold transition-colors", ring, value === o ? (dark ? "text-[#1A1206]" : "text-[#F4D27A]") : dark ? "text-white/75 hover:text-white" : "text-gray-700 hover:text-[#117F21]")}>
-          {value === o && <motion.span layoutId={`seg-${id}`} className={cn("absolute inset-0 rounded-full", dark ? "bg-[#F4D27A]" : "bg-[#0B1F10]")} transition={{ type: "spring", stiffness: 400, damping: 32 }} />}
+          {value === o && <motion.span layoutId={`seg-${id}`} className={cn("absolute inset-0 rounded-full", dark ? "bg-[#F4D27A]" : "bg-[#1A3A22]")} transition={{ type: "spring", stiffness: 400, damping: 32 }} />}
           <span className="relative">{o}</span>
         </button>
       ))}
@@ -44,7 +44,7 @@ function Segmented<T extends string>({ value, options, onChange, label, id, dark
 }
 
 function AsAt({ children, dark }: { children: React.ReactNode; dark?: boolean }) {
-  return <span className={cn("inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold", dark ? "bg-white/10 text-white/80 ring-1 ring-white/15" : "bg-[#F2F6F0] text-[#0A4A13] ring-1 ring-[#117F21]/15")}><span className={cn("h-1.5 w-1.5 rounded-full", dark ? "bg-[#F4D27A]" : "bg-[#117F21]")} />{children}</span>;
+  return <span className={cn("inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold", dark ? "bg-white/10 text-white/80 ring-1 ring-white/15" : "bg-[#F2F6F0] text-[#105D1D] ring-1 ring-[#14892A]/15")}><span className={cn("h-1.5 w-1.5 rounded-full", dark ? "bg-[#F4D27A]" : "bg-[#14892A]")} />{children}</span>;
 }
 
 /* ─────────────────────────── Hero ─────────────────────────── */
@@ -84,30 +84,30 @@ export function PerfHero() {
           <div className="flex items-start justify-between gap-4">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#7F5A04]">Total pension assets</p>
             <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#117F21] opacity-50 [animation-iteration-count:3]" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#117F21]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#14892A] opacity-50 [animation-iteration-count:3]" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#14892A]" />
             </span>
           </div>
-          <p className="mt-2 text-5xl font-black tracking-tight text-[#0B1F10] sm:text-6xl">
+          <p className="mt-2 text-5xl font-black tracking-tight text-[#1A3A22] sm:text-6xl">
             <Ticker value={headline.assets} fmt={(v) => `₦${v.toFixed(2)}`} />
             <span className="ml-1 text-2xl font-bold text-gray-600 sm:text-3xl">trillion</span>
           </p>
           <p className="mt-2 flex flex-wrap items-center gap-3 text-sm">
-            <span className="inline-flex items-center gap-1 rounded-full bg-[#0B1F10] px-3 py-1 font-bold text-[#F4D27A]">▲ {headline.ytd}% since January</span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-[#1A3A22] px-3 py-1 font-bold text-[#F4D27A]">▲ {headline.ytd}% since January</span>
             <span className="text-gray-600">about ${headline.usd}bn</span>
           </p>
           <svg viewBox="0 0 300 80" className="mt-6 h-28 w-full overflow-visible" aria-hidden="true" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="hero-spark" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#117F21" /><stop offset="1" stopColor="#CB9615" /></linearGradient>
-              <linearGradient id="hero-fill" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#117F21" stopOpacity="0.18" /><stop offset="1" stopColor="#117F21" stopOpacity="0" /></linearGradient>
+              <linearGradient id="hero-spark" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#14892A" /><stop offset="1" stopColor="#CB9615" /></linearGradient>
+              <linearGradient id="hero-fill" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#14892A" stopOpacity="0.18" /><stop offset="1" stopColor="#14892A" stopOpacity="0" /></linearGradient>
             </defs>
             <motion.polygon points={`0,80 ${pts} 300,80`} fill="url(#hero-fill)" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2, duration: 0.8 }} />
             <motion.polyline points={pts} fill="none" stroke="url(#hero-spark)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke" initial={{ pathLength: reduce ? 1 : 0 }} animate={{ pathLength: 1 }} transition={{ duration: reduce ? 0 : 1.8, delay: 0.4, ease }} />
           </svg>
           <div className="mt-1 flex justify-between font-mono text-[11px] text-gray-600"><span>{monthLabel(spark[0].m)}</span><span>{monthLabel(spark[spark.length - 1].m)}</span></div>
           <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
-            <p className="rounded-2xl bg-[#F2F6F0] p-3"><span className="block text-gray-600">Paid in benefits to date*</span><span className="font-mono text-base font-black text-[#0B1F10]">₦{headline.benefitsPaid}tn</span></p>
-            <p className="rounded-2xl bg-[#F2F6F0] p-3"><span className="block text-gray-600">New members in two years*</span><span className="font-mono text-base font-black text-[#0B1F10]">{headline.joined2y.toLocaleString("en-NG")}</span></p>
+            <p className="rounded-2xl bg-[#F2F6F0] p-3"><span className="block text-gray-600">Paid in benefits to date*</span><span className="font-mono text-base font-black text-[#1A3A22]">₦{headline.benefitsPaid}tn</span></p>
+            <p className="rounded-2xl bg-[#F2F6F0] p-3"><span className="block text-gray-600">New members in two years*</span><span className="font-mono text-base font-black text-[#1A3A22]">{headline.joined2y.toLocaleString("en-NG")}</span></p>
           </div>
           <p className="mt-4 text-[11px] text-gray-600">Unaudited. *As at July 2026.</p>
         </FramedPanel>
@@ -137,7 +137,7 @@ export function AssetsSection() {
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <Rise className="lg:col-span-9">
           <div onMouseMove={spot} className={cn("relative overflow-hidden p-5 sm:p-7", card, glowLight)}>
-            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615]" />
+            <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#14892A] via-[#36A045] to-[#CB9615]" />
             <DataPanel
               title="Total pension assets" name={`assets-${range.replace(/\s/g, "-").toLowerCase()}`}
               rows={data.map((d) => ({ month: d.m, assets_naira_trillion: d.v }))}
@@ -154,9 +154,9 @@ export function AssetsSection() {
               { l: "Biggest monthly rise", v: `+₦${best.d.toFixed(2)}tn`, s: best.m },
             ].map((c, i) => (
               <Rise key={c.l} delay={i * 0.1} className="h-full">
-                <div onMouseMove={spot} className={cn("relative h-full overflow-hidden rounded-3xl p-5", lift, i === 0 ? cn(darkCard, "text-white shadow-[0_30px_60px_-34px_rgba(4,20,10,0.9)]") : cn("bg-white ring-1 ring-black/10", glowLight))}>
+                <div onMouseMove={spot} className={cn("relative h-full overflow-hidden rounded-3xl p-5", lift, i === 0 ? cn(darkCard, "text-white shadow-[0_30px_60px_-34px_rgba(18,51,28,0.9)]") : cn("bg-white ring-1 ring-black/10", glowLight))}>
                   <p className={cn("text-xs font-bold uppercase tracking-[0.16em]", i === 0 ? "text-[#F4D27A]" : "text-[#7F5A04]")}>{c.l}</p>
-                  <AnimatePresence mode="wait"><motion.p key={c.v} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className={cn("mt-2 font-mono text-2xl font-black tabular-nums", i === 0 ? goldText : "text-[#0B1F10]")}>{c.v}</motion.p></AnimatePresence>
+                  <AnimatePresence mode="wait"><motion.p key={c.v} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className={cn("mt-2 font-mono text-2xl font-black tabular-nums", i === 0 ? goldText : "text-[#1A3A22]")}>{c.v}</motion.p></AnimatePresence>
                   <p className={cn("mt-1 text-sm", i === 0 ? "text-white/75" : "text-gray-600")}>{c.s}</p>
                 </div>
               </Rise>
@@ -201,7 +201,7 @@ export function FundsSection() {
   const reduce = useReducedMotion();
   const max = Math.max(...f.rows.map((r) => r.v));
   return (
-    <section id="funds" aria-labelledby="funds-title" className={cn("relative isolate bg-[#04140A] text-white", sectionCls)}>
+    <section id="funds" aria-labelledby="funds-title" className={cn("relative isolate bg-[#12331C] text-white", sectionCls)}>
       <DarkBackdrop />
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading id="funds-title" dark eyebrow="Fund types" title="Savings by fund type" highlight="fund type" intro="Your PFA places your savings in a fund that matches your age and appetite for risk. Fund II holds the largest share." action={<Segmented dark value={p} options={fundTypes.map((x) => x.label)} onChange={setP} label="Reporting month" id="funds" />} />
@@ -220,8 +220,8 @@ export function FundsSection() {
                       <p className="text-xs text-white/70">{r.who}</p>
                     </div>
                     <div className="h-4 rounded-full bg-white/10">
-                      <motion.div className="relative h-full rounded-full bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#F4D27A]" initial={{ width: 0 }} whileInView={{ width: `${(r.v / max) * 100}%` }} viewport={{ once: true }} transition={{ duration: reduce ? 0 : 1, delay: reduce ? 0 : i * 0.1, ease }}>
-                        <span aria-hidden="true" className="absolute -right-1 top-1/2 h-5 w-5 -translate-y-1/2 rounded-full bg-[#F4D27A] shadow-[0_0_18px_4px_rgba(244,210,122,0.45)] ring-4 ring-[#04140A] transition-transform duration-300 group-hover:scale-110" />
+                      <motion.div className="relative h-full rounded-full bg-gradient-to-r from-[#14892A] via-[#36A045] to-[#F4D27A]" initial={{ width: 0 }} whileInView={{ width: `${(r.v / max) * 100}%` }} viewport={{ once: true }} transition={{ duration: reduce ? 0 : 1, delay: reduce ? 0 : i * 0.1, ease }}>
+                        <span aria-hidden="true" className="absolute -right-1 top-1/2 h-5 w-5 -translate-y-1/2 rounded-full bg-[#F4D27A] shadow-[0_0_18px_4px_rgba(244,210,122,0.45)] ring-4 ring-[#12331C] transition-transform duration-300 group-hover:scale-110" />
                       </motion.div>
                     </div>
                     <p className="font-mono font-black tabular-nums sm:text-right"><span className={goldText}>{tn(r.v)}</span> <span className="text-xs font-normal text-white/70">{((r.v / f.total) * 100).toFixed(0)}%</span></p>
@@ -254,7 +254,7 @@ export function CoverageSection() {
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Rise className="h-full">
           <div onMouseMove={spot} className={cn("h-full p-6 sm:p-8", card, lift, glowLight)}>
-            <div className="flex items-start justify-between gap-3"><h3 className="text-xl font-black tracking-tight text-[#0B1F10]">RSA holders</h3><AsAt>{asAt}</AsAt></div>
+            <div className="flex items-start justify-between gap-3"><h3 className="text-xl font-black tracking-tight text-[#1A3A22]">RSA holders</h3><AsAt>{asAt}</AsAt></div>
             <p className="mt-1 text-sm text-gray-600">People with a Retirement Savings Account.</p>
             <div className="mt-6">
               <DataPanel title="RSA holders" name="rsa-holders" rows={members.map((m) => ({ period: m.label, rsa_holders: m.v }))}
@@ -267,11 +267,11 @@ export function CoverageSection() {
           </Rise>
           <Rise delay={0.1} className="h-full">
           <div onMouseMove={spot} className={cn("h-full p-6 sm:p-8", card, lift, glowLight)}>
-            <div className="flex items-start justify-between gap-3"><h3 className="text-xl font-black tracking-tight text-[#0B1F10]">Contributions received</h3><AsAt>Q1 2026</AsAt></div>
+            <div className="flex items-start justify-between gap-3"><h3 className="text-xl font-black tracking-tight text-[#1A3A22]">Contributions received</h3><AsAt>Q1 2026</AsAt></div>
             <p className="mt-1 text-sm text-gray-600">Money paid in by employers and workers each quarter.</p>
             <div className="mt-6">
               <DataPanel title="Contributions" name="contributions" rows={contributions.map((c) => ({ quarter: c.label, naira_billion: c.v, derived: !!c.derived }))}
-                chart={<Columns data={contributions.map((c) => ({ ...c, note: c.derived ? "derived" : undefined }))} fmt={bn} color="#0B1F10" />}
+                chart={<Columns data={contributions.map((c) => ({ ...c, note: c.derived ? "derived" : undefined }))} fmt={bn} color="#1A3A22" />}
                 table={<DataTable head={["Quarter", "₦ billion"]} rows={contributions.map((c) => [c.label + (c.derived ? " *" : ""), c.v.toFixed(2)])} />}
                 caption="* Worked out from the published Q3 2025 increase of 18%. Q4 2025 included one-off public-sector payments."
               />
@@ -281,19 +281,19 @@ export function CoverageSection() {
 
           <Rise className="h-full">
           <div onMouseMove={spot} className={cn("relative h-full overflow-hidden p-6 sm:p-8", card, lift, glowLight)}>
-            <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#F4D27A] via-[#CB9615] to-[#117F21]" />
-            <div className="flex items-start justify-between gap-3"><h3 className="text-xl font-black tracking-tight text-[#0B1F10]">Personal Pension Plan</h3><AsAt>{ppp.asAt}</AsAt></div>
+            <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#F4D27A] via-[#CB9615] to-[#14892A]" />
+            <div className="flex items-start justify-between gap-3"><h3 className="text-xl font-black tracking-tight text-[#1A3A22]">Personal Pension Plan</h3><AsAt>{ppp.asAt}</AsAt></div>
             <div className="mt-6 flex flex-col items-center gap-8 sm:flex-row">
               <div className="relative h-36 w-36 shrink-0">
                 <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90" role="img" aria-label={`${pct.toFixed(1)}% of Personal Pension Plan accounts have received a contribution`}>
-                  <defs><linearGradient id="ppp-ring" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#117F21" /><stop offset="1" stopColor="#CB9615" /></linearGradient></defs>
+                  <defs><linearGradient id="ppp-ring" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#14892A" /><stop offset="1" stopColor="#CB9615" /></linearGradient></defs>
                   <circle cx="60" cy="60" r={R} fill="none" stroke="#E6ECE4" strokeWidth="12" />
                   <motion.circle cx="60" cy="60" r={R} fill="none" stroke="url(#ppp-ring)" strokeWidth="12" strokeLinecap="round" strokeDasharray={C} initial={{ strokeDashoffset: C }} whileInView={{ strokeDashoffset: C * (1 - pct / 100) }} viewport={{ once: true }} transition={{ duration: reduce ? 0 : 1.4, ease }} />
                 </svg>
-                <span className="absolute inset-0 flex flex-col items-center justify-center"><span className="font-mono text-2xl font-black text-[#0B1F10]">{pct.toFixed(1)}%</span><span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7F5A04]">funded</span></span>
+                <span className="absolute inset-0 flex flex-col items-center justify-center"><span className="font-mono text-2xl font-black text-[#1A3A22]">{pct.toFixed(1)}%</span><span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7F5A04]">funded</span></span>
               </div>
               <div>
-                <p className="text-gray-700"><strong className="text-[#0B1F10]">{ppp.registered.toLocaleString("en-NG")}</strong> accounts opened, but only <strong className="text-[#0B1F10]">{ppp.funded.toLocaleString("en-NG")}</strong> have received a contribution.</p>
+                <p className="text-gray-700"><strong className="text-[#1A3A22]">{ppp.registered.toLocaleString("en-NG")}</strong> accounts opened, but only <strong className="text-[#1A3A22]">{ppp.funded.toLocaleString("en-NG")}</strong> have received a contribution.</p>
                 <Link to="/services#ppp" className={cn(goldCta, "mt-5")}>Start saving in a PPP <ArrowChip /></Link>
               </div>
             </div>
@@ -301,7 +301,7 @@ export function CoverageSection() {
           </Rise>
 
           <Rise delay={0.1} className="h-full">
-          <div onMouseMove={spot} className={cn("relative h-full overflow-hidden rounded-[1.75rem] p-6 text-white shadow-[0_30px_60px_-34px_rgba(4,20,10,0.9)] sm:p-8", darkCard, lift)}>
+          <div onMouseMove={spot} className={cn("relative h-full overflow-hidden rounded-[1.75rem] p-6 text-white shadow-[0_30px_60px_-34px_rgba(18,51,28,0.9)] sm:p-8", darkCard, lift)}>
             <div className="relative flex items-start justify-between gap-3"><h3 className="text-xl font-black tracking-tight">Retirees</h3><AsAt dark>July 2026</AsAt></div>
             <div className="relative mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div><p className={cn("font-mono text-4xl font-black", goldText)}><Ticker value={headline.retirees} fmt={(v) => Math.round(v).toLocaleString("en-NG")} /></p><p className="mt-1 text-sm text-white/75">retirees receiving a monthly pension</p></div>
@@ -351,7 +351,7 @@ export function CompareSection() {
           <div className="flex flex-wrap gap-3">
             <label className="relative">
               <span className="sr-only">Period</span>
-              <select value={period} onChange={(e) => setPeriod(e.target.value as PeriodKey)} className="min-h-11 appearance-none rounded-full border border-[#7A8A7E] bg-white pl-5 pr-10 font-semibold shadow-[0_10px_30px_-20px_rgba(4,20,10,0.5)] focus:border-[#117F21] focus:outline-none focus:ring-4 focus:ring-[#FFD84D]">
+              <select value={period} onChange={(e) => setPeriod(e.target.value as PeriodKey)} className="min-h-11 appearance-none rounded-full border border-[#7A8A7E] bg-white pl-5 pr-10 font-semibold shadow-[0_10px_30px_-20px_rgba(18,51,28,0.5)] focus:border-[#14892A] focus:outline-none focus:ring-4 focus:ring-[#FFD84D]">
                 {periods.map((p) => <option key={p}>{p}</option>)}
               </select>
               <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" aria-hidden="true" />
@@ -359,9 +359,9 @@ export function CompareSection() {
             <label className="relative">
               <span className="sr-only">Find a PFA</span>
               <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#117F21]" aria-hidden="true" />
-              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Find a PFA" className="min-h-11 w-52 rounded-full border border-[#7A8A7E] bg-white pl-10 pr-4 shadow-[0_10px_30px_-20px_rgba(4,20,10,0.5)] placeholder:text-gray-600 focus:border-[#117F21] focus:outline-none focus:ring-4 focus:ring-[#FFD84D]" />
+              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Find a PFA" className="min-h-11 w-52 rounded-full border border-[#7A8A7E] bg-white pl-10 pr-4 shadow-[0_10px_30px_-20px_rgba(18,51,28,0.5)] placeholder:text-gray-600 focus:border-[#14892A] focus:outline-none focus:ring-4 focus:ring-[#FFD84D]" />
             </label>
-            <button type="button" onClick={() => setDir((d) => (d === "desc" ? "asc" : "desc"))} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] pl-1.5 pr-5 text-sm font-semibold text-white transition hover:bg-[#117F21]", ring)}>
+            <button type="button" onClick={() => setDir((d) => (d === "desc" ? "asc" : "desc"))} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] pl-1.5 pr-5 text-sm font-semibold text-white transition hover:bg-[#14892A]", ring)}>
               <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:rotate-180"><ArrowDownUp className="h-4 w-4" /></span> {dir === "desc" ? "Highest first" : "Lowest first"}
             </button>
           </div>
@@ -377,7 +377,7 @@ export function CompareSection() {
                 <LayoutGroup id="pfa-race">
                   <div className="relative pt-6">
                   <span aria-hidden="true" className="pointer-events-none absolute bottom-0 top-6 z-10 w-0 border-l-2 border-dashed border-[#CB9615]" style={{ left: `calc(11.75rem + (100% - 16.25rem) * ${median / max})` }}>
-                    <span className="absolute -top-6 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#0B1F10] px-2 py-0.5 font-mono text-[10px] font-bold text-[#F4D27A] shadow">median {median.toFixed(1)}%</span>
+                    <span className="absolute -top-6 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#1A3A22] px-2 py-0.5 font-mono text-[10px] font-bold text-[#F4D27A] shadow">median {median.toFixed(1)}%</span>
                   </span>
                   <ul className="space-y-1.5" aria-label={`${fund} returns, ${period}, sample data`}>
                     {rows.map((r, i) => {
@@ -386,12 +386,12 @@ export function CompareSection() {
                         <motion.li key={r.id} layout={!reduce} transition={{ type: "spring", stiffness: 300, damping: 30 }}>
                           <label className={cn("group grid cursor-pointer grid-cols-[1.25rem_9rem_1fr_3.5rem] items-center gap-2 rounded-xl px-2 py-1.5 transition has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-[#FFD84D]", on ? "bg-[#FFF8E1] ring-1 ring-[#CB9615]/40" : "hover:bg-[#F2F6F0]")}>
                             <input type="checkbox" checked={on} onChange={() => toggle(r.id)} className="sr-only" />
-                            <span aria-hidden="true" className={cn("flex h-5 w-5 items-center justify-center rounded-md border-2 transition", on ? "border-[#0B1F10] bg-[#0B1F10] text-[#F4D27A]" : "border-[#7A8A7E]")}>{on && <Check className="h-3 w-3" strokeWidth={3} />}</span>
-                            <span className="truncate text-sm font-semibold text-[#0B1F10]" title={r.name}><span className="mr-1.5 font-mono text-xs text-gray-600">{String(i + 1).padStart(2, "0")}</span>{r.short}</span>
+                            <span aria-hidden="true" className={cn("flex h-5 w-5 items-center justify-center rounded-md border-2 transition", on ? "border-[#1A3A22] bg-[#1A3A22] text-[#F4D27A]" : "border-[#7A8A7E]")}>{on && <Check className="h-3 w-3" strokeWidth={3} />}</span>
+                            <span className="truncate text-sm font-semibold text-[#1A3A22]" title={r.name}><span className="mr-1.5 font-mono text-xs text-gray-600">{String(i + 1).padStart(2, "0")}</span>{r.short}</span>
                             <span className="h-3 overflow-hidden rounded-full bg-[#E6ECE4]">
-                              <motion.span className={cn("block h-full rounded-full", on ? "bg-gradient-to-r from-[#CB9615] to-[#F4D27A]" : "bg-gradient-to-r from-[#0B1F10] via-[#0A4A13] to-[#2E913D]")} initial={{ width: 0 }} animate={{ width: `${(r.ret / max) * 100}%` }} transition={{ duration: reduce ? 0 : 0.7, ease }} />
+                              <motion.span className={cn("block h-full rounded-full", on ? "bg-gradient-to-r from-[#CB9615] to-[#F4D27A]" : "bg-gradient-to-r from-[#1A3A22] via-[#105D1D] to-[#36A045]")} initial={{ width: 0 }} animate={{ width: `${(r.ret / max) * 100}%` }} transition={{ duration: reduce ? 0 : 0.7, ease }} />
                             </span>
-                            <span className="text-right font-mono text-sm font-bold tabular-nums text-[#0B1F10]">{r.ret.toFixed(1)}%</span>
+                            <span className="text-right font-mono text-sm font-bold tabular-nums text-[#1A3A22]">{r.ret.toFixed(1)}%</span>
                           </label>
                         </motion.li>
                       );
@@ -407,7 +407,7 @@ export function CompareSection() {
           </div>
 
           <aside className="lg:col-span-4" aria-label="Your comparison">
-            <div onMouseMove={spot} className={cn("sticky top-[180px] overflow-hidden rounded-[1.75rem] p-6 text-white shadow-[0_30px_60px_-34px_rgba(4,20,10,0.9)]", darkCard)}>
+            <div onMouseMove={spot} className={cn("sticky top-[180px] overflow-hidden rounded-[1.75rem] p-6 text-white shadow-[0_30px_60px_-34px_rgba(18,51,28,0.9)]", darkCard)}>
               <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F4D27A]/70 to-transparent" />
               <p className="relative text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">Your comparison</p>
               <AnimatePresence initial={false}>
@@ -459,12 +459,12 @@ export function FeesSection() {
               <li key={f.title}>
                 <Rise delay={i * 0.07} className="h-full">
                   <div onMouseMove={spot} className={cn("group relative h-full overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/10", lift, glowLight)}>
-                    <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                    <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
                     <div className="flex items-start justify-between gap-3">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:-rotate-6"><Icon className="h-6 w-6" aria-hidden="true" /></span>
+                      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:-rotate-6"><Icon className="h-6 w-6" aria-hidden="true" /></span>
                       <span className="rounded-full bg-[#FFF8E1] px-3 py-1 font-mono text-xs font-bold text-[#7A5600] ring-1 ring-[#CB9615]/30">{f.tag}</span>
                     </div>
-                    <h3 className="mt-5 text-lg font-black tracking-tight text-[#0B1F10]">{f.title}</h3>
+                    <h3 className="mt-5 text-lg font-black tracking-tight text-[#1A3A22]">{f.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-gray-600">{f.body}</p>
                   </div>
                 </Rise>
@@ -473,7 +473,7 @@ export function FeesSection() {
           })}
           <li>
             <Rise delay={fees.length * 0.07} className="h-full">
-            <Link to="/regulations?q=fees#library" onMouseMove={spot} className={cn("group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl p-6 text-white shadow-[0_30px_60px_-34px_rgba(4,20,10,0.9)]", darkCard, lift, ring)}>
+            <Link to="/regulations?q=fees#library" onMouseMove={spot} className={cn("group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl p-6 text-white shadow-[0_30px_60px_-34px_rgba(18,51,28,0.9)]", darkCard, lift, ring)}>
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F4D27A]/15 text-[#F4D27A]"><FileText className="h-6 w-6" aria-hidden="true" /></span>
               <span><span className="mt-6 block text-lg font-black tracking-tight">Read the fee regulations</span><span className="mt-1 block text-sm text-white/75">Regulation on Fees Structure and later circulars, in the library.</span></span>
               <span className="mt-4 inline-flex items-center gap-3 text-sm font-semibold text-[#F4D27A]">Open the library <ArrowChip dark /></span>
@@ -512,11 +512,11 @@ export function MethodSection() {
           <SectionHeading id="method-title" eyebrow="About this data" title="Methodology" stacked />
           <ul className="mt-8 space-y-3">
             {notes.map((n, i) => (
-              <li key={n.q} className={cn("overflow-hidden rounded-3xl bg-white ring-1 transition-shadow duration-300", open === i ? "shadow-[0_30px_60px_-40px_rgba(4,20,10,0.6)] ring-[#117F21]/30" : "ring-black/10")}>
+              <li key={n.q} className={cn("overflow-hidden rounded-3xl bg-white ring-1 transition-shadow duration-300", open === i ? "shadow-[0_30px_60px_-40px_rgba(18,51,28,0.6)] ring-[#14892A]/30" : "ring-black/10")}>
                 <h3>
-                  <button type="button" aria-expanded={open === i} onClick={() => setOpen(open === i ? null : i)} className={cn("flex min-h-16 w-full items-center justify-between gap-4 px-5 text-left font-bold text-[#0B1F10]", ring)}>
+                  <button type="button" aria-expanded={open === i} onClick={() => setOpen(open === i ? null : i)} className={cn("flex min-h-16 w-full items-center justify-between gap-4 px-5 text-left font-bold text-[#1A3A22]", ring)}>
                     <span className="flex items-center gap-4"><span aria-hidden="true" className={cn("font-mono text-sm font-black tabular-nums transition-colors", open === i ? "text-[#7F5A04]" : "text-gray-600")}>{String(i + 1).padStart(2, "0")}</span>{n.q}</span>
-                    <span aria-hidden="true" className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition", open === i ? "rotate-180 bg-[#0B1F10] text-[#F4D27A]" : "bg-[#F2F6F0] text-[#0B1F10]")}><ChevronDown className="h-4 w-4" /></span>
+                    <span aria-hidden="true" className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition", open === i ? "rotate-180 bg-[#1A3A22] text-[#F4D27A]" : "bg-[#F2F6F0] text-[#1A3A22]")}><ChevronDown className="h-4 w-4" /></span>
                   </button>
                 </h3>
                 <AnimatePresence initial={false}>
@@ -532,12 +532,12 @@ export function MethodSection() {
         </div>
         <div className="space-y-5 lg:col-span-5">
           <Rise>
-          <div onMouseMove={spot} className={cn("relative overflow-hidden rounded-[1.75rem] p-7 text-white shadow-[0_30px_60px_-34px_rgba(4,20,10,0.9)]", darkCard)}>
+          <div onMouseMove={spot} className={cn("relative overflow-hidden rounded-[1.75rem] p-7 text-white shadow-[0_30px_60px_-34px_rgba(18,51,28,0.9)]", darkCard)}>
             <Download aria-hidden="true" className="pointer-events-none absolute -right-6 -top-6 h-36 w-36 text-white/[0.05]" />
             <p className="relative text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">Open data</p>
             <p className="relative mt-2 text-xl font-black tracking-tight">Download every series on this page</p>
             <p className="relative mt-1 text-sm text-white/75">One CSV file with assets, allocation, fund types, membership and contributions.</p>
-            <button type="button" onClick={everything} className={cn(goldCta, "relative mt-5")}>Download CSV <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:translate-y-0.5"><Download className="h-4 w-4" /></span></button>
+            <button type="button" onClick={everything} className={cn(goldCta, "relative mt-5")}>Download CSV <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:translate-y-0.5"><Download className="h-4 w-4" /></span></button>
             <div className="relative mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-5 text-sm">
               {([["/resources#monthly-reports", "Monthly reports"], ["/resources#quarterly-reports", "Quarterly reports"], ["/resources#annual-reports", "Annual reports"]] as const).map(([to, l]) => (
                 <Link key={to} to={to} className={cn("inline-flex min-h-11 items-center rounded-full bg-white/10 px-4 font-semibold ring-1 ring-white/15 transition hover:bg-[#F4D27A] hover:text-[#1A1206]", ring)}>{l}</Link>
@@ -550,7 +550,7 @@ export function MethodSection() {
             <h3 className="text-xs font-bold uppercase tracking-[0.16em] text-[#7F5A04]">Sources</h3>
             <ul className="mt-3 divide-y divide-black/5">
               {sources.map((s) => (
-                <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className={cn("group flex min-h-11 items-center justify-between gap-3 py-2 text-sm font-medium text-[#0B1F10] transition-colors hover:text-[#117F21]", ring)}>{s.label}<span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] transition duration-300 group-hover:rotate-45 group-hover:bg-[#0B1F10] group-hover:text-[#F4D27A]"><ArrowUpRight className="h-4 w-4" /></span><span className="sr-only">(opens in a new tab)</span></a></li>
+                <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className={cn("group flex min-h-11 items-center justify-between gap-3 py-2 text-sm font-medium text-[#1A3A22] transition-colors hover:text-[#117F21]", ring)}>{s.label}<span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F2F6F0] transition duration-300 group-hover:rotate-45 group-hover:bg-[#1A3A22] group-hover:text-[#F4D27A]"><ArrowUpRight className="h-4 w-4" /></span><span className="sr-only">(opens in a new tab)</span></a></li>
               ))}
             </ul>
           </div>

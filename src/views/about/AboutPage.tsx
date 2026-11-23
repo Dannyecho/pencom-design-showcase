@@ -53,7 +53,7 @@ export default function AboutPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Hero />
         <SectionNav sections={onThisPage} pillId="about-nav-pill" />
         <Overview />
@@ -79,7 +79,7 @@ function Hero() {
   const at = T.toLowerCase().indexOf(M.toLowerCase());
   const heroTitle = at >= 0 ? { before: T.slice(0, at), mark: T.slice(at, at + M.length), after: T.slice(at + M.length), done: lang !== "en" } : { before: T, mark: "", after: "", done: lang !== "en" };
   return (
-    <section aria-labelledby="about-title" className="relative isolate overflow-hidden bg-[#04140A] text-white">
+    <section aria-labelledby="about-title" className="relative isolate overflow-hidden bg-[#12331C] text-white">
       <DarkBackdrop />
       <Ghost word="About" dark className="bottom-0 top-auto sm:top-auto lg:top-auto" />
 
@@ -122,7 +122,7 @@ function Hero() {
               Explore our history
               <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
             </button>
-            <button type="button" onClick={() => scrollToId("structure", !reduce)} className={cn("group inline-flex min-h-12 items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 font-semibold text-white backdrop-blur-md transition hover:bg-white hover:text-[#0B1F10]", focus)}>
+            <button type="button" onClick={() => scrollToId("structure", !reduce)} className={cn("group inline-flex min-h-12 items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 font-semibold text-white backdrop-blur-md transition hover:bg-white hover:text-[#1A3A22]", focus)}>
               How we are organised
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </button>
@@ -135,7 +135,7 @@ function Hero() {
           transition={{ duration: 0.9, delay: 0.15, ease }}
           className="relative lg:col-span-6"
         >
-          <FramedPanel className="h-[28rem] bg-[#0B1F10] sm:h-[32rem]">
+          <FramedPanel className="h-[28rem] bg-[#1A3A22] sm:h-[32rem]">
             <img
               src="/images/site/board-meeting-1920.webp"
               srcSet="/images/site/board-meeting-960.webp 960w, /images/site/board-meeting-1920.webp 1920w"
@@ -152,7 +152,7 @@ function Hero() {
               {heroStats.map((s) => (
                 <div key={s.label} className="px-3 py-3.5 sm:px-5 sm:py-4">
                   <dt className="text-xs font-semibold text-gray-600 sm:text-sm">{s.label}</dt>
-                  <dd className="mt-0.5 font-mono text-xl font-bold text-[#0B1F10] sm:text-2xl">
+                  <dd className="mt-0.5 font-mono text-xl font-bold text-[#1A3A22] sm:text-2xl">
                     <CountUp value={s.value} />
                   </dd>
                   <dd className="text-[11px] text-gray-600">{s.note}</dd>

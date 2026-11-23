@@ -14,7 +14,8 @@ them with PenCom's own cleared photography (design brief §8).
 | signing-document-* | https://images.unsplash.com/photo-1644412448696-3836c24bda5d | News: contribution figures statement |
 | elder-woman-call-* | https://images.unsplash.com/photo-1702648156997-eaa417d98b9e | News: 48-hour benefit approvals |
 | laptop-phone-* | https://images.unsplash.com/photo-1573164574230-db1d5e960238 | News: pension assets |
+| ../pencom-retiree.jpg, ../opt/pencom-retiree-*.webp | Pexels, Deen Docs, "Elderly Nigerian Man in Traditional Attire": https://www.pexels.com/photo/31655938/ (Pexels Licence, added 23 November 2026) | Retiree card and slide |
 | market-street-* | https://images.unsplash.com/photo-1552709586-d1aefe5d04b4 | Spare |
 
 Video posters (video-poster-team.webp, video-poster-elders.webp) are frames taken from
-PenCom's own highlight videos. Photos named pencom-*.webp in public/images/opt are PenCom's.
+PenCom's own highlight videos. Photos named pencom-*.webp in public/images/opt are PenCom's, except pencom-retiree-* (Pexels, listed above).

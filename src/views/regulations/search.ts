@@ -17,7 +17,7 @@ export const abbreviations: Record<string, string> = {
 };
 
 export const typeStyle: Record<RegDoc["type"], { dot: string; chip: string }> = {
-  Regulation: { dot: "bg-[#117F21]", chip: "bg-[#E8F5E9] text-[#0A4A13]" },
+  Regulation: { dot: "bg-[#14892A]", chip: "bg-[#E8F5E9] text-[#105D1D]" },
   Guideline: { dot: "bg-[#1E88E5]", chip: "bg-[#E3F2FD] text-[#0B4F8A]" },
   Circular: { dot: "bg-[#CB9615]", chip: "bg-[#FFF8E1] text-[#7A5604]" },
   Framework: { dot: "bg-[#7B4BB7]", chip: "bg-[#F1EAFB] text-[#4B2A7A]" },
@@ -26,7 +26,7 @@ export const typeStyle: Record<RegDoc["type"], { dot: string; chip: string }> = 
 };
 
 export const statusStyle: Record<RegDoc["status"], string> = {
-  "Latest version": "bg-[#E8F5E9] text-[#0A4A13] ring-[#117F21]/20",
+  "Latest version": "bg-[#E8F5E9] text-[#105D1D] ring-[#14892A]/20",
   Amended: "bg-[#FFF8E1] text-[#7A5604] ring-[#CB9615]/30",
   "Revised version available": "bg-[#FDE8E8] text-[#8E1A1E] ring-[#B52026]/20",
   Draft: "bg-gray-100 text-gray-700 ring-gray-300",

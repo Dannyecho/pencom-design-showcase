@@ -102,10 +102,10 @@ export default function QuickLinks() {
                     onClick={() => setOpen(false)}
                     className="group flex min-h-11 items-center gap-3 focus-visible:outline-none"
                   >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#117F21] to-[#0A4A13] text-white shadow-[0_10px_24px_-8px_rgba(10,74,19,0.8)] ring-2 ring-white transition duration-200 group-hover:scale-110 group-hover:from-[#CB9615] group-hover:to-[#9A6F06] group-focus-visible:outline group-focus-visible:outline-[3px] group-focus-visible:outline-offset-2 group-focus-visible:outline-[#FFD84D]">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#14892A] to-[#105D1D] text-white shadow-[0_10px_24px_-8px_rgba(16,93,29,0.8)] ring-2 ring-white transition duration-200 group-hover:scale-110 group-hover:from-[#CB9615] group-hover:to-[#9A6F06] group-focus-visible:outline group-focus-visible:outline-[3px] group-focus-visible:outline-offset-2 group-focus-visible:outline-[#FFD84D]">
                       <l.icon className="h-5 w-5" aria-hidden="true" />
                     </span>
-                    <span className="whitespace-nowrap rounded-lg bg-white px-3 py-1.5 text-sm font-semibold text-[#0B1F10] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] ring-1 ring-black/10 transition group-hover:-translate-x-0 group-hover:text-[#117F21] group-hover:ring-[#117F21]/30">
+                    <span className="whitespace-nowrap rounded-lg bg-white px-3 py-1.5 text-sm font-semibold text-[#1A3A22] shadow-[0_8px_24px_-8px_rgba(0,0,0,0.35)] ring-1 ring-black/10 transition group-hover:-translate-x-0 group-hover:text-[#117F21] group-hover:ring-[#14892A]/30">
                       {l.label}
                     </span>
                   </Link>
@@ -134,10 +134,10 @@ export default function QuickLinks() {
           setOpen((o) => !o);
         }}
         whileTap={{ scale: 0.92 }}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#04240A] text-white shadow-[0_16px_36px_-10px_rgba(4,36,10,0.9)] ring-2 ring-white/80 transition hover:bg-[#0A4A13] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#FFD84D]"
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#11421A] text-white shadow-[0_16px_36px_-10px_rgba(17,66,26,0.9)] ring-2 ring-white/80 transition hover:bg-[#105D1D] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#FFD84D]"
       >
         {!open && !reduce && (
-          <span aria-hidden="true" className="absolute inset-0 animate-ping rounded-full bg-[#117F21]/40 [animation-iteration-count:2]" />
+          <span aria-hidden="true" className="absolute inset-0 animate-ping rounded-full bg-[#14892A]/40 [animation-iteration-count:2]" />
         )}
         <AnimatePresence mode="wait" initial={false}>
           <motion.span

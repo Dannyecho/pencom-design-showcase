@@ -149,7 +149,7 @@ export default function NoticesBell() {
         transition={{ duration: 0.9, delay: 1.2, repeat: 1, repeatDelay: 2.5 }}
         className={cn(
           "relative flex h-10 w-10 items-center justify-center rounded-full border transition-colors focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]",
-          open ? "border-[#117F21] bg-[#E8F5E9] text-[#117F21]" : "border-gray-200 text-gray-700 hover:border-[#117F21] hover:bg-[#F4F7F2] hover:text-[#117F21]",
+          open ? "border-[#14892A] bg-[#E8F5E9] text-[#117F21]" : "border-gray-200 text-gray-700 hover:border-[#14892A] hover:bg-[#F4F7F2] hover:text-[#117F21]",
         )}
       >
         <Bell className="h-5 w-5" aria-hidden="true" />
@@ -163,7 +163,7 @@ export default function NoticesBell() {
               aria-hidden="true"
               className={cn(
                 "absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-bold text-white ring-2 ring-white",
-                urgent ? "bg-[#D32F2F]" : "bg-[#117F21]",
+                urgent ? "bg-[#D32F2F]" : "bg-[#14892A]",
               )}
             >
               {unread.length}
@@ -185,11 +185,11 @@ export default function NoticesBell() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: reduce ? 0 : -8, scale: reduce ? 1 : 0.97 }}
             transition={{ duration: 0.18 }}
-            className="fixed inset-x-3 top-[96px] z-[70] origin-top-right overflow-hidden rounded-2xl bg-white text-gray-900 shadow-[0_30px_70px_-20px_rgba(4,36,10,0.5)] ring-1 ring-black/10 focus:outline-none sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-3 sm:w-[25rem]"
+            className="fixed inset-x-3 top-[96px] z-[70] origin-top-right overflow-hidden rounded-2xl bg-white text-gray-900 shadow-[0_30px_70px_-20px_rgba(17,66,26,0.5)] ring-1 ring-black/10 focus:outline-none sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-3 sm:w-[25rem]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-gray-100 px-4 py-3">
               <div>
-                <p className="flex items-center gap-2 text-sm font-bold text-[#0B1F10]">
+                <p className="flex items-center gap-2 text-sm font-bold text-[#1A3A22]">
                   <Bell className="h-4 w-4 text-[#117F21]" aria-hidden="true" />
                   {t("Notices")}
                 </p>
@@ -249,7 +249,7 @@ export default function NoticesBell() {
                               </span>
                             )}
                           </p>
-                          <p className="mt-0.5 text-sm font-bold text-[#0B1F10]">{t(n.title)}</p>
+                          <p className="mt-0.5 text-sm font-bold text-[#1A3A22]">{t(n.title)}</p>
                           <p className="mt-0.5 text-sm leading-snug text-gray-600">{t(n.message)}</p>
                           <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
                             {n.link && (
@@ -292,7 +292,7 @@ export default function NoticesBell() {
                   <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#E8F5E9] text-[#117F21]">
                     <CheckCheck className="h-6 w-6" aria-hidden="true" />
                   </span>
-                  <p className="mt-3 text-sm font-semibold text-[#0B1F10]">{t("No notices right now")}</p>
+                  <p className="mt-3 text-sm font-semibold text-[#1A3A22]">{t("No notices right now")}</p>
                 </li>
               )}
             </ul>

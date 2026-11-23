@@ -38,11 +38,11 @@ export default function MegaPanel({ item, pathname }: { item: Item; pathname: st
     >
       <div
         onMouseMove={spot}
-        className="relative isolate overflow-hidden bg-[#04140A] text-white shadow-[0_40px_80px_-20px_rgba(0,0,0,0.9)] [background-image:radial-gradient(520px_circle_at_var(--x,70%)_var(--y,0%),rgba(244,210,122,0.12),transparent_45%)]"
+        className="relative isolate overflow-hidden bg-[#12331C] text-white shadow-[0_40px_80px_-20px_rgba(0,0,0,0.9)] [background-image:radial-gradient(520px_circle_at_var(--x,70%)_var(--y,0%),rgba(244,210,122,0.12),transparent_45%)]"
       >
         <DarkBackdrop animate={false} />
         <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F4D27A]/70 to-transparent" />
-        <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-[#117F21] via-[#F4D27A] to-[#117F21]" />
+        <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-[#14892A] via-[#F4D27A] to-[#14892A]" />
         <span
           aria-hidden="true"
           data-no-translate

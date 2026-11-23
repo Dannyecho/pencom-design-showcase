@@ -15,7 +15,7 @@ import { loadCases } from "./CaseForm";
 
 const fmt = (d: string) => new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 const mapsUrl = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
-const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]";
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)]";
 const chip = "flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-45";
 
 /* ─────────────────────────── Case tracker ─────────────────────────── */
@@ -46,18 +46,18 @@ export function Tracker({ prefill }: { prefill: string | null }) {
   }, [prefill]);
 
   return (
-    <section id="track" aria-labelledby="track-title" className={cn("relative isolate bg-[#04140A] text-white", sectionCls)}>
+    <section id="track" aria-labelledby="track-title" className={cn("relative isolate bg-[#12331C] text-white", sectionCls)}>
       <DarkBackdrop />
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <SectionHeading stacked id="track-title" dark eyebrow="Case tracker" title="Track your case" highlight="your case" intro="Enter the reference we gave you. No sign-in needed." />
           {/* Search pill: gold-to-green edge, pointer glow, focus ring on the pill (not inside it) */}
-          <div className="relative mt-8 rounded-full p-px [background-image:linear-gradient(120deg,rgba(244,210,122,0.9),rgba(255,255,255,0.15),rgba(17,127,33,0.8))] has-[input:focus-visible]:outline has-[input:focus-visible]:outline-[3px] has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-[#FFD84D]">
+          <div className="relative mt-8 rounded-full p-px [background-image:linear-gradient(120deg,rgba(244,210,122,0.9),rgba(255,255,255,0.15),rgba(20,137,42,0.8))] has-[input:focus-visible]:outline has-[input:focus-visible]:outline-[3px] has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-[#FFD84D]">
             <form role="search" onMouseMove={spot} onSubmit={(e) => { e.preventDefault(); look(ref); }} className={cn("flex items-center gap-2 rounded-full bg-white p-1.5 pl-5 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)]", glowLight)}>
               <Search className="hidden h-5 w-5 shrink-0 text-[#117F21] sm:block" aria-hidden="true" />
               <label htmlFor="track-ref" className="sr-only">Case reference</label>
-              <input id="track-ref" value={ref} onChange={(e) => setRef(e.target.value)} placeholder="e.g. PC-2611-AB12C" autoComplete="off" className="min-h-12 w-full min-w-0 bg-transparent font-mono uppercase text-[#0B1F10] placeholder:font-sans placeholder:normal-case placeholder:text-gray-600 focus:outline-none focus-visible:ring-0" />
-              <button type="submit" className={cn("group inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+              <input id="track-ref" value={ref} onChange={(e) => setRef(e.target.value)} placeholder="e.g. PC-2611-AB12C" autoComplete="off" className="min-h-12 w-full min-w-0 bg-transparent font-mono uppercase text-[#1A3A22] placeholder:font-sans placeholder:normal-case placeholder:text-gray-600 focus:outline-none focus-visible:ring-0" />
+              <button type="submit" className={cn("group inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full bg-[#1A3A22] py-1.5 pl-5 pr-1.5 font-semibold text-white transition hover:bg-[#14892A]", focus)}>
                 Track
                 <span aria-hidden="true" className={cn(chip, "h-9 w-9 bg-[#F4D27A] text-[#1A1206]")}><ArrowUpRight className="h-4 w-4" /></span>
               </button>
@@ -100,10 +100,10 @@ export function Tracker({ prefill }: { prefill: string | null }) {
                       <li key={s} className="relative flex gap-4 pb-7 last:pb-0">
                         {i < STAGES.length - 1 && (
                           <span aria-hidden="true" className="absolute left-[17px] top-9 h-[calc(100%-2.25rem)] w-0.5 bg-white/15">
-                            <motion.span className="block w-full origin-top bg-gradient-to-b from-[#F4D27A] to-[#2E913D]" initial={{ height: 0 }} animate={{ height: i < result.stage ? "100%" : "0%" }} transition={{ duration: reduce ? 0 : 0.5, delay: 0.2 + i * 0.25 }} />
+                            <motion.span className="block w-full origin-top bg-gradient-to-b from-[#F4D27A] to-[#36A045]" initial={{ height: 0 }} animate={{ height: i < result.stage ? "100%" : "0%" }} transition={{ duration: reduce ? 0 : 0.5, delay: 0.2 + i * 0.25 }} />
                           </span>
                         )}
-                        <motion.span initial={{ scale: reduce ? 1 : 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 + i * 0.2 }} className={cn("relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2", state === "done" ? "border-[#F4D27A] bg-[#F4D27A] text-[#1A1206]" : state === "now" ? "border-[#F4D27A] bg-[#0B1F10] text-[#F4D27A] shadow-[0_0_24px_rgba(244,210,122,0.45)]" : "border-white/25 text-white/60")}>
+                        <motion.span initial={{ scale: reduce ? 1 : 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 + i * 0.2 }} className={cn("relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2", state === "done" ? "border-[#F4D27A] bg-[#F4D27A] text-[#1A1206]" : state === "now" ? "border-[#F4D27A] bg-[#1A3A22] text-[#F4D27A] shadow-[0_0_24px_rgba(244,210,122,0.45)]" : "border-white/25 text-white/60")}>
                           {state === "done" ? <Check className="h-4 w-4" strokeWidth={3} aria-hidden="true" /> : state === "now" ? <Clock className="h-4 w-4" aria-hidden="true" /> : <span className="font-mono text-xs font-bold">{String(i + 1).padStart(2, "0")}</span>}
                           {state === "now" && !reduce && <span aria-hidden="true" className="absolute inset-0 animate-ping rounded-full border-2 border-[#F4D27A]/60 [animation-iteration-count:3]" />}
                         </motion.span>
@@ -160,8 +160,8 @@ export function Offices() {
           intro="Choose your state and we’ll show you the office that serves it, or pick a pin on the map."
           action={
             <label className="block w-full max-w-xs">
-              <span className="text-sm font-semibold text-[#0B1F10]">I live in</span>
-              <select value={state} onChange={(e) => setState(e.target.value)} className={cn("mt-1.5 min-h-12 w-full cursor-pointer rounded-full bg-white px-5 font-semibold text-[#0B1F10] shadow-[0_14px_30px_-20px_rgba(4,20,10,0.5)] ring-1 ring-black/10 transition hover:ring-[#117F21]/50", focus)}>
+              <span className="text-sm font-semibold text-[#1A3A22]">I live in</span>
+              <select value={state} onChange={(e) => setState(e.target.value)} className={cn("mt-1.5 min-h-12 w-full cursor-pointer rounded-full bg-white px-5 font-semibold text-[#1A3A22] shadow-[0_14px_30px_-20px_rgba(18,51,28,0.5)] ring-1 ring-black/10 transition hover:ring-[#14892A]/50", focus)}>
                 <option value="">Choose your state</option>
                 {allStates.map((s) => <option key={s}>{s}</option>)}
               </select>
@@ -173,15 +173,15 @@ export function Offices() {
           {/* Map */}
           <Rise className="lg:col-span-7">
             <div onMouseMove={spot} className={cn("relative h-full overflow-hidden rounded-[1.75rem] bg-[#F2F6F0] p-6 ring-1 ring-black/10", glowLight)}>
-              <div aria-hidden="true" className="absolute inset-0" style={{ backgroundImage: "radial-gradient(rgba(17,127,33,0.16) 1.2px, transparent 1.2px)", backgroundSize: "18px 18px" }} />
-              <div aria-hidden="true" className="absolute left-[12%] top-[10%] h-[80%] w-[76%] rounded-[45%_55%_48%_52%/52%_45%_55%_48%] bg-white/70 ring-1 ring-[#117F21]/15" />
+              <div aria-hidden="true" className="absolute inset-0" style={{ backgroundImage: "radial-gradient(rgba(20,137,42,0.16) 1.2px, transparent 1.2px)", backgroundSize: "18px 18px" }} />
+              <div aria-hidden="true" className="absolute left-[12%] top-[10%] h-[80%] w-[76%] rounded-[45%_55%_48%_52%/52%_45%_55%_48%] bg-white/70 ring-1 ring-[#14892A]/15" />
               <div className="relative mx-auto aspect-[0.95] w-full max-w-2xl sm:aspect-[1.25]">
                 {/* Route from the head office to the chosen zonal office */}
                 <svg aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
                   <defs>
                     <linearGradient id="office-route" x1="0" y1="0" x2="1" y2="1">
                       <stop offset="0%" stopColor="#CB9615" />
-                      <stop offset="100%" stopColor="#117F21" />
+                      <stop offset="100%" stopColor="#14892A" />
                     </linearGradient>
                   </defs>
                   {office && (
@@ -206,10 +206,10 @@ export function Offices() {
                       <li key={p.id} className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: `${px(p.x)}%`, top: `${py(p.y)}%` }}>
                         <button type="button" onClick={() => setSel(p.id)} aria-pressed={on} className="group relative flex flex-col items-center focus-visible:outline-none">
                           {on && !reduce && <span aria-hidden="true" className="absolute top-0 h-9 w-9 animate-ping rounded-full bg-[#CB9615]/35 [animation-iteration-count:3] sm:h-11 sm:w-11" />}
-                          <motion.span animate={{ scale: on ? 1.15 : 1 }} className={cn("relative flex h-9 w-9 items-center justify-center rounded-full shadow-[0_12px_24px_-10px_rgba(4,20,10,0.6)] ring-[3px] transition group-hover:-translate-y-0.5 group-focus-visible:outline group-focus-visible:outline-[3px] group-focus-visible:outline-[#FFD84D] sm:h-11 sm:w-11 sm:ring-4", on ? "bg-[#0B1F10] text-[#F4D27A] ring-[#F4D27A]" : p.hq ? "bg-[#F4D27A] text-[#1A1206] ring-white" : "bg-white text-[#117F21] ring-[#117F21]/25 group-hover:bg-[#E8F5E9]")}>
+                          <motion.span animate={{ scale: on ? 1.15 : 1 }} className={cn("relative flex h-9 w-9 items-center justify-center rounded-full shadow-[0_12px_24px_-10px_rgba(18,51,28,0.6)] ring-[3px] transition group-hover:-translate-y-0.5 group-focus-visible:outline group-focus-visible:outline-[3px] group-focus-visible:outline-[#FFD84D] sm:h-11 sm:w-11 sm:ring-4", on ? "bg-[#1A3A22] text-[#F4D27A] ring-[#F4D27A]" : p.hq ? "bg-[#F4D27A] text-[#1A1206] ring-white" : "bg-white text-[#117F21] ring-[#14892A]/25 group-hover:bg-[#E8F5E9]")}>
                             {p.hq ? <Landmark className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" /> : <MapPin className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />}
                           </motion.span>
-                          <span className={cn("mt-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-bold shadow-sm ring-1 sm:mt-1.5 sm:px-2.5 sm:text-xs", on ? "bg-[#0B1F10] text-[#F4D27A] ring-[#0B1F10]" : "bg-white text-[#0B1F10] ring-black/10")}>
+                          <span className={cn("mt-1 whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-bold shadow-sm ring-1 sm:mt-1.5 sm:px-2.5 sm:text-xs", on ? "bg-[#1A3A22] text-[#F4D27A] ring-[#1A3A22]" : "bg-white text-[#1A3A22] ring-black/10")}>
                             {p.city}{p.hq && " (HQ)"}
                           </span>
                         </button>
@@ -221,7 +221,7 @@ export function Offices() {
               <p className="relative mt-2 text-center text-xs text-gray-600">Schematic map. Pins show approximate locations.</p>
               <div className="relative mt-4 flex flex-wrap justify-center gap-2 sm:hidden">
                 {pins.map((p) => (
-                  <button key={p.id} type="button" onClick={() => setSel(p.id)} aria-pressed={sel === p.id} className={cn("min-h-11 rounded-full px-4 text-sm font-semibold transition", sel === p.id ? "bg-[#0B1F10] text-[#F4D27A]" : "bg-white text-[#0B1F10] ring-1 ring-black/10", focus)}>
+                  <button key={p.id} type="button" onClick={() => setSel(p.id)} aria-pressed={sel === p.id} className={cn("min-h-11 rounded-full px-4 text-sm font-semibold transition", sel === p.id ? "bg-[#1A3A22] text-[#F4D27A]" : "bg-white text-[#1A3A22] ring-1 ring-black/10", focus)}>
                     {p.city}
                   </button>
                 ))}
@@ -232,7 +232,7 @@ export function Offices() {
           {/* Office card */}
           <div className="lg:col-span-5" aria-live="polite">
             <AnimatePresence mode="wait">
-              <motion.article key={sel} onMouseMove={spot} initial={{ opacity: 0, y: reduce ? 0 : 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reduce ? 0 : -16 }} transition={{ duration: 0.3, ease }} className={cn("relative isolate h-full overflow-hidden rounded-[1.75rem] p-7 text-white shadow-[0_40px_80px_-40px_rgba(4,20,10,0.8)] sm:p-9", darkCard)}>
+              <motion.article key={sel} onMouseMove={spot} initial={{ opacity: 0, y: reduce ? 0 : 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reduce ? 0 : -16 }} transition={{ duration: 0.3, ease }} className={cn("relative isolate h-full overflow-hidden rounded-[1.75rem] p-7 text-white shadow-[0_40px_80px_-40px_rgba(18,51,28,0.8)] sm:p-9", darkCard)}>
                 <span aria-hidden="true" className="pointer-events-none absolute -bottom-4 right-3 -z-10 select-none text-[5.5rem] font-black uppercase leading-none tracking-tight text-transparent [-webkit-text-stroke:1.5px_rgba(244,210,122,0.18)] sm:text-[7rem]">{card.city}</span>
                 <p className="inline-flex items-center gap-2 rounded-full bg-[#F4D27A] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#1A1206]">
                   {office ? <MapPin className="h-3.5 w-3.5" aria-hidden="true" /> : <Landmark className="h-3.5 w-3.5" aria-hidden="true" />}
@@ -263,7 +263,7 @@ export function Offices() {
                 <a href={mapsUrl(card.address)} target="_blank" rel="noopener noreferrer" className={cn("group mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#F4D27A] py-1.5 pl-5 pr-1.5 text-sm font-bold text-[#1A1206] shadow-[0_14px_30px_-14px_rgba(244,210,122,0.9)] transition hover:bg-[#FFE08A]", focus)}>
                   <Navigation className="h-4 w-4" aria-hidden="true" /> Get directions
                   <span className="sr-only">(opens Google Maps in a new tab)</span>
-                  <span aria-hidden="true" className={cn(chip, "bg-[#0B1F10] text-[#F4D27A]")}><ArrowUpRight className="h-4 w-4" /></span>
+                  <span aria-hidden="true" className={cn(chip, "bg-[#1A3A22] text-[#F4D27A]")}><ArrowUpRight className="h-4 w-4" /></span>
                 </a>
               </motion.article>
             </AnimatePresence>
@@ -296,7 +296,7 @@ export function Newsroom() {
           title="Newsroom"
           intro="Press releases, statements, speeches, events, photos and videos from the Commission."
           action={
-            <Link to="/news" className={cn("group inline-flex min-h-12 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+            <Link to="/news" className={cn("group inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1A3A22] py-1.5 pl-5 pr-1.5 font-semibold text-white transition hover:bg-[#14892A]", focus)}>
               Open the newsroom
               <span aria-hidden="true" className={cn(chip, "h-9 w-9 bg-[#F4D27A] text-[#1A1206]")}><ArrowUpRight className="h-4 w-4" /></span>
             </Link>
@@ -307,12 +307,12 @@ export function Newsroom() {
           {media.map((m) => (
             <li key={m.k}>
               {"to" in m && m.to ? (
-                <Link to={m.to} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] py-1 pl-4 pr-1 text-sm font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+                <Link to={m.to} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] py-1 pl-4 pr-1 text-sm font-semibold text-white transition hover:bg-[#14892A]", focus)}>
                   <m.icon className="h-4 w-4 text-[#F4D27A]" aria-hidden="true" /> {m.k}
                   <span aria-hidden="true" className={cn(chip, "bg-white/10 text-[#F4D27A]")}><ArrowUpRight className="h-3.5 w-3.5" /></span>
                 </Link>
               ) : (
-                <span className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#0B1F10] ring-1 ring-black/10">
+                <span className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1A3A22] ring-1 ring-black/10">
                   <m.icon className="h-4 w-4 text-[#117F21]" aria-hidden="true" /> {m.k}
                 </span>
               )}
@@ -323,9 +323,9 @@ export function Newsroom() {
         <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-12">
           <Rise className="lg:col-span-7">
             <article className="h-full">
-              <Link to={newsPath(lead)} className={cn("group relative flex h-full min-h-[26rem] flex-col justify-end overflow-hidden rounded-[1.75rem] bg-[#04140A] text-white", focus)}>
+              <Link to={newsPath(lead)} className={cn("group relative flex h-full min-h-[26rem] flex-col justify-end overflow-hidden rounded-[1.75rem] bg-[#12331C] text-white", focus)}>
                 <img src={lead.image} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-1000 group-hover:scale-110" />
-                <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#04140A] via-[#04140A]/55 to-transparent" />
+                <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#12331C] via-[#12331C]/55 to-transparent" />
                 <span className="relative p-7 sm:p-9">
                   <span className="flex items-center gap-3 text-xs"><span className="rounded-full bg-[#F4D27A] px-3 py-1 font-bold uppercase tracking-wider text-[#1A1206]">{lead.category}</span><span className="text-white/80">{fmt(lead.date)}</span></span>
                   <span className="mt-4 block text-2xl font-black leading-tight tracking-tight sm:text-3xl">{lead.title}</span>
@@ -345,7 +345,7 @@ export function Newsroom() {
                     </span>
                     <span className="flex min-w-0 flex-1 flex-col justify-center py-2 pr-2">
                       <span className="text-[11px] font-bold uppercase tracking-wider text-[#117F21]">{n.category} · <span className="font-normal normal-case text-gray-600">{fmt(n.date)}</span></span>
-                      <span className="mt-1 block font-bold leading-snug text-[#0B1F10] transition group-hover:text-[#117F21]">{n.title}</span>
+                      <span className="mt-1 block font-bold leading-snug text-[#1A3A22] transition group-hover:text-[#117F21]">{n.title}</span>
                     </span>
                   </Link>
                 </article>

@@ -53,7 +53,7 @@ export default function Headline({
             transition={{ duration: 0.5 }}
             className={cn(
               "inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] shadow-sm",
-              dark ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#0A4A13] text-[#F4D27A]",
+              dark ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#105D1D] text-[#F4D27A]",
             )}
           >
             <span aria-hidden="true" className={cn("h-1.5 w-1.5 rounded-full", dark ? "bg-[#1A1206]" : "bg-[#F4D27A]")} />
@@ -69,12 +69,12 @@ export default function Headline({
             className={cn(
               "mt-4 text-[2.1rem] font-black leading-[1.05] tracking-tight sm:text-5xl",
               !stacked && "lg:text-[3.6rem]",
-              dark ? "text-white" : "text-[#0B1F10]",
+              dark ? "text-white" : "text-[#1A3A22]",
             )}
           >
             {before}
             {hl && (
-              <span className={cn("bg-clip-text text-transparent", dark ? "bg-gradient-to-r from-[#F4D27A] to-[#E9B949]" : "bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615]")}>
+              <span className={cn("bg-clip-text text-transparent", dark ? "bg-gradient-to-r from-[#F4D27A] to-[#E9B949]" : "bg-gradient-to-r from-[#14892A] via-[#36A045] to-[#CB9615]")}>
                 {hl}
               </span>
             )}

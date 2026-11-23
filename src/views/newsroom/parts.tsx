@@ -20,12 +20,12 @@ export const ease = [0.22, 1, 0.36, 1] as const;
 export const focus = "focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#FFD84D]";
 
 export const look: Record<Kind, { icon: LucideIcon; chip: string; dot: string }> = {
-  "Press release": { icon: Megaphone, chip: "bg-[#E8F5E9] text-[#0A4A13]", dot: "bg-[#117F21]" },
+  "Press release": { icon: Megaphone, chip: "bg-[#E8F5E9] text-[#105D1D]", dot: "bg-[#14892A]" },
   Statement: { icon: FileText, chip: "bg-[#E6F1FB] text-[#0B4F8A]", dot: "bg-[#1E88E5]" },
   Speech: { icon: Mic, chip: "bg-[#F1EAFB] text-[#5B2E91]", dot: "bg-[#7E57C2]" },
   Event: { icon: CalendarDays, chip: "bg-[#FAEEDA] text-[#854F0B]", dot: "bg-[#D97706]" },
   Reports: { icon: BarChart3, chip: "bg-[#FFF2CC] text-[#7A5200]", dot: "bg-[#CB9615]" },
-  Regulation: { icon: Scale, chip: "bg-[#EEF6EE] text-[#0A4A13]", dot: "bg-[#0A4A13]" },
+  Regulation: { icon: Scale, chip: "bg-[#EEF6EE] text-[#105D1D]", dot: "bg-[#105D1D]" },
   "Media coverage": { icon: Tv, chip: "bg-[#FCEBEB] text-[#A32D2D]", dot: "bg-[#D32F2F]" },
 };
 
@@ -61,7 +61,7 @@ export function Hero({ lead, q, onSearch }: { lead: NewsItem; q: string; onSearc
       actions={
         <div className="max-w-xl">
           {/* Search pill: gold-to-green edge, pointer glow, focus ring on the pill (not inside it) */}
-          <div className="relative rounded-full p-px [background-image:linear-gradient(120deg,rgba(244,210,122,0.9),rgba(255,255,255,0.15),rgba(17,127,33,0.8))] has-[input:focus-visible]:outline has-[input:focus-visible]:outline-[3px] has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-[#FFD84D]">
+          <div className="relative rounded-full p-px [background-image:linear-gradient(120deg,rgba(244,210,122,0.9),rgba(255,255,255,0.15),rgba(20,137,42,0.8))] has-[input:focus-visible]:outline has-[input:focus-visible]:outline-[3px] has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-[#FFD84D]">
             <form role="search" onSubmit={submit} onMouseMove={spot} className={cn("flex items-center gap-1.5 rounded-full bg-white p-1.5 pl-4 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)] sm:gap-2 sm:pl-5", glowLight)}>
               <label htmlFor="news-search" className="sr-only">
                 Search the news
@@ -73,14 +73,14 @@ export function Hero({ lead, q, onSearch }: { lead: NewsItem; q: string; onSearc
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder={t("Search the news, e.g. “Pencare” or “report”")}
-                className="min-h-12 w-full min-w-0 bg-transparent text-base text-[#0B1F10] placeholder:text-gray-500 focus:outline-none focus-visible:outline-none focus-visible:ring-0 [&::-webkit-search-cancel-button]:hidden"
+                className="min-h-12 w-full min-w-0 bg-transparent text-base text-[#1A3A22] placeholder:text-gray-500 focus:outline-none focus-visible:outline-none focus-visible:ring-0 [&::-webkit-search-cancel-button]:hidden"
               />
               {text && (
-                <button type="button" onClick={() => { setText(""); onSearch(""); }} aria-label={t("Clear search")} className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-gray-600 transition hover:bg-[#F2F6F0] hover:text-[#0B1F10]", focus)}>
+                <button type="button" onClick={() => { setText(""); onSearch(""); }} aria-label={t("Clear search")} className={cn("flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-gray-600 transition hover:bg-[#F2F6F0] hover:text-[#1A3A22]", focus)}>
                   <X className="h-4 w-4" aria-hidden="true" />
                 </button>
               )}
-              <button type="submit" className={cn("group inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-4 pr-1.5 font-semibold text-white transition hover:bg-[#117F21] sm:pl-5", focus)}>
+              <button type="submit" className={cn("group inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full bg-[#1A3A22] py-1.5 pl-4 pr-1.5 font-semibold text-white transition hover:bg-[#14892A] sm:pl-5", focus)}>
                 Search
                 <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:rotate-45">
                   <ArrowUpRight className="h-4 w-4" />
@@ -119,19 +119,19 @@ function Featured({ item }: { item: NewsItem }) {
   return (
     <article className="group relative" aria-labelledby="lead-title">
       {/* Thin gold-to-green edge, as on the theme's floating panels */}
-      <div aria-hidden="true" className="absolute -inset-px rounded-[calc(2rem+1px)] bg-gradient-to-br from-[#F4D27A]/80 via-white/10 to-[#117F21]/70" />
+      <div aria-hidden="true" className="absolute -inset-px rounded-[calc(2rem+1px)] bg-gradient-to-br from-[#F4D27A]/80 via-white/10 to-[#14892A]/70" />
       <div
         onMouseMove={spot}
-        className="relative h-[30rem] overflow-hidden rounded-[2rem] bg-[#0B1F10] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)] sm:h-[34rem]"
+        className="relative h-[30rem] overflow-hidden rounded-[2rem] bg-[#1A3A22] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)] sm:h-[34rem]"
       >
         <img src={item.image} alt={t(item.imageAlt)} className="absolute inset-0 h-full w-full object-cover transition [transition-duration:1600ms] ease-out group-hover:scale-105" fetchPriority="high" />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#04140A]/80 via-[#04140A]/10 to-[#04140A]/40" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#12331C]/80 via-[#12331C]/10 to-[#12331C]/40" />
         {/* Gold spotlight that follows the pointer over the photo */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100 [background-image:radial-gradient(380px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.22),transparent_55%)]" />
         <p className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[#F4D27A] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#1A1206] shadow-[0_12px_30px_-12px_rgba(244,210,122,0.9)]">
           <span className="relative flex h-2 w-2" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0A4A13]/60 [animation-iteration-count:3]" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0A4A13]" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#105D1D]/60 [animation-iteration-count:3]" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#105D1D]" />
           </span>
           Top story
         </p>
@@ -142,13 +142,13 @@ function Featured({ item }: { item: NewsItem }) {
             <span aria-hidden="true">·</span>
             <span>{t(item.meta)}</span>
           </p>
-          <h2 id="lead-title" className="mt-3 text-2xl font-black leading-tight tracking-tight text-[#0B1F10] sm:text-[1.7rem]">
+          <h2 id="lead-title" className="mt-3 text-2xl font-black leading-tight tracking-tight text-[#1A3A22] sm:text-[1.7rem]">
             <Link to={item.to} className={cn("rounded after:absolute after:inset-0 after:rounded-[1.5rem] after:content-['']", focus)}>
               {t(item.title)}
             </Link>
           </h2>
           <p className="mt-2 line-clamp-2 text-[0.95rem] leading-relaxed text-gray-600">{t(item.excerpt)}</p>
-          <span className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] py-1 pl-4 pr-1 text-sm font-semibold text-white transition group-hover:bg-[#117F21]">
+          <span className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] py-1 pl-4 pr-1 text-sm font-semibold text-white transition group-hover:bg-[#14892A]">
             {t(item.action)}
             <ArrowChip dark />
           </span>
@@ -179,13 +179,13 @@ export function FilterBar({
   ];
   const active = !!(kind || year || q);
   const select = cn(
-    "min-h-11 appearance-none rounded-full bg-white pl-4 pr-9 text-sm font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:ring-[#0B1F10]/40",
+    "min-h-11 appearance-none rounded-full bg-white pl-4 pr-9 text-sm font-semibold text-[#1A3A22] ring-1 ring-black/10 transition hover:ring-[#1A3A22]/40",
     focus,
   );
 
   return (
     <div className="sticky top-[92px] z-30 -mx-4 mt-8 px-4 py-3">
-      <div className="rounded-[1.75rem] bg-white/90 p-1.5 shadow-[0_24px_50px_-30px_rgba(4,20,10,0.7)] ring-1 ring-black/10 backdrop-blur-xl lg:rounded-full">
+      <div className="rounded-[1.75rem] bg-white/90 p-1.5 shadow-[0_24px_50px_-30px_rgba(18,51,28,0.7)] ring-1 ring-black/10 backdrop-blur-xl lg:rounded-full">
         <div className="flex flex-col gap-1.5 lg:flex-row lg:items-center">
           <div role="group" aria-label={t("Type of news")} className="flex snap-x gap-1 overflow-x-auto [scrollbar-width:none] lg:flex-1 [&::-webkit-scrollbar]:hidden">
             {chips.map((c) => {
@@ -198,7 +198,7 @@ export function FilterBar({
                   onClick={() => setKind(c.id)}
                   className={cn("relative flex min-h-11 shrink-0 snap-start items-center gap-2 rounded-full px-4 text-sm font-semibold transition", on ? "text-[#F4D27A]" : "text-gray-700 hover:bg-[#F2F6F0]", focus)}
                 >
-                  {on && <motion.span layoutId="news-kind-pill" className="absolute inset-0 rounded-full bg-[#0B1F10]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                  {on && <motion.span layoutId="news-kind-pill" className="absolute inset-0 rounded-full bg-[#1A3A22]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <span className="relative">{t(c.label)}</span>
                   <span className={cn("relative min-w-[1.5rem] rounded-full px-1.5 text-center font-mono text-xs tabular-nums", on ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#F2F6F0] text-gray-700")}>{c.n}</span>
                 </button>
@@ -231,9 +231,9 @@ export function FilterBar({
                   aria-pressed={view === v}
                   onClick={() => setView(v)}
                   title={t(label)}
-                  className={cn("relative flex h-10 w-11 items-center justify-center rounded-full transition", view === v ? "text-[#F4D27A]" : "text-gray-600 hover:text-[#0B1F10]", focus)}
+                  className={cn("relative flex h-10 w-11 items-center justify-center rounded-full transition", view === v ? "text-[#F4D27A]" : "text-gray-600 hover:text-[#1A3A22]", focus)}
                 >
-                  {view === v && <motion.span layoutId="news-view-pill" className="absolute inset-0 rounded-full bg-[#0B1F10]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                  {view === v && <motion.span layoutId="news-view-pill" className="absolute inset-0 rounded-full bg-[#1A3A22]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <Icon className="relative h-4 w-4" aria-hidden="true" />
                   <span className="sr-only">{t(label)}</span>
                 </button>
@@ -244,7 +244,7 @@ export function FilterBar({
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 px-2 text-sm text-gray-700">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]" aria-hidden="true">
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A]" aria-hidden="true">
           <SlidersHorizontal className="h-3.5 w-3.5" />
         </span>
         <p aria-live="polite" data-i18n-done>
@@ -252,7 +252,7 @@ export function FilterBar({
           {q && <> {t("for “{q}”", { q })}</>}
         </p>
         {active && (
-          <button type="button" onClick={clear} className={cn("inline-flex min-h-9 items-center gap-1 rounded-full bg-white px-3 font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:bg-[#0B1F10] hover:text-[#F4D27A]", focus)}>
+          <button type="button" onClick={clear} className={cn("inline-flex min-h-9 items-center gap-1 rounded-full bg-white px-3 font-semibold text-[#1A3A22] ring-1 ring-black/10 transition hover:bg-[#1A3A22] hover:text-[#F4D27A]", focus)}>
             <X className="h-3.5 w-3.5" aria-hidden="true" />
             Clear filters
           </button>
@@ -264,7 +264,7 @@ export function FilterBar({
 
 /* ─────────────────────────── Cards ─────────────────────────── */
 
-const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]";
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)]";
 
 export function NewsCard({ item, view, onShare }: { item: NewsItem; view: View; onShare: (i: NewsItem) => void }) {
   const { t } = useI18n();
@@ -274,10 +274,10 @@ export function NewsCard({ item, view, onShare }: { item: NewsItem; view: View; 
   if (view === "list") {
     return (
       <article onMouseMove={spot} className={cn("group relative flex items-center gap-4 rounded-3xl bg-white p-3 ring-1 ring-black/10 sm:gap-5 sm:p-4", glowLight, lift)}>
-        <div className="relative aspect-[4/3] w-28 shrink-0 self-start overflow-hidden rounded-2xl bg-[#0B1F10] sm:aspect-video sm:w-52">
+        <div className="relative aspect-[4/3] w-28 shrink-0 self-start overflow-hidden rounded-2xl bg-[#1A3A22] sm:aspect-video sm:w-52">
           <img src={img} alt="" loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
           {video && (
-            <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-[#04140A]/25">
+            <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-[#12331C]/25">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] shadow sm:h-11 sm:w-11"><Play className="ml-0.5 h-4 w-4 fill-current" /></span>
             </span>
           )}
@@ -289,7 +289,7 @@ export function NewsCard({ item, view, onShare }: { item: NewsItem; view: View; 
             <span aria-hidden="true" className="hidden sm:inline">·</span>
             <span className="hidden sm:inline">{t(item.meta)}</span>
           </p>
-          <h3 className="mt-2 font-bold leading-snug text-[#0B1F10] sm:text-lg">
+          <h3 className="mt-2 font-bold leading-snug text-[#1A3A22] sm:text-lg">
             <Link to={item.to} className={cn("rounded transition-colors after:absolute after:inset-0 after:rounded-3xl after:content-[''] group-hover:text-[#117F21]", focus)}>
               {t(item.title)}
             </Link>
@@ -307,13 +307,13 @@ export function NewsCard({ item, view, onShare }: { item: NewsItem; view: View; 
   return (
     <article onMouseMove={spot} className={cn("group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-black/10", glowLight, lift)}>
       {/* Green-to-gold line that grows along the top on hover */}
-      <span aria-hidden="true" className="absolute inset-x-0 top-0 z-10 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
-      <div className="relative aspect-[16/10] overflow-hidden bg-[#0B1F10]">
+      <span aria-hidden="true" className="absolute inset-x-0 top-0 z-10 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#14892A] via-[#36A045] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+      <div className="relative aspect-[16/10] overflow-hidden bg-[#1A3A22]">
         <img src={img} alt="" loading="lazy" className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.06]" />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#04140A]/60 via-transparent to-[#04140A]/20" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#12331C]/60 via-transparent to-[#12331C]/20" />
         <KindChip kind={item.kind} className="absolute left-3 top-3 shadow-sm" />
         {item.attachment && (
-          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-[#0B1F10]/85 px-2.5 py-1 text-[11px] font-bold text-[#F4D27A] shadow-sm backdrop-blur">
+          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-[#1A3A22]/85 px-2.5 py-1 text-[11px] font-bold text-[#F4D27A] shadow-sm backdrop-blur">
             <Paperclip className="h-3 w-3" aria-hidden="true" />
             PDF
           </span>
@@ -333,14 +333,14 @@ export function NewsCard({ item, view, onShare }: { item: NewsItem; view: View; 
           <span aria-hidden="true">·</span>
           <span>{t(item.meta)}</span>
         </p>
-        <h3 className="mt-2 text-lg font-bold leading-snug tracking-tight text-[#0B1F10]">
+        <h3 className="mt-2 text-lg font-bold leading-snug tracking-tight text-[#1A3A22]">
           <Link to={item.to} className={cn("rounded transition-colors after:absolute after:inset-0 after:rounded-3xl after:content-[''] group-hover:text-[#117F21]", focus)}>
             {t(item.title)}
           </Link>
         </h3>
         <p className="mt-2 line-clamp-2 flex-1 text-[0.95rem] leading-relaxed text-gray-600">{t(item.excerpt)}</p>
         <div className="mt-5 flex items-center justify-between gap-3 border-t border-black/[0.07] pt-4">
-          <span className="inline-flex items-center gap-2.5 text-sm font-semibold text-[#0B1F10]">
+          <span className="inline-flex items-center gap-2.5 text-sm font-semibold text-[#1A3A22]">
             <ArrowChip />
             {t(item.action)}
           </span>
@@ -360,7 +360,7 @@ function ShareButton({ item, onShare, className }: { item: NewsItem; onShare: (i
       aria-label={`${t("Share")}: ${t(item.title)}`}
       title={t("Share")}
       data-i18n-done
-      className={cn("relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-gray-600 ring-1 ring-black/10 transition hover:bg-[#0B1F10] hover:text-[#F4D27A]", focus, className)}
+      className={cn("relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-gray-600 ring-1 ring-black/10 transition hover:bg-[#1A3A22] hover:text-[#F4D27A]", focus, className)}
     >
       <Share2 className="h-4 w-4" aria-hidden="true" />
     </button>
@@ -378,7 +378,7 @@ export function Toast({ text }: { text: string | null }) {
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10 }}
-            className="inline-flex items-center gap-2 rounded-full bg-[#0B1F10] px-4 py-2.5 text-sm font-semibold text-white shadow-xl ring-1 ring-[#F4D27A]/40"
+            className="inline-flex items-center gap-2 rounded-full bg-[#1A3A22] px-4 py-2.5 text-sm font-semibold text-white shadow-xl ring-1 ring-[#F4D27A]/40"
           >
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206]">
               <Check className="h-3.5 w-3.5" aria-hidden="true" />
@@ -394,16 +394,16 @@ export function Toast({ text }: { text: string | null }) {
 export function Empty({ clear }: { clear: () => void }) {
   return (
     <div onMouseMove={spot} className={cn("rounded-[1.75rem] bg-white px-6 py-14 text-center ring-1 ring-black/10", glowLight)}>
-      <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]">
+      <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A]">
         <Search className="h-6 w-6" aria-hidden="true" />
       </span>
-      <h3 className="mt-4 text-xl font-black tracking-tight text-[#0B1F10]">No news matches your search</h3>
+      <h3 className="mt-4 text-xl font-black tracking-tight text-[#1A3A22]">No news matches your search</h3>
       <p className="mx-auto mt-2 max-w-md text-gray-600">Try a different word, choose another year, or look in the regulatory library for circulars and guidelines.</p>
       <div className="mt-6 flex flex-wrap justify-center gap-3">
-        <button type="button" onClick={clear} className={cn("inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] px-5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+        <button type="button" onClick={clear} className={cn("inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] px-5 font-semibold text-white transition hover:bg-[#14892A]", focus)}>
           Clear filters
         </button>
-        <Link to="/regulations#library" className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-white py-1 pl-5 pr-1 font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:ring-[#0B1F10]/40", focus)}>
+        <Link to="/regulations#library" className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-white py-1 pl-5 pr-1 font-semibold text-[#1A3A22] ring-1 ring-black/10 transition hover:ring-[#1A3A22]/40", focus)}>
           Open the library
           <ArrowChip />
         </Link>
@@ -427,7 +427,7 @@ export function Galleries() {
           mark="our events"
           intro="Briefings, visits, campaigns and training, captioned so everyone can follow."
           action={
-            <Link to="/media#photos" className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] py-1 pl-5 pr-1 text-sm font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+            <Link to="/media#photos" className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] py-1 pl-5 pr-1 text-sm font-semibold text-white transition hover:bg-[#14892A]", focus)}>
               <Images className="h-4 w-4 text-[#F4D27A]" aria-hidden="true" />
               {t("All photos and videos")}
               <ArrowChip dark />
@@ -448,21 +448,21 @@ export function Galleries() {
                         alt={k === 0 ? c.alt : ""}
                         loading="lazy"
                         className={cn(
-                          "absolute inset-x-4 top-3 h-48 w-[calc(100%-2rem)] rounded-2xl object-cover shadow-[0_18px_40px_-20px_rgba(4,20,10,0.6)] ring-4 ring-white transition duration-500 ease-out",
+                          "absolute inset-x-4 top-3 h-48 w-[calc(100%-2rem)] rounded-2xl object-cover shadow-[0_18px_40px_-20px_rgba(18,51,28,0.6)] ring-4 ring-white transition duration-500 ease-out",
                           k === 0 && "z-30 group-hover:-translate-y-1",
                           k === 1 && "z-20 -rotate-3 scale-[0.96] group-hover:-translate-x-5 group-hover:-rotate-[9deg]",
                           k === 2 && "z-10 rotate-3 scale-[0.92] group-hover:translate-x-5 group-hover:rotate-[9deg]",
                         )}
                       />
                     ))}
-                    <span className="absolute bottom-4 right-6 z-40 inline-flex items-center gap-1.5 rounded-full bg-[#0B1F10]/90 px-2.5 py-1 text-xs font-bold text-[#F4D27A] backdrop-blur">
+                    <span className="absolute bottom-4 right-6 z-40 inline-flex items-center gap-1.5 rounded-full bg-[#1A3A22]/90 px-2.5 py-1 text-xs font-bold text-[#F4D27A] backdrop-blur">
                       <Images className="h-3.5 w-3.5" aria-hidden="true" />
                       <span data-i18n-done>{t("{n} photos", { n: g.count })}</span>
                     </span>
                   </div>
                   <div className="mt-2 flex flex-1 items-start justify-between gap-3 px-2">
                     <div>
-                      <h3 className="font-bold leading-snug text-[#0B1F10] transition-colors group-hover:text-[#117F21]">{t(g.title)}</h3>
+                      <h3 className="font-bold leading-snug text-[#1A3A22] transition-colors group-hover:text-[#117F21]">{t(g.title)}</h3>
                       <p className="mt-1 text-sm leading-relaxed text-gray-600">{t(g.blurb)}</p>
                     </div>
                     <ArrowChip />
@@ -486,7 +486,7 @@ const label = "text-xs font-bold uppercase tracking-[0.18em] text-[#F4D27A]";
 export function MediaDesk() {
   const { t } = useI18n();
   return (
-    <section aria-labelledby="media-desk-title" className={cn("relative isolate bg-[#04140A] text-white", sectionCls)}>
+    <section aria-labelledby="media-desk-title" className={cn("relative isolate bg-[#12331C] text-white", sectionCls)}>
       <DarkBackdrop />
       <div className="relative mx-auto max-w-7xl">
         <Headline
@@ -551,7 +551,7 @@ export function MediaDesk() {
                 { label: "Reports and publications", to: "/resources#publications" },
                 { label: "Circulars and regulations", to: "/regulations#library" },
               ].map((l) => (
-                <Link key={l.to} to={l.to} className={cn("group flex min-h-12 items-center justify-between gap-3 rounded-full bg-white py-1 pl-5 pr-1 text-sm font-semibold text-[#0B1F10] transition hover:bg-[#F4D27A] hover:text-[#1A1206]", focus)}>
+                <Link key={l.to} to={l.to} className={cn("group flex min-h-12 items-center justify-between gap-3 rounded-full bg-white py-1 pl-5 pr-1 text-sm font-semibold text-[#1A3A22] transition hover:bg-[#F4D27A] hover:text-[#1A1206]", focus)}>
                   {t(l.label)}
                   <ArrowChip />
                 </Link>

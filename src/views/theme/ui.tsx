@@ -47,10 +47,10 @@ export function DarkBackdrop({ animate = true }: { animate?: boolean }) {
   const reduce = useReducedMotion();
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 print:hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(60%_70%_at_85%_0%,rgba(203,150,21,0.30),transparent),radial-gradient(55%_70%_at_0%_100%,rgba(46,145,61,0.40),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(60%_70%_at_85%_0%,rgba(203,150,21,0.30),transparent),radial-gradient(55%_70%_at_0%_100%,rgba(54,160,69,0.40),transparent)]" />
       {animate && (
         <motion.div
-          className="absolute -left-32 top-10 h-[26rem] w-[26rem] rounded-full bg-[#117F21]/25 blur-[110px]"
+          className="absolute -left-32 top-10 h-[26rem] w-[26rem] rounded-full bg-[#14892A]/25 blur-[110px]"
           animate={reduce ? undefined : { x: [0, 80, 0], y: [0, 30, 0] }}
           transition={{ duration: 18, repeat: 2, ease: "easeInOut" }}
         />
@@ -93,7 +93,7 @@ export function PageHero({
   const [before, after] = has ? [T.slice(0, at), T.slice(at + M.length)] : [T, ""];
   const Pill = pill.icon;
   return (
-    <section aria-labelledby={id} className="relative isolate overflow-hidden bg-[#04140A] text-white">
+    <section aria-labelledby={id} className="relative isolate overflow-hidden bg-[#12331C] text-white">
       <DarkBackdrop />
       <Ghost word={pill.label} dark className="bottom-0 top-auto sm:top-auto lg:top-auto" />
       <div className={cn("relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 pb-20 pt-8 sm:pt-10 lg:pb-28", aside && "lg:grid-cols-12")}>
@@ -146,7 +146,7 @@ export function PageHero({
             {intro}
           </motion.div>
           {actions && (
-            <motion.div initial={{ opacity: 0, y: reduce ? 0 : 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35, ease }} className="mt-8 text-[#0B1F10]">
+            <motion.div initial={{ opacity: 0, y: reduce ? 0 : 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35, ease }} className="mt-8 text-[#1A3A22]">
               {actions}
             </motion.div>
           )}
@@ -156,7 +156,7 @@ export function PageHero({
             initial={{ opacity: 0, y: reduce ? 0 : 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease }}
-            className="relative text-[#0B1F10] lg:col-span-6"
+            className="relative text-[#1A3A22] lg:col-span-6"
           >
             {aside}
           </motion.div>
@@ -170,7 +170,7 @@ export function PageHero({
 export function FramedPanel({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <div className="relative">
-      <div aria-hidden="true" className="absolute -inset-px -z-10 rounded-[calc(1.75rem+1px)] bg-gradient-to-br from-[#F4D27A]/70 via-white/10 to-[#117F21]/60" />
+      <div aria-hidden="true" className="absolute -inset-px -z-10 rounded-[calc(1.75rem+1px)] bg-gradient-to-br from-[#F4D27A]/70 via-white/10 to-[#14892A]/60" />
       <div
         onMouseMove={spot}
         className={cn(
@@ -218,7 +218,7 @@ export function SectionNav({ sections, pillId }: { sections: { id: string; label
   return (
     <nav aria-label="On this page" className="sticky top-[92px] z-30 px-4 py-3">
       <div className="mx-auto max-w-7xl">
-        <ul className="flex gap-1 overflow-x-auto rounded-full bg-white/90 p-1.5 shadow-[0_24px_50px_-30px_rgba(4,20,10,0.7)] ring-1 ring-black/10 backdrop-blur-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <ul className="flex gap-1 overflow-x-auto rounded-full bg-white/90 p-1.5 shadow-[0_24px_50px_-30px_rgba(18,51,28,0.7)] ring-1 ring-black/10 backdrop-blur-xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {sections.map((s) => {
             const on = active === s.id;
             return (
@@ -234,7 +234,7 @@ export function SectionNav({ sections, pillId }: { sections: { id: string; label
                   aria-current={on ? "location" : undefined}
                   className={cn("relative flex min-h-10 items-center rounded-full px-4 text-sm font-semibold transition", on ? "text-[#F4D27A]" : "text-gray-700 hover:bg-[#F2F6F0]", focus)}
                 >
-                  {on && <motion.span layoutId={pillId} className="absolute inset-0 rounded-full bg-[#0B1F10]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                  {on && <motion.span layoutId={pillId} className="absolute inset-0 rounded-full bg-[#1A3A22]" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                   <span className="relative">{s.label}</span>
                 </a>
               </li>
@@ -286,7 +286,7 @@ export function Modal({ open, onClose, labelledBy, children, className }: { open
     <AnimatePresence>
       {open && (
         <motion.div key="modal" className="fixed inset-0 z-[120] flex items-end justify-center p-3 sm:items-center sm:p-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <button type="button" tabIndex={-1} aria-label="Close" onClick={onClose} className="absolute inset-0 cursor-default bg-[#04140A]/70 backdrop-blur-md" />
+          <button type="button" tabIndex={-1} aria-label="Close" onClick={onClose} className="absolute inset-0 cursor-default bg-[#12331C]/70 backdrop-blur-md" />
           <motion.div
             role="dialog"
             aria-modal="true"
@@ -297,7 +297,7 @@ export function Modal({ open, onClose, labelledBy, children, className }: { open
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
             className={cn("relative max-h-[calc(100svh-1.5rem)] w-full overflow-y-auto rounded-[1.75rem] bg-white shadow-[0_50px_100px_-30px_rgba(0,0,0,0.6)]", className)}
           >
-            <button ref={closeBtn} type="button" onClick={onClose} aria-label="Close" className={cn("absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#0B1F10] shadow transition hover:rotate-90", focus)}>
+            <button ref={closeBtn} type="button" onClick={onClose} aria-label="Close" className={cn("absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#1A3A22] shadow transition hover:rotate-90", focus)}>
               <X className="h-5 w-5" aria-hidden="true" />
             </button>
             {children}
@@ -345,7 +345,7 @@ export function Drawer({ open, onClose, labelledBy, children }: { open: boolean;
     <AnimatePresence>
       {open && (
         <motion.div key="drawer" className="fixed inset-0 z-[120] flex justify-end" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <button type="button" tabIndex={-1} aria-label="Close" onClick={onClose} className="absolute inset-0 cursor-default bg-[#04140A]/60 backdrop-blur-md" />
+          <button type="button" tabIndex={-1} aria-label="Close" onClick={onClose} className="absolute inset-0 cursor-default bg-[#12331C]/60 backdrop-blur-md" />
           <motion.div
             role="dialog"
             aria-modal="true"

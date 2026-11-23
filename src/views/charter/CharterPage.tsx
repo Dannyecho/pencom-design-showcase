@@ -23,9 +23,9 @@ import data from "./charter.json";
  */
 
 /** Soft green pointer spotlight for white cards; pair with onMouseMove={spot}. */
-const glowLight = "[background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(46,145,61,0.10),transparent_45%)]";
+const glowLight = "[background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(54,160,69,0.10),transparent_45%)]";
 /** Card hover: 4px lift and a long soft shadow. */
-const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]";
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)]";
 
 type Block = { m?: string; x: string; sub?: boolean };
 type Std = { division: string; dept: string; sn: number; service: string; time: string; req: string };
@@ -77,7 +77,7 @@ function printChecklist(s: Std) {
   const esc = (x: string) => x.replace(/&/g, "&amp;").replace(/</g, "&lt;");
   const items = splitReq(s.req).map((r) => `<li><span class="box"></span>${esc(r)}</li>`).join("");
   w.document.write(
-    `<!doctype html><title>${esc(s.service)} – checklist</title><style>body{font:16px/1.6 Arial;margin:40px;color:#111}h1{font:bold 22px Verdana;color:#0A4A13;margin:0 0 4px}p{margin:0 0 16px;color:#444}ul{list-style:none;padding:0}li{display:flex;gap:12px;margin:0 0 12px}.box{flex:none;width:18px;height:18px;border:2px solid #117F21;border-radius:4px;margin-top:3px}footer{margin-top:32px;font-size:12px;color:#666;border-top:1px solid #ddd;padding-top:8px}</style><h1>${esc(s.service)}</h1><p>${esc(s.dept)} · Service standard: ${esc(s.time || "see charter")}</p><ul>${items}</ul><footer>National Pension Commission · Service Charter (revised May 2026) · pencom.gov.ng</footer>`,
+    `<!doctype html><title>${esc(s.service)} – checklist</title><style>body{font:16px/1.6 Arial;margin:40px;color:#111}h1{font:bold 22px Verdana;color:#105D1D;margin:0 0 4px}p{margin:0 0 16px;color:#444}ul{list-style:none;padding:0}li{display:flex;gap:12px;margin:0 0 12px}.box{flex:none;width:18px;height:18px;border:2px solid #14892A;border-radius:4px;margin-top:3px}footer{margin-top:32px;font-size:12px;color:#666;border-top:1px solid #ddd;padding-top:8px}</style><h1>${esc(s.service)}</h1><p>${esc(s.dept)} · Service standard: ${esc(s.time || "see charter")}</p><ul>${items}</ul><footer>National Pension Commission · Service Charter (revised May 2026) · pencom.gov.ng</footer>`,
   );
   w.document.close();
   w.focus();
@@ -102,7 +102,7 @@ export default function CharterPage() {
   return (
     <MotionConfig reducedMotion="user">
       <ReadingBar />
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Hero />
         <SectionNav sections={onThisPage} pillId="charter-nav-pill" />
         <Standards />
@@ -143,14 +143,14 @@ function Hero() {
       }
       aside={
         <FramedPanel className="p-6 sm:p-7">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0A4A13]">At a glance</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#105D1D]">At a glance</p>
           <dl className="mt-4 grid grid-cols-3 gap-3">
             {[
               ["2", "working days", "for most benefit approvals"],
               ["3–5", "working days", "to resolve a complaint"],
               ["72", "hours", "to issue a PCC"],
             ].map(([v, u, l]) => (
-              <div key={l} onMouseMove={spot} className="relative overflow-hidden rounded-2xl p-4 text-white shadow-[0_18px_40px_-20px_rgba(4,20,10,0.8)] transition duration-300 [background-image:radial-gradient(200px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.18),transparent_55%),linear-gradient(to_bottom_right,#0B1F10,#0A4A13)] hover:-translate-y-1">
+              <div key={l} onMouseMove={spot} className="relative overflow-hidden rounded-2xl p-4 text-white shadow-[0_18px_40px_-20px_rgba(18,51,28,0.8)] transition duration-300 [background-image:radial-gradient(200px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.18),transparent_55%),linear-gradient(to_bottom_right,#1A3A22,#105D1D)] hover:-translate-y-1">
                 <dt className="sr-only">{l}</dt>
                 <dd>
                   <span className="block text-3xl font-black tabular-nums tracking-tight text-[#F4D27A] sm:text-4xl">{v}</span>
@@ -189,11 +189,11 @@ function StandardCard({ s, q, open, onToggle }: { s: Std; q: string; open: boole
       className={cn(
         "group/card overflow-hidden rounded-3xl bg-white ring-1",
         glowLight,
-        open ? "shadow-[0_30px_60px_-30px_rgba(4,20,10,0.4)] ring-2 ring-[#117F21]" : cn("ring-black/10", lift),
+        open ? "shadow-[0_30px_60px_-30px_rgba(18,51,28,0.4)] ring-2 ring-[#14892A]" : cn("ring-black/10", lift),
       )}
     >
       <button type="button" onClick={onToggle} aria-expanded={open} className={cn("group flex w-full items-start gap-4 rounded-3xl p-5 text-left sm:p-6", focus)}>
-        <span className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] text-white shadow-[0_14px_30px_-16px_rgba(4,20,10,0.8)] transition-transform duration-300 group-hover/card:-rotate-6">
+        <span className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-[#1A3A22] to-[#105D1D] text-white shadow-[0_14px_30px_-16px_rgba(18,51,28,0.8)] transition-transform duration-300 group-hover/card:-rotate-6">
           <Clock className="h-4 w-4 text-[#F4D27A]" aria-hidden="true" />
           <span className="mt-0.5 text-sm font-black tabular-nums leading-none text-[#F4D27A]">{badge(s.time)}</span>
         </span>
@@ -203,13 +203,13 @@ function StandardCard({ s, q, open, onToggle }: { s: Std; q: string; open: boole
             <Mark text={s.service} q={q} />
           </span>
           {s.time && (
-            <span className="mt-2 inline-flex items-start gap-1.5 rounded-full bg-[#E8F5E9] px-3 py-1 text-xs font-semibold text-[#0A4A13]">
+            <span className="mt-2 inline-flex items-start gap-1.5 rounded-full bg-[#E8F5E9] px-3 py-1 text-xs font-semibold text-[#105D1D]">
               <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               {s.time}
             </span>
           )}
         </span>
-        <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition duration-300", open ? "rotate-180 bg-[#0B1F10] text-[#F4D27A]" : "bg-[#F2F6F0] text-[#0A4A13] group-hover:bg-[#0B1F10] group-hover:text-[#F4D27A]")}>
+        <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition duration-300", open ? "rotate-180 bg-[#1A3A22] text-[#F4D27A]" : "bg-[#F2F6F0] text-[#105D1D] group-hover:bg-[#1A3A22] group-hover:text-[#F4D27A]")}>
           <ChevronDown className="h-5 w-5" aria-hidden="true" />
         </span>
       </button>
@@ -221,7 +221,7 @@ function StandardCard({ s, q, open, onToggle }: { s: Std; q: string; open: boole
               <ul className="mt-3 space-y-2.5">
                 {reqs.map((r, k) => (
                   <li key={k} className="flex gap-3 text-sm leading-relaxed text-gray-700">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0A4A13] text-[#F4D27A]">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#105D1D] text-[#F4D27A]">
                       <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
                     </span>
                     <span>
@@ -231,11 +231,11 @@ function StandardCard({ s, q, open, onToggle }: { s: Std; q: string; open: boole
                 ))}
               </ul>
               <div className="mt-5 flex flex-wrap gap-2">
-                <button type="button" onClick={() => printChecklist(s)} className={cn("inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] px-5 text-sm font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+                <button type="button" onClick={() => printChecklist(s)} className={cn("inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] px-5 text-sm font-semibold text-white transition hover:bg-[#14892A]", focus)}>
                   <Printer className="h-4 w-4" aria-hidden="true" />
                   Print this checklist
                 </button>
-                <Link to="/connect" className={cn("group/ask inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:ring-[#117F21]/50", focus)}>
+                <Link to="/connect" className={cn("group/ask inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1A3A22] ring-1 ring-black/10 transition hover:ring-[#14892A]/50", focus)}>
                   Ask about this service
                   <ArrowRight className="h-4 w-4 transition-transform group-hover/ask:-rotate-45" aria-hidden="true" />
                 </Link>
@@ -272,8 +272,8 @@ function Standards() {
     <section id="standards" aria-labelledby="std-title" className={sectionCls}>
       <div className="mx-auto max-w-7xl">
         <Headline id="std-title" n="01" kicker="Service standards" title="How long each service takes" mark="each service" intro="Find a service to see its timeline and the documents you need. Print the list and take it with you." />
-        <div className="mt-10 flex flex-col gap-2 rounded-[1.75rem] bg-white p-2 shadow-[0_30px_60px_-36px_rgba(4,20,10,0.45)] ring-1 ring-black/10 sm:flex-row">
-          <label className="flex min-h-12 flex-1 items-center gap-3 rounded-full bg-[#F2F6F0] px-4 ring-1 ring-black/10 focus-within:ring-2 focus-within:ring-[#117F21]">
+        <div className="mt-10 flex flex-col gap-2 rounded-[1.75rem] bg-white p-2 shadow-[0_30px_60px_-36px_rgba(18,51,28,0.45)] ring-1 ring-black/10 sm:flex-row">
+          <label className="flex min-h-12 flex-1 items-center gap-3 rounded-full bg-[#F2F6F0] px-4 ring-1 ring-black/10 focus-within:ring-2 focus-within:ring-[#14892A]">
             <Search className="h-5 w-5 shrink-0 text-[#117F21]" aria-hidden="true" />
             <span className="sr-only">Find a service</span>
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Try “death benefits”, “25%”, “mortgage”, “PCC”" className="w-full bg-transparent focus:outline-none" />
@@ -285,7 +285,7 @@ function Standards() {
           </label>
           <label className="relative sm:w-80">
             <span className="sr-only">Department</span>
-            <select value={dept} onChange={(e) => setDept(e.target.value)} className={cn("min-h-12 w-full appearance-none rounded-full bg-[#0B1F10] pl-5 pr-10 font-semibold text-white ring-1 ring-black/10 [&>option]:text-[#0B1F10]", focus)}>
+            <select value={dept} onChange={(e) => setDept(e.target.value)} className={cn("min-h-12 w-full appearance-none rounded-full bg-[#1A3A22] pl-5 pr-10 font-semibold text-white ring-1 ring-black/10 [&>option]:text-[#1A3A22]", focus)}>
               {depts.map((d) => (
                 <option key={d} value={d}>
                   {d === "All" ? "All departments" : d}
@@ -309,14 +309,14 @@ function Standards() {
         {list.length === 0 && (
           <div className="mt-4 rounded-[1.75rem] bg-[#F2F6F0] px-6 py-12 text-center ring-1 ring-black/10">
             <p className="font-bold">No service matches</p>
-            <button type="button" onClick={() => { setQ(""); setDept("All"); }} className={cn("mt-4 inline-flex min-h-11 items-center rounded-full bg-[#0B1F10] px-5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+            <button type="button" onClick={() => { setQ(""); setDept("All"); }} className={cn("mt-4 inline-flex min-h-11 items-center rounded-full bg-[#1A3A22] px-5 font-semibold text-white transition hover:bg-[#14892A]", focus)}>
               Clear search
             </button>
           </div>
         )}
         {!showAll && !filtered && list.length > 8 && (
           <div className="mt-8 text-center">
-            <button type="button" onClick={() => setShowAll(true)} className={cn("group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#0B1F10] pl-6 pr-1.5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+            <button type="button" onClick={() => setShowAll(true)} className={cn("group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#1A3A22] pl-6 pr-1.5 font-semibold text-white transition hover:bg-[#14892A]", focus)}>
               Show all {list.length} services
               <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:translate-y-0.5">
                 <ChevronDown className="h-4 w-4" />
@@ -339,13 +339,13 @@ function Complaints() {
     ["Still unhappy?", "Take it further", "You can refer the Commission’s decision to arbitration or the National Industrial Court."],
   ];
   return (
-    <section id="complaints" aria-labelledby="cmp-title" className={cn(sectionCls, "relative isolate overflow-hidden bg-[#04140A] text-white")}>
+    <section id="complaints" aria-labelledby="cmp-title" className={cn(sectionCls, "relative isolate overflow-hidden bg-[#12331C] text-white")}>
       <DarkBackdrop />
       <div className="mx-auto max-w-7xl">
         <Headline id="cmp-title" n="02" kicker="If something goes wrong" title="Complaints and disputes" mark="disputes" intro="How we handle a complaint, and what you can do if you are still not satisfied." dark />
         <ol className="relative mt-12 grid grid-cols-1 gap-4 md:grid-cols-4">
           {/* the path between the steps: green to gold, desktop only */}
-          <span aria-hidden="true" className="absolute left-[12%] right-[12%] top-[46px] hidden h-[3px] rounded-full bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615] md:block" />
+          <span aria-hidden="true" className="absolute left-[12%] right-[12%] top-[46px] hidden h-[3px] rounded-full bg-gradient-to-r from-[#14892A] via-[#36A045] to-[#CB9615] md:block" />
           {steps.map(([k, t, b], i) => (
             <li key={k} className="relative">
               <Rise delay={i * 0.08} className="h-full">
@@ -353,7 +353,7 @@ function Complaints() {
                   onMouseMove={spot}
                   className="group relative h-full overflow-hidden rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/15 backdrop-blur transition duration-300 [background-image:radial-gradient(300px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.16),transparent_50%)] hover:-translate-y-1 hover:ring-[#F4D27A]/40 sm:p-6"
                 >
-                  <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[#F4D27A] font-mono text-lg font-black text-[#1A1206] shadow-[0_0_0_6px_#04140A,0_14px_30px_-10px_rgba(244,210,122,0.7)] transition-transform duration-300 group-hover:scale-110">{i + 1}</span>
+                  <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[#F4D27A] font-mono text-lg font-black text-[#1A1206] shadow-[0_0_0_6px_#12331C,0_14px_30px_-10px_rgba(244,210,122,0.7)] transition-transform duration-300 group-hover:scale-110">{i + 1}</span>
                   <p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">{k}</p>
                   <p className="mt-1 text-lg font-bold leading-snug">{t}</p>
                   <p className="mt-2 text-sm leading-relaxed text-white/75">{b}</p>
@@ -363,8 +363,8 @@ function Complaints() {
           ))}
         </ol>
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <a href="tel:+2342094603955" onMouseMove={spot} className={cn("group flex min-h-[5.5rem] items-center gap-4 rounded-3xl bg-white/[0.06] p-5 text-white ring-1 ring-white/15 transition duration-300 [background-image:radial-gradient(300px_circle_at_var(--x,50%)_var(--y,0%),rgba(46,145,61,0.25),transparent_50%)] hover:-translate-y-1 hover:ring-white/30", focus)}>
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#117F21] to-[#0A4A13] text-[#F4D27A]">
+          <a href="tel:+2342094603955" onMouseMove={spot} className={cn("group flex min-h-[5.5rem] items-center gap-4 rounded-3xl bg-white/[0.06] p-5 text-white ring-1 ring-white/15 transition duration-300 [background-image:radial-gradient(300px_circle_at_var(--x,50%)_var(--y,0%),rgba(54,160,69,0.25),transparent_50%)] hover:-translate-y-1 hover:ring-white/30", focus)}>
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#14892A] to-[#105D1D] text-[#F4D27A]">
               <Phone className="h-6 w-6" aria-hidden="true" />
             </span>
             <span>
@@ -413,9 +413,9 @@ function OurPromise() {
             <Rise className="lg:col-span-5">
               <div
                 onMouseMove={spot}
-                className="relative h-full overflow-hidden rounded-[1.75rem] p-7 text-white shadow-[0_40px_80px_-40px_rgba(4,20,10,0.8)] [background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.16),transparent_45%),linear-gradient(to_bottom_right,#0B1F10,#0A4A13)] sm:p-9"
+                className="relative h-full overflow-hidden rounded-[1.75rem] p-7 text-white shadow-[0_40px_80px_-40px_rgba(18,51,28,0.8)] [background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.16),transparent_45%),linear-gradient(to_bottom_right,#1A3A22,#105D1D)] sm:p-9"
               >
-                <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full bg-[#117F21]/60 blur-3xl" />
+                <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full bg-[#14892A]/60 blur-3xl" />
                 <Quote aria-hidden="true" className="absolute right-6 top-6 h-16 w-16 text-[#F4D27A]/20" />
                 <p className="relative inline-flex items-center gap-2 rounded-full bg-[#F4D27A] px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-[#1A1206]">
                   <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
@@ -433,8 +433,8 @@ function OurPromise() {
                 <li key={k}>
                   <Rise delay={i * 0.05} className="h-full">
                     <div onMouseMove={spot} className={cn("group relative h-full overflow-hidden rounded-3xl bg-white p-5 ring-1 ring-black/10", glowLight, lift)}>
-                      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
-                      <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0B1F10] to-[#0A4A13] text-[#F4D27A] transition-transform duration-300 group-hover:-rotate-6">
+                      <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                      <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1A3A22] to-[#105D1D] text-[#F4D27A] transition-transform duration-300 group-hover:-rotate-6">
                         <Icon className="h-5 w-5" />
                       </span>
                       <p className="mt-4 text-lg font-black tracking-tight">{k}</p>
@@ -490,11 +490,11 @@ function FullText() {
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
           <Headline id="full-title" n="04" kicker="Read the charter" title="The full charter" mark="full charter" />
           <div role="group" aria-label="Text size" className="flex w-fit shrink-0 items-center gap-1 rounded-full bg-white p-1 shadow-sm ring-1 ring-black/10">
-            <button type="button" onClick={() => setSize((s) => Math.max(0, s - 1))} disabled={size === 0} aria-label="Smaller text" className={cn("flex h-11 w-11 items-center justify-center rounded-full bg-[#0B1F10] text-white transition hover:bg-[#117F21] disabled:bg-gray-200 disabled:text-gray-500", focus)}>
+            <button type="button" onClick={() => setSize((s) => Math.max(0, s - 1))} disabled={size === 0} aria-label="Smaller text" className={cn("flex h-11 w-11 items-center justify-center rounded-full bg-[#1A3A22] text-white transition hover:bg-[#14892A] disabled:bg-gray-200 disabled:text-gray-500", focus)}>
               <Minus className="h-4 w-4" aria-hidden="true" />
             </button>
             <span className="px-2 text-sm font-semibold">Text size</span>
-            <button type="button" onClick={() => setSize((s) => Math.min(sizes.length - 1, s + 1))} disabled={size === sizes.length - 1} aria-label="Larger text" className={cn("flex h-11 w-11 items-center justify-center rounded-full bg-[#0B1F10] text-white transition hover:bg-[#117F21] disabled:bg-gray-200 disabled:text-gray-500", focus)}>
+            <button type="button" onClick={() => setSize((s) => Math.min(sizes.length - 1, s + 1))} disabled={size === sizes.length - 1} aria-label="Larger text" className={cn("flex h-11 w-11 items-center justify-center rounded-full bg-[#1A3A22] text-white transition hover:bg-[#14892A] disabled:bg-gray-200 disabled:text-gray-500", focus)}>
               <Plus className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
@@ -502,7 +502,7 @@ function FullText() {
 
         <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[17rem_minmax(0,1fr)]">
           <nav aria-label="Charter contents" className="hidden lg:block">
-            <div className="sticky top-[170px] max-h-[calc(100vh-200px)] overflow-y-auto rounded-[1.75rem] bg-white p-4 shadow-[0_30px_60px_-40px_rgba(4,20,10,0.4)] ring-1 ring-black/10">
+            <div className="sticky top-[170px] max-h-[calc(100vh-200px)] overflow-y-auto rounded-[1.75rem] bg-white p-4 shadow-[0_30px_60px_-40px_rgba(18,51,28,0.4)] ring-1 ring-black/10">
               <p className="px-2 text-xs font-bold uppercase tracking-[0.16em] text-gray-500">Contents</p>
               <ol className="mt-2 space-y-0.5">
                 {narrative.map((s) => (
@@ -516,7 +516,7 @@ function FullText() {
                       aria-current={current === s.n ? "location" : undefined}
                       className={cn(
                         "flex gap-2 rounded-2xl px-2.5 py-1.5 text-sm transition",
-                        current === s.n ? "bg-[#0B1F10] font-semibold text-white" : "text-gray-700 hover:bg-[#F2F6F0] hover:text-[#0A4A13]",
+                        current === s.n ? "bg-[#1A3A22] font-semibold text-white" : "text-gray-700 hover:bg-[#F2F6F0] hover:text-[#105D1D]",
                         focus,
                       )}
                     >
@@ -529,10 +529,10 @@ function FullText() {
             </div>
           </nav>
 
-          <article className="rounded-[1.75rem] bg-white p-6 shadow-[0_40px_80px_-50px_rgba(4,20,10,0.4)] ring-1 ring-black/10 sm:p-10" style={{ fontSize: sizes[size] }}>
+          <article className="rounded-[1.75rem] bg-white p-6 shadow-[0_40px_80px_-50px_rgba(18,51,28,0.4)] ring-1 ring-black/10 sm:p-10" style={{ fontSize: sizes[size] }}>
             <div className="relative overflow-hidden rounded-3xl bg-[#F2F6F0] p-5 pl-7 ring-1 ring-black/10 sm:p-6 sm:pl-8">
-              <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#117F21] to-[#CB9615]" />
-              <p className="inline-flex items-center gap-2 rounded-full bg-[#0A4A13] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">Foreword</p>
+              <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-[#14892A] to-[#CB9615]" />
+              <p className="inline-flex items-center gap-2 rounded-full bg-[#105D1D] px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">Foreword</p>
               <p className="mt-2 leading-[1.75] text-gray-800">{charter.foreword.split(" the provision")[0]}</p>
               <ul className="mt-3 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                 {charter.forewordList.map((f) => (
@@ -542,7 +542,7 @@ function FullText() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-sm font-bold text-[#0A4A13]">Omolola Bridget Oloworaran, Director-General</p>
+              <p className="mt-4 text-sm font-bold text-[#105D1D]">Omolola Bridget Oloworaran, Director-General</p>
             </div>
             <div className="mt-10 space-y-10">
               {narrative.map((s) => (
@@ -572,12 +572,12 @@ function FullText() {
               <span className="block font-bold leading-snug">Revised Commission’s Service Charter / Service Level Agreement</span>
               <span className="block text-sm text-gray-500">PDF · 46 pages · May 2026</span>
             </span>
-            <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:translate-y-0.5">
+            <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:translate-y-0.5">
               <Download className="h-4 w-4" />
             </span>
             <span className="sr-only">(opens in a new tab)</span>
           </a>
-          <p className="flex gap-3 rounded-3xl bg-[#E8F5E9] p-5 text-sm leading-relaxed text-[#0A4A13] ring-1 ring-black/10">
+          <p className="flex gap-3 rounded-3xl bg-[#E8F5E9] p-5 text-sm leading-relaxed text-[#105D1D] ring-1 ring-black/10">
             <FileText className="h-5 w-5 shrink-0" aria-hidden="true" />
             This web version is for easy reading. If it differs from the signed PDF, the signed PDF is the official version.
           </p>

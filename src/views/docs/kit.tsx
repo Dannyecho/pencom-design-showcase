@@ -13,9 +13,9 @@ import { DarkBackdrop, spot } from "@/views/theme/ui";
 
 export const ring = "focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]";
 /** Green pointer spotlight for white cards (set `--x/--y` with `spot`). */
-export const glowLight = "[background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(46,145,61,0.10),transparent_45%)]";
+export const glowLight = "[background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(54,160,69,0.10),transparent_45%)]";
 /** Dark spotlight card: the spotlight and the gradient share one background-image. */
-export const darkCard = "bg-[#0B1F10] [background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.16),transparent_50%),linear-gradient(135deg,#0B1F10,#0A4A13)]";
+export const darkCard = "bg-[#1A3A22] [background-image:radial-gradient(420px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.16),transparent_50%),linear-gradient(135deg,#1A3A22,#105D1D)]";
 
 /** `url` null: the document has no web version; report "error" without a request (no 404 in the console). */
 export function useDocJson<T>(url: string | null) {
@@ -61,7 +61,7 @@ export function Mark({ text, q }: { text: string; q: string }) {
 export function ReadingBar() {
   const { scrollYProgress } = useScroll();
   const x = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
-  return <motion.div aria-hidden="true" style={{ scaleX: x }} className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615] print:hidden" />;
+  return <motion.div aria-hidden="true" style={{ scaleX: x }} className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-[#14892A] via-[#36A045] to-[#CB9615] print:hidden" />;
 }
 
 export function DocHero({
@@ -78,7 +78,7 @@ export function DocHero({
 }) {
   const reduce = useReducedMotion();
   return (
-    <header className="relative isolate overflow-hidden bg-[#04140A] text-white print:bg-white print:text-black">
+    <header className="relative isolate overflow-hidden bg-[#12331C] text-white print:bg-white print:text-black">
       <DarkBackdrop />
       <Ghost word={kind} dark className="bottom-0 top-auto sm:top-auto lg:top-auto print:hidden" />
       <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:pt-10 lg:pb-20">
@@ -107,13 +107,13 @@ export function DocHero({
             <motion.h1 initial={{ opacity: 0, y: reduce ? 0 : 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease }} className="mt-5 text-3xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
               {title}
             </motion.h1>
-            <span aria-hidden="true" className="mt-4 block h-1 w-24 rounded-full bg-gradient-to-r from-[#F4D27A] to-[#117F21] print:hidden" />
+            <span aria-hidden="true" className="mt-4 block h-1 w-24 rounded-full bg-gradient-to-r from-[#F4D27A] to-[#14892A] print:hidden" />
             {lead && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }} className="mt-4 max-w-2xl text-lg leading-relaxed text-white/80 print:text-gray-700">{lead}</motion.div>}
             {actions && <motion.div initial={{ opacity: 0, y: reduce ? 0 : 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="mt-8 flex flex-wrap gap-3 print:hidden">{actions}</motion.div>}
           </div>
-          <motion.div initial={{ opacity: 0, y: reduce ? 0 : 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7, ease }} className="relative text-[#0B1F10] lg:col-span-4">
-            <div aria-hidden="true" className="absolute -inset-px -z-10 rounded-[calc(1.6rem+1px)] bg-gradient-to-br from-[#F4D27A]/70 via-white/10 to-[#117F21]/60 print:hidden" />
-            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.6rem] bg-[#0B1F10]/10 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)] ring-1 ring-black/10">
+          <motion.div initial={{ opacity: 0, y: reduce ? 0 : 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7, ease }} className="relative text-[#1A3A22] lg:col-span-4">
+            <div aria-hidden="true" className="absolute -inset-px -z-10 rounded-[calc(1.6rem+1px)] bg-gradient-to-br from-[#F4D27A]/70 via-white/10 to-[#14892A]/60 print:hidden" />
+            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.6rem] bg-[#1A3A22]/10 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)] ring-1 ring-black/10">
               {meta.map((m) => (
                 <div key={m.label} onMouseMove={spot} className={cn("bg-white p-4 transition-colors hover:bg-[#F2F6F0]", glowLight)}>
                   <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7F5A04]">{m.label}</dt>
@@ -133,7 +133,7 @@ export function PrimaryBtn({ href, children, external }: { href: string; childre
   return external ? <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>{children}<span className="sr-only"> (opens in a new tab)</span></a> : <Link to={href} className={cls}>{children}</Link>;
 }
 export function GhostBtn({ onClick, children, href }: { onClick?: () => void; children: ReactNode; href?: string }) {
-  const cls = cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-6 font-semibold text-[#0B1F10] ring-1 ring-black/10 transition hover:bg-[#F2F6F0]", ring);
+  const cls = cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-6 font-semibold text-[#1A3A22] ring-1 ring-black/10 transition hover:bg-[#F2F6F0]", ring);
   if (href) return <a href={href} onClick={onClick} className={cls}>{children}</a>;
   return <button type="button" onClick={onClick} className={cls}>{children}</button>;
 }
@@ -141,7 +141,7 @@ export function GhostBtn({ onClick, children, href }: { onClick?: () => void; ch
 /** Circular arrow chip that turns on hover (put inside a `group`). */
 export function ArrowChip({ dark }: { dark?: boolean }) {
   return (
-    <span aria-hidden="true" className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-45", dark ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#0B1F10] text-[#F4D27A]")}>
+    <span aria-hidden="true" className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-45", dark ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#1A3A22] text-[#F4D27A]")}>
       <ArrowUpRight className="h-4 w-4" />
     </span>
   );
@@ -150,12 +150,12 @@ export function ArrowChip({ dark }: { dark?: boolean }) {
 /** Text size, print and copy-link tools. */
 export function DocTools({ size, setSize }: { size: number; setSize: (n: number) => void }) {
   const [copied, setCopied] = useState(false);
-  const btn = cn("flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#0B1F10] ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-[#F4D27A] disabled:pointer-events-none disabled:opacity-30", ring);
+  const btn = cn("flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#1A3A22] ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#1A3A22] hover:text-[#F4D27A] disabled:pointer-events-none disabled:opacity-30", ring);
   return (
     <div className="flex flex-wrap items-center gap-2 print:hidden">
       <div role="group" aria-label="Text size" className="flex items-center gap-1">
         <button type="button" className={btn} onClick={() => setSize(Math.max(0, size - 1))} disabled={size === 0} aria-label="Smaller text"><Minus className="h-4 w-4" aria-hidden="true" /></button>
-        <span className="w-8 text-center text-sm font-bold text-[#0B1F10]/75" aria-live="polite">A<span className="sr-only"> size {size + 1} of 3</span></span>
+        <span className="w-8 text-center text-sm font-bold text-[#1A3A22]/75" aria-live="polite">A<span className="sr-only"> size {size + 1} of 3</span></span>
         <button type="button" className={btn} onClick={() => setSize(Math.min(2, size + 1))} disabled={size === 2} aria-label="Larger text"><Plus className="h-4 w-4" aria-hidden="true" /></button>
       </div>
       <button type="button" className={btn} onClick={() => window.print()} aria-label="Print"><Printer className="h-4 w-4" aria-hidden="true" /></button>
@@ -195,14 +195,14 @@ export function Toc({ items, title = "Contents", className }: { items: { id: str
   return (
     <nav aria-label={title} className={cn("rounded-3xl bg-white p-4 ring-1 ring-black/10", className)}>
       <p className="px-2 text-xs font-bold uppercase tracking-[0.18em] text-[#7F5A04]">{title}</p>
-      <ol ref={listRef} className="mt-3 max-h-[60vh] space-y-0.5 overflow-y-auto border-l-2 border-[#0B1F10]/10 pr-1 [scrollbar-width:thin]">
+      <ol ref={listRef} className="mt-3 max-h-[60vh] space-y-0.5 overflow-y-auto border-l-2 border-[#1A3A22]/10 pr-1 [scrollbar-width:thin]">
         {items.map((i) => (
           <li key={i.id} data-id={i.id}>
             <a
               href={`#${i.id}`}
               onClick={(e) => { e.preventDefault(); document.getElementById(i.id)?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
               aria-current={active === i.id ? "location" : undefined}
-              className={cn("-ml-0.5 block rounded-r-xl border-l-2 py-1.5 pr-2 text-sm leading-snug transition", (i.level ?? 1) > 1 ? "pl-7 text-[13px]" : "pl-4", active === i.id ? "border-[#CB9615] bg-[#F2F6F0] font-semibold text-[#0B1F10]" : "border-transparent text-[#0B1F10]/65 hover:bg-[#F2F6F0]/60 hover:text-[#0B1F10]")}
+              className={cn("-ml-0.5 block rounded-r-xl border-l-2 py-1.5 pr-2 text-sm leading-snug transition", (i.level ?? 1) > 1 ? "pl-7 text-[13px]" : "pl-4", active === i.id ? "border-[#CB9615] bg-[#F2F6F0] font-semibold text-[#1A3A22]" : "border-transparent text-[#1A3A22]/65 hover:bg-[#F2F6F0]/60 hover:text-[#1A3A22]")}
             >
               {i.label}
             </a>
@@ -215,7 +215,7 @@ export function Toc({ items, title = "Contents", className }: { items: { id: str
 
 export function PdfCard({ href, title, meta }: { href: string; title: string; meta: string }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" onMouseMove={spot} className={cn("group relative flex items-center gap-5 overflow-hidden rounded-3xl p-6 text-white shadow-[0_30px_60px_-34px_rgba(4,20,10,0.9)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_40px_70px_-34px_rgba(4,20,10,0.9)]", darkCard, ring)}>
+    <a href={href} target="_blank" rel="noopener noreferrer" onMouseMove={spot} className={cn("group relative flex items-center gap-5 overflow-hidden rounded-3xl p-6 text-white shadow-[0_30px_60px_-34px_rgba(18,51,28,0.9)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_40px_70px_-34px_rgba(18,51,28,0.9)]", darkCard, ring)}>
       <span aria-hidden="true" className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition duration-1000 group-hover:translate-x-full" />
       <span className="relative flex h-16 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-white text-[#B52026] shadow-lg ring-2 ring-[#F4D27A]/0 transition group-hover:-rotate-6 group-hover:ring-[#F4D27A]/70">
         <FileText className="h-6 w-6" aria-hidden="true" /><span className="text-[10px] font-black">PDF</span>
@@ -233,9 +233,9 @@ export function PdfCard({ href, title, meta }: { href: string; title: string; me
 
 export function VerifyNote({ children }: { children?: ReactNode }) {
   return (
-    <p className="relative flex gap-4 overflow-hidden rounded-3xl bg-white p-5 text-sm leading-relaxed text-[#0B1F10]/80 ring-1 ring-black/10">
+    <p className="relative flex gap-4 overflow-hidden rounded-3xl bg-white p-5 text-sm leading-relaxed text-[#1A3A22]/80 ring-1 ring-black/10">
       <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#F4D27A] to-[#CB9615]" />
-      <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]"><Info className="h-4 w-4" /></span>
+      <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A]"><Info className="h-4 w-4" /></span>
       <span>{children ?? "This web version was prepared from the official PDF so it is easier to read, search and link to. If the two ever differ, the signed PDF is the authoritative text."}</span>
     </p>
   );
@@ -243,8 +243,8 @@ export function VerifyNote({ children }: { children?: ReactNode }) {
 
 export function Loading({ label = "Loading the document" }: { label?: string }) {
   return (
-    <div className="flex min-h-[40vh] flex-col items-center justify-center gap-3 text-[#0B1F10]/70" role="status">
-      <span className="h-10 w-10 animate-spin rounded-full border-4 border-[#117F21]/20 border-t-[#CB9615]" aria-hidden="true" />
+    <div className="flex min-h-[40vh] flex-col items-center justify-center gap-3 text-[#1A3A22]/70" role="status">
+      <span className="h-10 w-10 animate-spin rounded-full border-4 border-[#14892A]/20 border-t-[#CB9615]" aria-hidden="true" />
       {label}…
     </div>
   );

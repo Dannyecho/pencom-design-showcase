@@ -69,7 +69,7 @@ export default function LanguageSwitcher() {
         onClick={() => setOpen((o) => !o)}
         className={cn(
           "group flex min-h-7 items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]",
-          open ? "border-[#F4D27A] bg-white text-[#0A4A13]" : "border-white/25 text-white hover:border-[#F4D27A] hover:bg-white/10",
+          open ? "border-[#F4D27A] bg-white text-[#105D1D]" : "border-white/25 text-white hover:border-[#F4D27A] hover:bg-white/10",
         )}
       >
         <Globe className={cn("h-3.5 w-3.5 transition-transform duration-500", open && !reduce && "rotate-[360deg]")} aria-hidden="true" />
@@ -90,9 +90,9 @@ export default function LanguageSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: reduce ? 0 : -6, scale: reduce ? 1 : 0.97 }}
             transition={{ duration: 0.18 }}
-            className="absolute right-0 top-full z-[70] mt-2 w-[min(19rem,calc(100vw-2rem))] origin-top-right overflow-hidden rounded-2xl bg-white text-gray-800 shadow-[0_24px_60px_-20px_rgba(4,36,10,0.55)] ring-1 ring-black/10"
+            className="absolute right-0 top-full z-[70] mt-2 w-[min(19rem,calc(100vw-2rem))] origin-top-right overflow-hidden rounded-2xl bg-white text-gray-800 shadow-[0_24px_60px_-20px_rgba(17,66,26,0.55)] ring-1 ring-black/10"
           >
-            <div className="relative overflow-hidden bg-gradient-to-br from-[#04240A] to-[#117F21] px-4 py-3 text-white">
+            <div className="relative overflow-hidden bg-gradient-to-br from-[#11421A] to-[#14892A] px-4 py-3 text-white">
               <div aria-hidden="true" className="absolute -right-6 -top-10 h-28 w-28 rounded-full bg-[#CB9615]/30 blur-2xl" />
               <p className="relative text-sm font-bold">{t("Choose a language")}</p>
               <p className="relative mt-0.5 text-xs text-white/75">{t("Translations are drafts being checked by PenCom.")}</p>
@@ -120,13 +120,13 @@ export default function LanguageSwitcher() {
                       aria-hidden="true"
                       className={cn(
                         "flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[11px] font-black tracking-wider",
-                        on ? "bg-gradient-to-br from-[#117F21] to-[#0A4A13] text-[#F4D27A]" : "bg-gray-100 text-gray-600",
+                        on ? "bg-gradient-to-br from-[#14892A] to-[#105D1D] text-[#F4D27A]" : "bg-gray-100 text-gray-600",
                       )}
                     >
                       {l.short}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-bold text-[#0B1F10]">{l.native}</span>
+                      <span className="block text-sm font-bold text-[#1A3A22]">{l.native}</span>
                       <span className="block truncate text-xs italic text-gray-500">“{l.hello}”</span>
                     </span>
                     {l.code !== "en" && <span lang={lang} className="rounded-full bg-[#FFF4D6] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#7A5200]">{t("Draft")}</span>}

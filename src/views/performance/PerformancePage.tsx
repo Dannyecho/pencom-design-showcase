@@ -39,7 +39,7 @@ export default function PerformancePage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <PerfHero />
         <SectionNav sections={sections} pillId="perf-nav-pill" />
         <AssetsSection />

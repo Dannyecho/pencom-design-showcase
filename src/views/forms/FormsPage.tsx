@@ -82,7 +82,7 @@ export default function FormsPage() {
     if (!cur) return;
     const w = window.open("", "_blank", "width=800,height=900");
     if (!w) return;
-    w.document.write(`<!doctype html><title>${cur.title}</title><style>body{font:16px/1.6 Arial;margin:40px}h1{font:bold 22px Verdana;color:#0A4A13;margin:0}p{color:#444}ul{list-style:none;padding:0}li{display:flex;gap:12px;margin-bottom:12px}.b{flex:none;width:18px;height:18px;border:2px solid #117F21;border-radius:4px;margin-top:3px;text-align:center;line-height:14px;font-weight:bold;color:#117F21}footer{margin-top:30px;font-size:12px;color:#666;border-top:1px solid #ddd;padding-top:8px}</style><h1>${cur.title}</h1><p>${cur.std.dept}${cur.std.time ? ` · Service standard: ${cur.std.time}` : ""}</p><ul>${cur.items.map((t, i) => `<li><span class="b">${done.includes(i) ? "✓" : ""}</span>${t.replace(/</g, "&lt;")}</li>`).join("")}</ul><footer>National Pension Commission · From the Service Charter (revised May 2026) · pencom.gov.ng</footer>`);
+    w.document.write(`<!doctype html><title>${cur.title}</title><style>body{font:16px/1.6 Arial;margin:40px}h1{font:bold 22px Verdana;color:#105D1D;margin:0}p{color:#444}ul{list-style:none;padding:0}li{display:flex;gap:12px;margin-bottom:12px}.b{flex:none;width:18px;height:18px;border:2px solid #14892A;border-radius:4px;margin-top:3px;text-align:center;line-height:14px;font-weight:bold;color:#117F21}footer{margin-top:30px;font-size:12px;color:#666;border-top:1px solid #ddd;padding-top:8px}</style><h1>${cur.title}</h1><p>${cur.std.dept}${cur.std.time ? ` · Service standard: ${cur.std.time}` : ""}</p><ul>${cur.items.map((t, i) => `<li><span class="b">${done.includes(i) ? "✓" : ""}</span>${t.replace(/</g, "&lt;")}</li>`).join("")}</ul><footer>National Pension Commission · From the Service Charter (revised May 2026) · pencom.gov.ng</footer>`);
     w.document.close(); w.focus(); w.print();
   };
 
@@ -93,7 +93,7 @@ export default function FormsPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
       <DocHero
         crumbs={[{ label: "Home", to: "/" }, { label: "Resources", to: "/resources" }, { label: "Forms and checklists" }]}
         kind="Forms and checklists"
@@ -108,7 +108,7 @@ export default function FormsPage() {
         ]}
         actions={<>
           <button type="button" onClick={() => jump("checklists")} className={cn(pill, "bg-[#F4D27A] font-bold text-[#1A1206] shadow-[0_18px_40px_-14px_rgba(244,210,122,0.9)] hover:bg-white", ring)}><ClipboardCheck className="h-4 w-4" aria-hidden="true" /> Start a checklist</button>
-          <button type="button" onClick={() => jump("forms")} className={cn(pill, "bg-white/10 text-white ring-1 ring-white/25 backdrop-blur hover:bg-white hover:text-[#0B1F10]", ring)}><FileText className="h-4 w-4" aria-hidden="true" /> Download forms</button>
+          <button type="button" onClick={() => jump("forms")} className={cn(pill, "bg-white/10 text-white ring-1 ring-white/25 backdrop-blur hover:bg-white hover:text-[#1A3A22]", ring)}><FileText className="h-4 w-4" aria-hidden="true" /> Download forms</button>
         </>}
       />
 
@@ -123,8 +123,8 @@ export default function FormsPage() {
               <LayoutGroup id="who">
               <div role="radiogroup" aria-label="Who is this for" className="flex flex-wrap gap-2">
                 {WHO.map((w) => (
-                  <button key={w} type="button" role="radio" aria-checked={who === w} onClick={() => { setWho(w); const first = lists.find((l) => w === "All" || l.who.includes(w as Who)); if (first) setSel(first.id); }} className={cn("relative min-h-11 rounded-full px-4 text-sm font-semibold transition", ring, who === w ? "text-[#F4D27A]" : "bg-white text-[#0B1F10]/75 ring-1 ring-black/10 hover:text-[#0B1F10] hover:ring-[#117F21]/40")}>
-                    {who === w && <motion.span layoutId="who-pill" className="absolute inset-0 rounded-full bg-[#0B1F10] shadow-[0_10px_24px_-12px_rgba(4,20,10,0.8)]" transition={{ type: "spring", stiffness: 400, damping: 32 }} />}
+                  <button key={w} type="button" role="radio" aria-checked={who === w} onClick={() => { setWho(w); const first = lists.find((l) => w === "All" || l.who.includes(w as Who)); if (first) setSel(first.id); }} className={cn("relative min-h-11 rounded-full px-4 text-sm font-semibold transition", ring, who === w ? "text-[#F4D27A]" : "bg-white text-[#1A3A22]/75 ring-1 ring-black/10 hover:text-[#1A3A22] hover:ring-[#14892A]/40")}>
+                    {who === w && <motion.span layoutId="who-pill" className="absolute inset-0 rounded-full bg-[#1A3A22] shadow-[0_10px_24px_-12px_rgba(18,51,28,0.8)]" transition={{ type: "spring", stiffness: 400, damping: 32 }} />}
                     <span className="relative">{w}</span>
                   </button>
                 ))}
@@ -141,14 +141,14 @@ export default function FormsPage() {
                   const n = (ticks[l.id] ?? []).length;
                   return (
                     <motion.li key={l.id} layout={!reduce} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-                      <button type="button" onClick={() => setSel(l.id)} onMouseMove={spot} aria-pressed={on} className={cn("group relative flex w-full items-center gap-3 overflow-hidden rounded-2xl p-3 text-left transition duration-300", ring, on ? cn(darkCard, "text-white shadow-[0_24px_50px_-28px_rgba(4,20,10,0.9)]") : cn("bg-white ring-1 ring-black/10 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-28px_rgba(4,20,10,0.4)]", glowLight))}>
-                        <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-mono text-sm font-bold tabular-nums", on ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#0B1F10] text-[#F4D27A]")}>{n === l.items.length ? <Check className="h-5 w-5" aria-hidden="true" /> : l.items.length}</span>
+                      <button type="button" onClick={() => setSel(l.id)} onMouseMove={spot} aria-pressed={on} className={cn("group relative flex w-full items-center gap-3 overflow-hidden rounded-2xl p-3 text-left transition duration-300", ring, on ? cn(darkCard, "text-white shadow-[0_24px_50px_-28px_rgba(18,51,28,0.9)]") : cn("bg-white ring-1 ring-black/10 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_-28px_rgba(18,51,28,0.4)]", glowLight))}>
+                        <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-mono text-sm font-bold tabular-nums", on ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#1A3A22] text-[#F4D27A]")}>{n === l.items.length ? <Check className="h-5 w-5" aria-hidden="true" /> : l.items.length}</span>
                         <span className="min-w-0 flex-1">
                           <span className="block font-semibold leading-snug">{l.title}</span>
-                          <span className={cn("block text-xs", on ? "text-white/70" : "text-[#0B1F10]/65")}>{l.who.join(" · ")}{n > 0 && ` · ${n} of ${l.items.length} ready`}</span>
+                          <span className={cn("block text-xs", on ? "text-white/70" : "text-[#1A3A22]/65")}>{l.who.join(" · ")}{n > 0 && ` · ${n} of ${l.items.length} ready`}</span>
                         </span>
-                        <ArrowRight className={cn("h-4 w-4 shrink-0 transition duration-300", on ? "text-[#F4D27A]" : "-rotate-45 text-[#0B1F10]/40 group-hover:rotate-0 group-hover:text-[#117F21]")} aria-hidden="true" />
-                        {n > 0 && <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[3px] bg-black/5"><span className="block h-full origin-left bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500" style={{ transform: `scaleX(${n / l.items.length})` }} /></span>}
+                        <ArrowRight className={cn("h-4 w-4 shrink-0 transition duration-300", on ? "text-[#F4D27A]" : "-rotate-45 text-[#1A3A22]/40 group-hover:rotate-0 group-hover:text-[#117F21]")} aria-hidden="true" />
+                        {n > 0 && <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[3px] bg-black/5"><span className="block h-full origin-left bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-500" style={{ transform: `scaleX(${n / l.items.length})` }} /></span>}
                       </button>
                     </motion.li>
                   );
@@ -157,7 +157,7 @@ export default function FormsPage() {
 
               <AnimatePresence mode="wait">
                 <motion.article key={cur.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -14 }} transition={{ duration: 0.3, ease }} aria-labelledby="cl-cur" className="lg:col-span-7">
-                  <div className="overflow-hidden rounded-[1.75rem] bg-white shadow-[0_40px_80px_-50px_rgba(4,20,10,0.55)] ring-1 ring-black/10">
+                  <div className="overflow-hidden rounded-[1.75rem] bg-white shadow-[0_40px_80px_-50px_rgba(18,51,28,0.55)] ring-1 ring-black/10">
                     <div onMouseMove={spot} className={cn("relative flex items-center gap-5 overflow-hidden p-6 text-white", darkCard)}>
                       <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_at_80%_50%,black,transparent_70%)]" />
                       <div className="relative h-20 w-20 shrink-0 rounded-full shadow-[0_0_40px_-8px_rgba(244,210,122,0.45)]">
@@ -173,29 +173,29 @@ export default function FormsPage() {
                         {cur.std.time && <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold ring-1 ring-white/15"><Clock className="h-3.5 w-3.5 text-[#F4D27A]" aria-hidden="true" />PenCom’s service standard: {cur.std.time}</p>}
                       </div>
                     </div>
-                    <ul className="divide-y divide-[#0B1F10]/[0.07]">
+                    <ul className="divide-y divide-[#1A3A22]/[0.07]">
                       {cur.items.map((it, i) => {
                         const on = done.includes(i);
                         return (
                           <li key={i}>
                             <label className={cn("flex cursor-pointer gap-4 px-6 py-4 transition has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:-outline-offset-[3px] has-[:focus-visible]:outline-[#FFD84D]", on ? "bg-[#F2F6F0]" : "hover:bg-[#F2F6F0]/60")}>
                               <input type="checkbox" checked={on} onChange={() => toggle(i)} className="sr-only" />
-                              <motion.span animate={{ scale: on ? [1, 1.25, 1] : 1 }} transition={{ duration: 0.3 }} aria-hidden="true" className={cn("mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border-2 transition", on ? "border-[#117F21] bg-[#117F21] text-white" : "border-[#0B1F10]/30 bg-white")}>
+                              <motion.span animate={{ scale: on ? [1, 1.25, 1] : 1 }} transition={{ duration: 0.3 }} aria-hidden="true" className={cn("mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border-2 transition", on ? "border-[#14892A] bg-[#14892A] text-white" : "border-[#1A3A22]/30 bg-white")}>
                                 {on && <Check className="h-4 w-4" strokeWidth={3} />}
                               </motion.span>
-                              <span className={cn("text-[15px] leading-relaxed transition", on ? "text-[#0B1F10]/60 line-through decoration-[#117F21]/50" : "text-[#0B1F10]/90")}>{it}</span>
+                              <span className={cn("text-[15px] leading-relaxed transition", on ? "text-[#1A3A22]/60 line-through decoration-[#14892A]/50" : "text-[#1A3A22]/90")}>{it}</span>
                             </label>
                           </li>
                         );
                       })}
                     </ul>
-                    <div className="flex flex-wrap items-center gap-2 border-t border-[#0B1F10]/[0.07] p-5">
-                      <button type="button" onClick={printList} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] px-5 text-sm font-semibold text-white transition hover:bg-[#117F21]", ring)}><Printer className="h-4 w-4 text-[#F4D27A]" aria-hidden="true" /> Print checklist</button>
-                      <button type="button" onClick={() => setTicks((t) => ({ ...t, [cur.id]: [] }))} disabled={!done.length} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#0B1F10] ring-1 ring-black/15 transition hover:ring-[#117F21] disabled:opacity-40", ring)}><RotateCcw className="h-4 w-4 transition-transform duration-500 group-hover:-rotate-180" aria-hidden="true" /> Start again</button>
-                      <Link to="/about/service-charter#standards" className={cn("group ml-auto inline-flex min-h-11 items-center gap-2 rounded-full text-sm font-semibold text-[#0A4A13] hover:underline", ring)}>See it in the Service Charter <ArrowChip /></Link>
+                    <div className="flex flex-wrap items-center gap-2 border-t border-[#1A3A22]/[0.07] p-5">
+                      <button type="button" onClick={printList} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] px-5 text-sm font-semibold text-white transition hover:bg-[#14892A]", ring)}><Printer className="h-4 w-4 text-[#F4D27A]" aria-hidden="true" /> Print checklist</button>
+                      <button type="button" onClick={() => setTicks((t) => ({ ...t, [cur.id]: [] }))} disabled={!done.length} className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1A3A22] ring-1 ring-black/15 transition hover:ring-[#14892A] disabled:opacity-40", ring)}><RotateCcw className="h-4 w-4 transition-transform duration-500 group-hover:-rotate-180" aria-hidden="true" /> Start again</button>
+                      <Link to="/about/service-charter#standards" className={cn("group ml-auto inline-flex min-h-11 items-center gap-2 rounded-full text-sm font-semibold text-[#105D1D] hover:underline", ring)}>See it in the Service Charter <ArrowChip /></Link>
                     </div>
                   </div>
-                  <p className="mt-3 text-xs text-[#0B1F10]/70">Your ticks are saved on this device only.</p>
+                  <p className="mt-3 text-xs text-[#1A3A22]/70">Your ticks are saved on this device only.</p>
                 </motion.article>
               </AnimatePresence>
             </div>
@@ -212,10 +212,10 @@ export default function FormsPage() {
             highlight="forms"
             intro="Download, complete and submit as the form instructs. Most services now start online through the right portal."
             action={
-              <label className="relative flex w-full max-w-sm items-center rounded-full bg-white p-1 shadow-[0_18px_40px_-28px_rgba(4,20,10,0.5)] ring-1 ring-black/15 transition focus-within:ring-[3px] focus-within:ring-[#FFD84D]">
+              <label className="relative flex w-full max-w-sm items-center rounded-full bg-white p-1 shadow-[0_18px_40px_-28px_rgba(18,51,28,0.5)] ring-1 ring-black/15 transition focus-within:ring-[3px] focus-within:ring-[#FFD84D]">
               <span className="sr-only">Find a form</span>
-              <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A]"><Search className="h-4 w-4" /></span>
-              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Find a form" className="min-h-10 w-full min-w-0 bg-transparent px-3 text-[#0B1F10] placeholder:text-[#0B1F10]/55 focus:outline-none focus-visible:outline-none focus-visible:ring-0" />
+              <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A]"><Search className="h-4 w-4" /></span>
+              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Find a form" className="min-h-10 w-full min-w-0 bg-transparent px-3 text-[#1A3A22] placeholder:text-[#1A3A22]/55 focus:outline-none focus-visible:outline-none focus-visible:ring-0" />
             </label>
             }
           />
@@ -223,14 +223,14 @@ export default function FormsPage() {
             {fl.map((f, i) => (
               <motion.li key={f.pdf} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 3) * 0.07, ease }}>
                 <Tilt className="h-full">
-                  <a href={f.pdf} target="_blank" rel="noopener noreferrer" onMouseMove={spot} className={cn("group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]", glowLight, ring)}>
-                    <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                  <a href={f.pdf} target="_blank" rel="noopener noreferrer" onMouseMove={spot} className={cn("group relative flex h-full flex-col overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/10 transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)]", glowLight, ring)}>
+                    <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
                     <span className="flex items-center justify-between">
                       <span className={cn("flex h-12 w-11 flex-col items-center justify-center rounded-lg text-[10px] font-black text-white shadow", f.ext === "PDF" ? "bg-[#B52026]" : "bg-[#2E7DAF]")}><FileType className="h-4 w-4" aria-hidden="true" />{f.ext}</span>
-                      <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F2F6F0] text-[#0B1F10] transition duration-300 group-hover:bg-[#0B1F10] group-hover:text-[#F4D27A]"><Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" /></span>
+                      <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F2F6F0] text-[#1A3A22] transition duration-300 group-hover:bg-[#1A3A22] group-hover:text-[#F4D27A]"><Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" /></span>
                     </span>
-                    <span className="mt-5 block flex-1 font-bold leading-snug text-[#0B1F10]">{f.title}</span>
-                    <span className="mt-3 block text-xs font-medium uppercase tracking-[0.14em] text-[#0B1F10]/60">Published {new Date(f.date).toLocaleDateString("en-GB", { month: "short", year: "numeric" })}</span>
+                    <span className="mt-5 block flex-1 font-bold leading-snug text-[#1A3A22]">{f.title}</span>
+                    <span className="mt-3 block text-xs font-medium uppercase tracking-[0.14em] text-[#1A3A22]/60">Published {new Date(f.date).toLocaleDateString("en-GB", { month: "short", year: "numeric" })}</span>
                     <span className="sr-only">(opens in a new tab)</span>
                   </a>
                 </Tilt>
@@ -239,7 +239,7 @@ export default function FormsPage() {
           </ul>
           <Rise className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
             <VerifyNote>Checklists reproduce the documentation requirements in the revised Service Charter (May 2026). Your PFA or the relevant PenCom department may ask for more in particular cases.</VerifyNote>
-            <Link to="/services#portals" onMouseMove={spot} className={cn("group flex items-center justify-between gap-4 rounded-3xl p-6 text-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.6)]", darkCard, ring)}>
+            <Link to="/services#portals" onMouseMove={spot} className={cn("group flex items-center justify-between gap-4 rounded-3xl p-6 text-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.6)]", darkCard, ring)}>
               <span><span className="block text-lg font-black tracking-tight">Applying online?</span><span className="mt-1 block text-sm text-white/70">Find the right portal: eHub, PCRS, PENCAP and more</span></span>
               <ArrowChip dark />
             </Link>

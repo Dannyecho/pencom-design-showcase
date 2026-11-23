@@ -22,9 +22,9 @@ import { albums, channelUrl, photoSrc, photos, thumb, topics, videos, type Topic
 const ring = "focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-[#FFD84D]";
 /** Gold pointer glow for glass cards on the dark band. */
 const glowDark = "[background-image:radial-gradient(380px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.14),transparent_50%)]";
-const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_34px_70px_-36px_rgba(4,20,10,0.45)]";
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_34px_70px_-36px_rgba(18,51,28,0.45)]";
 /** Thin gold-to-green edge drawn with a padding box (the card sits inside it). */
-const edge = "bg-gradient-to-br from-[#F4D27A] via-[#2E913D]/60 to-[#117F21] p-px";
+const edge = "bg-gradient-to-br from-[#F4D27A] via-[#36A045]/60 to-[#14892A] p-px";
 const nav = [
   { id: "videos", label: "Videos" },
   { id: "photos", label: "Photos" },
@@ -67,12 +67,12 @@ function Hero({ onVideos, onPhotos }: { onVideos: () => void; onPhotos: () => vo
         <div>
           <div className="flex flex-wrap gap-3">
             <button type="button" onClick={onVideos} className={cn("group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#F4D27A] py-1.5 pl-1.5 pr-6 font-bold text-[#1A1206] shadow-[0_18px_40px_-14px_rgba(244,210,122,0.9)] transition hover:bg-[#FBE0A0]", focus)}>
-              <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:scale-110">
+              <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:scale-110">
                 <Play className="ml-0.5 h-4 w-4 fill-current" />
               </span>
               Watch videos
             </button>
-            <button type="button" onClick={onPhotos} className={cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-white/10 px-6 font-semibold text-white ring-1 ring-white/25 backdrop-blur transition hover:bg-white hover:text-[#0B1F10]", focus)}>
+            <button type="button" onClick={onPhotos} className={cn("inline-flex min-h-12 items-center gap-2 rounded-full bg-white/10 px-6 font-semibold text-white ring-1 ring-white/25 backdrop-blur transition hover:bg-white hover:text-[#1A3A22]", focus)}>
               <Images className="h-4 w-4" aria-hidden="true" /> Browse photos
             </button>
           </div>
@@ -96,7 +96,7 @@ function Hero({ onVideos, onPhotos }: { onVideos: () => void; onPhotos: () => vo
             </div>
           </div>
           {!reduce && (
-            <button type="button" onClick={() => setPaused((p) => !p)} className={cn("absolute bottom-5 right-5 inline-flex h-11 items-center gap-2 rounded-full bg-[#0B1F10]/90 py-1 pl-1 pr-4 text-xs font-semibold text-white shadow-lg backdrop-blur transition hover:bg-[#117F21]", focus)}>
+            <button type="button" onClick={() => setPaused((p) => !p)} className={cn("absolute bottom-5 right-5 inline-flex h-11 items-center gap-2 rounded-full bg-[#1A3A22]/90 py-1 pl-1 pr-4 text-xs font-semibold text-white shadow-lg backdrop-blur transition hover:bg-[#14892A]", focus)}>
               <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206]">
                 {paused ? <Play className="ml-0.5 h-3.5 w-3.5 fill-current" /> : <Pause className="h-3.5 w-3.5 fill-current" />}
               </span>
@@ -129,12 +129,12 @@ function Videos({ initial }: { initial: string | null }) {
   };
 
   return (
-    <section id="videos" aria-labelledby="vid-title" className={cn("relative isolate overflow-hidden bg-[#04140A] text-white", sectionCls)}>
+    <section id="videos" aria-labelledby="vid-title" className={cn("relative isolate overflow-hidden bg-[#12331C] text-white", sectionCls)}>
       {/* ambient glow from the current thumbnail, under the theme's glows and grid */}
       <AnimatePresence>
         <motion.img key={v.id} src={thumb(v.id)} alt="" aria-hidden="true" initial={{ opacity: 0 }} animate={{ opacity: 0.3 }} exit={{ opacity: 0 }} transition={{ duration: 1 }} className="absolute inset-0 -z-20 h-full w-full scale-125 object-cover blur-[90px]" />
       </AnimatePresence>
-      <div aria-hidden="true" className="absolute inset-0 -z-20 bg-gradient-to-b from-[#04140A]/70 via-[#04140A]/85 to-[#04140A]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-20 bg-gradient-to-b from-[#12331C]/70 via-[#12331C]/85 to-[#12331C]" />
       <DarkBackdrop />
       <div className="mx-auto max-w-7xl">
         <SectionHeading
@@ -175,7 +175,7 @@ function Videos({ initial }: { initial: string | null }) {
                     className={cn("group absolute inset-0 text-left", ring)} aria-label={`Play: ${v.title}`}
                   >
                     <img src={thumb(v.id, hiOk)} onError={() => setHiOk(false)} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                    <span className="absolute inset-0 bg-gradient-to-t from-[#04140A] via-[#04140A]/30 to-transparent" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-[#12331C] via-[#12331C]/30 to-transparent" />
                     <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center">
                       {!reduce && <span className="absolute inset-0 animate-ping rounded-full bg-[#F4D27A]/30 [animation-iteration-count:3]" />}
                       <span className="relative flex h-20 w-20 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] shadow-[0_18px_50px_-10px_rgba(244,210,122,0.8)] ring-8 ring-[#F4D27A]/20 transition duration-300 group-hover:scale-110"><Play className="ml-1 h-8 w-8 fill-current" /></span>
@@ -195,7 +195,7 @@ function Videos({ initial }: { initial: string | null }) {
                 <p className="mt-1 max-w-2xl text-white/75">{v.blurb}</p>
                 <p className="mt-2 text-xs text-white/70">Video by {v.channel}. Published {v.month}.</p>
               </div>
-              <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener noreferrer" className={cn("group inline-flex min-h-12 shrink-0 items-center gap-3 self-start rounded-full bg-white/[0.06] py-1.5 pl-4 pr-1.5 text-sm font-semibold ring-1 ring-white/20 backdrop-blur transition hover:bg-white hover:text-[#0B1F10]", ring)}>
+              <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener noreferrer" className={cn("group inline-flex min-h-12 shrink-0 items-center gap-3 self-start rounded-full bg-white/[0.06] py-1.5 pl-4 pr-1.5 text-sm font-semibold ring-1 ring-white/20 backdrop-blur transition hover:bg-white hover:text-[#1A3A22]", ring)}>
                 <Youtube className="h-4 w-4" aria-hidden="true" /> Watch on YouTube<span className="sr-only"> (opens in a new tab)</span>
                 <ArrowChip dark />
               </a>
@@ -214,7 +214,7 @@ function Videos({ initial }: { initial: string | null }) {
                   return (
                     <motion.li key={x.id} layout={!reduce} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.3, delay: i * 0.02 }}>
                       <button type="button" onMouseMove={spot} onClick={() => choose(x.id)} aria-current={on ? "true" : undefined} className={cn("group relative flex w-full gap-3 overflow-hidden rounded-2xl p-2 text-left transition duration-300", glowDark, ring, on ? "bg-white/[0.12] ring-1 ring-[#F4D27A]/60" : "ring-1 ring-transparent hover:bg-white/[0.06] hover:ring-white/15")}>
-                        {on && <span aria-hidden="true" className="absolute inset-y-3 left-0 w-1 rounded-full bg-gradient-to-b from-[#F4D27A] to-[#2E913D]" />}
+                        {on && <span aria-hidden="true" className="absolute inset-y-3 left-0 w-1 rounded-full bg-gradient-to-b from-[#F4D27A] to-[#36A045]" />}
                         <span className="relative block aspect-video w-36 shrink-0 overflow-hidden rounded-xl bg-white/5">
                           <img src={thumb(x.id)} alt="" loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-110" />
                           <span className={cn("absolute inset-0 flex items-center justify-center transition", on ? "bg-black/50" : "bg-black/0 group-hover:bg-black/40")}>
@@ -265,7 +265,7 @@ function Photos({ album, setAlbum, open }: { album: string; setAlbum: (a: string
           highlight="the Commission"
           intro="Photos from PenCom Chronicles, Issue 1. Select a photo to see it full screen."
           action={
-            <Link to="/chronicles" className={cn("group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]", ring)}>
+            <Link to="/chronicles" className={cn("group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#1A3A22] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#14892A]", ring)}>
               From PenCom Chronicles <ArrowChip dark />
             </Link>
           }
@@ -277,9 +277,9 @@ function Photos({ album, setAlbum, open }: { album: string; setAlbum: (a: string
             const on = album === c.id;
             return (
               <li key={c.id} className="snap-start">
-                <button type="button" onClick={() => setAlbum(c.id)} aria-pressed={on} className={cn("group relative block h-36 w-56 overflow-hidden rounded-3xl text-left text-white transition duration-300 hover:-translate-y-1", ring, on ? "shadow-[0_24px_50px_-24px_rgba(203,150,21,0.8)] ring-[3px] ring-[#CB9615]" : "ring-1 ring-black/10 hover:shadow-[0_24px_50px_-28px_rgba(4,20,10,0.55)]")}>
+                <button type="button" onClick={() => setAlbum(c.id)} aria-pressed={on} className={cn("group relative block h-36 w-56 overflow-hidden rounded-3xl text-left text-white transition duration-300 hover:-translate-y-1", ring, on ? "shadow-[0_24px_50px_-24px_rgba(203,150,21,0.8)] ring-[3px] ring-[#CB9615]" : "ring-1 ring-black/10 hover:shadow-[0_24px_50px_-28px_rgba(18,51,28,0.55)]")}>
                   <img src={photoSrc(c.cover)} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-110" />
-                  <span className={cn("absolute inset-0 transition", on ? "bg-gradient-to-t from-[#04140A] via-[#04140A]/55 to-[#0A4A13]/20" : "bg-gradient-to-t from-[#04140A]/90 via-[#04140A]/30 to-transparent")} />
+                  <span className={cn("absolute inset-0 transition", on ? "bg-gradient-to-t from-[#12331C] via-[#12331C]/55 to-[#105D1D]/20" : "bg-gradient-to-t from-[#12331C]/90 via-[#12331C]/30 to-transparent")} />
                   {on && (
                     <span aria-hidden="true" className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] shadow-lg">
                       <Images className="h-4 w-4" />
@@ -296,7 +296,7 @@ function Photos({ album, setAlbum, open }: { album: string; setAlbum: (a: string
         </ul>
         <AnimatePresence mode="wait">
           <motion.p key={album} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="mt-3 border-l-2 border-[#CB9615] pl-3 text-sm text-gray-600" aria-live="polite">
-            {a ? <><strong className="text-[#0B1F10]">{a.title}.</strong> {a.blurb} </> : <strong className="text-[#0B1F10]">All albums. </strong>}{shown.length} photos.
+            {a ? <><strong className="text-[#1A3A22]">{a.title}.</strong> {a.blurb} </> : <strong className="text-[#1A3A22]">All albums. </strong>}{shown.length} photos.
           </motion.p>
         </AnimatePresence>
 
@@ -306,16 +306,16 @@ function Photos({ album, setAlbum, open }: { album: string; setAlbum: (a: string
             {shown.map((ph, i) => (
               <motion.li key={ph.id} initial={{ opacity: 0, y: reduce ? 0 : 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-30px" }} transition={{ duration: 0.5, delay: (i % 3) * 0.08, ease }} className="mb-4 break-inside-avoid">
                 <Tilt max={4}>
-                  <button type="button" onMouseMove={spot} onClick={() => open(ph.id)} className={cn("group relative block w-full overflow-hidden rounded-3xl bg-[#F2F6F0] text-left ring-1 ring-black/10 transition duration-300 hover:shadow-[0_34px_70px_-36px_rgba(4,20,10,0.55)]", ring)}>
+                  <button type="button" onMouseMove={spot} onClick={() => open(ph.id)} className={cn("group relative block w-full overflow-hidden rounded-3xl bg-[#F2F6F0] text-left ring-1 ring-black/10 transition duration-300 hover:shadow-[0_34px_70px_-36px_rgba(18,51,28,0.55)]", ring)}>
                     <img src={photoSrc(ph)} alt={ph.alt} loading="lazy" className={cn("w-full object-cover transition duration-700 group-hover:scale-105", ph.tall ? "aspect-[4/5]" : i % 5 === 0 ? "aspect-[4/3]" : "aspect-[3/2]")} />
                     {/* pointer shine */}
                     <span aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 [background-image:radial-gradient(320px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.28),transparent_55%)] group-hover:opacity-100" />
-                    <span className="absolute inset-0 bg-gradient-to-t from-[#04140A]/95 via-[#04140A]/25 to-transparent opacity-0 transition duration-500 group-hover:opacity-100 group-focus-visible:opacity-100" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-[#12331C]/95 via-[#12331C]/25 to-transparent opacity-0 transition duration-500 group-hover:opacity-100 group-focus-visible:opacity-100" />
                     <span className="absolute inset-x-0 bottom-0 translate-y-4 p-4 text-white opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
                       <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-[#F4D27A]">{albums.find((x) => x.id === ph.album)?.title}</span>
                       <span className="mt-1 block text-sm font-semibold leading-snug">{ph.caption}</span>
                     </span>
-                    <span className="absolute right-3 top-3 flex h-10 w-10 scale-75 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] opacity-0 shadow-lg ring-1 ring-white/20 transition duration-300 group-hover:rotate-90 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"><Expand className="h-4 w-4" aria-hidden="true" /></span>
+                    <span className="absolute right-3 top-3 flex h-10 w-10 scale-75 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] opacity-0 shadow-lg ring-1 ring-white/20 transition duration-300 group-hover:rotate-90 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"><Expand className="h-4 w-4" aria-hidden="true" /></span>
                   </button>
                 </Tilt>
               </motion.li>
@@ -378,7 +378,7 @@ function FullScreen({ open, onClose, onArrow, labelledBy, describedBy, children 
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[130] flex h-[100dvh] w-screen flex-col bg-[#04140A]/[0.97] text-white backdrop-blur"
+          className="fixed inset-0 z-[130] flex h-[100dvh] w-screen flex-col bg-[#12331C]/[0.97] text-white backdrop-blur"
         >
           {children}
         </motion.div>
@@ -424,8 +424,8 @@ function Lightbox({ id, list, onChange, onClose }: { id: string | null; list: ty
                   className="max-h-full max-w-full select-none rounded-xl object-contain shadow-[0_40px_120px_-30px_rgba(0,0,0,1)]"
                 />
               </AnimatePresence>
-              <button type="button" onClick={() => go(-1)} className={cn("absolute left-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#0B1F10]/70 ring-1 ring-white/20 backdrop-blur transition hover:bg-[#F4D27A] hover:text-[#1A1206] sm:left-6", ring)} aria-label="Previous photo"><ChevronLeft className="h-6 w-6" aria-hidden="true" /></button>
-              <button type="button" onClick={() => go(1)} className={cn("absolute right-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#0B1F10]/70 ring-1 ring-white/20 backdrop-blur transition hover:bg-[#F4D27A] hover:text-[#1A1206] sm:right-6", ring)} aria-label="Next photo"><ChevronRight className="h-6 w-6" aria-hidden="true" /></button>
+              <button type="button" onClick={() => go(-1)} className={cn("absolute left-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#1A3A22]/70 ring-1 ring-white/20 backdrop-blur transition hover:bg-[#F4D27A] hover:text-[#1A1206] sm:left-6", ring)} aria-label="Previous photo"><ChevronLeft className="h-6 w-6" aria-hidden="true" /></button>
+              <button type="button" onClick={() => go(1)} className={cn("absolute right-2 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-[#1A3A22]/70 ring-1 ring-white/20 backdrop-blur transition hover:bg-[#F4D27A] hover:text-[#1A1206] sm:right-6", ring)} aria-label="Next photo"><ChevronRight className="h-6 w-6" aria-hidden="true" /></button>
             </div>
             <div className="px-4 pb-4 pt-4 text-center sm:px-6">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">{albums.find((x) => x.id === ph.album)?.title}</p>
@@ -460,9 +460,9 @@ function Follow() {
             <motion.li key={s.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07, ease }}>
               <Tilt className="h-full">
                 <a href={s.href} target="_blank" rel="noopener noreferrer" onMouseMove={spot} className={cn("group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/10", glowLight, lift, ring)}>
-                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
                   <span className="flex items-start justify-between gap-3">
-                    <span className="text-lg font-black tracking-tight text-[#0B1F10]">{s.name}</span>
+                    <span className="text-lg font-black tracking-tight text-[#1A3A22]">{s.name}</span>
                     <ArrowChip />
                   </span>
                   <span className="mt-8 block break-words text-sm text-gray-600">{s.handle}</span>
@@ -481,9 +481,9 @@ function Follow() {
             <ArrowChip dark />
           </Link>
           <div className={cn("rounded-[1.75rem]", edge, lift)}>
-            <Link to="/chronicles" onMouseMove={spot} className={cn("group relative flex h-full items-center justify-between gap-4 overflow-hidden rounded-[calc(1.75rem-1px)] bg-white p-6 text-[#0B1F10] sm:p-7", glowLight, ring)}>
+            <Link to="/chronicles" onMouseMove={spot} className={cn("group relative flex h-full items-center justify-between gap-4 overflow-hidden rounded-[calc(1.75rem-1px)] bg-white p-6 text-[#1A3A22] sm:p-7", glowLight, ring)}>
               <span className="flex items-center gap-4">
-                <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A]"><Images className="h-6 w-6" /></span>
+                <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#1A3A22] text-[#F4D27A]"><Images className="h-6 w-6" /></span>
                 <span><span className="block text-lg font-black tracking-tight">PenCom Chronicles</span><span className="block text-sm text-gray-600">Read the magazine</span></span>
               </span>
               <ArrowChip />
@@ -492,7 +492,7 @@ function Follow() {
         </Rise>
         <p className="mt-6 flex items-start gap-2 text-sm text-gray-600">
           <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#7F5A04]" aria-hidden="true" />
-          <span>Journalists: for interviews, photos or footage, contact Corporate Communications at <a href="mailto:info@pencom.gov.ng" className={cn("font-semibold text-[#0A4A13] underline decoration-[#CB9615] decoration-2 underline-offset-4 hover:text-[#117F21]", ring)}>info@pencom.gov.ng</a>.</span>
+          <span>Journalists: for interviews, photos or footage, contact Corporate Communications at <a href="mailto:info@pencom.gov.ng" className={cn("font-semibold text-[#105D1D] underline decoration-[#CB9615] decoration-2 underline-offset-4 hover:text-[#117F21]", ring)}>info@pencom.gov.ng</a>.</span>
         </p>
       </div>
     </section>
@@ -525,7 +525,7 @@ export default function MediaPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
       <Hero onVideos={() => scrollToId("videos", !reduce)} onPhotos={() => scrollToId("photos", !reduce)} />
       <SectionNav sections={nav} pillId="media-nav-pill" />
       <Videos initial={params.get("video")} />

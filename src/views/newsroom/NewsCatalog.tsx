@@ -109,7 +109,7 @@ export default function NewsCatalog() {
   return (
     <MotionConfig reducedMotion="user">
       <CookieConsent />
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Hero lead={lead} q={q} onSearch={search} />
 
         <section id="catalogue" aria-labelledby="catalogue-title" className={sectionCls}>
@@ -169,12 +169,12 @@ export default function NewsCatalog() {
               {results.length > limit && (
                 <div className="mt-10 flex flex-col items-center gap-3">
                   <div className="h-1.5 w-48 overflow-hidden rounded-full bg-[#F2F6F0] ring-1 ring-black/10" aria-hidden="true">
-                    <motion.div className="h-full rounded-full bg-gradient-to-r from-[#117F21] to-[#CB9615]" animate={{ width: `${(limit / results.length) * 100}%` }} transition={{ duration: 0.5, ease }} />
+                    <motion.div className="h-full rounded-full bg-gradient-to-r from-[#14892A] to-[#CB9615]" animate={{ width: `${(limit / results.length) * 100}%` }} transition={{ duration: 0.5, ease }} />
                   </div>
                   <button
                     type="button"
                     onClick={() => setLimit((l) => l + PAGE)}
-                    className={cn("group inline-flex min-h-12 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-6 pr-1.5 font-semibold text-white transition hover:bg-[#117F21]", focus)}
+                    className={cn("group inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1A3A22] py-1.5 pl-6 pr-1.5 font-semibold text-white transition hover:bg-[#14892A]", focus)}
                   >
                     {t("Show more news")}
                     <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:translate-y-0.5">

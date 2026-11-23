@@ -48,8 +48,8 @@ module.exports = {
         },
         // PenCom Brand Colors
         pencom: {
-          green: "#117F21",
-          "green-dark": "#0A4A13",
+          green: "#14892A",
+          "green-dark": "#105D1D",
           "green-light": "#E8F5E9",
           gold: "#CB9615",
           "gold-light": "#FFF8E1",

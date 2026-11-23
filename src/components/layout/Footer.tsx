@@ -79,7 +79,7 @@ const focus = "focus-visible:outline focus-visible:outline-[3px] focus-visible:o
 /** Column label: uppercase eyebrow with a gold dot (the theme has no numbered labels). */
 function Kicker({ children, dark = false }: { children: string; dark?: boolean }) {
   return (
-    <p className={cn("flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] lg:whitespace-nowrap", dark ? "text-[#F4D27A]" : "text-[#0A4A13]")}>
+    <p className={cn("flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] lg:whitespace-nowrap", dark ? "text-[#F4D27A]" : "text-[#105D1D]")}>
       <span aria-hidden="true" className={cn("h-1.5 w-1.5 shrink-0 rounded-full", dark ? "bg-[#F4D27A]" : "bg-[#CB9615]")} />
       {children}
     </p>
@@ -113,13 +113,13 @@ export default function Footer() {
   const toTop = () => window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
 
   return (
-    <footer className="relative isolate overflow-hidden bg-[#F2F6F0] text-[#0B1F10]" aria-labelledby="footer-title">
+    <footer className="relative isolate overflow-hidden bg-[#F2F6F0] text-[#1A3A22]" aria-labelledby="footer-title">
       <h2 id="footer-title" className="sr-only">
         Site footer
       </h2>
 
       {/* Brand line across the top, and the drifting ghost word behind the columns */}
-      <div aria-hidden="true" className="h-1 bg-gradient-to-r from-[#117F21] via-[#2E913D] to-[#CB9615]" />
+      <div aria-hidden="true" className="h-1 bg-gradient-to-r from-[#14892A] via-[#36A045] to-[#CB9615]" />
       <Ghost word="PenCom" className="bottom-24 top-auto -z-10 hidden sm:top-auto sm:block lg:top-auto" />
 
       <div className="mx-auto max-w-7xl px-4 pt-14 sm:pt-16">
@@ -133,7 +133,7 @@ export default function Footer() {
         >
           <div
             onMouseMove={spot}
-            className="relative overflow-hidden rounded-[1.75rem] bg-[#04140A] text-white shadow-[0_40px_80px_-40px_rgba(4,20,10,0.8)] [background-image:radial-gradient(520px_circle_at_var(--x,70%)_var(--y,0%),rgba(244,210,122,0.16),transparent_50%),radial-gradient(60%_80%_at_100%_0%,rgba(203,150,21,0.22),transparent),radial-gradient(55%_80%_at_0%_100%,rgba(46,145,61,0.35),transparent)]"
+            className="relative overflow-hidden rounded-[1.75rem] bg-[#12331C] text-white shadow-[0_40px_80px_-40px_rgba(18,51,28,0.8)] [background-image:radial-gradient(520px_circle_at_var(--x,70%)_var(--y,0%),rgba(244,210,122,0.16),transparent_50%),radial-gradient(60%_80%_at_100%_0%,rgba(203,150,21,0.22),transparent),radial-gradient(55%_80%_at_0%_100%,rgba(54,160,69,0.35),transparent)]"
           >
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
 
@@ -175,7 +175,7 @@ export default function Footer() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="you@example.com"
-                            className="min-h-12 w-full bg-transparent text-base text-[#0B1F10] placeholder:text-gray-500 focus:outline-none"
+                            className="min-h-12 w-full bg-transparent text-base text-[#1A3A22] placeholder:text-gray-500 focus:outline-none"
                           />
                         </span>
                         <button
@@ -183,7 +183,7 @@ export default function Footer() {
                           className={cn("group inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#F4D27A] py-1.5 pl-5 pr-1.5 font-bold text-[#1A1206] transition hover:bg-[#FFE08F]", focus)}
                         >
                           Subscribe
-                          <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]">
+                          <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]">
                             <ArrowRight className="h-4 w-4" />
                           </span>
                         </button>
@@ -206,7 +206,7 @@ export default function Footer() {
                       <Link
                         key={s.name}
                         to="/mobile"
-                        className={cn("group inline-flex min-h-14 items-center gap-3 rounded-2xl bg-white/10 px-4 ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white hover:text-[#0B1F10]", focus)}
+                        className={cn("group inline-flex min-h-14 items-center gap-3 rounded-2xl bg-white/10 px-4 ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:bg-white hover:text-[#1A3A22]", focus)}
                       >
                         <s.icon className="h-6 w-6" aria-hidden="true" />
                         <span className="text-left">
@@ -260,11 +260,11 @@ export default function Footer() {
               {contacts.map((c) => {
                 const inner = (
                   <>
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:rotate-6 group-hover:bg-[#117F21]">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#1A3A22] text-[#F4D27A] transition duration-300 group-hover:rotate-6 group-hover:bg-[#14892A]">
                       <c.icon className="h-[18px] w-[18px]" aria-hidden="true" />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-xs font-bold uppercase tracking-[0.14em] text-[#0A4A13]">{c.label}</span>
+                      <span className="block text-xs font-bold uppercase tracking-[0.14em] text-[#105D1D]">{c.label}</span>
                       <span className="block break-words text-sm text-gray-700">{c.value}</span>
                     </span>
                   </>
@@ -281,7 +281,7 @@ export default function Footer() {
               <ul className={cn("mt-5 space-y-1", col.links.length > 4 && "columns-2 gap-6")}>
                 {col.links.map((l) => (
                   <li key={l.label} className="break-inside-avoid">
-                    <Link to={l.href} className={cn("group inline-flex min-h-9 items-center gap-1.5 rounded py-1 text-[0.95rem] text-gray-700 transition hover:text-[#0B1F10]", focus)}>
+                    <Link to={l.href} className={cn("group inline-flex min-h-9 items-center gap-1.5 rounded py-1 text-[0.95rem] text-gray-700 transition hover:text-[#1A3A22]", focus)}>
                       <span className="relative">
                         {l.label}
                         <span aria-hidden="true" className="absolute -bottom-0.5 left-0 h-[2px] w-full origin-left scale-x-0 rounded-full bg-[#CB9615] transition-transform duration-300 group-hover:scale-x-100" />
@@ -296,7 +296,7 @@ export default function Footer() {
         </div>
 
         {/* ── Online services ── */}
-        <div className="rounded-[1.75rem] bg-white p-5 shadow-[0_30px_60px_-45px_rgba(4,20,10,0.5)] ring-1 ring-black/10 sm:p-6">
+        <div className="rounded-[1.75rem] bg-white p-5 shadow-[0_30px_60px_-45px_rgba(18,51,28,0.5)] ring-1 ring-black/10 sm:p-6">
           <div className="flex flex-col gap-4">
             <Kicker>Online services</Kicker>
             <ul className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
@@ -306,11 +306,11 @@ export default function Footer() {
                     href={`https://${p.name.toLowerCase()}.pencom.gov.ng`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={cn("group flex min-h-12 items-center gap-3 rounded-full bg-[#F2F6F0] pl-5 pr-1.5 ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-white", focus)}
+                    className={cn("group flex min-h-12 items-center gap-3 rounded-full bg-[#F2F6F0] pl-5 pr-1.5 ring-1 ring-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#1A3A22] hover:text-white", focus)}
                   >
                     <span className="font-bold">{p.name}</span>
                     <span className="hidden truncate text-sm text-gray-600 transition group-hover:text-white/80 sm:inline">{p.note}</span>
-                    <span aria-hidden="true" className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:rotate-45 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]"><ExternalLink className="h-4 w-4" /></span>
+                    <span aria-hidden="true" className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition duration-300 group-hover:rotate-45 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]"><ExternalLink className="h-4 w-4" /></span>
                     <span className="sr-only">(opens in a new tab)</span>
                   </a>
                 </li>
@@ -322,7 +322,7 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="mx-auto mt-10 max-w-7xl px-4 pb-8">
-        <div className="flex flex-col gap-4 border-t border-[#0B1F10]/10 pt-6 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 border-t border-[#1A3A22]/10 pt-6 md:flex-row md:items-center md:justify-between">
           <p className="text-sm text-gray-600">
             &copy; 2026 National Pension Commission. All rights reserved. Federal Republic of Nigeria.
           </p>
@@ -332,14 +332,14 @@ export default function Footer() {
               { label: "Report Employer", to: "/connect#report" },
               { label: "Privacy Policy", to: "/regulations#policies" },
             ].map((l) => (
-              <Link key={l.label} to={l.to} className={cn("rounded text-sm font-medium text-gray-700 hover:text-[#0B1F10] hover:underline", focus)}>
+              <Link key={l.label} to={l.to} className={cn("rounded text-sm font-medium text-gray-700 hover:text-[#1A3A22] hover:underline", focus)}>
                 {l.label}
               </Link>
             ))}
             <button
               type="button"
               onClick={toTop}
-              className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] pl-4 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]", focus)}
+              className={cn("group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] pl-4 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#14892A]", focus)}
             >
               Back to top
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform group-hover:-translate-y-0.5">

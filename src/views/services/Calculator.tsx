@@ -69,10 +69,10 @@ function Slider({
     <div>
       <label
         htmlFor={id}
-        className="flex items-baseline justify-between gap-3 text-sm font-semibold text-[#0B1F10]"
+        className="flex items-baseline justify-between gap-3 text-sm font-semibold text-[#1A3A22]"
       >
         {label}
-        <span className="rounded-full bg-[#0B1F10] px-2.5 py-0.5 font-mono text-sm tabular-nums text-[#F4D27A]">
+        <span className="rounded-full bg-[#1A3A22] px-2.5 py-0.5 font-mono text-sm tabular-nums text-[#F4D27A]">
           {format(value)}
         </span>
       </label>
@@ -85,9 +85,9 @@ function Slider({
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         aria-valuetext={format(value)}
-        className="mt-3 h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-200 accent-[#117F21] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-4 focus-visible:outline-[#FFD84D]"
+        className="mt-3 h-2 w-full cursor-pointer appearance-none rounded-full bg-gray-200 accent-[#14892A] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-4 focus-visible:outline-[#FFD84D]"
         style={{
-          background: `linear-gradient(to right, #117F21 ${pct}%, #E5E7EB ${pct}%)`,
+          background: `linear-gradient(to right, #14892A ${pct}%, #E5E7EB ${pct}%)`,
         }}
       />
       {hint && <p className="mt-1 text-xs text-gray-600">{hint}</p>}
@@ -174,7 +174,7 @@ export default function Calculator() {
       aria-labelledby="calc-title"
       className={cn(
         sectionCls,
-        "relative isolate overflow-hidden bg-[#04140A] text-white",
+        "relative isolate overflow-hidden bg-[#12331C] text-white",
       )}
     >
       <DarkBackdrop />
@@ -194,9 +194,9 @@ export default function Calculator() {
             <div className="relative h-full">
               <div
                 aria-hidden="true"
-                className="absolute -inset-px -z-10 rounded-[calc(1.75rem+1px)] bg-gradient-to-br from-[#F4D27A]/70 via-white/10 to-[#117F21]/60"
+                className="absolute -inset-px -z-10 rounded-[calc(1.75rem+1px)] bg-gradient-to-br from-[#F4D27A]/70 via-white/10 to-[#14892A]/60"
               />
-              <div className="h-full space-y-6 rounded-[1.75rem] bg-white p-6 text-[#0B1F10] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)] sm:p-8">
+              <div className="h-full space-y-6 rounded-[1.75rem] bg-white p-6 text-[#1A3A22] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)] sm:p-8">
                 <Slider
                   label="Your age"
                   value={age}
@@ -276,10 +276,10 @@ export default function Calculator() {
               onMouseMove={spot}
               className="relative h-full overflow-hidden rounded-[1.75rem] p-[1px] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.8)] [background-image:radial-gradient(320px_circle_at_var(--x,70%)_var(--y,0%),rgba(244,210,122,0.75),rgba(255,255,255,0.12)_45%)]"
             >
-              <div className="relative isolate h-full overflow-hidden rounded-[calc(1.75rem-1px)] bg-[#0A1C10]/95 p-6 sm:p-8">
+              <div className="relative isolate h-full overflow-hidden rounded-[calc(1.75rem-1px)] bg-[#173624]/95 p-6 sm:p-8">
                 <div
                   aria-hidden="true"
-                  className="absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full bg-[#117F21]/50 blur-3xl"
+                  className="absolute -right-24 -top-24 -z-10 h-72 w-72 rounded-full bg-[#14892A]/50 blur-3xl"
                 />
                 <div
                   aria-hidden="true"

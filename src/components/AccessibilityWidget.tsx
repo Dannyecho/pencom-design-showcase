@@ -139,7 +139,7 @@ export default function AccessibilityWidget() {
       {/* Floating Button */}
       <motion.button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-24 right-6 z-[70] w-12 h-12 rounded-full bg-[#117F21] text-white shadow-lg hover:bg-[#0A4A13] transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#117F21]"
+        className="fixed bottom-24 right-6 z-[70] w-12 h-12 rounded-full bg-[#14892A] text-white shadow-lg hover:bg-[#105D1D] transition-colors flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#14892A]"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, scale: 0.8 }}
@@ -181,7 +181,7 @@ export default function AccessibilityWidget() {
             transition={{ duration: 0.2 }}
             className="fixed bottom-40 right-6 z-[70] w-72 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
           >
-            <div className="bg-gradient-to-r from-[#117F21] to-[#2E913D] px-4 py-3 flex items-center gap-2">
+            <div className="bg-gradient-to-r from-[#14892A] to-[#36A045] px-4 py-3 flex items-center gap-2">
               <Accessibility className="w-5 h-5 text-white" />
               <h3 className="text-white font-semibold text-sm">
                 Accessibility Options
@@ -194,7 +194,7 @@ export default function AccessibilityWidget() {
                   onClick={option.action}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${
                     option.active
-                      ? "bg-[#E8F5E9] text-[#0A4A13]"
+                      ? "bg-[#E8F5E9] text-[#105D1D]"
                       : "hover:bg-gray-50 text-gray-700"
                   }`}
                 >
@@ -215,7 +215,7 @@ export default function AccessibilityWidget() {
                   </div>
                   <div
                     className={`w-8 h-5 rounded-full transition-colors relative ${
-                      option.active ? "bg-[#117F21]" : "bg-gray-300"
+                      option.active ? "bg-[#14892A]" : "bg-gray-300"
                     }`}
                   >
                     <div

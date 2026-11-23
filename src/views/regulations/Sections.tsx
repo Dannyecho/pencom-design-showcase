@@ -13,8 +13,8 @@ import { ArrowChip, darkCard, glowLight } from "@/views/docs/kit";
 import { SectionHeading } from "@/views/theme/heading";
 import { DarkBackdrop, Rise, focus, sectionCls, spot } from "@/views/theme/ui";
 
-const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]";
-const darkBtn = "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#117F21]";
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)]";
+const darkBtn = "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1A3A22] py-1.5 pl-5 pr-1.5 text-sm font-semibold text-white transition hover:bg-[#14892A]";
 const goldBtn = "group inline-flex min-h-11 items-center gap-2 rounded-full bg-[#F4D27A] py-1.5 pl-5 pr-1.5 text-sm font-bold text-[#1A1206] shadow-[0_14px_30px_-14px_rgba(244,210,122,0.9)] transition hover:bg-[#FFE08A]";
 const chip = "flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-transform duration-300 group-hover:rotate-45";
 import { library } from "./library";
@@ -46,7 +46,7 @@ export function LatestRail({ onOpen }: { onOpen: (id: string) => void }) {
                   type="button"
                   onClick={() => scroll(d)}
                   aria-label={l}
-                  className={cn("flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#0B1F10] ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#0B1F10] hover:text-[#F4D27A]", focus)}
+                  className={cn("flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#1A3A22] ring-1 ring-black/10 transition hover:-translate-y-0.5 hover:bg-[#1A3A22] hover:text-[#F4D27A]", focus)}
                 >
                   <I className="h-5 w-5" aria-hidden="true" />
                 </button>
@@ -78,11 +78,11 @@ export function LatestRail({ onOpen }: { onOpen: (id: string) => void }) {
                   "group relative flex h-full min-h-[250px] w-full flex-col overflow-hidden rounded-3xl p-6 text-left",
                   lift,
                   focus,
-                  first ? cn(darkCard, "text-white shadow-[0_30px_60px_-30px_rgba(4,20,10,0.9)]") : cn("bg-white ring-1 ring-black/10", glowLight),
+                  first ? cn(darkCard, "text-white shadow-[0_30px_60px_-30px_rgba(18,51,28,0.9)]") : cn("bg-white ring-1 ring-black/10", glowLight),
                 )}
               >
                 {/* growing top line */}
-                <span aria-hidden="true" className={cn("absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r transition-transform duration-500 group-hover:scale-x-100", first ? "from-[#F4D27A] to-[#E9B949]" : "from-[#117F21] to-[#CB9615]")} />
+                <span aria-hidden="true" className={cn("absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r transition-transform duration-500 group-hover:scale-x-100", first ? "from-[#F4D27A] to-[#E9B949]" : "from-[#14892A] to-[#CB9615]")} />
                 <span className="relative flex items-center justify-between gap-2 text-xs">
                   <span className={cn("rounded-full px-2.5 py-0.5 font-bold uppercase tracking-wider", first ? "bg-[#F4D27A] text-[#1A1206]" : typeStyle[d.type].chip)}>
                     {d.type}
@@ -90,10 +90,10 @@ export function LatestRail({ onOpen }: { onOpen: (id: string) => void }) {
                   <span className={cn("font-mono", first ? "text-white/70" : "text-gray-600")}>{fmtDate(d.date)}</span>
                 </span>
                 {first && <span className="relative mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-[#F4D27A]">Newest</span>}
-                <span className={cn("relative line-clamp-4 text-lg font-bold leading-snug", first ? "mt-2 text-white" : "mt-5 text-[#0B1F10] group-hover:text-[#0A4A13]")}>
+                <span className={cn("relative line-clamp-4 text-lg font-bold leading-snug", first ? "mt-2 text-white" : "mt-5 text-[#1A3A22] group-hover:text-[#105D1D]")}>
                   {d.title}
                 </span>
-                <span className={cn("relative mt-auto flex items-center justify-between gap-2 pt-5 text-sm font-semibold", first ? "text-[#F4D27A]" : "text-[#0A4A13]")}>
+                <span className={cn("relative mt-auto flex items-center justify-between gap-2 pt-5 text-sm font-semibold", first ? "text-[#F4D27A]" : "text-[#105D1D]")}>
                   Read details
                   <ArrowChip dark={first} />
                 </span>
@@ -182,7 +182,7 @@ export function ActSpotlight({ set }: { set: (p: Partial<Filters>) => void }) {
   const p = provisions.find((x) => x.id === tab)!;
 
   return (
-    <section id="act" aria-labelledby="act-title" className={cn("relative isolate overflow-hidden bg-[#04140A] text-white", sectionCls)}>
+    <section id="act" aria-labelledby="act-title" className={cn("relative isolate overflow-hidden bg-[#12331C] text-white", sectionCls)}>
       <DarkBackdrop />
       <div className="mx-auto max-w-7xl">
         <SectionHeading
@@ -206,7 +206,7 @@ export function ActSpotlight({ set }: { set: (p: Partial<Filters>) => void }) {
                 </div>
                 <Link to="/regulations/pension-reform-act" className={cn(goldBtn, "mt-4", focus)}>
                   Read the full Act
-                  <span aria-hidden="true" className={cn(chip, "bg-[#0B1F10] text-[#F4D27A]")}><ArrowUpRight className="h-4 w-4" /></span>
+                  <span aria-hidden="true" className={cn(chip, "bg-[#1A3A22] text-[#F4D27A]")}><ArrowUpRight className="h-4 w-4" /></span>
                 </Link>
               </div>
             </Rise>
@@ -288,14 +288,14 @@ export function ActSpotlight({ set }: { set: (p: Partial<Filters>) => void }) {
                       set({ q: p.q, types: [], years: [], who: [], subjects: [], status: "" });
                       document.getElementById("library")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
                     }}
-                    className={cn("group relative mt-7 inline-flex min-h-11 items-center gap-2 rounded-full bg-white/[0.06] py-1.5 pl-5 pr-1.5 text-sm font-semibold ring-1 ring-white/25 transition hover:bg-white hover:text-[#0B1F10]", focus)}
+                    className={cn("group relative mt-7 inline-flex min-h-11 items-center gap-2 rounded-full bg-white/[0.06] py-1.5 pl-5 pr-1.5 text-sm font-semibold ring-1 ring-white/25 transition hover:bg-white hover:text-[#1A3A22]", focus)}
                   >
                     Related regulations and circulars
                     <span aria-hidden="true" className={cn(chip, "bg-[#F4D27A] text-[#1A1206]")}><ArrowUpRight className="h-4 w-4" /></span>
                   </button>
                 </div>
-                <div className="relative flex flex-col justify-center overflow-hidden rounded-3xl bg-[#0B1F10] p-6 ring-1 ring-[#F4D27A]/40 [background-image:linear-gradient(135deg,#0B1F10,#0A4A13)]">
-                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#F4D27A] via-[#E9B949] to-[#117F21]" />
+                <div className="relative flex flex-col justify-center overflow-hidden rounded-3xl bg-[#1A3A22] p-6 ring-1 ring-[#F4D27A]/40 [background-image:linear-gradient(135deg,#1A3A22,#105D1D)]">
+                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#F4D27A] via-[#E9B949] to-[#14892A]" />
                   <span aria-hidden="true" className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[#F4D27A]/20 blur-2xl" />
                   <CountUp value={p.stat.value} className="relative bg-gradient-to-r from-[#F4D27A] to-[#E9B949] bg-clip-text text-6xl font-black tracking-tight text-transparent" />
                   <p className="relative mt-2 text-sm font-semibold leading-snug text-white/85">{p.stat.label}</p>
@@ -351,19 +351,19 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
         <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-12">
           {/* Employer checklist */}
           <Rise className="lg:col-span-8">
-            <div className="relative overflow-hidden rounded-[1.75rem] bg-white p-6 shadow-[0_40px_80px_-50px_rgba(4,20,10,0.45)] ring-1 ring-black/10 sm:p-8">
+            <div className="relative overflow-hidden rounded-[1.75rem] bg-white p-6 shadow-[0_40px_80px_-50px_rgba(18,51,28,0.45)] ring-1 ring-black/10 sm:p-8">
               <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-[#E8F5E9]">
-                <motion.span className="block h-full origin-left bg-gradient-to-r from-[#117F21] to-[#CB9615]" animate={{ scaleX: pct }} initial={false} transition={{ duration: reduce ? 0 : 0.6, ease }} />
+                <motion.span className="block h-full origin-left bg-gradient-to-r from-[#14892A] to-[#CB9615]" animate={{ scaleX: pct }} initial={false} transition={{ duration: reduce ? 0 : 0.6, ease }} />
               </span>
               <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#7F5A04]">
                     <Building2 className="h-4 w-4" aria-hidden="true" /> For employers
                   </p>
-                  <h3 className="mt-2 text-2xl font-black tracking-tight text-[#0B1F10]">Your pension duties: a self-check</h3>
+                  <h3 className="mt-2 text-2xl font-black tracking-tight text-[#1A3A22]">Your pension duties: a self-check</h3>
                   <p className="mt-1 text-sm text-gray-600">Tick what you already do. Nothing is sent to PenCom.</p>
                 </div>
-                <div className="relative flex h-32 w-32 shrink-0 items-center justify-center self-center rounded-full bg-[#0B1F10] shadow-[0_24px_50px_-24px_rgba(4,20,10,0.8)]">
+                <div className="relative flex h-32 w-32 shrink-0 items-center justify-center self-center rounded-full bg-[#1A3A22] shadow-[0_24px_50px_-24px_rgba(18,51,28,0.8)]">
                   <svg viewBox="0 0 120 120" className="h-32 w-32 -rotate-90" aria-hidden="true">
                     <defs>
                       <linearGradient id="comp-ring" x1="0" y1="0" x2="1" y2="1">
@@ -401,7 +401,7 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
                       className={cn(
                         "group flex cursor-pointer gap-4 rounded-3xl p-4 ring-1 transition duration-300 hover:-translate-y-0.5",
                         glowLight,
-                        done[i] ? "bg-[#F2F6F0] ring-[#117F21]/35" : "bg-white ring-black/10 hover:ring-[#117F21]/30",
+                        done[i] ? "bg-[#F2F6F0] ring-[#14892A]/35" : "bg-white ring-black/10 hover:ring-[#14892A]/30",
                       )}
                     >
                       <input
@@ -414,13 +414,13 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
                         aria-hidden="true"
                         className={cn(
                           "flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition duration-300 peer-focus-visible:outline peer-focus-visible:outline-[3px] peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#FFD84D]",
-                          done[i] ? "scale-105 bg-[#0B1F10] text-[#F4D27A]" : "bg-[#F2F6F0] text-[#0A4A13] group-hover:bg-[#E8F5E9]",
+                          done[i] ? "scale-105 bg-[#1A3A22] text-[#F4D27A]" : "bg-[#F2F6F0] text-[#105D1D] group-hover:bg-[#E8F5E9]",
                         )}
                       >
                         {done[i] ? <Check className="h-5 w-5" strokeWidth={3} /> : <d.icon className="h-5 w-5" />}
                       </span>
                       <span className="flex-1">
-                        <span className="flex items-center gap-2 font-semibold text-[#0B1F10]">
+                        <span className="flex items-center gap-2 font-semibold text-[#1A3A22]">
                           <span className="font-mono text-xs tabular-nums text-[#7F5A04]">0{i + 1}</span>
                           {d.title}
                         </span>
@@ -439,7 +439,7 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
                   exit={{ opacity: 0, y: -8 }}
                   className={cn(
                     "relative mt-6 flex flex-col gap-4 overflow-hidden rounded-3xl p-5 sm:flex-row sm:items-center",
-                    pct === 1 ? cn(darkCard, "text-white") : "bg-[#F2F6F0] text-[#0B1F10] ring-1 ring-black/10",
+                    pct === 1 ? cn(darkCard, "text-white") : "bg-[#F2F6F0] text-[#1A3A22] ring-1 ring-black/10",
                   )}
                   aria-live="polite"
                 >
@@ -451,7 +451,7 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
                   </p>
                   <Link to="/services#pcc" className={cn(pct === 1 ? goldBtn : darkBtn, "shrink-0 self-start sm:self-auto", focus)}>
                     Get your PCC
-                    <span aria-hidden="true" className={cn(chip, pct === 1 ? "bg-[#0B1F10] text-[#F4D27A]" : "bg-[#F4D27A] text-[#1A1206]")}>
+                    <span aria-hidden="true" className={cn(chip, pct === 1 ? "bg-[#1A3A22] text-[#F4D27A]" : "bg-[#F4D27A] text-[#1A1206]")}>
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </Link>
@@ -463,7 +463,7 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
           <div className="space-y-6 lg:col-span-4">
             {/* Operators */}
             <Rise delay={0.08}>
-              <div onMouseMove={spot} className={cn("relative overflow-hidden rounded-[1.75rem] p-6 text-white shadow-[0_30px_60px_-30px_rgba(4,20,10,0.9)] sm:p-7", darkCard)}>
+              <div onMouseMove={spot} className={cn("relative overflow-hidden rounded-[1.75rem] p-6 text-white shadow-[0_30px_60px_-30px_rgba(18,51,28,0.9)] sm:p-7", darkCard)}>
                 <KeyRound aria-hidden="true" className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 text-white/[0.05]" />
                 <p className="relative flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#F4D27A]">
                   <KeyRound className="h-4 w-4" aria-hidden="true" /> For licensed operators
@@ -502,7 +502,7 @@ export function Compliance({ set }: { set: (p: Partial<Filters>) => void }) {
                   <MessageSquareWarning className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <span className="flex-1">
-                  <span className="block text-lg font-black tracking-tight text-[#0B1F10]">Report an employer</span>
+                  <span className="block text-lg font-black tracking-tight text-[#1A3A22]">Report an employer</span>
                   <span className="mt-1 block text-sm text-gray-600">Is your employer deducting pension but not remitting it? Tell us and we will follow it up.</span>
                 </span>
                 <ArrowChip />
@@ -538,12 +538,12 @@ export function Policies() {
           {items.map((it, i) => (
             <Rise key={it.title} delay={i * 0.1} className="h-full">
               <div onMouseMove={spot} className={cn("group relative h-full overflow-hidden rounded-[1.75rem] bg-white p-7 ring-1 ring-black/10 sm:p-8", glowLight, lift)}>
-                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
-                <it.icon aria-hidden="true" className="pointer-events-none absolute -bottom-8 -right-6 h-40 w-40 text-[#0A4A13]/[0.05] transition duration-500 group-hover:-translate-y-2" />
-                <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] shadow-[0_16px_30px_-16px_rgba(4,20,10,0.8)] transition duration-300 group-hover:-rotate-6">
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                <it.icon aria-hidden="true" className="pointer-events-none absolute -bottom-8 -right-6 h-40 w-40 text-[#105D1D]/[0.05] transition duration-500 group-hover:-translate-y-2" />
+                <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] shadow-[0_16px_30px_-16px_rgba(18,51,28,0.8)] transition duration-300 group-hover:-rotate-6">
                   <it.icon className="h-6 w-6" aria-hidden="true" />
                 </span>
-                <h3 className="relative mt-5 text-xl font-black tracking-tight text-[#0B1F10]">{it.title}</h3>
+                <h3 className="relative mt-5 text-xl font-black tracking-tight text-[#1A3A22]">{it.title}</h3>
                 <p className="relative mt-2 leading-relaxed text-gray-600">{it.body}</p>
                 <Link to="/connect#contact" className={cn(darkBtn, "relative mt-6", focus)}>
                   Questions about your data? Contact us

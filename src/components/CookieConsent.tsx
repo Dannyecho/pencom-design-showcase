@@ -121,13 +121,13 @@ export default function CookieConsent() {
 
                     <button
                       onClick={handleAcceptAll}
-                      className="w-full md:w-44 px-6 py-2.5 bg-[#117F21] text-white text-sm font-semibold rounded hover:bg-[#0A4A13] transition-colors"
+                      className="w-full md:w-44 px-6 py-2.5 bg-[#14892A] text-white text-sm font-semibold rounded hover:bg-[#105D1D] transition-colors"
                     >
                       ACCEPT ALL
                     </button>
                     <button
                       onClick={handleDeclineAll}
-                      className="w-full md:w-44 px-6 py-2.5 border-2 border-[#117F21] text-[#117F21] text-sm font-semibold rounded hover:bg-[#E8F5E9] transition-colors"
+                      className="w-full md:w-44 px-6 py-2.5 border-2 border-[#14892A] text-[#117F21] text-sm font-semibold rounded hover:bg-[#E8F5E9] transition-colors"
                     >
                       DECLINE ALL
                     </button>
@@ -166,7 +166,7 @@ export default function CookieConsent() {
                           Required for the website to function
                         </p>
                       </div>
-                      <div className="w-11 h-6 bg-[#117F21] rounded-full relative">
+                      <div className="w-11 h-6 bg-[#14892A] rounded-full relative">
                         <div className="absolute right-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow" />
                       </div>
                     </div>
@@ -190,7 +190,7 @@ export default function CookieConsent() {
                         }
                         className={`w-11 h-6 rounded-full relative transition-colors ${
                           preferences.analytics
-                            ? "bg-[#117F21]"
+                            ? "bg-[#14892A]"
                             : "bg-gray-300"
                         }`}
                       >
@@ -223,7 +223,7 @@ export default function CookieConsent() {
                         }
                         className={`w-11 h-6 rounded-full relative transition-colors ${
                           preferences.personalization
-                            ? "bg-[#117F21]"
+                            ? "bg-[#14892A]"
                             : "bg-gray-300"
                         }`}
                       >
@@ -256,7 +256,7 @@ export default function CookieConsent() {
                         }
                         className={`w-11 h-6 rounded-full relative transition-colors ${
                           preferences.advertising
-                            ? "bg-[#117F21]"
+                            ? "bg-[#14892A]"
                             : "bg-gray-300"
                         }`}
                       >
@@ -274,13 +274,13 @@ export default function CookieConsent() {
                   <div className="flex flex-wrap gap-3">
                     <button
                       onClick={handleSavePreferences}
-                      className="px-6 py-2.5 bg-[#117F21] text-white text-sm font-semibold rounded hover:bg-[#0A4A13] transition-colors"
+                      className="px-6 py-2.5 bg-[#14892A] text-white text-sm font-semibold rounded hover:bg-[#105D1D] transition-colors"
                     >
                       Save Preferences
                     </button>
                     <button
                       onClick={handleAcceptAll}
-                      className="px-6 py-2.5 border-2 border-[#117F21] text-[#117F21] text-sm font-semibold rounded hover:bg-[#E8F5E9] transition-colors"
+                      className="px-6 py-2.5 border-2 border-[#14892A] text-[#117F21] text-sm font-semibold rounded hover:bg-[#E8F5E9] transition-colors"
                     >
                       Accept All
                     </button>

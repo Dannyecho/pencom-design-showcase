@@ -169,7 +169,7 @@ export default function PromoPopup({ items = promos }: { items?: Promo[] }) {
             aria-label={t("Close")}
             tabIndex={-1}
             onClick={close}
-            className="absolute inset-0 cursor-default bg-[#04140A]/60 backdrop-blur-sm"
+            className="absolute inset-0 cursor-default bg-[#12331C]/60 backdrop-blur-sm"
           />
 
           <motion.div
@@ -189,7 +189,7 @@ export default function PromoPopup({ items = promos }: { items?: Promo[] }) {
               onClick={close}
               aria-label={t("Close")}
               className={cn(
-                "absolute right-3 top-3 z-20 grid h-11 w-11 place-items-center rounded-full bg-white/90 text-[#0B1F10] shadow-lg backdrop-blur transition hover:rotate-90 hover:bg-white",
+                "absolute right-3 top-3 z-20 grid h-11 w-11 place-items-center rounded-full bg-white/90 text-[#1A3A22] shadow-lg backdrop-blur transition hover:rotate-90 hover:bg-white",
                 focus,
               )}
             >
@@ -230,9 +230,9 @@ export default function PromoPopup({ items = promos }: { items?: Promo[] }) {
                       animate={{ scale: 1 }}
                       transition={{ duration: 1.6, ease: "easeOut" }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#04140A]/70 via-transparent to-transparent sm:hidden" />
-                    <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[#FFD84D] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#04140A] shadow">
-                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#007E2F]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#12331C]/70 via-transparent to-transparent sm:hidden" />
+                    <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[#FFD84D] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#12331C] shadow">
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#068537]" />
                       {t(p.eyebrow)}
                     </span>
                   </motion.div>
@@ -253,14 +253,14 @@ export default function PromoPopup({ items = promos }: { items?: Promo[] }) {
                     onDragEnd={many ? onDragEnd : undefined}
                   >
                     {many && (
-                      <p className="font-mono text-sm font-semibold text-[#007E2F]" aria-live="polite">
-                        <span className="text-xl font-bold text-[#0B1F10]">{String(index + 1).padStart(2, "0")}</span>
+                      <p className="font-mono text-sm font-semibold text-[#068537]" aria-live="polite">
+                        <span className="text-xl font-bold text-[#1A3A22]">{String(index + 1).padStart(2, "0")}</span>
                         {" / "}
                         {String(items.length).padStart(2, "0")}
                         <span className="sr-only">{t(p.title)}</span>
                       </p>
                     )}
-                    <h2 id="promo-title" className="text-2xl font-black leading-tight text-[#0B1F10] sm:text-[2rem]">
+                    <h2 id="promo-title" className="text-2xl font-black leading-tight text-[#1A3A22] sm:text-[2rem]">
                       {t(p.title)}
                     </h2>
                     <p className="text-base leading-relaxed text-[#3B4A40] sm:text-lg">{t(p.text)}</p>
@@ -273,13 +273,13 @@ export default function PromoPopup({ items = promos }: { items?: Promo[] }) {
                           go(p.cta, navigate);
                         }}
                         className={cn(
-                          "group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#007E2F] py-3 pl-6 pr-2 text-base font-bold text-white shadow-[0_14px_30px_-10px_rgba(0,126,47,0.7)] transition hover:bg-[#006626]",
+                          "group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#068537] py-3 pl-6 pr-2 text-base font-bold text-white shadow-[0_14px_30px_-10px_rgba(6,133,55,0.7)] transition hover:bg-[#057530]",
                           focus,
                         )}
                       >
                         <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-white/25 motion-safe:animate-[promo-shine_2.8s_ease-in-out_1.2s_2]" />
                         {t(p.cta.label)}
-                        <span className="grid h-9 w-9 place-items-center rounded-full bg-[#FFD84D] text-[#04140A] transition group-hover:translate-x-0.5">
+                        <span className="grid h-9 w-9 place-items-center rounded-full bg-[#FFD84D] text-[#12331C] transition group-hover:translate-x-0.5">
                           <ArrowRight className="h-4 w-4" />
                         </span>
                       </button>
@@ -311,7 +311,7 @@ export default function PromoPopup({ items = promos }: { items?: Promo[] }) {
                       <span
                         className={cn(
                           "block h-2.5 rounded-full transition-all duration-300",
-                          i === index ? "w-9 bg-[#007E2F]" : "w-2.5 bg-[#C7D6CC] hover:bg-[#8FB09A]",
+                          i === index ? "w-9 bg-[#068537]" : "w-2.5 bg-[#C7D6CC] hover:bg-[#8FB09A]",
                         )}
                       />
                     </button>
@@ -323,7 +323,7 @@ export default function PromoPopup({ items = promos }: { items?: Promo[] }) {
                     type="button"
                     onClick={() => paginate(-1)}
                     aria-label={t("Previous banner")}
-                    className={cn("grid h-11 w-11 place-items-center rounded-full border border-[#C7D6CC] text-[#0B1F10] transition hover:border-[#007E2F] hover:bg-[#EAF5EE]", focus)}
+                    className={cn("grid h-11 w-11 place-items-center rounded-full border border-[#C7D6CC] text-[#1A3A22] transition hover:border-[#068537] hover:bg-[#EAF5EE]", focus)}
                   >
                     <ChevronLeft className="h-5 w-5" />
                   </button>
@@ -331,7 +331,7 @@ export default function PromoPopup({ items = promos }: { items?: Promo[] }) {
                     type="button"
                     onClick={() => paginate(1)}
                     aria-label={t("Next banner")}
-                    className={cn("grid h-11 w-11 place-items-center rounded-full bg-[#0B1F10] text-white transition hover:bg-[#007E2F]", focus)}
+                    className={cn("grid h-11 w-11 place-items-center rounded-full bg-[#1A3A22] text-white transition hover:bg-[#068537]", focus)}
                   >
                     <ChevronRight className="h-5 w-5" />
                   </button>

@@ -47,7 +47,7 @@ const topicIcon: Record<TopicId, LucideIcon> = { enquiry: Send, pfa: MessageSqua
 function Field({ id, label, hint, error, children }: { id: string; label: string; hint?: string; error?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-bold text-[#0B1F10]">{label}</label>
+      <label htmlFor={id} className="block text-sm font-bold text-[#1A3A22]">{label}</label>
       {hint && <p id={`${id}-hint`} className="mt-0.5 text-xs text-gray-600">{hint}</p>}
       <div className="mt-2">{children}</div>
       <AnimatePresence>
@@ -64,8 +64,8 @@ function Field({ id, label, hint, error, children }: { id: string; label: string
 /* Input edge #7D8A80 is 3.6:1 on white (WCAG 1.4.11); focus turns it green with a soft green halo. */
 const inputCls = (err?: string) =>
   cn(
-    "min-h-12 w-full rounded-2xl border bg-white px-4 text-base text-[#0B1F10] shadow-[0_1px_0_rgba(4,20,10,0.04)] transition placeholder:text-gray-500 hover:border-[#0B1F10]/60 focus:outline-none focus:ring-4",
-    err ? "border-[#B52026] focus:ring-[#B52026]/20" : "border-[#7D8A80] focus:border-[#117F21] focus:ring-[#117F21]/20",
+    "min-h-12 w-full rounded-2xl border bg-white px-4 text-base text-[#1A3A22] shadow-[0_1px_0_rgba(18,51,28,0.04)] transition placeholder:text-gray-500 hover:border-[#1A3A22]/60 focus:outline-none focus:ring-4",
+    err ? "border-[#B52026] focus:ring-[#B52026]/20" : "border-[#7D8A80] focus:border-[#14892A] focus:ring-[#14892A]/20",
   );
 
 const pillBtn = "inline-flex min-h-12 items-center gap-2 rounded-full font-semibold transition";
@@ -141,7 +141,7 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
           <div className="lg:sticky lg:top-[180px]">
             <SectionHeading stacked id="form-title" eyebrow="Contact us" title="Send us a message" highlight="message" intro="Three short steps. We only ask for what we need to help you." />
             {/* Reassurances on a dark spotlight card */}
-            <ul onMouseMove={spot} className={cn("mt-8 space-y-4 rounded-[1.75rem] p-6 text-sm text-white/85 shadow-[0_30px_60px_-30px_rgba(4,20,10,0.6)]", darkCard)}>
+            <ul onMouseMove={spot} className={cn("mt-8 space-y-4 rounded-[1.75rem] p-6 text-sm text-white/85 shadow-[0_30px_60px_-30px_rgba(18,51,28,0.6)]", darkCard)}>
               {[
                 [Lock, "Never send your password, BVN or bank details."],
                 [ShieldCheck, "Your details are used only to handle your case, under the Nigeria Data Protection Act 2023."],
@@ -162,17 +162,17 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
         <div className="lg:col-span-8">
           {/* Card with a thin gold-to-green edge and a pointer spotlight */}
           <div className="relative">
-            <div aria-hidden="true" className="absolute -inset-px rounded-[calc(1.75rem+1px)] bg-gradient-to-br from-[#CB9615]/60 via-black/5 to-[#117F21]/60" />
-            <div onMouseMove={spot} className={cn("relative overflow-hidden rounded-[1.75rem] bg-white shadow-[0_40px_80px_-50px_rgba(4,20,10,0.55)]", glowLight)}>
+            <div aria-hidden="true" className="absolute -inset-px rounded-[calc(1.75rem+1px)] bg-gradient-to-br from-[#CB9615]/60 via-black/5 to-[#14892A]/60" />
+            <div onMouseMove={spot} className={cn("relative overflow-hidden rounded-[1.75rem] bg-white shadow-[0_40px_80px_-50px_rgba(18,51,28,0.55)]", glowLight)}>
               {/* Progress: pill bar; the ink pill slides to the current step */}
               {!done && (
                 <div className="border-b border-black/10 bg-[#F2F6F0]/60 p-2 sm:p-3">
                   <ol className="grid grid-cols-3 gap-1.5" aria-label="Progress">
                     {steps.map((s, i) => (
                       <li key={s} aria-current={i === step ? "step" : undefined} className="relative">
-                        {i === step && <motion.span layoutId={`${uid}-step`} aria-hidden="true" className="absolute inset-0 rounded-full bg-[#0B1F10] shadow-[0_12px_30px_-14px_rgba(4,20,10,0.8)]" transition={{ type: "spring", stiffness: 380, damping: 34 }} />}
-                        <span className={cn("relative flex min-h-11 items-center justify-center gap-2 rounded-full px-2 text-xs font-semibold sm:justify-start sm:px-3 sm:text-sm", i === step ? "text-white" : i < step ? "text-[#0A4A13]" : "text-gray-600")}>
-                          <span className={cn("flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-bold tabular-nums transition", i < step ? "bg-[#117F21] text-white" : i === step ? "bg-[#F4D27A] text-[#1A1206]" : "bg-white text-gray-600 ring-1 ring-black/10")}>
+                        {i === step && <motion.span layoutId={`${uid}-step`} aria-hidden="true" className="absolute inset-0 rounded-full bg-[#1A3A22] shadow-[0_12px_30px_-14px_rgba(18,51,28,0.8)]" transition={{ type: "spring", stiffness: 380, damping: 34 }} />}
+                        <span className={cn("relative flex min-h-11 items-center justify-center gap-2 rounded-full px-2 text-xs font-semibold sm:justify-start sm:px-3 sm:text-sm", i === step ? "text-white" : i < step ? "text-[#105D1D]" : "text-gray-600")}>
+                          <span className={cn("flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-bold tabular-nums transition", i < step ? "bg-[#14892A] text-white" : i === step ? "bg-[#F4D27A] text-[#1A1206]" : "bg-white text-gray-600 ring-1 ring-black/10")}>
                             {i < step ? <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" /> : `0${i + 1}`}
                           </span>
                           <span className="hidden truncate sm:inline">{s}</span>
@@ -182,7 +182,7 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                     ))}
                   </ol>
                   <div aria-hidden="true" className="mx-2 mt-2 h-[3px] overflow-hidden rounded-full bg-black/5">
-                    <motion.span className="block h-full origin-left rounded-full bg-gradient-to-r from-[#117F21] to-[#CB9615]" initial={false} animate={{ scaleX: (step + 1) / steps.length }} transition={{ duration: 0.5, ease }} />
+                    <motion.span className="block h-full origin-left rounded-full bg-gradient-to-r from-[#14892A] to-[#CB9615]" initial={false} animate={{ scaleX: (step + 1) / steps.length }} transition={{ duration: 0.5, ease }} />
                   </div>
                 </div>
               )}
@@ -207,13 +207,13 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                         {!reduce && [0, 1].map((r) => (
                           <motion.span key={r} aria-hidden="true" className="absolute inset-0 rounded-full border-2 border-[#CB9615]" initial={{ scale: 1, opacity: 0.7 }} animate={{ scale: 1.9, opacity: 0 }} transition={{ duration: 1.4, delay: 0.25 + r * 0.35, ease: "easeOut" }} />
                         ))}
-                        <motion.span initial={{ scale: reduce ? 1 : 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.1 }} className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#117F21] to-[#0A4A13] text-[#F4D27A] shadow-[0_20px_40px_-16px_rgba(10,74,19,0.8)]">
+                        <motion.span initial={{ scale: reduce ? 1 : 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.1 }} className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#14892A] to-[#105D1D] text-[#F4D27A] shadow-[0_20px_40px_-16px_rgba(16,93,29,0.8)]">
                           <Check className="h-10 w-10" strokeWidth={3} aria-hidden="true" />
                         </motion.span>
                       </span>
-                      <h3 id={`${uid}-done`} className="mt-6 text-2xl font-black tracking-tight text-[#0B1F10] sm:text-3xl">We’ve received your {topic === "enquiry" ? "enquiry" : topic === "employer" ? "report" : "complaint"}</h3>
+                      <h3 id={`${uid}-done`} className="mt-6 text-2xl font-black tracking-tight text-[#1A3A22] sm:text-3xl">We’ve received your {topic === "enquiry" ? "enquiry" : topic === "employer" ? "report" : "complaint"}</h3>
                       <p className="mt-2 text-gray-700">{response[topic]}</p>
-                      <div onMouseMove={spot} className={cn("mx-auto mt-6 flex max-w-sm items-center justify-between gap-3 rounded-3xl px-5 py-4 text-left text-white ring-1 ring-[#F4D27A]/30 shadow-[0_30px_60px_-30px_rgba(4,20,10,0.7)]", darkCard)}>
+                      <div onMouseMove={spot} className={cn("mx-auto mt-6 flex max-w-sm items-center justify-between gap-3 rounded-3xl px-5 py-4 text-left text-white ring-1 ring-[#F4D27A]/30 shadow-[0_30px_60px_-30px_rgba(18,51,28,0.7)]", darkCard)}>
                         <span className="min-w-0">
                           <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-white/75">Your case reference</span>
                           <span className="block break-all font-mono text-2xl font-bold text-[#F4D27A]">{done}</span>
@@ -224,17 +224,17 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                       </div>
                       <p className="sr-only" aria-live="polite">{copied ? "Reference copied" : ""}</p>
                       <div className="mt-6 flex flex-wrap justify-center gap-3">
-                        <button type="button" onClick={() => document.getElementById("track")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" })} className={cn(pillBtn, "group bg-[#0B1F10] py-1.5 pl-5 pr-1.5 text-white hover:bg-[#117F21]", focus)}>
+                        <button type="button" onClick={() => document.getElementById("track")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth" })} className={cn(pillBtn, "group bg-[#1A3A22] py-1.5 pl-5 pr-1.5 text-white hover:bg-[#14892A]", focus)}>
                           Track this case
                           <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:-rotate-45"><ArrowRight className="h-4 w-4" /></span>
                         </button>
-                        <button type="button" onClick={reset} className={cn(pillBtn, "bg-white px-5 text-[#0B1F10] ring-1 ring-black/15 hover:ring-[#0B1F10]/50", focus)}>Send another</button>
+                        <button type="button" onClick={reset} className={cn(pillBtn, "bg-white px-5 text-[#1A3A22] ring-1 ring-black/15 hover:ring-[#1A3A22]/50", focus)}>Send another</button>
                       </div>
                       <p className="mt-6 text-xs text-gray-600">Prototype: nothing is sent to PenCom yet. The reference is saved in this browser so you can try the tracker.</p>
                     </motion.div>
                   ) : step === 0 ? (
                     <motion.fieldset key="s0" {...swap}>
-                      <legend className="text-xl font-black tracking-tight text-[#0B1F10] sm:text-2xl">What is your message about?</legend>
+                      <legend className="text-xl font-black tracking-tight text-[#1A3A22] sm:text-2xl">What is your message about?</legend>
                       <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                         {topics.map((x) => {
                           const on = topic === x.id;
@@ -245,19 +245,19 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                               onMouseMove={spot}
                               className={cn(
                                 "group relative flex cursor-pointer flex-col rounded-3xl p-5 ring-1 transition duration-300 has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#FFD84D]",
-                                on ? cn(darkCard, "text-white ring-[#0B1F10] shadow-[0_30px_60px_-30px_rgba(4,20,10,0.7)]") : cn("bg-white ring-black/10 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(4,20,10,0.35)]", glowLight),
+                                on ? cn(darkCard, "text-white ring-[#1A3A22] shadow-[0_30px_60px_-30px_rgba(18,51,28,0.7)]") : cn("bg-white ring-black/10 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(18,51,28,0.35)]", glowLight),
                               )}
                             >
                               <input type="radio" name={`${uid}-topic`} value={x.id} checked={on} onChange={() => setTopic(x.id)} className="sr-only" />
                               <span className="flex items-start justify-between gap-3">
-                                <span aria-hidden="true" className={cn("flex h-11 w-11 items-center justify-center rounded-2xl transition", on ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#0B1F10] text-[#F4D27A]")}>
+                                <span aria-hidden="true" className={cn("flex h-11 w-11 items-center justify-center rounded-2xl transition", on ? "bg-[#F4D27A] text-[#1A1206]" : "bg-[#1A3A22] text-[#F4D27A]")}>
                                   <Icon className="h-5 w-5" />
                                 </span>
                                 <span aria-hidden="true" className={cn("flex h-6 w-6 items-center justify-center rounded-full border-2 transition", on ? "border-[#F4D27A] bg-[#F4D27A] text-[#1A1206]" : "border-[#7D8A80]")}>
                                   {on && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
                                 </span>
                               </span>
-                              <span className={cn("mt-4 font-bold", on ? "text-white" : "text-[#0B1F10]")}>{x.label}</span>
+                              <span className={cn("mt-4 font-bold", on ? "text-white" : "text-[#1A3A22]")}>{x.label}</span>
                               <span className={cn("mt-1 text-sm", on ? "text-white/80" : "text-gray-600")}>{x.body}</span>
                             </label>
                           );
@@ -267,7 +267,7 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                     </motion.fieldset>
                   ) : step === 1 ? (
                     <motion.div key="s1" {...swap} className="space-y-5">
-                      <p className="inline-flex items-center gap-2 rounded-full bg-[#0B1F10] py-1 pl-1 pr-4 text-sm font-semibold text-white">
+                      <p className="inline-flex items-center gap-2 rounded-full bg-[#1A3A22] py-1 pl-1 pr-4 text-sm font-semibold text-white">
                         <span aria-hidden="true" className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206]"><TopicIcon className="h-3.5 w-3.5" /></span>
                         {t.label}
                       </p>
@@ -314,15 +314,15 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                         <textarea id={`${uid}-message`} rows={5} maxLength={2000} value={v.message} onChange={(e) => set("message", e.target.value)} aria-invalid={!!errors.message} aria-describedby={errors.message ? `${uid}-message-error` : undefined} className={cn(inputCls(errors.message), "py-3")} />
                         <div aria-hidden="true" className="mt-1.5 flex items-center gap-3">
                           <span className="h-1 flex-1 overflow-hidden rounded-full bg-black/5">
-                            <span className="block h-full origin-left rounded-full bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-300" style={{ transform: `scaleX(${Math.min(v.message.length / 2000, 1)})` }} />
+                            <span className="block h-full origin-left rounded-full bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-300" style={{ transform: `scaleX(${Math.min(v.message.length / 2000, 1)})` }} />
                           </span>
                           <span className="font-mono text-xs tabular-nums text-gray-600">{v.message.length} / 2000</span>
                         </div>
                       </Field>
                       <Field id={`${uid}-file`} label="Attach a document" hint="Optional. PDF, JPG or PNG, up to 5 MB" error={errors.file}>
-                        <label className={cn("group flex min-h-16 cursor-pointer items-center gap-3 rounded-2xl border-2 border-dashed px-3 transition hover:border-[#117F21] hover:bg-[#F2F6F0] has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#FFD84D]", errors.file ? "border-[#B52026]" : file ? "border-[#117F21] bg-[#F2F6F0]" : "border-[#7D8A80]")}>
-                          <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:-rotate-12"><Paperclip className="h-4 w-4" /></span>
-                          <span className="flex-1 truncate text-sm font-medium text-[#0B1F10]">{file ? file.name : "Choose a file"}</span>
+                        <label className={cn("group flex min-h-16 cursor-pointer items-center gap-3 rounded-2xl border-2 border-dashed px-3 transition hover:border-[#14892A] hover:bg-[#F2F6F0] has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#FFD84D]", errors.file ? "border-[#B52026]" : file ? "border-[#14892A] bg-[#F2F6F0]" : "border-[#7D8A80]")}>
+                          <span aria-hidden="true" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:-rotate-12"><Paperclip className="h-4 w-4" /></span>
+                          <span className="flex-1 truncate text-sm font-medium text-[#1A3A22]">{file ? file.name : "Choose a file"}</span>
                           {file && <button type="button" onClick={(e) => { e.preventDefault(); setFile(null); }} aria-label="Remove file" className={cn("flex h-11 w-11 items-center justify-center rounded-full text-gray-700 hover:bg-white hover:text-[#B52026]", focus)}><X className="h-4 w-4" aria-hidden="true" /></button>}
                           <input id={`${uid}-file`} type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => setFile(e.target.files?.[0] ?? null)} aria-describedby={`${uid}-file-hint${errors.file ? ` ${uid}-file-error` : ""}`} className="sr-only" />
                         </label>
@@ -330,7 +330,7 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                     </motion.div>
                   ) : (
                     <motion.div key="s2" {...swap}>
-                      <h3 className="text-xl font-black tracking-tight text-[#0B1F10] sm:text-2xl">Check your details</h3>
+                      <h3 className="text-xl font-black tracking-tight text-[#1A3A22] sm:text-2xl">Check your details</h3>
                       <dl className="mt-4 overflow-hidden rounded-3xl ring-1 ring-black/10">
                         {[
                           ["About", t.label],
@@ -345,21 +345,21 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                         ].map(([k, val]) => (
                           <div key={k} className="grid grid-cols-1 gap-1 px-5 py-3 text-sm odd:bg-[#F2F6F0]/70 even:bg-white sm:grid-cols-3 sm:gap-4">
                             <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#7F5A04] sm:pt-0.5">{k}</dt>
-                            <dd className="break-words text-[#0B1F10] sm:col-span-2">{val}</dd>
+                            <dd className="break-words text-[#1A3A22] sm:col-span-2">{val}</dd>
                           </div>
                         ))}
                       </dl>
-                      <button type="button" onClick={() => setStep(1)} className={cn("mt-2 inline-flex min-h-11 items-center gap-1.5 rounded-full px-1 text-sm font-semibold text-[#117F21] underline underline-offset-4 hover:text-[#0A4A13]", focus)}>
+                      <button type="button" onClick={() => setStep(1)} className={cn("mt-2 inline-flex min-h-11 items-center gap-1.5 rounded-full px-1 text-sm font-semibold text-[#117F21] underline underline-offset-4 hover:text-[#105D1D]", focus)}>
                         <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Change details
                       </button>
                       <div className="mt-5">
-                        <label className={cn("flex cursor-pointer gap-3 rounded-3xl p-5 ring-1 transition has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#FFD84D]", errors.consent ? "bg-[#FDF3F3] ring-2 ring-[#B52026]" : v.consent ? "bg-[#E8F5E9] ring-2 ring-[#117F21]" : "bg-white ring-black/15 hover:ring-[#0B1F10]/40")}>
+                        <label className={cn("flex cursor-pointer gap-3 rounded-3xl p-5 ring-1 transition has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#FFD84D]", errors.consent ? "bg-[#FDF3F3] ring-2 ring-[#B52026]" : v.consent ? "bg-[#E8F5E9] ring-2 ring-[#14892A]" : "bg-white ring-black/15 hover:ring-[#1A3A22]/40")}>
                           <input id={`${uid}-consent`} type="checkbox" checked={v.consent} onChange={(e) => set("consent", e.target.checked)} aria-invalid={!!errors.consent} aria-describedby={errors.consent ? `${uid}-consent-error` : undefined} className="peer sr-only" />
-                          <span aria-hidden="true" className={cn("mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border-2 transition", v.consent ? "border-[#0B1F10] bg-[#0B1F10] text-[#F4D27A]" : "border-[#7D8A80] bg-white")}>
+                          <span aria-hidden="true" className={cn("mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border-2 transition", v.consent ? "border-[#1A3A22] bg-[#1A3A22] text-[#F4D27A]" : "border-[#7D8A80] bg-white")}>
                             {v.consent && <Check className="h-4 w-4" strokeWidth={3} />}
                           </span>
                           <span className="text-sm text-gray-800">
-                            I agree that PenCom may use these details to handle my {topic === "enquiry" ? "enquiry" : "case"}, and share them with the PFA or employer concerned where needed. Read the <Link to="/regulations#policies" className="font-semibold text-[#0A4A13] underline underline-offset-2">privacy notice</Link>.
+                            I agree that PenCom may use these details to handle my {topic === "enquiry" ? "enquiry" : "case"}, and share them with the PFA or employer concerned where needed. Read the <Link to="/regulations#policies" className="font-semibold text-[#105D1D] underline underline-offset-2">privacy notice</Link>.
                           </span>
                         </label>
                         {errors.consent && <p id={`${uid}-consent-error`} className="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-[#B52026]"><AlertCircle className="h-4 w-4" aria-hidden="true" /> {errors.consent}</p>}
@@ -371,11 +371,11 @@ export default function CaseForm({ topic, setTopic, onSubmitted }: { topic: Topi
                 {!done && (
                   <div className="mt-8 flex items-center justify-between gap-3 border-t border-black/10 pt-6">
                     {step > 0 ? (
-                      <button type="button" onClick={() => { setErrors({}); setStep((s) => s - 1); }} className={cn(pillBtn, "bg-white px-5 text-[#0B1F10] ring-1 ring-black/15 hover:ring-[#0B1F10]/50", focus)}>
+                      <button type="button" onClick={() => { setErrors({}); setStep((s) => s - 1); }} className={cn(pillBtn, "bg-white px-5 text-[#1A3A22] ring-1 ring-black/15 hover:ring-[#1A3A22]/50", focus)}>
                         <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Back
                       </button>
                     ) : <span />}
-                    <button type="button" onClick={step < 2 ? next : submit} className={cn(pillBtn, "group bg-[#0B1F10] py-1.5 pl-6 pr-1.5 text-white shadow-[0_14px_30px_-14px_rgba(4,20,10,0.8)] hover:bg-[#117F21]", focus)}>
+                    <button type="button" onClick={step < 2 ? next : submit} className={cn(pillBtn, "group bg-[#1A3A22] py-1.5 pl-6 pr-1.5 text-white shadow-[0_14px_30px_-14px_rgba(18,51,28,0.8)] hover:bg-[#14892A]", focus)}>
                       {step < 2 ? "Continue" : "Send"}
                       <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover:-rotate-45">
                         {step < 2 ? <ArrowRight className="h-4 w-4" /> : <Send className="h-4 w-4" />}

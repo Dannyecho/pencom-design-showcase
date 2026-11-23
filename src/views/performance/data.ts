@@ -36,9 +36,9 @@ export const allocation: Alloc[] = [
   { period: "2026-08", label: "Aug 2026", total: 31.8, items: [{ k: "FGN securities", v: 17.8 }, { k: "Equities", v: 6.32 }, { k: "Corporate debt", v: 2.21 }, { k: "Money market", v: 0 }, { k: "Other", v: 5.47 }], note: "Equities are domestic only. Money market is included in Other until the full August breakdown is confirmed." },
 ];
 export const allocColors: Record<string, string> = {
-  "FGN securities": "#117F21",
+  "FGN securities": "#14892A",
   Equities: "#CB9615",
-  "Corporate debt": "#0B1F10",
+  "Corporate debt": "#1A3A22",
   "Money market": "#7BC67E",
   Other: "#9AA59B",
 };

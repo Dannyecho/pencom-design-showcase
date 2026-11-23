@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen flex-col">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[#117F21] focus:px-6 focus:py-3 focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[#14892A] focus:px-6 focus:py-3 focus:font-semibold focus:text-white focus:shadow-lg focus:outline-none"
       >
         Skip to main content
       </a>

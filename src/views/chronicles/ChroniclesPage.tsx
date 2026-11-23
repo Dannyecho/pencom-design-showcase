@@ -24,9 +24,9 @@ import { awards, issue, launchSource, sections, shelf } from "./data";
  */
 
 const glowDark = "[background-image:radial-gradient(380px_circle_at_var(--x,50%)_var(--y,0%),rgba(244,210,122,0.14),transparent_50%)]";
-const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_34px_70px_-36px_rgba(4,20,10,0.45)]";
+const lift = "transition duration-300 hover:-translate-y-1 hover:shadow-[0_34px_70px_-36px_rgba(18,51,28,0.45)]";
 /** Thin gold-to-green edge drawn with a padding box (the card sits inside it). */
-const edge = "bg-gradient-to-br from-[#F4D27A] via-[#2E913D]/60 to-[#117F21] p-px";
+const edge = "bg-gradient-to-br from-[#F4D27A] via-[#36A045]/60 to-[#14892A] p-px";
 
 /* ─────────────────────────── 3D cover ─────────────────────────── */
 
@@ -52,7 +52,7 @@ function Cover3D() {
       onPointerLeave={() => { mx.set(0); my.set(0); }}
     >
       {/* gold halo behind the issue */}
-      <span aria-hidden="true" className="absolute left-1/2 top-1/2 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,210,122,0.28),rgba(46,145,61,0.12)_45%,transparent_70%)] blur-2xl" />
+      <span aria-hidden="true" className="absolute left-1/2 top-1/2 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,210,122,0.28),rgba(54,160,69,0.12)_45%,transparent_70%)] blur-2xl" />
       <motion.div aria-hidden="true" animate={reduce ? undefined : { y: [0, -14, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="relative" style={{ width: W, height: H }}>
         <motion.div style={{ rotateX: rx, rotateY: reduce ? -18 : ry, transformStyle: "preserve-3d", width: W, height: H }} className="relative">
           {/* front */}
@@ -62,13 +62,13 @@ function Cover3D() {
             <span className="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/40 to-transparent" />
           </div>
           {/* spine */}
-          <div className="absolute left-0 top-0 flex items-center justify-center bg-gradient-to-r from-[#04140A] to-[#0A4A13]" style={{ width: D, height: H, transform: `rotateY(-90deg) translateZ(${D / 2}px)`, transformOrigin: "center" }}>
+          <div className="absolute left-0 top-0 flex items-center justify-center bg-gradient-to-r from-[#12331C] to-[#105D1D]" style={{ width: D, height: H, transform: `rotateY(-90deg) translateZ(${D / 2}px)`, transformOrigin: "center" }}>
             <span className="-rotate-90 whitespace-nowrap text-[9px] font-bold uppercase tracking-[0.3em] text-[#F4D27A]">PenCom Chronicles · 01</span>
           </div>
           {/* page block */}
           <div className="absolute right-0 top-[2px] bg-[repeating-linear-gradient(90deg,#fff,#fff_1px,#e6e0cf_1px,#e6e0cf_2px)]" style={{ width: D - 2, height: H - 4, transform: `rotateY(90deg) translateZ(${W - D / 2}px)`, transformOrigin: "left center", left: 0 }} />
           {/* back */}
-          <div className="absolute inset-0 rounded-l-md bg-[#0B1F10]" style={{ transform: `translateZ(-${D / 2}px) rotateY(180deg)` }} />
+          <div className="absolute inset-0 rounded-l-md bg-[#1A3A22]" style={{ transform: `translateZ(-${D / 2}px) rotateY(180deg)` }} />
         </motion.div>
       </motion.div>
       <span aria-hidden="true" className="absolute bottom-4 left-1/2 h-8 w-64 -translate-x-1/2 rounded-[50%] bg-black/70 blur-2xl" />
@@ -103,7 +103,7 @@ export default function ChroniclesPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Hero />
         <SectionNav sections={nav} pillId="mag-nav-pill" />
         <Inside />
@@ -120,7 +120,7 @@ export default function ChroniclesPage() {
 function Hero() {
   const reduce = useReducedMotion();
   return (
-    <section aria-labelledby="mag-title" className="relative isolate overflow-hidden bg-[#04140A] text-white">
+    <section aria-labelledby="mag-title" className="relative isolate overflow-hidden bg-[#12331C] text-white">
       <DarkBackdrop />
       <Ghost word="Chronicles" dark className="bottom-0 top-auto sm:top-auto lg:top-auto" />
       <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:pt-10 lg:pb-20">
@@ -189,10 +189,10 @@ function Inside() {
             return (
               <motion.li key={s.k} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.55, delay: i * 0.07, ease }}>
                 <div onMouseMove={spot} className={cn("group relative h-full overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/10", glowLight, lift)}>
-                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#117F21] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
+                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-[#14892A] to-[#CB9615] transition-transform duration-500 group-hover:scale-x-100" />
                   {/* magazine initial, outlined like the ghost words */}
-                  <span aria-hidden="true" data-no-translate className="pointer-events-none absolute -bottom-10 right-3 select-none font-serif text-[9rem] font-bold italic leading-none text-transparent transition-transform duration-500 [-webkit-text-stroke:1.5px_rgba(10,74,19,0.13)] group-hover:-translate-y-2 group-hover:[-webkit-text-stroke:1.5px_rgba(203,150,21,0.45)]">{s.k[0]}</span>
-                  <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:rotate-6 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]"><Icon className="h-6 w-6" aria-hidden="true" /></span>
+                  <span aria-hidden="true" data-no-translate className="pointer-events-none absolute -bottom-10 right-3 select-none font-serif text-[9rem] font-bold italic leading-none text-transparent transition-transform duration-500 [-webkit-text-stroke:1.5px_rgba(16,93,29,0.13)] group-hover:-translate-y-2 group-hover:[-webkit-text-stroke:1.5px_rgba(203,150,21,0.45)]">{s.k[0]}</span>
+                  <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-[#1A3A22] text-[#F4D27A] transition duration-300 group-hover:rotate-6 group-hover:bg-[#F4D27A] group-hover:text-[#1A1206]"><Icon className="h-6 w-6" aria-hidden="true" /></span>
                   <h3 className="relative mt-5 text-xl font-black tracking-tight">{s.k}</h3>
                   <p className="relative mt-1 max-w-[85%] text-gray-600">{s.body}</p>
                 </div>
@@ -209,7 +209,7 @@ function Inside() {
 
 function Launch() {
   return (
-    <section id="launch" aria-labelledby="launch-title" className={cn("relative isolate bg-[#04140A] text-white", sectionCls)}>
+    <section id="launch" aria-labelledby="launch-title" className={cn("relative isolate bg-[#12331C] text-white", sectionCls)}>
       <DarkBackdrop />
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-12">
         <div className="lg:col-span-6">
@@ -241,11 +241,11 @@ function Launch() {
             {awards.map((a, i) => (
               <motion.li key={a.cat} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.6, delay: i * 0.12, ease }}>
                 <div onMouseMove={spot} className={cn("group relative flex items-center gap-5 overflow-hidden rounded-3xl bg-white/[0.06] p-5 ring-1 ring-white/10 backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-white/[0.09] hover:ring-[#F4D27A]/40", glowDark)}>
-                  <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1 origin-top scale-y-0 bg-gradient-to-b from-[#F4D27A] to-[#117F21] transition-transform duration-500 group-hover:scale-y-100" />
+                  <span aria-hidden="true" className="absolute inset-y-0 left-0 w-1 origin-top scale-y-0 bg-gradient-to-b from-[#F4D27A] to-[#14892A] transition-transform duration-500 group-hover:scale-y-100" />
                   {/* medal: gold disc inside a slowly turning gold ring */}
                   <span aria-hidden="true" className="relative flex h-16 w-16 shrink-0 items-center justify-center">
                     <motion.span className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,#F4D27A,transparent_35%,#CB9615_55%,transparent_80%,#F4D27A)] opacity-80" animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} />
-                    <span className="absolute inset-[3px] rounded-full bg-[#04140A]" />
+                    <span className="absolute inset-[3px] rounded-full bg-[#12331C]" />
                     <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#F4D27A] to-[#CB9615] text-[#1A1206] shadow-[0_0_30px_rgba(244,210,122,0.35)] transition duration-300 group-hover:scale-110">
                       {a.cat === "Online" ? <Megaphone className="h-5 w-5" /> : a.cat === "Print" ? <Newspaper className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
                     </span>
@@ -277,7 +277,7 @@ function Issues() {
             <motion.li key={s.n} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.12, ease }} className="w-48">
               {s.live ? (
                 <a href={issue.localPdf} target="_blank" rel="noopener noreferrer" className={cn("group block rounded-md", focus)}>
-                  <span className="relative block h-[272px] w-48 overflow-hidden rounded-r-md shadow-[12px_16px_30px_-10px_rgba(4,20,10,0.5)] transition duration-500 [transform:perspective(900px)_rotateY(-12deg)] group-hover:shadow-[0_30px_50px_-18px_rgba(203,150,21,0.55)] group-hover:[transform:perspective(900px)_rotateY(0deg)_translateY(-8px)]">
+                  <span className="relative block h-[272px] w-48 overflow-hidden rounded-r-md shadow-[12px_16px_30px_-10px_rgba(18,51,28,0.5)] transition duration-500 [transform:perspective(900px)_rotateY(-12deg)] group-hover:shadow-[0_30px_50px_-18px_rgba(203,150,21,0.55)] group-hover:[transform:perspective(900px)_rotateY(0deg)_translateY(-8px)]">
                     <span className="pointer-events-none absolute left-0 top-0 block" style={{ width: 420, height: 594, transform: `scale(${192 / 420})`, transformOrigin: "top left" }}>{previewPages[0].node}</span>
                     <span className="absolute inset-y-0 left-0 w-2 bg-gradient-to-r from-black/40 to-transparent" />
                     {/* light sweep on hover */}
@@ -289,8 +289,8 @@ function Issues() {
                 </a>
               ) : (
                 <div aria-label={`${s.label}, coming soon`}>
-                  <span className="flex h-[272px] w-48 flex-col items-center justify-center rounded-md border-2 border-dashed border-[#0B1F10]/25 bg-white/70 text-center text-gray-600">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A]"><Lock className="h-5 w-5" aria-hidden="true" /></span>
+                  <span className="flex h-[272px] w-48 flex-col items-center justify-center rounded-md border-2 border-dashed border-[#1A3A22]/25 bg-white/70 text-center text-gray-600">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#1A3A22] text-[#F4D27A]"><Lock className="h-5 w-5" aria-hidden="true" /></span>
                     <span className="mt-3 text-sm font-semibold">Next edition</span>
                   </span>
                   <span className="mt-4 block text-lg font-black tracking-tight text-gray-700">{s.label}</span>
@@ -299,7 +299,7 @@ function Issues() {
               )}
             </motion.li>
           ))}
-          <li className="h-3 w-full rounded-full bg-gradient-to-r from-[#0B1F10] via-[#0A4A13] to-[#0B1F10] shadow-[inset_0_1px_0_rgba(244,210,122,0.7),0_14px_24px_-10px_rgba(4,20,10,0.55)]" aria-hidden="true" />
+          <li className="h-3 w-full rounded-full bg-gradient-to-r from-[#1A3A22] via-[#105D1D] to-[#1A3A22] shadow-[inset_0_1px_0_rgba(244,210,122,0.7),0_14px_24px_-10px_rgba(18,51,28,0.55)]" aria-hidden="true" />
         </ul>
       </div>
     </section>
@@ -332,24 +332,24 @@ function Subscribe() {
     <section id="subscribe" aria-labelledby="sub-title" className={sectionCls}>
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-2">
         <Rise className="h-full">
-          <div onMouseMove={spot} className={cn("relative h-full overflow-hidden rounded-[1.75rem] p-8 text-white shadow-[0_40px_80px_-40px_rgba(4,20,10,0.8)] sm:p-10", darkCard)}>
+          <div onMouseMove={spot} className={cn("relative h-full overflow-hidden rounded-[1.75rem] p-8 text-white shadow-[0_40px_80px_-40px_rgba(18,51,28,0.8)] sm:p-10", darkCard)}>
             <span aria-hidden="true" className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F4D27A] text-[#1A1206]"><Mail className="h-6 w-6" /></span>
             <h2 id="sub-title" className="relative mt-5 text-3xl font-black tracking-tight">Get new issues by email</h2>
             <p className="relative mt-2 text-white/80">We’ll email you when a new edition of PenCom Chronicles is published. Nothing else.</p>
             <AnimatePresence mode="wait" initial={false}>
               {done ? (
                 <motion.p key="ok" role="status" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="relative mt-6 flex items-center gap-3 rounded-2xl bg-white/10 p-4 font-semibold ring-1 ring-[#F4D27A]/40">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F4D27A] text-[#0B1F10]"><Check className="h-5 w-5" strokeWidth={3} aria-hidden="true" /></span>
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A3A22]"><Check className="h-5 w-5" strokeWidth={3} aria-hidden="true" /></span>
                   Thank you. We’ll let you know when Issue 02 is out.
                 </motion.p>
               ) : (
                 <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} className="relative mt-6 space-y-4">
                   <div className="flex flex-col gap-2 rounded-[1.5rem] bg-white p-1.5 ring-[3px] ring-transparent transition focus-within:ring-[#FFD84D] sm:flex-row sm:rounded-full">
                     <label htmlFor="sub-email" className="sr-only">Email address</label>
-                    <input ref={input} id="sub-email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-invalid={!!err && !email} placeholder="name@example.com" className="min-h-12 flex-1 rounded-full bg-transparent px-4 text-[#0B1F10] placeholder:text-gray-500 focus:outline-none" />
+                    <input ref={input} id="sub-email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-invalid={!!err && !email} placeholder="name@example.com" className="min-h-12 flex-1 rounded-full bg-transparent px-4 text-[#1A3A22] placeholder:text-gray-500 focus:outline-none" />
                     <button type="submit" className={cn("group inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#F4D27A] py-1.5 pl-5 pr-1.5 font-bold text-[#1A1206] transition hover:bg-[#FFE08F]", focus)}>
                       Notify me
-                      <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0B1F10] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]"><ArrowRight className="h-4 w-4" /></span>
+                      <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1A3A22] text-[#F4D27A] transition-transform duration-300 group-hover:rotate-[-45deg]"><ArrowRight className="h-4 w-4" /></span>
                     </button>
                   </div>
                   <label className="flex cursor-pointer items-start gap-3 text-sm text-white/80">
@@ -365,18 +365,18 @@ function Subscribe() {
         </Rise>
 
         <Rise delay={0.1} className="h-full">
-          <div className={cn("h-full rounded-[1.75rem] shadow-[0_30px_70px_-45px_rgba(4,20,10,0.5)]", edge)}>
+          <div className={cn("h-full rounded-[1.75rem] shadow-[0_30px_70px_-45px_rgba(18,51,28,0.5)]", edge)}>
             <div onMouseMove={spot} className={cn("group relative h-full overflow-hidden rounded-[calc(1.75rem-1px)] bg-white p-8 sm:p-10", glowLight)}>
-              <span aria-hidden="true" className="pointer-events-none absolute -bottom-12 right-2 select-none font-serif text-[11rem] font-bold italic leading-none text-transparent transition-transform duration-500 [-webkit-text-stroke:1.5px_rgba(10,74,19,0.12)] group-hover:-translate-y-2">“</span>
-              <span aria-hidden="true" className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0B1F10] text-[#F4D27A] transition duration-300 group-hover:rotate-6"><PenLine className="h-6 w-6" /></span>
+              <span aria-hidden="true" className="pointer-events-none absolute -bottom-12 right-2 select-none font-serif text-[11rem] font-bold italic leading-none text-transparent transition-transform duration-500 [-webkit-text-stroke:1.5px_rgba(16,93,29,0.12)] group-hover:-translate-y-2">“</span>
+              <span aria-hidden="true" className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-[#1A3A22] text-[#F4D27A] transition duration-300 group-hover:rotate-6"><PenLine className="h-6 w-6" /></span>
               <h2 className="relative mt-5 text-3xl font-black tracking-tight">Share your story</h2>
               <p className="relative mt-2 text-gray-600">Every edition gives stakeholders space to share their views. Contributors, retirees, employers and operators can suggest a story or a commentary for the next issue.</p>
               <div className="relative mt-6 flex flex-wrap gap-3">
-                <Link to="/connect#contact" className={cn("group/btn inline-flex min-h-12 items-center gap-3 rounded-full bg-[#0B1F10] py-1.5 pl-5 pr-1.5 font-semibold text-white transition hover:bg-[#117F21]", focus)}>
+                <Link to="/connect#contact" className={cn("group/btn inline-flex min-h-12 items-center gap-3 rounded-full bg-[#1A3A22] py-1.5 pl-5 pr-1.5 font-semibold text-white transition hover:bg-[#14892A]", focus)}>
                   Suggest a story
                   <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#F4D27A] text-[#1A1206] transition-transform duration-300 group-hover/btn:rotate-[-45deg]"><ArrowRight className="h-4 w-4" /></span>
                 </Link>
-                <Link to="/news" className={cn("inline-flex min-h-12 items-center gap-2 rounded-full px-5 font-semibold text-[#0B1F10] ring-1 ring-black/15 transition hover:bg-[#0B1F10] hover:text-[#F4D27A] hover:ring-[#0B1F10]", focus)}>Latest news</Link>
+                <Link to="/news" className={cn("inline-flex min-h-12 items-center gap-2 rounded-full px-5 font-semibold text-[#1A3A22] ring-1 ring-black/15 transition hover:bg-[#1A3A22] hover:text-[#F4D27A] hover:ring-[#1A3A22]", focus)}>Latest news</Link>
               </div>
             </div>
           </div>

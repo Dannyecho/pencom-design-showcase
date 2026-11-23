@@ -32,7 +32,7 @@ export default function HomeShowcase() {
       <CookieConsent />
       <PromoPopup />
       <ScrollProgress />
-      <div className="bg-white text-[#0B1F10]">
+      <div className="bg-white text-[#1A3A22]">
         <Banner />
         <AudienceDock />
         <CommandSearch />
