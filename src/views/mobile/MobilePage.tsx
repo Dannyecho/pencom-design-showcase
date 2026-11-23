@@ -173,7 +173,7 @@ export default function MobilePage() {
         <Phone
           screen={screen}
           setScreen={(s) => { setTouring(false); setScreen(s); }}
-          className="h-[calc(100svh-250px)] max-h-[760px] min-h-[600px] rounded-[2.6rem] bg-[#F2F6F0] lg:min-h-[620px]"
+          className="h-[calc(100svh-130px)] max-h-[880px] min-h-[720px] rounded-[2.6rem] bg-[#F2F6F0] lg:min-h-[740px]"
         />
       </motion.div>
     </div>
