@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "@/lib/router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -14,6 +14,7 @@ import { navItems } from "@/lib/data";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ReportGovBadge from "@/components/ReportGovBadge";
 import NoticesBell from "@/components/NoticesBell";
+import MegaPanel from "./MegaPanel";
 
 const iconMap: Record<string, React.ReactNode> = {
   Home: <Home className="w-4 h-4" />,
@@ -47,7 +48,6 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMega, setActiveMega] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const megaRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -60,6 +60,14 @@ export default function Header() {
     setMobileOpen(false);
     setActiveMega(null);
   }, [location.pathname]);
+
+  // Escape closes an open mega menu.
+  useEffect(() => {
+    if (!activeMega) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActiveMega(null);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [activeMega]);
 
   const hasMega = (label: string) => {
     const item = navItems.find((n) => n.label === label);
@@ -97,7 +105,7 @@ export default function Header() {
 
       {/* Main nav */}
       <nav
-        className={`transition-all duration-300 ${
+        className={`relative transition-all duration-300 ${
           scrolled
             ? "bg-white/95 backdrop-blur-md shadow-md"
             : "bg-white"
@@ -132,74 +140,42 @@ export default function Header() {
             </Link>
 
             {/* Desktop nav */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
-                <div
-                  key={item.label}
-                  className="relative"
-                  onMouseEnter={() => hasMega(item.label) && setActiveMega(item.label)}
-                  onMouseLeave={() => setActiveMega(null)}
-                >
-                  <Link
-                    to={item.href}
-                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                      location.pathname === item.href || (item.href !== "/" && location.pathname.startsWith(`${item.href}/`)) || (item as { match?: string[] }).match?.includes(location.pathname)
-                        ? "text-[#117F21] bg-[#E8F5E9]"
-                        : "text-gray-700 hover:text-[#117F21] hover:bg-[#F5F5F5]"
-                    }`}
+            <div className="hidden self-stretch lg:flex items-stretch gap-1">
+              {navItems.map((item) => {
+                const mega = hasMega(item.label);
+                const openNow = activeMega === item.label;
+                const on = location.pathname === item.href || (item.href !== "/" && location.pathname.startsWith(`${item.href}/`)) || (item as { match?: string[] }).match?.includes(location.pathname);
+                return (
+                  <div
+                    key={item.label}
+                    className="flex items-center"
+                    onMouseEnter={() => mega && setActiveMega(item.label)}
+                    onMouseLeave={() => setActiveMega(null)}
+                    onFocus={() => mega && setActiveMega(item.label)}
+                    onBlur={(e) => !e.currentTarget.contains(e.relatedTarget as Node | null) && setActiveMega(null)}
                   >
-                    {item.label}
-                    {hasMega(item.label) && (
-                      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${activeMega === item.label ? "rotate-180" : ""}`} />
-                    )}
-                  </Link>
+                    <Link
+                      to={item.href}
+                      aria-current={location.pathname === item.href ? "page" : undefined}
+                      aria-expanded={mega ? openNow : undefined}
+                      className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                        on || openNow
+                          ? "text-[#117F21] bg-[#E8F5E9]"
+                          : "text-gray-700 hover:text-[#117F21] hover:bg-[#F5F5F5]"
+                      }`}
+                    >
+                      {item.label}
+                      {mega && (
+                        <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openNow ? "rotate-180" : ""}`} aria-hidden="true" />
+                      )}
+                    </Link>
 
-                  {/* Mega Menu */}
-                  <AnimatePresence>
-                    {activeMega === item.label && item.megaMenu && (
-                      <motion.div
-                        ref={megaRef}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.2 }}
-                        className={`absolute top-full pt-2 ${item.megaMenu.columns.length === 1 ? "left-0" : "left-1/2 -translate-x-1/2"}`}
-                      >
-                        <div className={`bg-white rounded-xl shadow-xl border border-gray-100 ${item.megaMenu.columns.length === 1 ? "p-3 w-[22rem]" : "p-6 min-w-[640px]"}`}>
-                          <div className="grid gap-6" style={{ gridTemplateColumns: `repeat(${item.megaMenu.columns.length}, minmax(0, 1fr))` }}>
-                            {item.megaMenu.columns.map((col) => (
-                              <div key={col.title}>
-                                <h4 className="text-xs font-semibold text-[#117F21] uppercase tracking-wider mb-3">
-                                  {col.title}
-                                </h4>
-                                <ul className="space-y-1.5">
-                                  {col.links.map((link) => (
-                                    <li key={link.label}>
-                                      <NavLink
-                                        to={link.href}
-                                        plain={(link as { plain?: boolean }).plain}
-                                        aria-current={location.pathname === link.href ? "page" : undefined}
-                                        className={`text-sm rounded-md px-2 py-1.5 block transition-colors ${
-                                          location.pathname === link.href ? "bg-[#E8F5E9] text-[#117F21]" : "text-gray-600 hover:text-[#117F21] hover:bg-[#F5F5F5]"
-                                        }`}
-                                      >
-                                        <span className={(link as { note?: string }).note ? "font-semibold" : undefined}>{link.label}</span>
-                                        {(link as { note?: string }).note && (
-                                          <span className="mt-0.5 block text-xs font-normal leading-snug text-gray-500">{(link as { note?: string }).note}</span>
-                                        )}
-                                      </NavLink>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
+                    <AnimatePresence>
+                      {openNow && item.megaMenu && <MegaPanel item={item} pathname={location.pathname} />}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Right actions */}
