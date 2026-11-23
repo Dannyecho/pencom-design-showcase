@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { navItems } from "@/lib/data";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ReportGovBadge from "@/components/ReportGovBadge";
 import NoticesBell from "@/components/NoticesBell";
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -78,6 +79,7 @@ export default function Header() {
             </Link>
           </div>
           <div className="flex gap-4 items-center">
+            <span className="hidden md:inline-flex"><ReportGovBadge compact /></span>
             <Link to="/connect#contact" className="opacity-80 hover:opacity-100 transition-opacity flex items-center gap-1 whitespace-nowrap">
               <Phone className="w-3 h-3" aria-hidden="true" /> <span className="hidden sm:inline">09-4611300</span><span className="sr-only sm:hidden">09-4611300</span>
             </Link>
