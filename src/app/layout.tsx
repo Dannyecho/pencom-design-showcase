@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: { default: "PenCom Nigeria | National Pension Commission", template: "%s | PenCom" },
   description: "Pensions made clear for every Nigerian: services, regulations, news and help from the National Pension Commission.",
-  icons: { icon: "/pencom-logo.png" },
+  icons: { icon: "/favicon.png", apple: "/favicon.png" },
 };
 
 export const viewport: Viewport = { themeColor: "#0A4A13" };
